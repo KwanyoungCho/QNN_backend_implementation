@@ -695,6 +695,9 @@ CMakeFiles/qnn_graph_probe.dir/apps/qnn_graph_probe_main.cpp.o: \
   /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__functional/pointer_to_binary_function.h \
   /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__functional/pointer_to_unary_function.h \
   /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__functional/unary_negate.h \
+  /home/chokwans99/QNN_SDK/qairt/2.37.1.250807/include/QNN/QnnTensor.h \
+  /home/chokwans99/QNN_SDK/qairt/2.37.1.250807/include/QNN/QnnCommon.h \
+  /home/chokwans99/QNN_SDK/qairt/2.37.1.250807/include/QNN/QnnTypes.h \
   /home/chokwans99/llm_test/include/binary_provider.h \
   /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/iostream \
   /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/ios \
@@ -715,9 +718,7 @@ CMakeFiles/qnn_graph_probe.dir/apps/qnn_graph_probe_main.cpp.o: \
   /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__bsd_locale_fallbacks.h \
   /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/cstdarg \
   /home/chokwans99/QNN_SDK/qairt/2.37.1.250807/include/QNN/QnnContext.h \
-  /home/chokwans99/QNN_SDK/qairt/2.37.1.250807/include/QNN/QnnCommon.h \
   /home/chokwans99/QNN_SDK/qairt/2.37.1.250807/include/QNN/QnnMem.h \
-  /home/chokwans99/QNN_SDK/qairt/2.37.1.250807/include/QNN/QnnTypes.h \
   /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/sys/mman.h \
   /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/linux/memfd.h \
   /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/asm-generic/hugetlb_encode.h \

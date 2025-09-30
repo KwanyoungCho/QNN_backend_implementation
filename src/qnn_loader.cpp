@@ -49,6 +49,51 @@ bool QnnLoader::load(const std::string& backend_so_path, const std::string& syst
   return true;
 }
 
+bool QnnLoader::get_graph_io(size_t ctx_index,
+                             const std::string& graph_name,
+                             std::vector<Qnn_Tensor_t>& inputs,
+                             std::vector<Qnn_Tensor_t>& outputs) {
+  if (!interface_provider_) return false;
+  if (ctx_index >= contexts_.size()) return false;
+  auto qnn = reinterpret_cast<const QnnInterface_t*>(interface_provider_);
+  const auto& api = qnn->QNN_INTERFACE_VER_NAME;
+  if (!api.graphRetrieve) return false;
+  void* graph = nullptr;
+  if (api.graphRetrieve(reinterpret_cast<Qnn_ContextHandle_t>(contexts_[ctx_index]),
+                        graph_name.c_str(),
+                        reinterpret_cast<Qnn_GraphHandle_t*>(&graph)) != QNN_SUCCESS || !graph) {
+    return false;
+  }
+  // 표준 C API로는 I/O 디스크립터를 직접 열람할 수 없습니다. 여기서는 두 벡터를 비워둡니다.
+  // 주 호출자는 JSON 기반으로 Qnn_Tensor_t 배열을 구성한 뒤 update_graph_tensors로 등록 텐서를 갱신합니다.
+  inputs.clear(); outputs.clear();
+  return true;
+}
+
+bool QnnLoader::update_graph_tensors(size_t ctx_index,
+                                     const std::string& graph_name,
+                                     const std::vector<Qnn_Tensor_t>& tensors) {
+  if (!interface_provider_) return false;
+  if (ctx_index >= contexts_.size()) return false;
+  auto qnn = reinterpret_cast<const QnnInterface_t*>(interface_provider_);
+  const auto& api = qnn->QNN_INTERFACE_VER_NAME;
+  if (!api.graphRetrieve || !api.tensorUpdateGraphTensors) return false;
+  void* graph = nullptr;
+  if (api.graphRetrieve(reinterpret_cast<Qnn_ContextHandle_t>(contexts_[ctx_index]),
+                        graph_name.c_str(),
+                        reinterpret_cast<Qnn_GraphHandle_t*>(&graph)) != QNN_SUCCESS || !graph) {
+    return false;
+  }
+  // tensorUpdateGraphTensors는 등록된 텐서 ID를 키로 clientBuf/quant 등을 갱신한다.
+  std::vector<const Qnn_Tensor_t*> ptrs;
+  ptrs.reserve(tensors.size());
+  for (const auto& t : tensors) ptrs.push_back(&t);
+  Qnn_ErrorHandle_t err = api.tensorUpdateGraphTensors(
+      reinterpret_cast<Qnn_GraphHandle_t>(graph),
+      ptrs.data(), static_cast<uint64_t>(ptrs.size()));
+  return err == QNN_SUCCESS;
+}
+
 // QnnInterface_getProviders를 호출해 provider 리스트를 받아 적절한 provider를 선택
 const void* QnnLoader::get_interface_provider(const char* provider_name) {
   if (!get_providers_fn_) return nullptr;
@@ -172,6 +217,30 @@ bool QnnLoader::retrieve_graph(size_t ctx_index, const std::string& graph_name) 
   if (err != QNN_SUCCESS || graph == nullptr) return false;
   graphs_.push_back(graph);
   return true;
+}
+
+bool QnnLoader::execute_graph(size_t ctx_index,
+                              const std::string& graph_name,
+                              const std::vector<Qnn_Tensor_t>& inputs,
+                              std::vector<Qnn_Tensor_t>& outputs) {
+  if (!interface_provider_) return false;
+  if (ctx_index >= contexts_.size()) return false;
+  auto qnn = reinterpret_cast<const QnnInterface_t*>(interface_provider_);
+  const auto& api = qnn->QNN_INTERFACE_VER_NAME;
+  if (!api.graphRetrieve || !api.graphExecute) return false;
+  void* graph = nullptr;
+  if (api.graphRetrieve(reinterpret_cast<Qnn_ContextHandle_t>(contexts_[ctx_index]),
+                        graph_name.c_str(),
+                        reinterpret_cast<Qnn_GraphHandle_t*>(&graph)) != QNN_SUCCESS || !graph) {
+    return false;
+  }
+  Qnn_ErrorHandle_t err = api.graphExecute(
+      reinterpret_cast<Qnn_GraphHandle_t>(graph),
+      inputs.data(), static_cast<uint32_t>(inputs.size()),
+      outputs.data(), static_cast<uint32_t>(outputs.size()),
+      /*profile*/nullptr,
+      /*signal*/nullptr);
+  return err == QNN_SUCCESS;
 }
 
 } // namespace llm_test

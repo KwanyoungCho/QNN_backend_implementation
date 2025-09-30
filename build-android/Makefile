@@ -264,29 +264,29 @@ src/binary_provider.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_ctx_core.dir/build.make CMakeFiles/qnn_ctx_core.dir/src/binary_provider.cpp.s
 .PHONY : src/binary_provider.cpp.s
 
-src/io_meta.o: src/io_meta.cpp.o
-.PHONY : src/io_meta.o
+src/io_alloc.o: src/io_alloc.cpp.o
+.PHONY : src/io_alloc.o
 
 # target to build an object file
-src/io_meta.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_ctx_core.dir/build.make CMakeFiles/qnn_ctx_core.dir/src/io_meta.cpp.o
-.PHONY : src/io_meta.cpp.o
+src/io_alloc.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_ctx_core.dir/build.make CMakeFiles/qnn_ctx_core.dir/src/io_alloc.cpp.o
+.PHONY : src/io_alloc.cpp.o
 
-src/io_meta.i: src/io_meta.cpp.i
-.PHONY : src/io_meta.i
+src/io_alloc.i: src/io_alloc.cpp.i
+.PHONY : src/io_alloc.i
 
 # target to preprocess a source file
-src/io_meta.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_ctx_core.dir/build.make CMakeFiles/qnn_ctx_core.dir/src/io_meta.cpp.i
-.PHONY : src/io_meta.cpp.i
+src/io_alloc.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_ctx_core.dir/build.make CMakeFiles/qnn_ctx_core.dir/src/io_alloc.cpp.i
+.PHONY : src/io_alloc.cpp.i
 
-src/io_meta.s: src/io_meta.cpp.s
-.PHONY : src/io_meta.s
+src/io_alloc.s: src/io_alloc.cpp.s
+.PHONY : src/io_alloc.s
 
 # target to generate assembly for a file
-src/io_meta.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_ctx_core.dir/build.make CMakeFiles/qnn_ctx_core.dir/src/io_meta.cpp.s
-.PHONY : src/io_meta.cpp.s
+src/io_alloc.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_ctx_core.dir/build.make CMakeFiles/qnn_ctx_core.dir/src/io_alloc.cpp.s
+.PHONY : src/io_alloc.cpp.s
 
 src/qnn_loader.o: src/qnn_loader.cpp.o
 .PHONY : src/qnn_loader.o
@@ -312,6 +312,54 @@ src/qnn_loader.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_ctx_core.dir/build.make CMakeFiles/qnn_ctx_core.dir/src/qnn_loader.cpp.s
 .PHONY : src/qnn_loader.cpp.s
 
+src/qnn_qnnjson.o: src/qnn_qnnjson.cpp.o
+.PHONY : src/qnn_qnnjson.o
+
+# target to build an object file
+src/qnn_qnnjson.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_ctx_core.dir/build.make CMakeFiles/qnn_ctx_core.dir/src/qnn_qnnjson.cpp.o
+.PHONY : src/qnn_qnnjson.cpp.o
+
+src/qnn_qnnjson.i: src/qnn_qnnjson.cpp.i
+.PHONY : src/qnn_qnnjson.i
+
+# target to preprocess a source file
+src/qnn_qnnjson.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_ctx_core.dir/build.make CMakeFiles/qnn_ctx_core.dir/src/qnn_qnnjson.cpp.i
+.PHONY : src/qnn_qnnjson.cpp.i
+
+src/qnn_qnnjson.s: src/qnn_qnnjson.cpp.s
+.PHONY : src/qnn_qnnjson.s
+
+# target to generate assembly for a file
+src/qnn_qnnjson.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_ctx_core.dir/build.make CMakeFiles/qnn_ctx_core.dir/src/qnn_qnnjson.cpp.s
+.PHONY : src/qnn_qnnjson.cpp.s
+
+src/qnn_tensor_util.o: src/qnn_tensor_util.cpp.o
+.PHONY : src/qnn_tensor_util.o
+
+# target to build an object file
+src/qnn_tensor_util.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_ctx_core.dir/build.make CMakeFiles/qnn_ctx_core.dir/src/qnn_tensor_util.cpp.o
+.PHONY : src/qnn_tensor_util.cpp.o
+
+src/qnn_tensor_util.i: src/qnn_tensor_util.cpp.i
+.PHONY : src/qnn_tensor_util.i
+
+# target to preprocess a source file
+src/qnn_tensor_util.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_ctx_core.dir/build.make CMakeFiles/qnn_ctx_core.dir/src/qnn_tensor_util.cpp.i
+.PHONY : src/qnn_tensor_util.cpp.i
+
+src/qnn_tensor_util.s: src/qnn_tensor_util.cpp.s
+.PHONY : src/qnn_tensor_util.s
+
+# target to generate assembly for a file
+src/qnn_tensor_util.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_ctx_core.dir/build.make CMakeFiles/qnn_ctx_core.dir/src/qnn_tensor_util.cpp.s
+.PHONY : src/qnn_tensor_util.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -336,12 +384,18 @@ help:
 	@echo "... src/binary_provider.o"
 	@echo "... src/binary_provider.i"
 	@echo "... src/binary_provider.s"
-	@echo "... src/io_meta.o"
-	@echo "... src/io_meta.i"
-	@echo "... src/io_meta.s"
+	@echo "... src/io_alloc.o"
+	@echo "... src/io_alloc.i"
+	@echo "... src/io_alloc.s"
 	@echo "... src/qnn_loader.o"
 	@echo "... src/qnn_loader.i"
 	@echo "... src/qnn_loader.s"
+	@echo "... src/qnn_qnnjson.o"
+	@echo "... src/qnn_qnnjson.i"
+	@echo "... src/qnn_qnnjson.s"
+	@echo "... src/qnn_tensor_util.o"
+	@echo "... src/qnn_tensor_util.i"
+	@echo "... src/qnn_tensor_util.s"
 .PHONY : help
 
 

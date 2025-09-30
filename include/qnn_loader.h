@@ -2,6 +2,7 @@
 
 #include <string>
 #include <vector>
+#include <QnnTensor.h>
 
 // dlopen으로 연 QNN 공유 라이브러리 핸들 쌍을 보관
 struct DlHandlePair { void* backend_so_handle; void* system_so_handle; };
@@ -43,6 +44,23 @@ public:
   // 컨텍스트 인덱스와 그래프 이름으로 그래프 핸들을 조회하여 내부에 보관
   bool retrieve_graph(size_t ctx_index, const std::string& graph_name);
   size_t num_graphs() const { return graphs_.size(); }
+
+  // 그래프 실행: 입력/출력 텐서를 전달하여 graphExecute 호출
+  bool execute_graph(size_t ctx_index,
+                     const std::string& graph_name,
+                     const std::vector<Qnn_Tensor_t>& inputs,
+                     std::vector<Qnn_Tensor_t>& outputs);
+
+  // 그래프 등록 IO 텐서 조회(Executorch 흐름: 등록된 텐서 ID 사용)
+  bool get_graph_io(size_t ctx_index,
+                    const std::string& graph_name,
+                    std::vector<Qnn_Tensor_t>& inputs,
+                    std::vector<Qnn_Tensor_t>& outputs);
+
+  // 등록된 그래프 텐서에 clientBuf를 업데이트(Executorch AllocateTensor 유사)
+  bool update_graph_tensors(size_t ctx_index,
+                            const std::string& graph_name,
+                            const std::vector<Qnn_Tensor_t>& tensors);
 
   // 생성/복원한 리소스를 역순으로 정리 (context → device → backend → logger → dlclose)
   void cleanup();

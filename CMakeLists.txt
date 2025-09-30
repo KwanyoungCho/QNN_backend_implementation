@@ -19,8 +19,9 @@ message(STATUS "Using QNN_SDK_ROOT=${QNN_SDK_ROOT}")
 add_library(qnn_ctx_core STATIC
   src/qnn_loader.cpp
   src/binary_provider.cpp
-  src/io_meta.cpp
-  src/io_allocator.cpp
+  src/io_alloc.cpp
+  src/qnn_qnnjson.cpp
+  src/qnn_tensor_util.cpp
 )
 
 add_executable(qnn_ctx_init

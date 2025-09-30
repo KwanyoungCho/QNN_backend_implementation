@@ -746,6 +746,7 @@ CMakeFiles/qnn_graph_probe.dir/apps/qnn_graph_probe_main.cpp.o: /home/chokwans99
   /home/chokwans99/QNN_SDK/qairt/2.37.1.250807/include/QNN/QnnCommon.h \
   /home/chokwans99/QNN_SDK/qairt/2.37.1.250807/include/QNN/QnnContext.h \
   /home/chokwans99/QNN_SDK/qairt/2.37.1.250807/include/QNN/QnnMem.h \
+  /home/chokwans99/QNN_SDK/qairt/2.37.1.250807/include/QNN/QnnTensor.h \
   /home/chokwans99/QNN_SDK/qairt/2.37.1.250807/include/QNN/QnnTypes.h \
   /home/chokwans99/llm_test/include/binary_provider.h \
   /home/chokwans99/llm_test/include/qnn_loader.h
@@ -783,6 +784,8 @@ CMakeFiles/qnn_graph_probe.dir/apps/qnn_graph_probe_main.cpp.o:
 /home/chokwans99/llm_test/include/qnn_loader.h:
 
 /home/chokwans99/llm_test/include/binary_provider.h:
+
+/home/chokwans99/QNN_SDK/qairt/2.37.1.250807/include/QNN/QnnTensor.h:
 
 /home/chokwans99/QNN_SDK/qairt/2.37.1.250807/include/QNN/QnnMem.h:
 
