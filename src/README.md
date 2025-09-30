@@ -32,6 +32,111 @@
     - 샤드 디렉토리(`--ctx_dir`)에 있는 컨텍스트/JSON 페어를 순회하며, 컨텍스트 복원 → 그래프 조회(`prefill_forward`, `kv_forward`) → JSON 기반 메모리 계획 및 텐서 생성 → `graphExecute` 수행
     - 상세 플래그는 아래 “실행 방법” 참고
 
+## 빠른 시작(처음 보는 사람용)
+
+1) QNN SDK 설치 확인(QNN 2.37.x 기준). `libQnnSystem.so`, `libQnnHtp.so`를 기기 혹은 작업 디렉토리에 배치
+2) PTE 파일에서 QNN 컨텍스트 바이너리와 JSON을 준비
+   - 컨텍스트 바이너리: Executorch 빌드 산출물에서 추출하거나, 제공된 `forward_<i>.bin` 사용
+   - JSON: QNN SDK의 `qnn-context-binary-utility`로 각 컨텍스트의 그래프/텐서 I/O 정보를 덤프(아래 “JSON 파일 출처와 생성법” 참조)
+3) 디렉토리 준비: `ctx_dir`에 `forward_0.bin` … `forward_N.bin`과 각 `forward_i_json.json`을 페어로 배치
+4) 빌드 후 실행
+   - Host: `./build/apps/qnn_io_plan --ctx_dir /path/to/ctx_dir --log_level 3`
+   - Android: `adb push`로 파일 배치 후 `adb shell`에서 동일 실행(기본 SO는 현 디렉토리 참조)
+5) 정상 시나리오: 각 샤드에서 `prefill_forward`, `kv_forward` 그래프가 순차 실행됨. 에러 시 “문제 해결 가이드” 확인
+
+## 파일/모듈별 상세 역할
+
+### 1) 로더
+- `include/qnn_loader.h` / `src/qnn_loader.cpp`
+  - 책임
+    - QNN 공유 라이브러리 로딩(`dlopen`)과 심볼 로딩(`dlsym`)
+    - Provider 조회(`QnnInterface_getProviders`) 및 첫 Provider 선택
+    - Backend/Device 수명 주기 관리(`backendCreate`/`deviceCreate`/해제)
+    - 컨텍스트 복원(`qnn_context_create_from_binary`)과 해제
+    - 그래프 핸들 조회(`graphRetrieve`), 실행(`graphExecute`)
+    - 로그 레벨 설정(QNN의 `QnnLog` 이용, 현재는 기본 로거 사용)
+  - 왜 필요한가
+    - Executorch가 내부에서 수행하는 초기화/복원/실행 과정을 독립 모듈로 분리하여 재사용성 확보
+  - 주의
+    - `graphExecute` 시 입력은 `APP_WRITE`, 출력은 `APP_READ`여야 하며, 등록된 텐서 `id`와 일치해야 함
+
+### 2) JSON 파서
+- `include/qnn_qnnjson.h` / `src/qnn_qnnjson.cpp`
+  - 책임
+    - `qnn-context-binary-utility`가 생성한 JSON(`forward_{i}_json.json`)에서 그래프/텐서 메타를 안전하게 파싱
+    - `id`, `name`, `dims`, `dataType(문자열/정수)`, `bytesPerElement`, `quantization` 추출
+    - `nbytes`가 없으면 계산(bpe × ∏dims)
+  - 왜 필요한가
+    - 표준 QNN C API만으로는 컨텍스트 내부 그래프 I/O 메타를 완전 탐색하기 어려움 → SDK JSON을 “단일 소스”로 채택
+  - 주의
+    - `dimensions`/`currentDimensions` 중 실제 런타임 차원에 해당하는 값을 사용(파일마다 차이가 있어 양쪽 지원)
+    - `dataType`이 정수 코드로 오는 경우가 있음(예: 1032/1046/562). 매핑 규칙에 따라 bpe 도출
+
+### 3) 텐서 유틸리티
+- `include/qnn_tensor_util.h` / `src/qnn_tensor_util.cpp`
+  - 책임
+    - JSON 메타와 할당 버퍼로 `Qnn_Tensor_t(v2)`를 구성하는 `QnnTensorHolder` 제공
+    - `id`/`name`/`type(APP_WRITE/APP_READ)`/`memType(RAW)`/`dataFormat(FLAT_BUFFER)`/`dims`/`dataType`/`clientBuf`/`quantizeParams` 채우기
+  - 왜 필요한가
+    - Executorch와 동일한 “등록 텐서에 clientBuf만 꽂아 실행” 모델을 안전하게 구현
+  - 주의
+    - QNN SDK 2.37에서는 v2 구조를 사용. `clientBuf.dataSize`는 32-bit일 수 있으므로 캐스팅 유의
+    - per-axis quant는 encoding 메타까지만 채우고, 실제 스케일/오프셋 배열 포인터 연결은 추후 확장
+
+### 4) 바이너리 공급자
+- `src/binary_provider.cpp`
+  - 책임
+    - `ctx_dir`에서 `forward_<i>.bin`/`forward_<i>_json.json` 페어를 스캔
+    - 바이너리를 `mmap`으로 매핑하여 파일 I/O 및 메모리 사용 최적화
+  - 왜 필요한가
+    - 대용량 컨텍스트를 효율적으로 다루기 위함. 불필요한 전체 로드/복사를 피함
+  - 주의
+    - 파일 디스크립터/매핑 해제 수명 관리 철저(종료 시 `munmap`/`close`)
+
+### 5) 실행 앱
+- `apps/qnn_io_plan_main.cpp`
+  - 책임
+    - CLI 파싱(그래프명은 기본 `prefill_forward`, `kv_forward`), SO 경로 기본값(현 디렉토리), 로그레벨 등
+    - 컨텍스트 복원→그래프 조회→JSON 기반 I/O 계획→`Qnn_Tensor_t` 구성→`graphExecute`
+  - 왜 필요한가
+    - 전체 체인을 통합 검증하고, 다른 프레임워크(예: llama.cpp) 통합 시 참조 예제로 활용
+
+## 구현 중심 해설(내부 동작 디테일)
+
+- `qnn_loader.cpp` 내부 흐름
+  - `dlopen(system_so)`, `dlopen(backend_so)` → `dlsym("QnnInterface_getProviders")`로 provider 배열 획득 → 첫 provider 선택
+  - `provider->systemInterface.qnn_backend_create(...)` 로 backend 핸들 생성
+  - `provider->systemInterface.qnn_device_create(...)` 로 device 핸들 생성
+  - 컨텍스트 복원: `provider->context.qnn_context_create_from_binary(backend, device, config=null, binary, size, &ctx, profile=null)`
+  - 그래프 조회: `provider->graph.qnn_graph_retrieve(ctx, graphName.c_str(), &graph)`
+  - 실행: `provider->graph.qnn_graph_execute(graph, inputs, inCount, outputs, outCount, /*profile*/nullptr, /*signal*/nullptr)`
+  - 로그: QNN 기본 로거를 사용하고, `set_log_level(int)`로 레벨만 조정(콜백 미사용)
+  - 자원 수명: backend/device는 프로세스 동안 1회 생성, 컨텍스트/그래프 핸들은 샤드/그래프별로 벡터/맵에 보관 후 종료 시 파괴
+
+- `qnn_qnnjson.cpp` 파싱 구현
+  - 엄격한 키 탐색으로 `id/name/dims/dataType/bytesPerElement/quantization` 취득
+  - `bytesPerElement` 부재 시 `dataType`(문자열 또는 정수 코드) 기반으로 바이트 수 도출
+  - `dims`는 `dimensions`/`currentDimensions` 양쪽 지원, 0 차원 보호
+  - `nbytes = bytesPerElement × ∏dims`로 계산. JSON의 `nbytes`가 있더라도 충돌 시 재계산 가능(현재는 bpe를 우선 신뢰)
+  - quantization은 per-tensor(scale, offset) 즉시 매핑, per-axis는 encoding 메타까지만 보존(배열 포인터 미연결)
+
+- `qnn_tensor_util.cpp` 텐서 구성
+  - `Qnn_Tensor_t v2` 사용: `id/name/type(APP_WRITE|APP_READ)/dataFormat(FLAT_BUFFER)/memType(RAW)/dataType/dimensions` 채움
+  - `clientBuf.data`에 호스트 버퍼 포인터, `clientBuf.dataSize`에 `nbytes(uint32_t 캐스팅)` 지정
+  - `quantizeParams`는 JSON에 따라 per-tensor를 채움. per-axis는 후속 확장 포인트
+  - 주의: `id`는 그래프 등록 텐서의 ID와 정확히 일치해야 하며, 그렇지 않으면 "Expected Tensor ID ... not found" 오류 발생
+
+- `binary_provider.cpp` 매핑 로직
+  - `open`→`mmap(PROT_READ, MAP_SHARED)`로 바이너리 read-only 매핑
+  - `MappingOwner`가 fd와 매핑 포인터 수명 관리(`munmap`, `close`)
+  - JSON 파일은 일반 파일 I/O로 로드
+
+- `qnn_io_plan_main.cpp` 구동 순서
+  - SO 경로 기본값: 현 디렉토리의 `./libQnnHtp.so`, `./libQnnSystem.so`
+  - `--ctx_dir` 스캔: `forward_<i>.bin`과 `forward_<i>_json.json` 페어 찾기(인덱스 순)
+  - 각 페어마다: 컨텍스트 복원 → 두 그래프명(`prefill_forward`, `kv_forward`) 시도 → 그래프별로 JSON I/O 메타 로드 → per‑tensor 메모리 할당 → `Qnn_Tensor_t` 구성 → `graphExecute`
+  - 불필요 예시 출력 제거, 실패 시 에러 로그 후 다음 페어 진행
+
 
 ## 구현 철학(왜 이렇게 했는가)
 
@@ -76,6 +181,23 @@
 
 
 ## JSON 파싱 규칙(중요)
+
+## JSON 파일 출처와 생성법
+
+- 출처: QNN SDK의 `qnn-context-binary-utility`가 컨텍스트 바이너리에서 그래프/텐서 메타를 추출해 생성한 JSON입니다.
+- 전제: 각 컨텍스트 바이너리(`forward_<i>.bin`)는 멀티-그래프(예: `prefill_forward`, `kv_forward`)를 포함할 수 있습니다.
+- 일반적 사용 예시(환경/버전에 따라 옵션명이 다를 수 있으니 SDK 문서를 우선 확인하세요):
+
+```bash
+# QNN SDK 설치 경로 예시: $QNN_SDK/bin/x86_64-linux-clang
+$QNN_SDK/bin/x86_64-linux-clang/qnn-context-binary-utility \
+  --input forward_0.bin \
+  --output forward_0_json.json \
+  --dump_graph_io
+```
+
+- 결과: `forward_0_json.json` 내에 컨텍스트가 가진 그래프들의 I/O 텐서 정보(`id`, `name`, `dims`, `dataType`, `bytesPerElement`, `quantization` 등)가 포함됩니다.
+- 본 프로젝트는 해당 JSON을 “단일 진실 소스(source of truth)”로 사용하여, Executorch 런타임 덤프(JSON)는 참고용으로만 봅니다.
 
 - JSON 파일: `ctx_dir` 내 `forward_<i>_json.json`
 - 그래프별로 `inputs`, `outputs` 섹션이 있고, 각 텐서는 최소한 다음 정보를 제공합니다.
@@ -221,6 +343,20 @@ ninja -C build-android
 
 ## 문제 해결 가이드(Troubleshooting)
 
+## 자주 하는 질문(FAQ)
+
+- Q) 그래프 이름을 JSON에서 자동으로 가져오나요?
+  - A) 현재 예제는 `prefill_forward`, `kv_forward`를 기본값으로 사용합니다. 필요 시 JSON에서 그래프명 목록을 파싱해 확장 가능합니다.
+
+- Q) 샤드 간 버퍼를 자동 공유하나요?
+  - A) 아니요. 동일 주소 바인딩(혹은 MEMHANDLE/ION)으로 명시적으로 공유해야 합니다. 자동 공유는 동일 컨텍스트 내의 mutable buffer 설계에서만 동작합니다(본 환경은 -1로 미사용).
+
+- Q) 왜 `QnnTensor_updateGraphTensors`를 쓰지 않나요?
+  - A) I/O(APP_*) 텐서는 업데이트 대상이 아니기 때문입니다. Executorch도 등록 텐서에 `clientBuf`만 채워 실행합니다.
+
+- Q) `bytesPerElement`가 JSON에 없을 때 어떻게 하나요?
+  - A) `dataType`을 문자열/정수 코드로 해석해 매핑 테이블로 도출합니다. 그 후 `nbytes = bpe × ∏dims`로 계산합니다.
+
 - 오류: `Expected Tensor ID: #### not found in user-provided tensors.`
   - 원인: `Qnn_Tensor_t.v2.id`가 그래프 등록 텐서 ID와 불일치
   - 조치: JSON에서 제공하는 ID를 그대로 넣었는지 확인. 입력/출력 텐서 수와 순서도 점검
@@ -250,6 +386,59 @@ ninja -C build-android
 - 동일: provider 첫 항목 선택, 기본 로거 사용, 런타임 로그 레벨 조절
 - 차이: I/O 메타데이터는 Executorch의 내부 MethodMeta 대신 QNN SDK JSON을 “단일 소스”로 사용
 - 차이: 자동 mutable buffer 공유는 사용하지 않음(-1 기본). 필요 시 앱 레벨에서 버퍼 재사용 또는 MEMHANDLE 사용
+
+## Executorch 구현과의 상세 비교(코드 기준)
+
+- 라이브러리/Provider 로딩
+  - Executorch: `backends/qualcomm/runtime/QnnImplementation.cpp`의 `QnnImplementation::StartBackend()`에서 `QnnInterface_getProviders` 호출 후 첫 provider 선택
+  - 본 구현: 동일하게 `QnnInterface_getProviders`로 provider 배열을 받아 첫 항목 사용
+
+- Backend/Device/Context 생성
+  - Executorch: `QnnManager::Init()`에서 backend/device/context를 순차 구성. 컨텍스트는 `QnnContextCommon::Configure()`에서 캐시 상태에 따라
+    - DESERIALIZE: `qnn_context_create_from_binary`
+    - SERIALIZE/ONLINE_PREPARE/MULTI_GRAPH: `qnn_context_create` 후 그래프 등록 경로
+  - 본 구현: “DESERIALIZE” 경로만 사용. 즉, 항상 `qnn_context_create_from_binary`로 복원(멀티-그래프 포함 단일 바이너리)
+
+- 컨텍스트 바이너리 소스
+  - Executorch: PTE 내부에 임베드된 QNN 컨텍스트 바이너리를 `QnnExecuTorchContextBinary`로 추출·보관(`QnnExecuTorch.h`, `QnnContextCommon::GetContextBinary()`)
+  - 본 구현: 외부에서 추출된 `forward_<i>.bin` 파일을 그대로 사용(Python 추출 스크립트 등 별도 경로)
+
+- 그래프 이름/검색
+  - Executorch: `MethodMeta` 등 내부 메타에서 그래프 목록을 보유하고 순회 초기화
+  - 본 구현: `prefill_forward`, `kv_forward`를 기본 상수로 사용. 필요 시 JSON에서 그래프명 파싱으로 확장 가능(현재는 상수)
+
+- I/O 텐서 메타데이터 출처
+  - Executorch: PTE의 `MethodMeta`·런타임 내부 캐시에서 입출력/업데이트 텐서 정보를 관리
+  - 본 구현: QNN SDK `qnn-context-binary-utility` JSON을 “단일 소스”로 사용. Executorch 런타임 덤프 JSON은 참고용
+
+- 텐서 바인딩 방식
+  - Executorch: 그래프에 등록된 텐서 집합을 보유한 상태에서 “`AllocateTensor`가 각 텐서의 clientBuf만 채움”. 이후 `graphExecute`
+  - 본 구현: JSON의 `id`를 그대로 사용해 `Qnn_Tensor_t v2`를 구성하고 `clientBuf`만 채워 `graphExecute`. `QnnTensor_updateGraphTensors`는 사용하지 않음(입출력은 APP_* 타입)
+
+- Quantization 처리
+  - Executorch: `MethodMeta` 기반으로 per-tensor/per-axis를 세밀하게 구성(필요 시 내부 버퍼 보관)
+  - 본 구현: per-tensor(scale/offset) 즉시 반영, per-axis는 encoding 메타까지만(실제 배열 포인터 연결은 미구현)
+
+- Mutable Buffer/공유 메모리
+  - Executorch: 동일 컨텍스트 내 mutable buffer id를 기반으로 버퍼 공유(필요 시 ION/DMABUF 등록 경로 보유: `QnnManager::RegisterIonMem` 등)
+  - 본 구현: 기본적으로 per‑tensor host 메모리 할당. 샤드 간 자동 공유 없음. 향후 ION/DMABUF 연계는 확장 포인트
+
+- 프로파일/시그널
+  - Executorch: 선택적으로 프로파일 핸들/시그널을 사용
+  - 본 구현: 단순화를 위해 `nullptr` 사용
+
+- 로깅
+  - Executorch: `QnnLogger` 래퍼와 환경 변수/옵션을 통한 제어
+  - 본 구현: QNN 기본 로거 사용, `--log_level`로 최소 제어(콜백 미사용)
+
+- 에러 처리/검증
+  - Executorch: `ET_CHECK_OR_RETURN_ERROR` 매크로 등으로 일관 처리
+  - 본 구현: 함수별 반환 검사 및 에러 로그 출력(간결화)
+
+- 샤딩 운영 모델
+  - Executorch: 실행 시 내부 스케줄에 따라 샤드 전환·재사용, 캐시 상태 관리
+  - 본 구현: `ctx_dir` 순회로 각 컨텍스트를 순차 복원·실행. 필요 시 수명 연장/재사용 가능하나 기본은 순차 처리
+
 
 
 ## 예시 확인(정상 동작 시)
