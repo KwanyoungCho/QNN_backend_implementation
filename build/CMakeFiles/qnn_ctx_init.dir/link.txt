@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/qnn_ctx_init.dir/apps/qnn_ctx_init_main.cpp.o -o qnn_ctx_init  libqnn_ctx_core.a -ldl -lpthread

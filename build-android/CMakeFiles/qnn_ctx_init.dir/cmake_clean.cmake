@@ -1,0 +1,12 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/qnn_ctx_init.dir/link.d"
+  "CMakeFiles/qnn_ctx_init.dir/apps/qnn_ctx_init_main.cpp.o"
+  "CMakeFiles/qnn_ctx_init.dir/apps/qnn_ctx_init_main.cpp.o.d"
+  "qnn_ctx_init"
+  "qnn_ctx_init.pdb"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/qnn_ctx_init.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

@@ -1,0 +1,2 @@
+/usr/bin/ar qc libqnn_ctx_core.a CMakeFiles/qnn_ctx_core.dir/src/qnn_loader.cpp.o CMakeFiles/qnn_ctx_core.dir/src/binary_provider.cpp.o CMakeFiles/qnn_ctx_core.dir/src/io_meta.cpp.o
+/usr/bin/ranlib libqnn_ctx_core.a

@@ -1,0 +1,6 @@
+/home/chokwans99/llm_test/build-android/CMakeFiles/qnn_ctx_core.dir
+/home/chokwans99/llm_test/build-android/CMakeFiles/qnn_ctx_init.dir
+/home/chokwans99/llm_test/build-android/CMakeFiles/qnn_graph_probe.dir
+/home/chokwans99/llm_test/build-android/CMakeFiles/qnn_io_plan.dir
+/home/chokwans99/llm_test/build-android/CMakeFiles/edit_cache.dir
+/home/chokwans99/llm_test/build-android/CMakeFiles/rebuild_cache.dir
