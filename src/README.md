@@ -329,9 +329,45 @@ ninja -C build-android
 
 ## 메모리 할당/정렬
 
-- 각 텐서별 `nbytes` 크기만큼 호스트 메모리를 할당
-- `--align`으로 정렬을 지정하면, 페이지/캐시 라인 등 원하는 경계 정렬 구현 가능
-- 향후 Android ION/DMABUF 연계를 통해 NPU와 zero-copy 파이프라인을 구성 가능(Executorch의 `RegisterIonMem` 경로와 유사)
+본 프로젝트의 메모리 할당은 “JSON 기반의 정적 바인딩”을 기본으로 하며, Executorch의 `AllocateTensor`가 하는 역할(등록된 텐서의 clientBuf만 채움)을 앱 레벨에서 재현합니다. 세부 동작은 다음과 같습니다.
+
+1) nbytes 산출
+   - 각 텐서별 `bytesPerElement`(JSON 제공 또는 dtype 매핑)와 `dims`의 곱으로 `nbytes`를 계산합니다.
+   - 32-bit overflow를 피하기 위해 누적 곱은 `size_t`/`uint64_t`로 수행 후, `clientBuf.dataSize`에 대입 시 `uint32_t` 캐스팅을 수행합니다. 캐스팅 전 상한 검증으로 4GiB 초과 시 경고/에러를 낼 수 있습니다.
+
+2) 할당기 정책
+   - 기본: 각 텐서마다 독립적인 호스트 버퍼를 `new uint8_t[nbytes]` 또는 `std::aligned_alloc(align, rounded_size)`로 확보합니다.
+   - 정렬: `--align` 인자를 통해 정렬 바이트를 지정할 수 있습니다(예: 64/128). 지정 시, `rounded_size = AlignUp(nbytes, align)`을 적용하여 오버런 없이 안전하게 할당합니다.
+   - 수명: 입력/출력 텐서 버퍼는 그래프 실행이 끝날 때까지 유효해야 합니다. 현재 예제는 단일 호출 단위로 수명을 관리합니다. 반복 실행 시에는 재사용 풀(캐시)을 둘 수 있습니다.
+
+3) 메모리 소유권과 클린업
+   - `QnnTensorHolder`는 텐서 구조체와 별개로 버퍼 포인터만 참조합니다. 실제 소유권은 앱이 보유하며, 실행 종료 시 `delete[]` 혹은 `std::free`로 해제합니다(정렬 방법에 따라 일치하는 해제 함수 사용).
+   - `mmap`은 컨텍스트 바이너리(읽기 전용)에만 사용합니다. I/O 텐서 버퍼는 일반 힙 할당을 사용합니다.
+
+4) 멀티 텐서 연속 할당(옵션)
+   - 성능과 캐시 친화성을 위해 여러 텐서를 하나의 큰 컨티구어스 블록에 패킹할 수 있습니다.
+   - 절차: 총 바이트 수 = ∑ AlignUp(nbytes_i, align)로 계산 → 1회 대형 할당 → 각 텐서에 오프셋으로 슬라이스를 나누어 `clientBuf.data`에 지정.
+   - 장점: `malloc`/`free` 호출 감소, TLB/캐시 효율 개선. 단점: 단일 텐서 재할당이 어려움.
+
+5) 샤드 간/그래프 간 공유(심화)
+   - 기본 구현은 샤드 간 자동 공유를 하지 않습니다. 동일 주소(or MEMHANDLE)를 명시적으로 바인딩해야 합니다.
+   - 향후 ION/DMABUF 통합 시, 공통 ION 버퍼를 생성하고 각 샤드/그래프의 공통 I/O에 동일 핸들+오프셋을 바인딩함으로써 진정한 zero‑copy를 구현할 수 있습니다.
+   - Executorch 유사 경로: `QnnManager::RegisterIonMem`/`RegisterCustomMem`를 참고하여 FD→memhandle 등록 후, 텐서 `memType=QNN_TENSORMEMTYPE_MEMHANDLE`로 설정 및 `clientBuf` 대신 핸들/오프셋을 사용합니다.
+
+6) 동적 크기 텐서(옵션)
+   - 동적 차원을 갖는 입력의 경우, 실행 전에 실제 `dims`로 `nbytes`를 재계산하고, 버퍼를 재할당하거나 충분한 상한 크기의 버퍼를 재사용합니다.
+   - Executorch는 `MethodMeta` 기반으로 이를 관리합니다. 본 구현은 JSON+런타임 입력으로 치환하며, 차원/바이트 검증 로직을 추가해 안전성을 확보할 수 있습니다.
+
+7) 보안/안정성
+   - `nbytes==0` 또는 과대값(예: 비정상적으로 큰 값)인 경우 즉시 실패하도록 방어 로직을 두었습니다.
+   - `memset`(0) 초기화 여부는 워크로드에 따라 선택합니다. 출력 텐서는 초기화 없이 상관없는 경우가 많지만, 디버깅 용이성을 위해 초기화를 권장할 수 있습니다.
+
+8) 정렬 기준 추천치
+   - CPU 측 캐시라인 정렬: 64B
+   - HTP/버스 전송 친화: 64~128B(플랫폼에 따라 상이)
+   - ION/DMABUF 사용 시, 페이지 정렬(4KiB) 또는 드라이버 제약을 우선 고려합니다.
+
+향후 확장: ION/DMABUF 기반 MEMHANDLE 경로를 추가하여 NPU와의 zero‑copy를 실현하고, 텐서 묶음(특히 샤드 간 동일 I/O)에 대해 공유 핸들을 바인딩하는 플래너를 도입할 수 있습니다.
 
 
 ## 로깅
