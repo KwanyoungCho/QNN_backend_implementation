@@ -101,6 +101,32 @@
   - 왜 필요한가
     - 전체 체인을 통합 검증하고, 다른 프레임워크(예: llama.cpp) 통합 시 참조 예제로 활용
 
+### 6) I/O Allocator
+- `include/io_alloc.h` / `src/io_alloc.cpp`
+  - 공개 API
+    - `build_from_qnnjson(const QnnJsonGraphDesc&)`: 그래프의 `inputs`/`outputs`에서 텐서명→`nbytes` 맵을 구성. 내부 상태 초기화.
+    - `allocate(std::size_t alignment) -> uint64_t`: 기존 버퍼를 `release()`로 해제 후, 각 텐서별로 메모리를 할당하여 텐서명→포인터 맵을 구성. 총 할당 바이트를 반환.
+      - `alignment`가 2의 거듭제곱이면 `posix_memalign(&p, alignment, sz)`, 아니면 `std::malloc(sz)`.
+      - `sz==0`이면 포인터를 `nullptr`로 보관(바인딩은 되지만 읽기/쓰기는 금지).
+      - 할당 실패 시 포인터는 `nullptr`, 총 바이트 합산에서 제외.
+    - `bindings() -> const std::map<std::string, void*>&`: 텐서명→버퍼 주소 맵(그래프 바인딩 시 `clientBuf.data`로 사용).
+    - `total_allocated_bytes() -> uint64_t`: 직전 `allocate()`의 총합.
+    - `release()`: 보유 중 모든 버퍼를 `std::free`로 해제(멱등). 내부 맵/총합 초기화.
+  - 설계/동작
+    - 현 단계는 mutable buffer 공유가 없어 “텐서별(per‑tensor) 독립 할당”만 수행.
+    - 정렬은 선택적. `alignment`가 거듭제곱이 아닐 때는 표준 `malloc`으로 폴백.
+    - 수명/소유권: 현재 경로에서는 QNNIOAllocator가 버퍼를 소유/해제하고, `QnnTensorHolder`는 포인터만 참조.
+  - 사용 예(흐름)
+    - `desc = parse_qnn_json("forward_i_json.json")`
+    - `alloc.build_from_qnnjson(desc)` → `alloc.allocate(align)` → `alloc.bindings()`에서 이름으로 포인터를 찾아 `Qnn_Tensor_t.v2.clientBuf.data`에 지정, `dataSize`는 `desc`에서 계산된 `nbytes`로 설정.
+  - Executorch 대비
+    - Executorch의 `AllocateTensor`가 “등록 텐서의 clientBuf만 채움”이라는 철학은 동일.
+    - 다만 Executorch는 mutable buffer 기반 공유/메모리 핸들(ION/DMABUF)까지 포괄. 본 구현은 현재 per‑tensor 호스트 메모리 중심.
+  - 확장 포인트
+    - 컨티구어스 대형 블록 패킹(여러 텐서를 하나의 블록에 정렬·슬라이스)
+    - mutableBufferId 기반 공유 그룹 할당(메타가 제공될 때)
+    - MEMHANDLE 경로(ION/DMABUF) 추가 및 오프셋 바인딩
+
 ## 구현 중심 해설(내부 동작 디테일)
 
 - `qnn_loader.cpp` 내부 흐름
