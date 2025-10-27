@@ -44,10 +44,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /home/chokwans99/anaconda3/envs/et/lib/python3.11/site-packages/cmake/data/bin/cmake
+CMAKE_COMMAND = /home/chokwans99/anaconda3/envs/et_new/lib/python3.11/site-packages/cmake/data/bin/cmake
 
 # The command to remove a file.
-RM = /home/chokwans99/anaconda3/envs/et/lib/python3.11/site-packages/cmake/data/bin/cmake -E rm -f
+RM = /home/chokwans99/anaconda3/envs/et_new/lib/python3.11/site-packages/cmake/data/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -142,13 +142,58 @@ CMakeFiles/qnn_ctx_core.dir/src/qnn_tensor_util.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/qnn_ctx_core.dir/src/qnn_tensor_util.cpp.s"
 	/home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/chokwans99/llm_test/src/qnn_tensor_util.cpp -o CMakeFiles/qnn_ctx_core.dir/src/qnn_tensor_util.cpp.s
 
+CMakeFiles/qnn_ctx_core.dir/src/llm_input_preparer.cpp.o: CMakeFiles/qnn_ctx_core.dir/flags.make
+CMakeFiles/qnn_ctx_core.dir/src/llm_input_preparer.cpp.o: /home/chokwans99/llm_test/src/llm_input_preparer.cpp
+CMakeFiles/qnn_ctx_core.dir/src/llm_input_preparer.cpp.o: CMakeFiles/qnn_ctx_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/chokwans99/llm_test/build-android/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/qnn_ctx_core.dir/src/llm_input_preparer.cpp.o"
+	/home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/qnn_ctx_core.dir/src/llm_input_preparer.cpp.o -MF CMakeFiles/qnn_ctx_core.dir/src/llm_input_preparer.cpp.o.d -o CMakeFiles/qnn_ctx_core.dir/src/llm_input_preparer.cpp.o -c /home/chokwans99/llm_test/src/llm_input_preparer.cpp
+
+CMakeFiles/qnn_ctx_core.dir/src/llm_input_preparer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/qnn_ctx_core.dir/src/llm_input_preparer.cpp.i"
+	/home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/chokwans99/llm_test/src/llm_input_preparer.cpp > CMakeFiles/qnn_ctx_core.dir/src/llm_input_preparer.cpp.i
+
+CMakeFiles/qnn_ctx_core.dir/src/llm_input_preparer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/qnn_ctx_core.dir/src/llm_input_preparer.cpp.s"
+	/home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/chokwans99/llm_test/src/llm_input_preparer.cpp -o CMakeFiles/qnn_ctx_core.dir/src/llm_input_preparer.cpp.s
+
+CMakeFiles/qnn_ctx_core.dir/src/llm_output_processor.cpp.o: CMakeFiles/qnn_ctx_core.dir/flags.make
+CMakeFiles/qnn_ctx_core.dir/src/llm_output_processor.cpp.o: /home/chokwans99/llm_test/src/llm_output_processor.cpp
+CMakeFiles/qnn_ctx_core.dir/src/llm_output_processor.cpp.o: CMakeFiles/qnn_ctx_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/chokwans99/llm_test/build-android/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/qnn_ctx_core.dir/src/llm_output_processor.cpp.o"
+	/home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/qnn_ctx_core.dir/src/llm_output_processor.cpp.o -MF CMakeFiles/qnn_ctx_core.dir/src/llm_output_processor.cpp.o.d -o CMakeFiles/qnn_ctx_core.dir/src/llm_output_processor.cpp.o -c /home/chokwans99/llm_test/src/llm_output_processor.cpp
+
+CMakeFiles/qnn_ctx_core.dir/src/llm_output_processor.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/qnn_ctx_core.dir/src/llm_output_processor.cpp.i"
+	/home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/chokwans99/llm_test/src/llm_output_processor.cpp > CMakeFiles/qnn_ctx_core.dir/src/llm_output_processor.cpp.i
+
+CMakeFiles/qnn_ctx_core.dir/src/llm_output_processor.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/qnn_ctx_core.dir/src/llm_output_processor.cpp.s"
+	/home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/chokwans99/llm_test/src/llm_output_processor.cpp -o CMakeFiles/qnn_ctx_core.dir/src/llm_output_processor.cpp.s
+
+CMakeFiles/qnn_ctx_core.dir/src/llm_kv_cache_manager.cpp.o: CMakeFiles/qnn_ctx_core.dir/flags.make
+CMakeFiles/qnn_ctx_core.dir/src/llm_kv_cache_manager.cpp.o: /home/chokwans99/llm_test/src/llm_kv_cache_manager.cpp
+CMakeFiles/qnn_ctx_core.dir/src/llm_kv_cache_manager.cpp.o: CMakeFiles/qnn_ctx_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/chokwans99/llm_test/build-android/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/qnn_ctx_core.dir/src/llm_kv_cache_manager.cpp.o"
+	/home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/qnn_ctx_core.dir/src/llm_kv_cache_manager.cpp.o -MF CMakeFiles/qnn_ctx_core.dir/src/llm_kv_cache_manager.cpp.o.d -o CMakeFiles/qnn_ctx_core.dir/src/llm_kv_cache_manager.cpp.o -c /home/chokwans99/llm_test/src/llm_kv_cache_manager.cpp
+
+CMakeFiles/qnn_ctx_core.dir/src/llm_kv_cache_manager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/qnn_ctx_core.dir/src/llm_kv_cache_manager.cpp.i"
+	/home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/chokwans99/llm_test/src/llm_kv_cache_manager.cpp > CMakeFiles/qnn_ctx_core.dir/src/llm_kv_cache_manager.cpp.i
+
+CMakeFiles/qnn_ctx_core.dir/src/llm_kv_cache_manager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/qnn_ctx_core.dir/src/llm_kv_cache_manager.cpp.s"
+	/home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/chokwans99/llm_test/src/llm_kv_cache_manager.cpp -o CMakeFiles/qnn_ctx_core.dir/src/llm_kv_cache_manager.cpp.s
+
 # Object files for target qnn_ctx_core
 qnn_ctx_core_OBJECTS = \
 "CMakeFiles/qnn_ctx_core.dir/src/qnn_loader.cpp.o" \
 "CMakeFiles/qnn_ctx_core.dir/src/binary_provider.cpp.o" \
 "CMakeFiles/qnn_ctx_core.dir/src/io_alloc.cpp.o" \
 "CMakeFiles/qnn_ctx_core.dir/src/qnn_qnnjson.cpp.o" \
-"CMakeFiles/qnn_ctx_core.dir/src/qnn_tensor_util.cpp.o"
+"CMakeFiles/qnn_ctx_core.dir/src/qnn_tensor_util.cpp.o" \
+"CMakeFiles/qnn_ctx_core.dir/src/llm_input_preparer.cpp.o" \
+"CMakeFiles/qnn_ctx_core.dir/src/llm_output_processor.cpp.o" \
+"CMakeFiles/qnn_ctx_core.dir/src/llm_kv_cache_manager.cpp.o"
 
 # External object files for target qnn_ctx_core
 qnn_ctx_core_EXTERNAL_OBJECTS =
@@ -158,9 +203,12 @@ libqnn_ctx_core.a: CMakeFiles/qnn_ctx_core.dir/src/binary_provider.cpp.o
 libqnn_ctx_core.a: CMakeFiles/qnn_ctx_core.dir/src/io_alloc.cpp.o
 libqnn_ctx_core.a: CMakeFiles/qnn_ctx_core.dir/src/qnn_qnnjson.cpp.o
 libqnn_ctx_core.a: CMakeFiles/qnn_ctx_core.dir/src/qnn_tensor_util.cpp.o
+libqnn_ctx_core.a: CMakeFiles/qnn_ctx_core.dir/src/llm_input_preparer.cpp.o
+libqnn_ctx_core.a: CMakeFiles/qnn_ctx_core.dir/src/llm_output_processor.cpp.o
+libqnn_ctx_core.a: CMakeFiles/qnn_ctx_core.dir/src/llm_kv_cache_manager.cpp.o
 libqnn_ctx_core.a: CMakeFiles/qnn_ctx_core.dir/build.make
 libqnn_ctx_core.a: CMakeFiles/qnn_ctx_core.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/chokwans99/llm_test/build-android/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX static library libqnn_ctx_core.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/chokwans99/llm_test/build-android/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX static library libqnn_ctx_core.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/qnn_ctx_core.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/qnn_ctx_core.dir/link.txt --verbose=$(VERBOSE)
 

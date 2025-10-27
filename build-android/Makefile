@@ -48,10 +48,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /home/chokwans99/anaconda3/envs/et/lib/python3.11/site-packages/cmake/data/bin/cmake
+CMAKE_COMMAND = /home/chokwans99/anaconda3/envs/et_new/lib/python3.11/site-packages/cmake/data/bin/cmake
 
 # The command to remove a file.
-RM = /home/chokwans99/anaconda3/envs/et/lib/python3.11/site-packages/cmake/data/bin/cmake -E rm -f
+RM = /home/chokwans99/anaconda3/envs/et_new/lib/python3.11/site-packages/cmake/data/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -68,7 +68,7 @@ CMAKE_BINARY_DIR = /home/chokwans99/llm_test/build-android
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "No interactive CMake dialog available..."
-	/home/chokwans99/anaconda3/envs/et/lib/python3.11/site-packages/cmake/data/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	/home/chokwans99/anaconda3/envs/et_new/lib/python3.11/site-packages/cmake/data/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -78,12 +78,57 @@ edit_cache/fast: edit_cache
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Running CMake to regenerate build system..."
-	/home/chokwans99/anaconda3/envs/et/lib/python3.11/site-packages/cmake/data/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/home/chokwans99/anaconda3/envs/et_new/lib/python3.11/site-packages/cmake/data/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
 rebuild_cache/fast: rebuild_cache
 .PHONY : rebuild_cache/fast
+
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+.PHONY : list_install_components/fast
+
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Install the project..."
+	/home/chokwans99/anaconda3/envs/et_new/lib/python3.11/site-packages/cmake/data/bin/cmake -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Install the project..."
+	/home/chokwans99/anaconda3/envs/et_new/lib/python3.11/site-packages/cmake/data/bin/cmake -P cmake_install.cmake
+.PHONY : install/fast
+
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing only the local directory..."
+	/home/chokwans99/anaconda3/envs/et_new/lib/python3.11/site-packages/cmake/data/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing only the local directory..."
+	/home/chokwans99/anaconda3/envs/et_new/lib/python3.11/site-packages/cmake/data/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local/fast
+
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing the project stripped..."
+	/home/chokwans99/anaconda3/envs/et_new/lib/python3.11/site-packages/cmake/data/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
+
+# Special rule for the target install/strip
+install/strip/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing the project stripped..."
+	/home/chokwans99/anaconda3/envs/et_new/lib/python3.11/site-packages/cmake/data/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -168,6 +213,110 @@ qnn_io_plan/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_io_plan.dir/build.make CMakeFiles/qnn_io_plan.dir/build
 .PHONY : qnn_io_plan/fast
 
+#=============================================================================
+# Target rules for targets named qnn_prefill
+
+# Build rule for target.
+qnn_prefill: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 qnn_prefill
+.PHONY : qnn_prefill
+
+# fast build rule for target.
+qnn_prefill/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_prefill.dir/build.make CMakeFiles/qnn_prefill.dir/build
+.PHONY : qnn_prefill/fast
+
+#=============================================================================
+# Target rules for targets named qnn_decode
+
+# Build rule for target.
+qnn_decode: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 qnn_decode
+.PHONY : qnn_decode
+
+# fast build rule for target.
+qnn_decode/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_decode.dir/build.make CMakeFiles/qnn_decode.dir/build
+.PHONY : qnn_decode/fast
+
+#=============================================================================
+# Target rules for targets named tok_llama
+
+# Build rule for target.
+tok_llama: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tok_llama
+.PHONY : tok_llama
+
+# fast build rule for target.
+tok_llama/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tok_llama.dir/build.make CMakeFiles/tok_llama.dir/build
+.PHONY : tok_llama/fast
+
+#=============================================================================
+# Target rules for targets named tok_encode
+
+# Build rule for target.
+tok_encode: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tok_encode
+.PHONY : tok_encode
+
+# fast build rule for target.
+tok_encode/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tok_encode.dir/build.make CMakeFiles/tok_encode.dir/build
+.PHONY : tok_encode/fast
+
+#=============================================================================
+# Target rules for targets named ggml-base
+
+# Build rule for target.
+ggml-base: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ggml-base
+.PHONY : ggml-base
+
+# fast build rule for target.
+ggml-base/fast:
+	$(MAKE) $(MAKESILENT) -f third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/build.make third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/build
+.PHONY : ggml-base/fast
+
+#=============================================================================
+# Target rules for targets named ggml
+
+# Build rule for target.
+ggml: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ggml
+.PHONY : ggml
+
+# fast build rule for target.
+ggml/fast:
+	$(MAKE) $(MAKESILENT) -f third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/build.make third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/build
+.PHONY : ggml/fast
+
+#=============================================================================
+# Target rules for targets named ggml-cpu
+
+# Build rule for target.
+ggml-cpu: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ggml-cpu
+.PHONY : ggml-cpu
+
+# fast build rule for target.
+ggml-cpu/fast:
+	$(MAKE) $(MAKESILENT) -f third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/build.make third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/build
+.PHONY : ggml-cpu/fast
+
+#=============================================================================
+# Target rules for targets named llama
+
+# Build rule for target.
+llama: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 llama
+.PHONY : llama
+
+# fast build rule for target.
+llama/fast:
+	$(MAKE) $(MAKESILENT) -f third_party/specinfer-build/src/CMakeFiles/llama.dir/build.make third_party/specinfer-build/src/CMakeFiles/llama.dir/build
+.PHONY : llama/fast
+
 apps/qnn_ctx_init_main.o: apps/qnn_ctx_init_main.cpp.o
 .PHONY : apps/qnn_ctx_init_main.o
 
@@ -191,6 +340,30 @@ apps/qnn_ctx_init_main.s: apps/qnn_ctx_init_main.cpp.s
 apps/qnn_ctx_init_main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_ctx_init.dir/build.make CMakeFiles/qnn_ctx_init.dir/apps/qnn_ctx_init_main.cpp.s
 .PHONY : apps/qnn_ctx_init_main.cpp.s
+
+apps/qnn_decode_main.o: apps/qnn_decode_main.cpp.o
+.PHONY : apps/qnn_decode_main.o
+
+# target to build an object file
+apps/qnn_decode_main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_decode.dir/build.make CMakeFiles/qnn_decode.dir/apps/qnn_decode_main.cpp.o
+.PHONY : apps/qnn_decode_main.cpp.o
+
+apps/qnn_decode_main.i: apps/qnn_decode_main.cpp.i
+.PHONY : apps/qnn_decode_main.i
+
+# target to preprocess a source file
+apps/qnn_decode_main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_decode.dir/build.make CMakeFiles/qnn_decode.dir/apps/qnn_decode_main.cpp.i
+.PHONY : apps/qnn_decode_main.cpp.i
+
+apps/qnn_decode_main.s: apps/qnn_decode_main.cpp.s
+.PHONY : apps/qnn_decode_main.s
+
+# target to generate assembly for a file
+apps/qnn_decode_main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_decode.dir/build.make CMakeFiles/qnn_decode.dir/apps/qnn_decode_main.cpp.s
+.PHONY : apps/qnn_decode_main.cpp.s
 
 apps/qnn_graph_probe_main.o: apps/qnn_graph_probe_main.cpp.o
 .PHONY : apps/qnn_graph_probe_main.o
@@ -240,6 +413,54 @@ apps/qnn_io_plan_main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_io_plan.dir/build.make CMakeFiles/qnn_io_plan.dir/apps/qnn_io_plan_main.cpp.s
 .PHONY : apps/qnn_io_plan_main.cpp.s
 
+apps/qnn_prefill_main.o: apps/qnn_prefill_main.cpp.o
+.PHONY : apps/qnn_prefill_main.o
+
+# target to build an object file
+apps/qnn_prefill_main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_prefill.dir/build.make CMakeFiles/qnn_prefill.dir/apps/qnn_prefill_main.cpp.o
+.PHONY : apps/qnn_prefill_main.cpp.o
+
+apps/qnn_prefill_main.i: apps/qnn_prefill_main.cpp.i
+.PHONY : apps/qnn_prefill_main.i
+
+# target to preprocess a source file
+apps/qnn_prefill_main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_prefill.dir/build.make CMakeFiles/qnn_prefill.dir/apps/qnn_prefill_main.cpp.i
+.PHONY : apps/qnn_prefill_main.cpp.i
+
+apps/qnn_prefill_main.s: apps/qnn_prefill_main.cpp.s
+.PHONY : apps/qnn_prefill_main.s
+
+# target to generate assembly for a file
+apps/qnn_prefill_main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_prefill.dir/build.make CMakeFiles/qnn_prefill.dir/apps/qnn_prefill_main.cpp.s
+.PHONY : apps/qnn_prefill_main.cpp.s
+
+apps/tok_encode_main.o: apps/tok_encode_main.cpp.o
+.PHONY : apps/tok_encode_main.o
+
+# target to build an object file
+apps/tok_encode_main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tok_encode.dir/build.make CMakeFiles/tok_encode.dir/apps/tok_encode_main.cpp.o
+.PHONY : apps/tok_encode_main.cpp.o
+
+apps/tok_encode_main.i: apps/tok_encode_main.cpp.i
+.PHONY : apps/tok_encode_main.i
+
+# target to preprocess a source file
+apps/tok_encode_main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tok_encode.dir/build.make CMakeFiles/tok_encode.dir/apps/tok_encode_main.cpp.i
+.PHONY : apps/tok_encode_main.cpp.i
+
+apps/tok_encode_main.s: apps/tok_encode_main.cpp.s
+.PHONY : apps/tok_encode_main.s
+
+# target to generate assembly for a file
+apps/tok_encode_main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tok_encode.dir/build.make CMakeFiles/tok_encode.dir/apps/tok_encode_main.cpp.s
+.PHONY : apps/tok_encode_main.cpp.s
+
 src/binary_provider.o: src/binary_provider.cpp.o
 .PHONY : src/binary_provider.o
 
@@ -287,6 +508,78 @@ src/io_alloc.s: src/io_alloc.cpp.s
 src/io_alloc.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_ctx_core.dir/build.make CMakeFiles/qnn_ctx_core.dir/src/io_alloc.cpp.s
 .PHONY : src/io_alloc.cpp.s
+
+src/llm_input_preparer.o: src/llm_input_preparer.cpp.o
+.PHONY : src/llm_input_preparer.o
+
+# target to build an object file
+src/llm_input_preparer.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_ctx_core.dir/build.make CMakeFiles/qnn_ctx_core.dir/src/llm_input_preparer.cpp.o
+.PHONY : src/llm_input_preparer.cpp.o
+
+src/llm_input_preparer.i: src/llm_input_preparer.cpp.i
+.PHONY : src/llm_input_preparer.i
+
+# target to preprocess a source file
+src/llm_input_preparer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_ctx_core.dir/build.make CMakeFiles/qnn_ctx_core.dir/src/llm_input_preparer.cpp.i
+.PHONY : src/llm_input_preparer.cpp.i
+
+src/llm_input_preparer.s: src/llm_input_preparer.cpp.s
+.PHONY : src/llm_input_preparer.s
+
+# target to generate assembly for a file
+src/llm_input_preparer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_ctx_core.dir/build.make CMakeFiles/qnn_ctx_core.dir/src/llm_input_preparer.cpp.s
+.PHONY : src/llm_input_preparer.cpp.s
+
+src/llm_kv_cache_manager.o: src/llm_kv_cache_manager.cpp.o
+.PHONY : src/llm_kv_cache_manager.o
+
+# target to build an object file
+src/llm_kv_cache_manager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_ctx_core.dir/build.make CMakeFiles/qnn_ctx_core.dir/src/llm_kv_cache_manager.cpp.o
+.PHONY : src/llm_kv_cache_manager.cpp.o
+
+src/llm_kv_cache_manager.i: src/llm_kv_cache_manager.cpp.i
+.PHONY : src/llm_kv_cache_manager.i
+
+# target to preprocess a source file
+src/llm_kv_cache_manager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_ctx_core.dir/build.make CMakeFiles/qnn_ctx_core.dir/src/llm_kv_cache_manager.cpp.i
+.PHONY : src/llm_kv_cache_manager.cpp.i
+
+src/llm_kv_cache_manager.s: src/llm_kv_cache_manager.cpp.s
+.PHONY : src/llm_kv_cache_manager.s
+
+# target to generate assembly for a file
+src/llm_kv_cache_manager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_ctx_core.dir/build.make CMakeFiles/qnn_ctx_core.dir/src/llm_kv_cache_manager.cpp.s
+.PHONY : src/llm_kv_cache_manager.cpp.s
+
+src/llm_output_processor.o: src/llm_output_processor.cpp.o
+.PHONY : src/llm_output_processor.o
+
+# target to build an object file
+src/llm_output_processor.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_ctx_core.dir/build.make CMakeFiles/qnn_ctx_core.dir/src/llm_output_processor.cpp.o
+.PHONY : src/llm_output_processor.cpp.o
+
+src/llm_output_processor.i: src/llm_output_processor.cpp.i
+.PHONY : src/llm_output_processor.i
+
+# target to preprocess a source file
+src/llm_output_processor.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_ctx_core.dir/build.make CMakeFiles/qnn_ctx_core.dir/src/llm_output_processor.cpp.i
+.PHONY : src/llm_output_processor.cpp.i
+
+src/llm_output_processor.s: src/llm_output_processor.cpp.s
+.PHONY : src/llm_output_processor.s
+
+# target to generate assembly for a file
+src/llm_output_processor.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_ctx_core.dir/build.make CMakeFiles/qnn_ctx_core.dir/src/llm_output_processor.cpp.s
+.PHONY : src/llm_output_processor.cpp.s
 
 src/qnn_loader.o: src/qnn_loader.cpp.o
 .PHONY : src/qnn_loader.o
@@ -360,6 +653,30 @@ src/qnn_tensor_util.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_ctx_core.dir/build.make CMakeFiles/qnn_ctx_core.dir/src/qnn_tensor_util.cpp.s
 .PHONY : src/qnn_tensor_util.cpp.s
 
+src/tokenizer_llama.o: src/tokenizer_llama.cpp.o
+.PHONY : src/tokenizer_llama.o
+
+# target to build an object file
+src/tokenizer_llama.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tok_llama.dir/build.make CMakeFiles/tok_llama.dir/src/tokenizer_llama.cpp.o
+.PHONY : src/tokenizer_llama.cpp.o
+
+src/tokenizer_llama.i: src/tokenizer_llama.cpp.i
+.PHONY : src/tokenizer_llama.i
+
+# target to preprocess a source file
+src/tokenizer_llama.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tok_llama.dir/build.make CMakeFiles/tok_llama.dir/src/tokenizer_llama.cpp.i
+.PHONY : src/tokenizer_llama.cpp.i
+
+src/tokenizer_llama.s: src/tokenizer_llama.cpp.s
+.PHONY : src/tokenizer_llama.s
+
+# target to generate assembly for a file
+src/tokenizer_llama.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tok_llama.dir/build.make CMakeFiles/tok_llama.dir/src/tokenizer_llama.cpp.s
+.PHONY : src/tokenizer_llama.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -367,26 +684,56 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... edit_cache"
+	@echo "... install"
+	@echo "... install/local"
+	@echo "... install/strip"
+	@echo "... list_install_components"
 	@echo "... rebuild_cache"
+	@echo "... ggml"
+	@echo "... ggml-base"
+	@echo "... ggml-cpu"
+	@echo "... llama"
 	@echo "... qnn_ctx_core"
 	@echo "... qnn_ctx_init"
+	@echo "... qnn_decode"
 	@echo "... qnn_graph_probe"
 	@echo "... qnn_io_plan"
+	@echo "... qnn_prefill"
+	@echo "... tok_encode"
+	@echo "... tok_llama"
 	@echo "... apps/qnn_ctx_init_main.o"
 	@echo "... apps/qnn_ctx_init_main.i"
 	@echo "... apps/qnn_ctx_init_main.s"
+	@echo "... apps/qnn_decode_main.o"
+	@echo "... apps/qnn_decode_main.i"
+	@echo "... apps/qnn_decode_main.s"
 	@echo "... apps/qnn_graph_probe_main.o"
 	@echo "... apps/qnn_graph_probe_main.i"
 	@echo "... apps/qnn_graph_probe_main.s"
 	@echo "... apps/qnn_io_plan_main.o"
 	@echo "... apps/qnn_io_plan_main.i"
 	@echo "... apps/qnn_io_plan_main.s"
+	@echo "... apps/qnn_prefill_main.o"
+	@echo "... apps/qnn_prefill_main.i"
+	@echo "... apps/qnn_prefill_main.s"
+	@echo "... apps/tok_encode_main.o"
+	@echo "... apps/tok_encode_main.i"
+	@echo "... apps/tok_encode_main.s"
 	@echo "... src/binary_provider.o"
 	@echo "... src/binary_provider.i"
 	@echo "... src/binary_provider.s"
 	@echo "... src/io_alloc.o"
 	@echo "... src/io_alloc.i"
 	@echo "... src/io_alloc.s"
+	@echo "... src/llm_input_preparer.o"
+	@echo "... src/llm_input_preparer.i"
+	@echo "... src/llm_input_preparer.s"
+	@echo "... src/llm_kv_cache_manager.o"
+	@echo "... src/llm_kv_cache_manager.i"
+	@echo "... src/llm_kv_cache_manager.s"
+	@echo "... src/llm_output_processor.o"
+	@echo "... src/llm_output_processor.i"
+	@echo "... src/llm_output_processor.s"
 	@echo "... src/qnn_loader.o"
 	@echo "... src/qnn_loader.i"
 	@echo "... src/qnn_loader.s"
@@ -396,6 +743,9 @@ help:
 	@echo "... src/qnn_tensor_util.o"
 	@echo "... src/qnn_tensor_util.i"
 	@echo "... src/qnn_tensor_util.s"
+	@echo "... src/tokenizer_llama.o"
+	@echo "... src/tokenizer_llama.i"
+	@echo "... src/tokenizer_llama.s"
 .PHONY : help
 
 

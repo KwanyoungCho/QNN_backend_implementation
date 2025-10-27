@@ -45,10 +45,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /home/chokwans99/anaconda3/envs/et/lib/python3.11/site-packages/cmake/data/bin/cmake
+CMAKE_COMMAND = /home/chokwans99/anaconda3/envs/et_new/lib/python3.11/site-packages/cmake/data/bin/cmake
 
 # The command to remove a file.
-RM = /home/chokwans99/anaconda3/envs/et/lib/python3.11/site-packages/cmake/data/bin/cmake -E rm -f
+RM = /home/chokwans99/anaconda3/envs/et_new/lib/python3.11/site-packages/cmake/data/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -67,6 +67,11 @@ all: CMakeFiles/qnn_ctx_core.dir/all
 all: CMakeFiles/qnn_ctx_init.dir/all
 all: CMakeFiles/qnn_graph_probe.dir/all
 all: CMakeFiles/qnn_io_plan.dir/all
+all: CMakeFiles/qnn_prefill.dir/all
+all: CMakeFiles/qnn_decode.dir/all
+all: CMakeFiles/tok_llama.dir/all
+all: CMakeFiles/tok_encode.dir/all
+all: third_party/specinfer-build/all
 .PHONY : all
 
 # The main recursive "codegen" target.
@@ -74,10 +79,15 @@ codegen: CMakeFiles/qnn_ctx_core.dir/codegen
 codegen: CMakeFiles/qnn_ctx_init.dir/codegen
 codegen: CMakeFiles/qnn_graph_probe.dir/codegen
 codegen: CMakeFiles/qnn_io_plan.dir/codegen
+codegen: CMakeFiles/qnn_prefill.dir/codegen
+codegen: CMakeFiles/qnn_decode.dir/codegen
+codegen: CMakeFiles/tok_llama.dir/codegen
+codegen: CMakeFiles/tok_encode.dir/codegen
+codegen: third_party/specinfer-build/codegen
 .PHONY : codegen
 
 # The main recursive "preinstall" target.
-preinstall:
+preinstall: third_party/specinfer-build/preinstall
 .PHONY : preinstall
 
 # The main recursive "clean" target.
@@ -85,7 +95,120 @@ clean: CMakeFiles/qnn_ctx_core.dir/clean
 clean: CMakeFiles/qnn_ctx_init.dir/clean
 clean: CMakeFiles/qnn_graph_probe.dir/clean
 clean: CMakeFiles/qnn_io_plan.dir/clean
+clean: CMakeFiles/qnn_prefill.dir/clean
+clean: CMakeFiles/qnn_decode.dir/clean
+clean: CMakeFiles/tok_llama.dir/clean
+clean: CMakeFiles/tok_encode.dir/clean
+clean: third_party/specinfer-build/clean
 .PHONY : clean
+
+#=============================================================================
+# Directory level rules for directory third_party/specinfer-build
+
+# Recursive "all" directory target.
+third_party/specinfer-build/all: third_party/specinfer-build/ggml/all
+third_party/specinfer-build/all: third_party/specinfer-build/src/all
+.PHONY : third_party/specinfer-build/all
+
+# Recursive "codegen" directory target.
+third_party/specinfer-build/codegen: third_party/specinfer-build/ggml/codegen
+third_party/specinfer-build/codegen: third_party/specinfer-build/src/codegen
+.PHONY : third_party/specinfer-build/codegen
+
+# Recursive "preinstall" directory target.
+third_party/specinfer-build/preinstall: third_party/specinfer-build/ggml/preinstall
+third_party/specinfer-build/preinstall: third_party/specinfer-build/src/preinstall
+.PHONY : third_party/specinfer-build/preinstall
+
+# Recursive "clean" directory target.
+third_party/specinfer-build/clean: third_party/specinfer-build/ggml/clean
+third_party/specinfer-build/clean: third_party/specinfer-build/src/clean
+.PHONY : third_party/specinfer-build/clean
+
+#=============================================================================
+# Directory level rules for directory third_party/specinfer-build/ggml
+
+# Recursive "all" directory target.
+third_party/specinfer-build/ggml/all: third_party/specinfer-build/ggml/src/all
+.PHONY : third_party/specinfer-build/ggml/all
+
+# Recursive "codegen" directory target.
+third_party/specinfer-build/ggml/codegen: third_party/specinfer-build/ggml/src/codegen
+.PHONY : third_party/specinfer-build/ggml/codegen
+
+# Recursive "preinstall" directory target.
+third_party/specinfer-build/ggml/preinstall: third_party/specinfer-build/ggml/src/preinstall
+.PHONY : third_party/specinfer-build/ggml/preinstall
+
+# Recursive "clean" directory target.
+third_party/specinfer-build/ggml/clean: third_party/specinfer-build/ggml/src/clean
+.PHONY : third_party/specinfer-build/ggml/clean
+
+#=============================================================================
+# Directory level rules for directory third_party/specinfer-build/ggml/src
+
+# Recursive "all" directory target.
+third_party/specinfer-build/ggml/src/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/all
+third_party/specinfer-build/ggml/src/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/all
+third_party/specinfer-build/ggml/src/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/all
+third_party/specinfer-build/ggml/src/all: third_party/specinfer-build/ggml/src/ggml-cpu/all
+.PHONY : third_party/specinfer-build/ggml/src/all
+
+# Recursive "codegen" directory target.
+third_party/specinfer-build/ggml/src/codegen: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/codegen
+third_party/specinfer-build/ggml/src/codegen: third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/codegen
+third_party/specinfer-build/ggml/src/codegen: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/codegen
+third_party/specinfer-build/ggml/src/codegen: third_party/specinfer-build/ggml/src/ggml-cpu/codegen
+.PHONY : third_party/specinfer-build/ggml/src/codegen
+
+# Recursive "preinstall" directory target.
+third_party/specinfer-build/ggml/src/preinstall: third_party/specinfer-build/ggml/src/ggml-cpu/preinstall
+.PHONY : third_party/specinfer-build/ggml/src/preinstall
+
+# Recursive "clean" directory target.
+third_party/specinfer-build/ggml/src/clean: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/clean
+third_party/specinfer-build/ggml/src/clean: third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/clean
+third_party/specinfer-build/ggml/src/clean: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/clean
+third_party/specinfer-build/ggml/src/clean: third_party/specinfer-build/ggml/src/ggml-cpu/clean
+.PHONY : third_party/specinfer-build/ggml/src/clean
+
+#=============================================================================
+# Directory level rules for directory third_party/specinfer-build/ggml/src/ggml-cpu
+
+# Recursive "all" directory target.
+third_party/specinfer-build/ggml/src/ggml-cpu/all:
+.PHONY : third_party/specinfer-build/ggml/src/ggml-cpu/all
+
+# Recursive "codegen" directory target.
+third_party/specinfer-build/ggml/src/ggml-cpu/codegen:
+.PHONY : third_party/specinfer-build/ggml/src/ggml-cpu/codegen
+
+# Recursive "preinstall" directory target.
+third_party/specinfer-build/ggml/src/ggml-cpu/preinstall:
+.PHONY : third_party/specinfer-build/ggml/src/ggml-cpu/preinstall
+
+# Recursive "clean" directory target.
+third_party/specinfer-build/ggml/src/ggml-cpu/clean:
+.PHONY : third_party/specinfer-build/ggml/src/ggml-cpu/clean
+
+#=============================================================================
+# Directory level rules for directory third_party/specinfer-build/src
+
+# Recursive "all" directory target.
+third_party/specinfer-build/src/all: third_party/specinfer-build/src/CMakeFiles/llama.dir/all
+.PHONY : third_party/specinfer-build/src/all
+
+# Recursive "codegen" directory target.
+third_party/specinfer-build/src/codegen: third_party/specinfer-build/src/CMakeFiles/llama.dir/codegen
+.PHONY : third_party/specinfer-build/src/codegen
+
+# Recursive "preinstall" directory target.
+third_party/specinfer-build/src/preinstall:
+.PHONY : third_party/specinfer-build/src/preinstall
+
+# Recursive "clean" directory target.
+third_party/specinfer-build/src/clean: third_party/specinfer-build/src/CMakeFiles/llama.dir/clean
+.PHONY : third_party/specinfer-build/src/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/qnn_ctx_core.dir
@@ -94,12 +217,12 @@ clean: CMakeFiles/qnn_io_plan.dir/clean
 CMakeFiles/qnn_ctx_core.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_ctx_core.dir/build.make CMakeFiles/qnn_ctx_core.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_ctx_core.dir/build.make CMakeFiles/qnn_ctx_core.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/chokwans99/llm_test/build-android/CMakeFiles --progress-num=1,2,3,4,5,6 "Built target qnn_ctx_core"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/chokwans99/llm_test/build-android/CMakeFiles --progress-num=54,55,56,57,58,59,60,61,62 "Built target qnn_ctx_core"
 .PHONY : CMakeFiles/qnn_ctx_core.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/qnn_ctx_core.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/chokwans99/llm_test/build-android/CMakeFiles 6
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/chokwans99/llm_test/build-android/CMakeFiles 9
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/qnn_ctx_core.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/chokwans99/llm_test/build-android/CMakeFiles 0
 .PHONY : CMakeFiles/qnn_ctx_core.dir/rule
@@ -111,7 +234,7 @@ qnn_ctx_core: CMakeFiles/qnn_ctx_core.dir/rule
 # codegen rule for target.
 CMakeFiles/qnn_ctx_core.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_ctx_core.dir/build.make CMakeFiles/qnn_ctx_core.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/chokwans99/llm_test/build-android/CMakeFiles --progress-num=1,2,3,4,5,6 "Finished codegen for target qnn_ctx_core"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/chokwans99/llm_test/build-android/CMakeFiles --progress-num=54,55,56,57,58,59,60,61,62 "Finished codegen for target qnn_ctx_core"
 .PHONY : CMakeFiles/qnn_ctx_core.dir/codegen
 
 # clean rule for target.
@@ -126,12 +249,12 @@ CMakeFiles/qnn_ctx_core.dir/clean:
 CMakeFiles/qnn_ctx_init.dir/all: CMakeFiles/qnn_ctx_core.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_ctx_init.dir/build.make CMakeFiles/qnn_ctx_init.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_ctx_init.dir/build.make CMakeFiles/qnn_ctx_init.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/chokwans99/llm_test/build-android/CMakeFiles --progress-num=7,8 "Built target qnn_ctx_init"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/chokwans99/llm_test/build-android/CMakeFiles --progress-num=63,64 "Built target qnn_ctx_init"
 .PHONY : CMakeFiles/qnn_ctx_init.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/qnn_ctx_init.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/chokwans99/llm_test/build-android/CMakeFiles 8
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/chokwans99/llm_test/build-android/CMakeFiles 11
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/qnn_ctx_init.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/chokwans99/llm_test/build-android/CMakeFiles 0
 .PHONY : CMakeFiles/qnn_ctx_init.dir/rule
@@ -143,7 +266,7 @@ qnn_ctx_init: CMakeFiles/qnn_ctx_init.dir/rule
 # codegen rule for target.
 CMakeFiles/qnn_ctx_init.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_ctx_init.dir/build.make CMakeFiles/qnn_ctx_init.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/chokwans99/llm_test/build-android/CMakeFiles --progress-num=7,8 "Finished codegen for target qnn_ctx_init"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/chokwans99/llm_test/build-android/CMakeFiles --progress-num=63,64 "Finished codegen for target qnn_ctx_init"
 .PHONY : CMakeFiles/qnn_ctx_init.dir/codegen
 
 # clean rule for target.
@@ -158,12 +281,12 @@ CMakeFiles/qnn_ctx_init.dir/clean:
 CMakeFiles/qnn_graph_probe.dir/all: CMakeFiles/qnn_ctx_core.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_graph_probe.dir/build.make CMakeFiles/qnn_graph_probe.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_graph_probe.dir/build.make CMakeFiles/qnn_graph_probe.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/chokwans99/llm_test/build-android/CMakeFiles --progress-num=9,10 "Built target qnn_graph_probe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/chokwans99/llm_test/build-android/CMakeFiles --progress-num=67,68 "Built target qnn_graph_probe"
 .PHONY : CMakeFiles/qnn_graph_probe.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/qnn_graph_probe.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/chokwans99/llm_test/build-android/CMakeFiles 8
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/chokwans99/llm_test/build-android/CMakeFiles 11
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/qnn_graph_probe.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/chokwans99/llm_test/build-android/CMakeFiles 0
 .PHONY : CMakeFiles/qnn_graph_probe.dir/rule
@@ -175,7 +298,7 @@ qnn_graph_probe: CMakeFiles/qnn_graph_probe.dir/rule
 # codegen rule for target.
 CMakeFiles/qnn_graph_probe.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_graph_probe.dir/build.make CMakeFiles/qnn_graph_probe.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/chokwans99/llm_test/build-android/CMakeFiles --progress-num=9,10 "Finished codegen for target qnn_graph_probe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/chokwans99/llm_test/build-android/CMakeFiles --progress-num=67,68 "Finished codegen for target qnn_graph_probe"
 .PHONY : CMakeFiles/qnn_graph_probe.dir/codegen
 
 # clean rule for target.
@@ -190,12 +313,12 @@ CMakeFiles/qnn_graph_probe.dir/clean:
 CMakeFiles/qnn_io_plan.dir/all: CMakeFiles/qnn_ctx_core.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_io_plan.dir/build.make CMakeFiles/qnn_io_plan.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_io_plan.dir/build.make CMakeFiles/qnn_io_plan.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/chokwans99/llm_test/build-android/CMakeFiles --progress-num=11,12 "Built target qnn_io_plan"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/chokwans99/llm_test/build-android/CMakeFiles --progress-num=69,70 "Built target qnn_io_plan"
 .PHONY : CMakeFiles/qnn_io_plan.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/qnn_io_plan.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/chokwans99/llm_test/build-android/CMakeFiles 8
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/chokwans99/llm_test/build-android/CMakeFiles 11
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/qnn_io_plan.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/chokwans99/llm_test/build-android/CMakeFiles 0
 .PHONY : CMakeFiles/qnn_io_plan.dir/rule
@@ -207,13 +330,289 @@ qnn_io_plan: CMakeFiles/qnn_io_plan.dir/rule
 # codegen rule for target.
 CMakeFiles/qnn_io_plan.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_io_plan.dir/build.make CMakeFiles/qnn_io_plan.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/chokwans99/llm_test/build-android/CMakeFiles --progress-num=11,12 "Finished codegen for target qnn_io_plan"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/chokwans99/llm_test/build-android/CMakeFiles --progress-num=69,70 "Finished codegen for target qnn_io_plan"
 .PHONY : CMakeFiles/qnn_io_plan.dir/codegen
 
 # clean rule for target.
 CMakeFiles/qnn_io_plan.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_io_plan.dir/build.make CMakeFiles/qnn_io_plan.dir/clean
 .PHONY : CMakeFiles/qnn_io_plan.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/qnn_prefill.dir
+
+# All Build rule for target.
+CMakeFiles/qnn_prefill.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/all
+CMakeFiles/qnn_prefill.dir/all: CMakeFiles/tok_llama.dir/all
+CMakeFiles/qnn_prefill.dir/all: third_party/specinfer-build/src/CMakeFiles/llama.dir/all
+CMakeFiles/qnn_prefill.dir/all: CMakeFiles/qnn_ctx_core.dir/all
+CMakeFiles/qnn_prefill.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/all
+CMakeFiles/qnn_prefill.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_prefill.dir/build.make CMakeFiles/qnn_prefill.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_prefill.dir/build.make CMakeFiles/qnn_prefill.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/chokwans99/llm_test/build-android/CMakeFiles --progress-num=71,72 "Built target qnn_prefill"
+.PHONY : CMakeFiles/qnn_prefill.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/qnn_prefill.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/chokwans99/llm_test/build-android/CMakeFiles 66
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/qnn_prefill.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/chokwans99/llm_test/build-android/CMakeFiles 0
+.PHONY : CMakeFiles/qnn_prefill.dir/rule
+
+# Convenience name for target.
+qnn_prefill: CMakeFiles/qnn_prefill.dir/rule
+.PHONY : qnn_prefill
+
+# codegen rule for target.
+CMakeFiles/qnn_prefill.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_prefill.dir/build.make CMakeFiles/qnn_prefill.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/chokwans99/llm_test/build-android/CMakeFiles --progress-num=71,72 "Finished codegen for target qnn_prefill"
+.PHONY : CMakeFiles/qnn_prefill.dir/codegen
+
+# clean rule for target.
+CMakeFiles/qnn_prefill.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_prefill.dir/build.make CMakeFiles/qnn_prefill.dir/clean
+.PHONY : CMakeFiles/qnn_prefill.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/qnn_decode.dir
+
+# All Build rule for target.
+CMakeFiles/qnn_decode.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/all
+CMakeFiles/qnn_decode.dir/all: CMakeFiles/tok_llama.dir/all
+CMakeFiles/qnn_decode.dir/all: third_party/specinfer-build/src/CMakeFiles/llama.dir/all
+CMakeFiles/qnn_decode.dir/all: CMakeFiles/qnn_ctx_core.dir/all
+CMakeFiles/qnn_decode.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/all
+CMakeFiles/qnn_decode.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_decode.dir/build.make CMakeFiles/qnn_decode.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_decode.dir/build.make CMakeFiles/qnn_decode.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/chokwans99/llm_test/build-android/CMakeFiles --progress-num=65,66 "Built target qnn_decode"
+.PHONY : CMakeFiles/qnn_decode.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/qnn_decode.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/chokwans99/llm_test/build-android/CMakeFiles 66
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/qnn_decode.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/chokwans99/llm_test/build-android/CMakeFiles 0
+.PHONY : CMakeFiles/qnn_decode.dir/rule
+
+# Convenience name for target.
+qnn_decode: CMakeFiles/qnn_decode.dir/rule
+.PHONY : qnn_decode
+
+# codegen rule for target.
+CMakeFiles/qnn_decode.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_decode.dir/build.make CMakeFiles/qnn_decode.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/chokwans99/llm_test/build-android/CMakeFiles --progress-num=65,66 "Finished codegen for target qnn_decode"
+.PHONY : CMakeFiles/qnn_decode.dir/codegen
+
+# clean rule for target.
+CMakeFiles/qnn_decode.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_decode.dir/build.make CMakeFiles/qnn_decode.dir/clean
+.PHONY : CMakeFiles/qnn_decode.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/tok_llama.dir
+
+# All Build rule for target.
+CMakeFiles/tok_llama.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/all
+CMakeFiles/tok_llama.dir/all: third_party/specinfer-build/src/CMakeFiles/llama.dir/all
+CMakeFiles/tok_llama.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/all
+CMakeFiles/tok_llama.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tok_llama.dir/build.make CMakeFiles/tok_llama.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tok_llama.dir/build.make CMakeFiles/tok_llama.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/chokwans99/llm_test/build-android/CMakeFiles --progress-num=75,76 "Built target tok_llama"
+.PHONY : CMakeFiles/tok_llama.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/tok_llama.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/chokwans99/llm_test/build-android/CMakeFiles 55
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/tok_llama.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/chokwans99/llm_test/build-android/CMakeFiles 0
+.PHONY : CMakeFiles/tok_llama.dir/rule
+
+# Convenience name for target.
+tok_llama: CMakeFiles/tok_llama.dir/rule
+.PHONY : tok_llama
+
+# codegen rule for target.
+CMakeFiles/tok_llama.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tok_llama.dir/build.make CMakeFiles/tok_llama.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/chokwans99/llm_test/build-android/CMakeFiles --progress-num=75,76 "Finished codegen for target tok_llama"
+.PHONY : CMakeFiles/tok_llama.dir/codegen
+
+# clean rule for target.
+CMakeFiles/tok_llama.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tok_llama.dir/build.make CMakeFiles/tok_llama.dir/clean
+.PHONY : CMakeFiles/tok_llama.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/tok_encode.dir
+
+# All Build rule for target.
+CMakeFiles/tok_encode.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/all
+CMakeFiles/tok_encode.dir/all: CMakeFiles/tok_llama.dir/all
+CMakeFiles/tok_encode.dir/all: third_party/specinfer-build/src/CMakeFiles/llama.dir/all
+CMakeFiles/tok_encode.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/all
+CMakeFiles/tok_encode.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tok_encode.dir/build.make CMakeFiles/tok_encode.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tok_encode.dir/build.make CMakeFiles/tok_encode.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/chokwans99/llm_test/build-android/CMakeFiles --progress-num=73,74 "Built target tok_encode"
+.PHONY : CMakeFiles/tok_encode.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/tok_encode.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/chokwans99/llm_test/build-android/CMakeFiles 57
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/tok_encode.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/chokwans99/llm_test/build-android/CMakeFiles 0
+.PHONY : CMakeFiles/tok_encode.dir/rule
+
+# Convenience name for target.
+tok_encode: CMakeFiles/tok_encode.dir/rule
+.PHONY : tok_encode
+
+# codegen rule for target.
+CMakeFiles/tok_encode.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tok_encode.dir/build.make CMakeFiles/tok_encode.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/chokwans99/llm_test/build-android/CMakeFiles --progress-num=73,74 "Finished codegen for target tok_encode"
+.PHONY : CMakeFiles/tok_encode.dir/codegen
+
+# clean rule for target.
+CMakeFiles/tok_encode.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tok_encode.dir/build.make CMakeFiles/tok_encode.dir/clean
+.PHONY : CMakeFiles/tok_encode.dir/clean
+
+#=============================================================================
+# Target rules for target third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir
+
+# All Build rule for target.
+third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/all:
+	$(MAKE) $(MAKESILENT) -f third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/build.make third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/depend
+	$(MAKE) $(MAKESILENT) -f third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/build.make third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/chokwans99/llm_test/build-android/CMakeFiles --progress-num=3,4,5,6,7,8,9,10,11 "Built target ggml-base"
+.PHONY : third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/all
+
+# Build rule for subdir invocation for target.
+third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/chokwans99/llm_test/build-android/CMakeFiles 9
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/chokwans99/llm_test/build-android/CMakeFiles 0
+.PHONY : third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/rule
+
+# Convenience name for target.
+ggml-base: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/rule
+.PHONY : ggml-base
+
+# codegen rule for target.
+third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/build.make third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/chokwans99/llm_test/build-android/CMakeFiles --progress-num=3,4,5,6,7,8,9,10,11 "Finished codegen for target ggml-base"
+.PHONY : third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/codegen
+
+# clean rule for target.
+third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/clean:
+	$(MAKE) $(MAKESILENT) -f third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/build.make third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/clean
+.PHONY : third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/clean
+
+#=============================================================================
+# Target rules for target third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir
+
+# All Build rule for target.
+third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/all
+third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/all
+	$(MAKE) $(MAKESILENT) -f third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/build.make third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/depend
+	$(MAKE) $(MAKESILENT) -f third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/build.make third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/chokwans99/llm_test/build-android/CMakeFiles --progress-num=1,2 "Built target ggml"
+.PHONY : third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/all
+
+# Build rule for subdir invocation for target.
+third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/chokwans99/llm_test/build-android/CMakeFiles 27
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/chokwans99/llm_test/build-android/CMakeFiles 0
+.PHONY : third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/rule
+
+# Convenience name for target.
+ggml: third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/rule
+.PHONY : ggml
+
+# codegen rule for target.
+third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/build.make third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/chokwans99/llm_test/build-android/CMakeFiles --progress-num=1,2 "Finished codegen for target ggml"
+.PHONY : third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/codegen
+
+# clean rule for target.
+third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/clean:
+	$(MAKE) $(MAKESILENT) -f third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/build.make third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/clean
+.PHONY : third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/clean
+
+#=============================================================================
+# Target rules for target third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir
+
+# All Build rule for target.
+third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/all
+	$(MAKE) $(MAKESILENT) -f third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/build.make third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/depend
+	$(MAKE) $(MAKESILENT) -f third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/build.make third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/chokwans99/llm_test/build-android/CMakeFiles --progress-num=12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27 "Built target ggml-cpu"
+.PHONY : third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/all
+
+# Build rule for subdir invocation for target.
+third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/chokwans99/llm_test/build-android/CMakeFiles 25
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/chokwans99/llm_test/build-android/CMakeFiles 0
+.PHONY : third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/rule
+
+# Convenience name for target.
+ggml-cpu: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/rule
+.PHONY : ggml-cpu
+
+# codegen rule for target.
+third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/build.make third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/chokwans99/llm_test/build-android/CMakeFiles --progress-num=12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27 "Finished codegen for target ggml-cpu"
+.PHONY : third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/codegen
+
+# clean rule for target.
+third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/clean:
+	$(MAKE) $(MAKESILENT) -f third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/build.make third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/clean
+.PHONY : third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/clean
+
+#=============================================================================
+# Target rules for target third_party/specinfer-build/src/CMakeFiles/llama.dir
+
+# All Build rule for target.
+third_party/specinfer-build/src/CMakeFiles/llama.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/all
+third_party/specinfer-build/src/CMakeFiles/llama.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/all
+third_party/specinfer-build/src/CMakeFiles/llama.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/all
+	$(MAKE) $(MAKESILENT) -f third_party/specinfer-build/src/CMakeFiles/llama.dir/build.make third_party/specinfer-build/src/CMakeFiles/llama.dir/depend
+	$(MAKE) $(MAKESILENT) -f third_party/specinfer-build/src/CMakeFiles/llama.dir/build.make third_party/specinfer-build/src/CMakeFiles/llama.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/chokwans99/llm_test/build-android/CMakeFiles --progress-num=28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53 "Built target llama"
+.PHONY : third_party/specinfer-build/src/CMakeFiles/llama.dir/all
+
+# Build rule for subdir invocation for target.
+third_party/specinfer-build/src/CMakeFiles/llama.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/chokwans99/llm_test/build-android/CMakeFiles 53
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 third_party/specinfer-build/src/CMakeFiles/llama.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/chokwans99/llm_test/build-android/CMakeFiles 0
+.PHONY : third_party/specinfer-build/src/CMakeFiles/llama.dir/rule
+
+# Convenience name for target.
+llama: third_party/specinfer-build/src/CMakeFiles/llama.dir/rule
+.PHONY : llama
+
+# codegen rule for target.
+third_party/specinfer-build/src/CMakeFiles/llama.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f third_party/specinfer-build/src/CMakeFiles/llama.dir/build.make third_party/specinfer-build/src/CMakeFiles/llama.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/chokwans99/llm_test/build-android/CMakeFiles --progress-num=28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53 "Finished codegen for target llama"
+.PHONY : third_party/specinfer-build/src/CMakeFiles/llama.dir/codegen
+
+# clean rule for target.
+third_party/specinfer-build/src/CMakeFiles/llama.dir/clean:
+	$(MAKE) $(MAKESILENT) -f third_party/specinfer-build/src/CMakeFiles/llama.dir/build.make third_party/specinfer-build/src/CMakeFiles/llama.dir/clean
+.PHONY : third_party/specinfer-build/src/CMakeFiles/llama.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

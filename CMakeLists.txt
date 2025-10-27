@@ -22,6 +22,9 @@ add_library(qnn_ctx_core STATIC
   src/io_alloc.cpp
   src/qnn_qnnjson.cpp
   src/qnn_tensor_util.cpp
+  src/llm_input_preparer.cpp
+  src/llm_output_processor.cpp
+  src/llm_kv_cache_manager.cpp
 )
 
 add_executable(qnn_ctx_init
@@ -53,4 +56,36 @@ add_executable(qnn_io_plan
 )
 target_link_libraries(qnn_io_plan PRIVATE qnn_ctx_core)
 
+add_executable(qnn_prefill
+  apps/qnn_prefill_main.cpp
+)
+target_link_libraries(qnn_prefill PRIVATE qnn_ctx_core tok_llama)
+
+add_executable(qnn_decode
+  apps/qnn_decode_main.cpp
+)
+target_link_libraries(qnn_decode PRIVATE qnn_ctx_core tok_llama)
+
+
+# llama.cpp tokenizer wrapper and example
+# Build llama.cpp (specinfer.cpp fork) as subproject
+set(LLAMA_STATIC ON CACHE BOOL "" FORCE)
+set(LLAMA_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+set(LLAMA_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+set(LLAMA_BUILD_TOOLS OFF CACHE BOOL "" FORCE)
+add_subdirectory(/home/chokwans99/dev/llm/specinfer.cpp ${CMAKE_BINARY_DIR}/third_party/specinfer-build)
+
+add_library(tok_llama STATIC src/tokenizer_llama.cpp)
+
+target_include_directories(tok_llama PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
+target_link_libraries(tok_llama PUBLIC llama)
+if(ANDROID)
+  target_link_libraries(tok_llama PUBLIC log)
+endif()
+
+add_executable(tok_encode
+  apps/tok_encode_main.cpp
+)
+target_link_libraries(tok_encode PRIVATE tok_llama)
 
