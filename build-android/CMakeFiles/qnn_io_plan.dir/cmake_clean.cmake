@@ -1,5 +1,4 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/qnn_io_plan.dir/link.d"
   "CMakeFiles/qnn_io_plan.dir/apps/qnn_io_plan_main.cpp.o"
   "CMakeFiles/qnn_io_plan.dir/apps/qnn_io_plan_main.cpp.o.d"
   "qnn_io_plan"

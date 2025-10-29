@@ -6,7 +6,7 @@
 namespace llm_test {
 
 LLMKVCacheManager::LLMKVCacheManager(const Metadata& metadata)
-    : metadata_(metadata), total_cache_size_(0) {
+    : metadata_(metadata), total_cache_size_(0), cur_ar_len_(metadata.max_ar_len) {
   // Resize storage
   k_cache_.resize(metadata_.num_layers);
   v_cache_.resize(metadata_.num_layers);
@@ -199,6 +199,128 @@ void LLMKVCacheManager::update_attention_mask(
     uint16_t* row = attention_mask + i * metadata_.context_len;
     std::fill_n(row + n_past, n_update, pos_val);
   }
+}
+
+void LLMKVCacheManager::rearrange_key(
+    KVCacheBuffer& cache,
+    int32_t src_cache_len,
+    int32_t dst_cache_len) {
+  // ExecutorchReader의 rearrange_key 구현:
+  // 
+  // K cache layout: [head_dim, cache_len] - strided
+  // Prefill→Decode 전환 시 [64, 480] → [64, 511]로 확장
+  // 
+  // 각 dimension 별로 memmove:
+  //   src: [dim][0..479]
+  //   dst: [dim][0..479] (31 positions shifted)
+  // 
+  // 예: head_dim=64
+  //   Before: [dim0][0..479][dim1][0..479]...[dim63][0..479]
+  //   After:  [dim0][0..510][dim1][0..510]...[dim63][0..510]
+  //   
+  //   memmove(&cache[dim*511], &cache[dim*480], 480)로 각 dim을 이동
+  
+  if (src_cache_len == dst_cache_len) {
+    return;  // No rearrangement needed
+  }
+  
+  std::cout << "[LLMKVCacheManager] Rearranging K cache: " 
+            << src_cache_len << " → " << dst_cache_len << "\n";
+  
+  uint8_t* buffer = reinterpret_cast<uint8_t*>(cache.input_buffer);
+  
+  // DEBUG: Log BEFORE rearrange (first cache only, Layer 0 Head 0)
+  static bool first_rearrange = true;
+  if (first_rearrange && cache.input_buffer == k_cache_[0][0].input_buffer) {
+    std::cout << "[DEBUG Rearrange] BEFORE K cache (L0H0):\n";
+    std::cout << "  buffer[0]=" << (int)buffer[0] 
+              << ", buffer[" << src_cache_len << "]=" << (int)buffer[src_cache_len]
+              << ", buffer[" << (src_cache_len*2) << "]=" << (int)buffer[src_cache_len*2] << "\n";
+    std::cout << "  Total buffer size allocated: " << cache.input_bytes << " bytes\n";
+    std::cout << "  src_cache_len=" << src_cache_len << ", dst_cache_len=" << dst_cache_len << "\n";
+  }
+  
+  // BACKWARD iteration to avoid overwrite (src_cache_len < dst_cache_len)
+  for (int32_t dim = metadata_.head_dim - 1; dim >= 0; --dim) {
+    uint8_t* src = buffer + dim * src_cache_len;
+    uint8_t* dst = buffer + dim * dst_cache_len;
+    std::memmove(dst, src, src_cache_len);
+  }
+  
+  // DEBUG: Log AFTER rearrange
+  if (first_rearrange && cache.input_buffer == k_cache_[0][0].input_buffer) {
+    std::cout << "[DEBUG Rearrange] AFTER K cache (L0H0):\n";
+    std::cout << "  buffer[0]=" << (int)buffer[0] 
+              << ", buffer[" << dst_cache_len << "]=" << (int)buffer[dst_cache_len]
+              << ", buffer[" << (dst_cache_len*2) << "]=" << (int)buffer[dst_cache_len*2] << "\n";
+    
+    // 전체 non-zero count
+    int non_zero = 0;
+    for (int i = 0; i < std::min((int)cache.input_bytes, 10000); ++i) {
+      if (buffer[i] != 0) non_zero++;
+    }
+    std::cout << "  Non-zero in first 10000 bytes: " << non_zero << "/10000\n";
+    first_rearrange = false;
+  }
+}
+
+void LLMKVCacheManager::rearrange_value(
+    KVCacheBuffer& cache,
+    int32_t src_cache_len,
+    int32_t dst_cache_len) {
+  // ExecutorchReader의 rearrange_value 구현:
+  // 
+  // V cache layout: [cache_len, head_dim] - sequential
+  // Prefill→Decode 전환 시 [480, 64] → [511, 64]로 확장
+  // 
+  // Sequential이므로 단순 copy (이미 올바른 위치):
+  //   [0..479*64] → [0..479*64] (no change)
+  //   [480*64..510*64] → all zeros (new positions)
+  // 
+  // ExecutorchReader는 실제로 아무것도 안함 (already correct)
+  
+  if (src_cache_len == dst_cache_len) {
+    return;  // No rearrangement needed
+  }
+  
+  std::cout << "[LLMKVCacheManager] Rearranging V cache: " 
+            << src_cache_len << " → " << dst_cache_len << " (no-op)\n";
+  
+  // V cache is sequential, so no rearrangement needed
+  // The first src_cache_len * head_dim bytes are already in correct position
+}
+
+void LLMKVCacheManager::rearrange_cache(int32_t src_ar_len, int32_t dst_ar_len) {
+  // ExecutorchReader의 rearrange_cache 구현:
+  // 
+  // Prefill (AR=32) → Decode (AR=1) 전환 시 호출
+  // - Prefill cache_len: context_len - 32 = 512 - 32 = 480
+  // - Decode cache_len:  context_len - 1  = 512 - 1  = 511
+  // 
+  // 모든 layer/head의 K/V cache를 480→511로 재배치
+  
+  if (src_ar_len == dst_ar_len) {
+    std::cout << "[LLMKVCacheManager] Rearrange skipped (same AR len: " 
+              << src_ar_len << ")\n";
+    return;
+  }
+  
+  int32_t src_cache_len = metadata_.context_len - src_ar_len;
+  int32_t dst_cache_len = metadata_.context_len - dst_ar_len;
+  
+  std::cout << "[LLMKVCacheManager] Rearranging cache: AR " 
+            << src_ar_len << " → " << dst_ar_len 
+            << " (cache " << src_cache_len << " → " << dst_cache_len << ")\n";
+  
+  for (int32_t layer = 0; layer < metadata_.num_layers; ++layer) {
+    for (int32_t head = 0; head < metadata_.num_heads; ++head) {
+      rearrange_key(k_cache_[layer][head], src_cache_len, dst_cache_len);
+      rearrange_value(v_cache_[layer][head], src_cache_len, dst_cache_len);
+    }
+  }
+  
+  cur_ar_len_ = dst_ar_len;  // Update current AR length
+  std::cout << "[LLMKVCacheManager] Rearrange complete\n";
 }
 
 } // namespace llm_test

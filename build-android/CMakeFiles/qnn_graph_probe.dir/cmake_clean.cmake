@@ -1,5 +1,4 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/qnn_graph_probe.dir/link.d"
   "CMakeFiles/qnn_graph_probe.dir/apps/qnn_graph_probe_main.cpp.o"
   "CMakeFiles/qnn_graph_probe.dir/apps/qnn_graph_probe_main.cpp.o.d"
   "qnn_graph_probe"

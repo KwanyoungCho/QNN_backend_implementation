@@ -33,15 +33,13 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/chokwans99/dev/llm/specinfer.cpp/src/llama.cpp" "third_party/specinfer-build/src/CMakeFiles/llama.dir/llama.cpp.o" "gcc" "third_party/specinfer-build/src/CMakeFiles/llama.dir/llama.cpp.o.d"
   "/home/chokwans99/dev/llm/specinfer.cpp/src/unicode-data.cpp" "third_party/specinfer-build/src/CMakeFiles/llama.dir/unicode-data.cpp.o" "gcc" "third_party/specinfer-build/src/CMakeFiles/llama.dir/unicode-data.cpp.o.d"
   "/home/chokwans99/dev/llm/specinfer.cpp/src/unicode.cpp" "third_party/specinfer-build/src/CMakeFiles/llama.dir/unicode.cpp.o" "gcc" "third_party/specinfer-build/src/CMakeFiles/llama.dir/unicode.cpp.o.d"
-  "" "bin/libllama.so" "gcc" "third_party/specinfer-build/src/CMakeFiles/llama.dir/link.d"
   )
 
-# Targets to which this target links which contain Fortran sources.
-set(CMAKE_Fortran_TARGET_LINKED_INFO_FILES
-  )
-
-# Targets to which this target links which contain Fortran sources.
-set(CMAKE_Fortran_TARGET_FORWARD_LINKED_INFO_FILES
+# Targets to which this target links.
+set(CMAKE_TARGET_LINKED_INFO_FILES
+  "/home/chokwans99/llm_test/build-android/third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/DependInfo.cmake"
+  "/home/chokwans99/llm_test/build-android/third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/DependInfo.cmake"
+  "/home/chokwans99/llm_test/build-android/third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

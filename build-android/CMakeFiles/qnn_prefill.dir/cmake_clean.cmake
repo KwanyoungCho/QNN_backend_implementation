@@ -1,5 +1,4 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/qnn_prefill.dir/link.d"
   "CMakeFiles/qnn_prefill.dir/apps/qnn_prefill_main.cpp.o"
   "CMakeFiles/qnn_prefill.dir/apps/qnn_prefill_main.cpp.o.d"
   "qnn_prefill"

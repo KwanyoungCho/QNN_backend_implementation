@@ -103,6 +103,27 @@ public:
    * @brief Get metadata
    */
   const Metadata& metadata() const { return metadata_; }
+  
+  /**
+   * @brief Rearrange KV cache from src_ar_len layout to dst_ar_len layout
+   * 
+   * ExecutorchReader의 rearrange_cache 구현:
+   * - Prefill (AR=32): cache_len = context_len - 32 = 480
+   * - Decode (AR=1):   cache_len = context_len - 1  = 511
+   * 
+   * Prefill→Decode 전환 시 480→511로 메모리 재배치 필요
+   * 
+   * @param src_ar_len Source AR length (e.g., 32 for prefill)
+   * @param dst_ar_len Destination AR length (e.g., 1 for decode)
+   */
+  void rearrange_cache(int32_t src_ar_len, int32_t dst_ar_len);
+  
+  /**
+   * @brief Get current cache length for given AR length
+   */
+  int32_t get_cache_len_for_ar(int32_t ar_len) const {
+    return metadata_.context_len - ar_len;
+  }
 
 private:
   Metadata metadata_;
@@ -122,6 +143,19 @@ private:
       const KVCacheBuffer& cache,
       int32_t n_past,
       int32_t n_update);
+  
+  // Rearrange helper functions
+  void rearrange_key(
+      KVCacheBuffer& cache,
+      int32_t src_cache_len,
+      int32_t dst_cache_len);
+  
+  void rearrange_value(
+      KVCacheBuffer& cache,
+      int32_t src_cache_len,
+      int32_t dst_cache_len);
+  
+  int32_t cur_ar_len_;  // Current AR length (for rearrange tracking)
 };
 
 } // namespace llm_test

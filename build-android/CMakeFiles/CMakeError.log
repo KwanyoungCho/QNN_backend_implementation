@@ -1,0 +1,56 @@
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /home/chokwans99/llm_test/build-android/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_021e5/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_021e5.dir/build.make CMakeFiles/cmTC_021e5.dir/build
+gmake[1]: Entering directory '/home/chokwans99/llm_test/build-android/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_021e5.dir/src.c.o
+/home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DCMAKE_HAVE_LIBC_PTHREAD  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -fPIE -std=gnu11 -MD -MT CMakeFiles/cmTC_021e5.dir/src.c.o -MF CMakeFiles/cmTC_021e5.dir/src.c.o.d -o CMakeFiles/cmTC_021e5.dir/src.c.o -c /home/chokwans99/llm_test/build-android/CMakeFiles/CMakeTmp/src.c
+/home/chokwans99/llm_test/build-android/CMakeFiles/CMakeTmp/src.c:13:3: error: call to undeclared function 'pthread_cancel'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+  pthread_cancel(thread);
+  ^
+/home/chokwans99/llm_test/build-android/CMakeFiles/CMakeTmp/src.c:13:3: note: did you mean 'pthread_once'?
+/home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/pthread.h:258:5: note: 'pthread_once' declared here
+int pthread_once(pthread_once_t* _Nonnull __once, void (* _Nonnull __init_routine)(void));
+    ^
+1 error generated.
+gmake[1]: *** [CMakeFiles/cmTC_021e5.dir/build.make:79: CMakeFiles/cmTC_021e5.dir/src.c.o] Error 1
+gmake[1]: Leaving directory '/home/chokwans99/llm_test/build-android/CMakeFiles/CMakeTmp'
+gmake: *** [Makefile:127: cmTC_021e5/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+static void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Performing C++ SOURCE FILE Test GGML_COMPILER_SUPPORTS_FP16_FORMAT_I3E failed with the following output:
+Change Dir: /home/chokwans99/llm_test/build-android/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_77514/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_77514.dir/build.make CMakeFiles/cmTC_77514.dir/build
+gmake[1]: Entering directory '/home/chokwans99/llm_test/build-android/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_77514.dir/src.cxx.o
+/home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DGGML_COMPILER_SUPPORTS_FP16_FORMAT_I3E  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security    -fPIE   -mfp16-format=ieee -std=gnu++17 -MD -MT CMakeFiles/cmTC_77514.dir/src.cxx.o -MF CMakeFiles/cmTC_77514.dir/src.cxx.o.d -o CMakeFiles/cmTC_77514.dir/src.cxx.o -c /home/chokwans99/llm_test/build-android/CMakeFiles/CMakeTmp/src.cxx
+clang++: error: unknown argument: '-mfp16-format=ieee'
+gmake[1]: *** [CMakeFiles/cmTC_77514.dir/build.make:79: CMakeFiles/cmTC_77514.dir/src.cxx.o] Error 1
+gmake[1]: Leaving directory '/home/chokwans99/llm_test/build-android/CMakeFiles/CMakeTmp'
+gmake: *** [Makefile:127: cmTC_77514/fast] Error 2
+
+
+Source file was:
+int main() { return 0; }

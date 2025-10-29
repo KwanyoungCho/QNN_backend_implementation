@@ -1,7 +1,6 @@
 file(REMOVE_RECURSE
   "../../../bin/libllama.pdb"
   "../../../bin/libllama.so"
-  "CMakeFiles/llama.dir/link.d"
   "CMakeFiles/llama.dir/llama-adapter.cpp.o"
   "CMakeFiles/llama.dir/llama-adapter.cpp.o.d"
   "CMakeFiles/llama.dir/llama-arch.cpp.o"

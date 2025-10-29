@@ -16,15 +16,10 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/chokwans99/dev/llm/specinfer.cpp/ggml/src/ggml-threading.cpp" "third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/ggml-threading.cpp.o" "gcc" "third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/ggml-threading.cpp.o.d"
   "/home/chokwans99/dev/llm/specinfer.cpp/ggml/src/ggml.cpp" "third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/ggml.cpp.o" "gcc" "third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/ggml.cpp.o.d"
   "/home/chokwans99/dev/llm/specinfer.cpp/ggml/src/gguf.cpp" "third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/gguf.cpp.o" "gcc" "third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/gguf.cpp.o.d"
-  "" "bin/libggml-base.so" "gcc" "third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/link.d"
   )
 
-# Targets to which this target links which contain Fortran sources.
-set(CMAKE_Fortran_TARGET_LINKED_INFO_FILES
-  )
-
-# Targets to which this target links which contain Fortran sources.
-set(CMAKE_Fortran_TARGET_FORWARD_LINKED_INFO_FILES
+# Targets to which this target links.
+set(CMAKE_TARGET_LINKED_INFO_FILES
   )
 
 # Fortran module output directory.

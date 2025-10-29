@@ -1,5 +1,4 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/qnn_ctx_init.dir/link.d"
   "CMakeFiles/qnn_ctx_init.dir/apps/qnn_ctx_init_main.cpp.o"
   "CMakeFiles/qnn_ctx_init.dir/apps/qnn_ctx_init_main.cpp.o.d"
   "qnn_ctx_init"

@@ -221,8 +221,30 @@ int main(int argc, char** argv) {
   num_layers = 16;
   num_heads = total_kv_tensors / (2 * num_layers);
   
-  int32_t max_cache_len = context_len - std::min(prefill_ar_len, kv_ar_len);
-  int32_t max_ar_len = std::max(prefill_ar_len, kv_ar_len);
+  // ===== Cache Length 계산 (그래프별로 다름!) =====
+  // ExecutorchReader는 AR length에 따라 KV cache size를 동적으로 변경 (rearrange_cache)
+  // 
+  // Prefill (AR=32): cache_len = context_len - 32 = 512 - 32 = 480
+  // Decode (AR=1):   cache_len = context_len - 1  = 512 - 1  = 511
+  //
+  // 우리는 rearrange를 구현하지 않았으므로, Decode 기준 (더 큰 값) 사용
+  // → 문제: Prefill 그래프는 480을 기대하는데, 우리는 511 제공
+  //
+  // 해결: 각 그래프의 실제 KV cache input dimensions 확인 필요!
+  
+  // ===== Cache Length 계산: ExecutorchReader 방식 =====
+  // 
+  // ExecutorchReader는 Prefill 기준으로 할당 후 Decode로 rearrange!
+  // - Prefill (AR=32): cache_len = context_len - 32 = 512 - 32 = 480
+  // - Decode (AR=1):   cache_len = context_len - 1  = 512 - 1  = 511
+  // 
+  // 초기 할당: Prefill 기준 (480)
+  // Prefill→Decode 전환: rearrange_cache(32, 1) 호출하여 480→511 확장
+  
+  int32_t prefill_cache_len = context_len - prefill_ar_len;  // 512 - 32 = 480
+  int32_t kv_cache_len = context_len - kv_ar_len;            // 512 - 1 = 511
+  int32_t max_cache_len = kv_cache_len;  // ✅ 511 (최대, rearrange 후 사용)
+  int32_t max_ar_len = prefill_ar_len;  // ✅ Prefill AR length (32)
 
   std::cout << "[Metadata] context_len=" << context_len 
             << ", prefill_ar=" << prefill_ar_len
@@ -230,17 +252,27 @@ int main(int argc, char** argv) {
   std::cout << "[Metadata] num_layers=" << num_layers 
             << ", num_heads=" << num_heads
             << ", head_dim=" << head_dim << "\n";
-  std::cout << "[Metadata] max_cache_len=" << max_cache_len
-            << ", max_ar_len=" << max_ar_len << "\n";
+  std::cout << "[Metadata] prefill_cache_len=" << prefill_cache_len
+            << ", kv_cache_len=" << kv_cache_len 
+            << ", max_cache_len=" << max_cache_len << "\n";
+  std::cout << "[Metadata] max_ar_len (initial)=" << max_ar_len << "\n";
 
-  // ========== 6. Initialize KV Cache Manager ==========
+  // ========== 6. Initialize KV Cache Manager (최대 cache_len=511로 할당!) ==========
+  // 
+  // ✅ CRITICAL FIX: ExecutorchReader는 최대 cache_len (511)로 메모리 할당!
+  // - 메모리는 511로 할당, Prefill은 480만 사용
+  // - rearrange_cache()는 메모리 재할당이 아닌 stride 변경만!
+  // - 480→511 rearrange는 같은 버퍼 내에서 memmove로 처리
+  //
+  // 이전 버그: initial_cache_len=480으로 할당 → rearrange 시 511 접근 → out-of-bounds!
+  
   LLMKVCacheManager::Metadata kv_metadata{
-      context_len,
-      head_dim,
-      max_ar_len,
-      max_cache_len,
-      num_heads,
-      num_layers
+      context_len,        // 512
+      head_dim,           // 64
+      max_ar_len,         // 32 (Prefill AR length)
+      max_cache_len,      // ✅ 511 (최대 cache_len, rearrange 후 접근)
+      num_heads,          // 8
+      num_layers          // 16
   };
 
   LLMKVCacheManager kv_manager(kv_metadata);
@@ -250,7 +282,7 @@ int main(int argc, char** argv) {
   }
 
   std::cout << "[KV Cache] Allocated " << (kv_manager.total_cache_size() / 1024.0 / 1024.0) 
-            << " MiB\n";
+            << " MiB (max_cache_len=" << max_cache_len << ")\n";
 
   // ========== 7. Allocate I/O for Both Graphs ==========
   QNNIOAllocator prefill_alloc;
@@ -451,8 +483,56 @@ int main(int argc, char** argv) {
   // - n_update = tokens.size() - 1 = 12 - 1 = 11 (next_token은 아직 KV cache에 없음)
   // - 복사 위치: n_past = 0 (첫 prefill이므로)
   
-  int32_t n_past = 0; // KV cache에서 복사 시작 position (첫 prefill이므로 0)
-  int32_t n_update = tokens.size() - 1; // 실제로 복사할 토큰 수 (next_token 제외)
+  // ===== Prefill KV cache update 파라미터 =====
+  // ExecutorchReader 분석:
+  //   n_update = 1 + ((num_prompt_tokens - 1) % ar_len)
+  // 
+  // 예: num_prompt_tokens=1, ar_len=32
+  //   n_update = 1 + ((1 - 1) % 32) = 1
+  // 
+  // 의미: Prefill 실행 후, output에서 의미있는 n_update개 토큰의 KV를 복사
+  // - AR=32로 실행했지만, 실제 입력 토큰은 1개뿐
+  // - Output의 [0..n_update-1] 위치만 유효한 데이터
+  
+  int32_t n_past = 0; // 첫 prefill이므로 KV cache는 비어있음
+  int32_t num_prompt_tokens = tokens.size();  // "Hello" → 1
+  int32_t n_update = 1 + ((num_prompt_tokens - 1) % prefill_ar_len);  // ✅ ExecutorchReader 방식
+  
+  // DEBUG: Prefill 첫 번째 KV output 검사 (Layer 0, Head 0)
+  if (log_level >= 1) {
+    bool logged_v = false, logged_k = false;
+    for (const auto& kv_out : kv_outputs) {
+      if (!logged_v && kv_out.is_v_cache && kv_out.layer == 0 && kv_out.head == 0) {
+        uint8_t* data = reinterpret_cast<uint8_t*>(kv_out.buffer);
+        int non_zero = 0;
+        int total_bytes = prefill_ar_len * head_dim;  // [1, ar_len, head_dim]
+        for (int i = 0; i < std::min(1000, total_bytes); ++i) {
+          if (data[i] != 0) non_zero++;
+        }
+        std::cout << "\n[Debug] Prefill V cache output (L0H0):\n";
+        std::cout << "  Shape: [1, " << prefill_ar_len << ", " << head_dim << "]\n";
+        std::cout << "  First 10 bytes: [";
+        for (int i = 0; i < 10; ++i) std::cout << (int)data[i] << (i<9 ? ", " : "]\n");
+        std::cout << "  Non-zero in first 1000 bytes: " << non_zero << "/1000\n";
+        logged_v = true;
+      }
+      if (!logged_k && !kv_out.is_v_cache && kv_out.layer == 0 && kv_out.head == 0) {
+        uint8_t* data = reinterpret_cast<uint8_t*>(kv_out.buffer);
+        int non_zero = 0;
+        int total_bytes = head_dim * prefill_ar_len;  // [1, head_dim, ar_len]
+        for (int i = 0; i < std::min(1000, total_bytes); ++i) {
+          if (data[i] != 0) non_zero++;
+        }
+        std::cout << "[Debug] Prefill K cache output (L0H0):\n";
+        std::cout << "  Shape: [1, " << head_dim << ", " << prefill_ar_len << "]\n";
+        std::cout << "  First 10 bytes: [";
+        for (int i = 0; i < 10; ++i) std::cout << (int)data[i] << (i<9 ? ", " : "]\n");
+        std::cout << "  Non-zero in first 1000 bytes: " << non_zero << "/1000\n";
+        logged_k = true;
+      }
+      if (logged_v && logged_k) break;
+    }
+  }
   
   // 모든 layer와 head에 대해 KV cache 업데이트
   for (const auto& kv_out : kv_outputs) {
@@ -461,11 +541,19 @@ int main(int argc, char** argv) {
       // Output: [1, ar_len=32, head_dim=64] (sequential layout)
       // Input:  [1, max_cache_len=511, head_dim=64] (sequential layout)
       // 
-      // Sequential이므로 연속된 메모리 복사 가능:
-      // output[0..n_update-1][0..63] → input[n_past..n_past+n_update-1][0..63]
+      // SMART_MASK: 유효 데이터는 output의 끝에 있음!
+      // Prefill output [1, 32, 64]: 유효 데이터는 position [32-n_update..31]
+      //
+      // 예: n_update=1, ar_len=32
+      //   Output: [padding...][DATA][head_dim=64] (position 31에 유효 데이터)
+      //   → src를 (ar_len - n_update) * head_dim offset해야 함!
       
       const auto& v_buf = kv_manager.get_v_cache(kv_out.layer, kv_out.head);
-      uint8_t* src = reinterpret_cast<uint8_t*>(kv_out.buffer);  // output의 시작
+      
+      // ✅ ExecutorchReader 방식: Output의 시작부터 n_update개 복사
+      // SMART_MASK에서 output은 이미 올바른 위치에 데이터 배치됨
+      // Output [1, 32, 64]: position [0..n_update-1]이 유효 데이터
+      uint8_t* src = reinterpret_cast<uint8_t*>(kv_out.buffer);  // ✅ 시작부터!
       uint8_t* dst = reinterpret_cast<uint8_t*>(v_buf.input_buffer) + n_past * head_dim;
       
       // 연속 복사: n_update개 토큰 × head_dim bytes
@@ -484,26 +572,104 @@ int main(int argc, char** argv) {
       // Input:  [dim0: pos0,pos1,...,pos510][dim1: pos0,pos1,...,pos510]...[dim63]
       
       const auto& k_buf = kv_manager.get_k_cache(kv_out.layer, kv_out.head);
-      uint8_t* src = reinterpret_cast<uint8_t*>(kv_out.buffer);  // output의 시작
-      uint8_t* dst = reinterpret_cast<uint8_t*>(k_buf.input_buffer) + n_past;  // position offset
+      
+      // ===== SMART_MASK K cache update =====
+      // ExecutorchReader 실제 동작 (로그 확인):
+      //   write_ptr = k_cache.buffer + past_size (n_past offset)
+      //   read_ptr = k_cache.output_buffer  ← 시작부터!
+      //   copy_size = n_update * sizeof(T)
+      //   for each dimension:
+      //     memcpy(write_ptr, read_ptr, copy_size)
+      //     write_ptr += iter_size (cache_len stride)
+      //     read_ptr += out_size (ar_len stride)
+      //
+      // ✅ SMART_MASK에서 output은 이미 올바른 위치에 데이터 배치
+      // Prefill output [1, 64, 32]: position [0..n_update-1]이 유효
+      //
+      // 예: n_update=18, ar_len=32
+      //   Output: [dim0][DATA(18개), padding(14개)]
+      //   read_ptr[0:3] = [130, 121, 38]  ← 시작부터 유효!
+      
+      uint8_t* src = reinterpret_cast<uint8_t*>(kv_out.buffer);  // ✅ 시작부터!
+      uint8_t* dst = reinterpret_cast<uint8_t*>(k_buf.input_buffer) + n_past;  // n_past offset
       
       for (int32_t dim = 0; dim < head_dim; ++dim) {
         // 각 dimension에서 n_update bytes 복사
         std::memcpy(dst, src, n_update);
-        src += prefill_ar_len;  // Output: 다음 dimension (stride=32)
-        dst += max_cache_len;    // Input: 다음 dimension (stride=511)
+        src += prefill_ar_len;       // Output: 다음 dimension (stride=32)
+        dst += prefill_cache_len;    // Input: 다음 dimension (stride=480, rearrange 전!)
       }
     }
   }
   
   std::cout << "[KV Update] Copied " << n_update << " tokens to KV cache at position " << n_past << "\n";
   std::cout << "[KV Update] KV cache now contains positions [0.." << (n_past + n_update - 1) << "]\n";
+  
+  // DEBUG: Prefill KV update 후 메모리 상태 확인 (Layer 0, Head 0)
+  if (log_level >= 1) {
+    const auto& k_buf = kv_manager.get_k_cache(0, 0);
+    uint8_t* k_data = reinterpret_cast<uint8_t*>(k_buf.input_buffer);
+    int non_zero = 0;
+    for (int i = 0; i < std::min((int)k_buf.input_bytes, 10000); ++i) {
+      if (k_data[i] != 0) non_zero++;
+    }
+    std::cout << "[Debug] After Prefill KV update (L0H0):\n";
+    std::cout << "  K cache buffer[0]=" << (int)k_data[0]
+              << ", buffer[" << prefill_cache_len << "]=" << (int)k_data[prefill_cache_len]
+              << ", buffer[" << (prefill_cache_len*2) << "]=" << (int)k_data[prefill_cache_len*2] << "\n";
+    std::cout << "  Non-zero in first 10000 bytes: " << non_zero << "/10000\n";
+    std::cout << "  Expected: n_update=" << n_update << " tokens copied to position " << n_past << "\n";
+  }
+
+  // ========== 14.5. Rearrange Cache for Decode ==========
+  //
+  // ExecutorchReader 방식:
+  // - Prefill (AR=32, cache_len=480) → Decode (AR=1, cache_len=511)로 전환
+  // - rearrange_cache(32, 1)를 호출하여 480→511로 메모리 재배치
+  //
+  // K cache:
+  //   Before: [head_dim, 480] - [dim0][pos0..479][dim1][pos0..479]...[dim63]
+  //   After:  [head_dim, 511] - [dim0][pos0..510][dim1][pos0..510]...[dim63]
+  //   → 각 dimension을 뒤로 31 positions 이동 (backward memmove)
+  //
+  // V cache:
+  //   Before: [480, head_dim] - sequential [pos0..479][head_dim]
+  //   After:  [511, head_dim] - sequential [pos0..479][head_dim] + 31 empty
+  //   → 이미 올바른 위치에 있으므로 no-op
+  
+  std::cout << "\n[Rearrange] Expanding KV cache: Prefill (AR=32, cache_len=480) → Decode (AR=1, cache_len=511)\n";
+  kv_manager.rearrange_cache(prefill_ar_len, kv_ar_len);
+  
+  // ========== 14.6. Rearrange 후 메모리 검증 ==========
+  if (log_level >= 1) {
+    std::cout << "\n[Debug] Verifying K cache after rearrange (Layer 0, Head 0):\n";
+    const auto& k_buf_after = kv_manager.get_k_cache(0, 0);
+    uint8_t* k_data = reinterpret_cast<uint8_t*>(k_buf_after.input_buffer);
+    
+    // Check first dimension at positions [0..1] (should have data)
+    int non_zero_pos0 = 0, non_zero_pos1 = 0;
+    for (int i = 0; i < 5; ++i) {
+      if (k_data[0 * kv_cache_len + i] != 0) non_zero_pos0++;
+      if (k_data[1 * kv_cache_len + i] != 0) non_zero_pos1++;
+    }
+    std::cout << "  Dim 0: positions [0..4] have " << non_zero_pos0 << "/5 non-zero\n";
+    std::cout << "  Dim 1: positions [0..4] have " << non_zero_pos1 << "/5 non-zero\n";
+    
+    // Total non-zero bytes in first 1000 bytes
+    int total_non_zero = 0;
+    for (int i = 0; i < std::min((int)k_buf_after.input_bytes, 1000); ++i) {
+      if (k_data[i] != 0) total_non_zero++;
+    }
+    std::cout << "  Total: " << total_non_zero << "/1000 bytes non-zero\n";
+  }
 
   // ========== 15. Decoding Loop ==========
   std::cout << "\n========== DECODING PHASE ==========\n";
   
-  // Initial position after prefill
-  int32_t initial_tokens = tokens.size() - 1; // Tokens from prefill (excluding first next_token)
+  // ===== Decode 시작 position =====
+  // Prefill 후 KV cache에 저장된 토큰 수
+  // = n_update (prefill에서 복사한 유효 토큰 수)
+  int32_t initial_tokens = n_update;  // ✅ Prefill에서 복사한 토큰 수
   
   for (int gen_idx = 0; gen_idx < max_gen - 1; ++gen_idx) {
     std::cout << "\n--- Decode Step " << (gen_idx + 1) << " ---\n";
@@ -530,10 +696,16 @@ int main(int argc, char** argv) {
       // Token
       if (n.find("token") != std::string::npos && n.find("input") != std::string::npos) {
         std::memcpy(buf, &next_token, sizeof(int32_t));
+        if (log_level >= 2 && gen_idx == 0) {
+          std::cout << "[Debug] Token input: " << next_token << "\n";
+        }
       }
       // Position
       else if (n.find("pos") != std::string::npos && t.data_type.find("INT_32") != std::string::npos) {
         std::memcpy(buf, &n_past, sizeof(int32_t));
+        if (log_level >= 2 && gen_idx == 0) {
+          std::cout << "[Debug] Position input: " << n_past << "\n";
+        }
       }
       // ===== Attention mask (decode: [1, ar_len=1, context_len]) =====
       else if (n.find("atten_mask") != std::string::npos || n.find("attn_mask") != std::string::npos) {
@@ -565,6 +737,15 @@ int main(int argc, char** argv) {
         // 2. 현재 토큰에 attend (context window 끝)
         // ar_len=1이므로 마지막 position (context_len - 1)
         mask[context_len - 1] = 65535;
+        
+        if (log_level >= 2 && gen_idx == 0) {
+          std::cout << "[Debug] Attention mask: n_past=" << n_past << ", attend to [0.." << (n_past-1) << "] and [" << (context_len-1) << "]\n";
+          int attend_count = 0;
+          for (int i = 0; i < context_len; ++i) {
+            if (mask[i] == 65535) attend_count++;
+          }
+          std::cout << "  Total positions attending: " << attend_count << "/" << context_len << "\n";
+        }
       }
       // KV cache inputs: use KVManager buffers directly
       else if (n.find("_args_") != std::string::npos && t.dims.size() == 3) {
@@ -579,8 +760,8 @@ int main(int argc, char** argv) {
         size_t idx_end = t.name.find('_', idx_start);
         int tensor_idx = std::stoi(t.name.substr(idx_start, idx_end - idx_start));
         
-        if (t.dims[1] == max_cache_len && t.dims[2] == head_dim) {
-          // V cache input
+        if (t.dims[1] == kv_cache_len && t.dims[2] == head_dim) {
+          // V cache input (Decode 그래프, cache_len=511)
           int v_offset = tensor_idx - 2; // input_2 is first V cache
           int layer = v_offset / num_heads;
           int head = v_offset % num_heads;
@@ -611,8 +792,8 @@ int main(int argc, char** argv) {
           } else {
             std::memset(buf, 0, t.nbytes);
           }
-        } else if (t.dims[1] == head_dim && t.dims[2] == max_cache_len) {
-          // K cache input
+        } else if (t.dims[1] == head_dim && t.dims[2] == kv_cache_len) {
+          // K cache input (Decode 그래프, cache_len=511)
           int k_offset = tensor_idx - (2 + 128); // input_130 is first K cache
           int layer = k_offset / num_heads;
           int head = k_offset % num_heads;
@@ -620,6 +801,32 @@ int main(int argc, char** argv) {
           if (layer >= 0 && layer < num_layers && head >= 0 && head < num_heads) {
             const auto& k_buf = kv_manager.get_k_cache(layer, head);
             std::memcpy(buf, k_buf.input_buffer, k_buf.input_bytes);
+            
+            // Debug: verify K cache data integrity
+            if (gen_idx == 0 && layer == 0 && head == 0 && log_level >= 2) {
+              uint8_t* src_check = reinterpret_cast<uint8_t*>(k_buf.input_buffer);
+              int src_non_zero = 0;
+              for (size_t i = 0; i < std::min(k_buf.input_bytes, (size_t)1000); ++i) {
+                if (src_check[i] != 0) src_non_zero++;
+              }
+              
+              uint8_t* dst_check = reinterpret_cast<uint8_t*>(buf);
+              int dst_non_zero = 0;
+              for (size_t i = 0; i < std::min(k_buf.input_bytes, (size_t)1000); ++i) {
+                if (dst_check[i] != 0) dst_non_zero++;
+              }
+              
+              std::cout << "[Debug] K[0][0]: KVManager has " << src_non_zero 
+                        << "/1000 non-zero, kv_alloc has " << dst_non_zero << "/1000 non-zero\n";
+              
+              // Check position 0 for each dimension (should have data)
+              std::cout << "  First 3 dimensions at position 0: ";
+              for (int d = 0; d < 3; ++d) {
+                uint8_t val = src_check[d * kv_cache_len];
+                std::cout << (int)val << " ";
+              }
+              std::cout << "\n";
+            }
           } else {
             std::memset(buf, 0, t.nbytes);
           }
@@ -767,7 +974,7 @@ int main(int argc, char** argv) {
             // Output: [1, head_dim=64, 1] → 메모리상 sequential [64 bytes]
             //   [dim0_val, dim1_val, ..., dim63_val]
             // 
-            // Input: [1, head_dim=64, max_cache_len=511] → strided layout
+            // Input: [1, head_dim=64, kv_cache_len=511] → strided layout (rearrange 후)
             //   [dim0: pos0, pos1, ..., pos510]
             //   [dim1: pos0, pos1, ..., pos510]
             //   ...
@@ -781,8 +988,9 @@ int main(int argc, char** argv) {
             for (int32_t dim = 0; dim < head_dim; ++dim) {
               // Input의 [dim][pos_for_update] 위치 계산
               // = base + dim * stride + pos_for_update
+              // ✅ stride=kv_cache_len (511, rearrange 후)
               uint8_t* dst = reinterpret_cast<uint8_t*>(k_buf.input_buffer) 
-                             + dim * max_cache_len + pos_for_update;
+                             + dim * kv_cache_len + pos_for_update;
               dst[0] = src[dim];  // src는 sequential하므로 src[dim]
             }
             k_updated++;
