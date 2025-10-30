@@ -296,8 +296,17 @@ int main(int argc, char** argv) {
   std::cout << "[KV Decode] Allocated " << (kv_bytes / 1024.0) << " KiB for I/O\n";
 
   // ========== 8. Map KV Cache Tensors to Shared Memory ==========
-  // Build mapping: tensor_name -> (layer, head, is_key)
-  // Pattern: input_X_args_Y_Z where Y encodes layer/head info
+  // ExecutorchReader 로그 분석 결과:
+  //   prefill_forward/kv_forward 모두:
+  //     input_2~9:   V cache L0 H0~7 [1, cache_len, 64]
+  //     input_10~17: K cache L0 H0~7 [1, 64, cache_len]
+  //     input_18:    attention_mask
+  //     input_19~26: V cache L1 H0~7
+  //     input_27~34: K cache L1 H0~7
+  //     ... 반복 ...
+  //
+  // 패턴: 각 Layer마다 V 8개 → K 8개 (Layer 0만 mask 뒤에)
+  
   std::map<std::string, void*> prefill_kv_input_override;
   std::map<std::string, void*> prefill_kv_output_override;
   std::map<std::string, void*> kv_kv_input_override;
@@ -305,23 +314,106 @@ int main(int argc, char** argv) {
 
   std::cout << "[KV Binding] Mapping KV cache tensors to shared memory...\n";
   
-  // For now, use simple index-based mapping
-  // Total KV cache: 256 tensors (16 layers * 8 heads * 2 (K+V))
-  int kv_idx = 0;
-  for (int32_t layer = 0; layer < num_layers; ++layer) {
-    for (int32_t head = 0; head < num_heads; ++head) {
-      // K cache
-      const auto& k_buf = kv_manager.get_k_cache(layer, head);
-      // V cache
-      const auto& v_buf = kv_manager.get_v_cache(layer, head);
+  // Helper: Extract input index from tensor name
+  auto extract_input_index = [](const std::string& name) -> int {
+    size_t pos = name.find("input_");
+    if (pos == std::string::npos) return -1;
+    size_t start = pos + 6;  // "input_" length
+    size_t end = name.find('_', start);
+    if (end == std::string::npos) return -1;
+    return std::stoi(name.substr(start, end - start));
+  };
+  
+  // Collect all KV cache inputs with their indices
+  struct KVTensorInfo {
+    std::string name;
+    int input_idx;
+    int layer;
+    int head;
+    bool is_v_cache;  // true: V, false: K
+    std::vector<uint32_t> dims;
+  };
+  
+  auto build_kv_mapping = [&](const QnnJsonGraphDesc& graph) -> std::vector<KVTensorInfo> {
+    std::vector<KVTensorInfo> result;
+    
+    for (const auto& t : graph.inputs) {
+      if (t.dims.size() != 3) continue;
       
-      // We need to match tensor names - for now skip detailed mapping
-      // TODO: Implement proper tensor name -> layer/head mapping
-      kv_idx += 2;
+      int input_idx = extract_input_index(t.name);
+      if (input_idx < 2) continue;  // Skip tokens, pos
+      
+      // Detect V vs K by shape
+      bool is_v = (t.dims[1] > head_dim && t.dims[2] == head_dim);  // [1, cache_len, 64]
+      bool is_k = (t.dims[1] == head_dim && t.dims[2] > head_dim);  // [1, 64, cache_len]
+      
+      if (is_v || is_k) {
+        result.push_back({t.name, input_idx, -1, -1, is_v, t.dims});
+      }
+    }
+    
+    // Sort by input_idx
+    std::sort(result.begin(), result.end(), 
+              [](const KVTensorInfo& a, const KVTensorInfo& b) {
+                return a.input_idx < b.input_idx;
+              });
+    
+    // Assign layer/head based on pattern: V 8개 → K 8개 per layer
+    int v_count = 0, k_count = 0;
+    for (auto& info : result) {
+      if (info.is_v_cache) {
+        info.layer = v_count / num_heads;
+        info.head = v_count % num_heads;
+        v_count++;
+      } else {
+        info.layer = k_count / num_heads;
+        info.head = k_count % num_heads;
+        k_count++;
+      }
+    }
+    
+    return result;
+  };
+  
+  // Build mappings for both graphs
+  auto prefill_kv_map = build_kv_mapping(prefill_graph);
+  auto kv_kv_map = build_kv_mapping(kv_graph);
+  
+  // Bind to KVManager buffers
+  for (const auto& info : prefill_kv_map) {
+    if (info.is_v_cache) {
+      const auto& v_buf = kv_manager.get_v_cache(info.layer, info.head);
+      prefill_kv_input_override[info.name] = v_buf.input_buffer;
+    } else {
+      const auto& k_buf = kv_manager.get_k_cache(info.layer, info.head);
+      prefill_kv_input_override[info.name] = k_buf.input_buffer;
     }
   }
   
-  std::cout << "[KV Binding] Total KV cache buffers: " << (num_layers * num_heads * 2) << "\n";
+  for (const auto& info : kv_kv_map) {
+    if (info.is_v_cache) {
+      const auto& v_buf = kv_manager.get_v_cache(info.layer, info.head);
+      kv_kv_input_override[info.name] = v_buf.input_buffer;
+    } else {
+      const auto& k_buf = kv_manager.get_k_cache(info.layer, info.head);
+      kv_kv_input_override[info.name] = k_buf.input_buffer;
+    }
+  }
+  
+  std::cout << "[KV Binding] Prefill KV inputs: " << prefill_kv_map.size() << "\n";
+  std::cout << "[KV Binding] Decode KV inputs: " << kv_kv_map.size() << "\n";
+  
+  // DEBUG: Show first few mappings
+  if (log_level >= 1) {
+    std::cout << "\n[Debug] Prefill KV Input Mapping (first 20):\n";
+    for (size_t i = 0; i < std::min((size_t)20, prefill_kv_map.size()); ++i) {
+      const auto& info = prefill_kv_map[i];
+      std::cout << "  [" << info.input_idx << "] " << info.name 
+                << " → " << (info.is_v_cache ? "V" : "K")
+                << " L" << info.layer << "H" << info.head
+                << " [" << info.dims[0] << "," << info.dims[1] << "," << info.dims[2] << "]\n";
+    }
+  }
 
   // ========== 9. Prepare Prefill Inputs ==========
   auto get_prefill_buffer = [&](const std::string& name) -> void* {
@@ -679,9 +771,14 @@ int main(int argc, char** argv) {
     int32_t n_past = initial_tokens + gen_idx; // Total tokens in KV cache
     
     auto get_kv_buffer = [&](const std::string& name) -> void* {
+      // ✅ Check KV cache override first (shared memory)
+      auto it = kv_kv_input_override.find(name);
+      if (it != kv_kv_input_override.end()) return it->second;
+      
+      // Otherwise use allocated buffer
       auto& bindings = kv_alloc.bindings();
-      auto it = bindings.find(name);
-      return (it != bindings.end()) ? it->second : nullptr;
+      auto bit = bindings.find(name);
+      return (bit != bindings.end()) ? bit->second : nullptr;
     };
     
     // Fill kv_forward inputs
@@ -747,92 +844,21 @@ int main(int argc, char** argv) {
           std::cout << "  Total positions attending: " << attend_count << "/" << context_len << "\n";
         }
       }
-      // KV cache inputs: use KVManager buffers directly
-      else if (n.find("_args_") != std::string::npos && t.dims.size() == 3) {
-        // Map tensor name index to layer/head
-        // Pattern: input_2_args_128_0 → index 2
-        // First 256 inputs: 2~257
-        // V cache (first 128): input_2~input_129 with dims [1, max_cache_len, head_dim]
-        // K cache (next 128): input_130~input_257 with dims [1, head_dim, max_cache_len]
-        
-        // Extract index from tensor name
-        size_t idx_start = t.name.find("input_") + 6;
-        size_t idx_end = t.name.find('_', idx_start);
-        int tensor_idx = std::stoi(t.name.substr(idx_start, idx_end - idx_start));
-        
-        if (t.dims[1] == kv_cache_len && t.dims[2] == head_dim) {
-          // V cache input (Decode 그래프, cache_len=511)
-          int v_offset = tensor_idx - 2; // input_2 is first V cache
-          int layer = v_offset / num_heads;
-          int head = v_offset % num_heads;
-          
-          if (layer >= 0 && layer < num_layers && head >= 0 && head < num_heads) {
-            const auto& v_buf = kv_manager.get_v_cache(layer, head);
-            std::memcpy(buf, v_buf.input_buffer, v_buf.input_bytes);
-            
-            // Debug: verify KV cache data integrity
-            if (gen_idx == 0 && layer == 0 && head == 0) {
-              // Check source (KVManager)
-              uint8_t* src_check = reinterpret_cast<uint8_t*>(v_buf.input_buffer);
-              int src_non_zero = 0;
-              for (size_t i = 0; i < std::min(v_buf.input_bytes, (size_t)1000); ++i) {
-                if (src_check[i] != 0) src_non_zero++;
-              }
-              
-              // Check destination (kv_alloc)
-              uint8_t* dst_check = reinterpret_cast<uint8_t*>(buf);
-              int dst_non_zero = 0;
-              for (size_t i = 0; i < std::min(v_buf.input_bytes, (size_t)1000); ++i) {
-                if (dst_check[i] != 0) dst_non_zero++;
-              }
-              
-              std::cout << "[Debug] V[0][0]: KVManager has " << src_non_zero 
-                        << "/1000 non-zero, kv_alloc has " << dst_non_zero << "/1000 non-zero\n";
-            }
-          } else {
-            std::memset(buf, 0, t.nbytes);
-          }
-        } else if (t.dims[1] == head_dim && t.dims[2] == kv_cache_len) {
-          // K cache input (Decode 그래프, cache_len=511)
-          int k_offset = tensor_idx - (2 + 128); // input_130 is first K cache
-          int layer = k_offset / num_heads;
-          int head = k_offset % num_heads;
-          
-          if (layer >= 0 && layer < num_layers && head >= 0 && head < num_heads) {
-            const auto& k_buf = kv_manager.get_k_cache(layer, head);
-            std::memcpy(buf, k_buf.input_buffer, k_buf.input_bytes);
-            
-            // Debug: verify K cache data integrity
-            if (gen_idx == 0 && layer == 0 && head == 0 && log_level >= 2) {
-              uint8_t* src_check = reinterpret_cast<uint8_t*>(k_buf.input_buffer);
-              int src_non_zero = 0;
-              for (size_t i = 0; i < std::min(k_buf.input_bytes, (size_t)1000); ++i) {
-                if (src_check[i] != 0) src_non_zero++;
-              }
-              
-              uint8_t* dst_check = reinterpret_cast<uint8_t*>(buf);
-              int dst_non_zero = 0;
-              for (size_t i = 0; i < std::min(k_buf.input_bytes, (size_t)1000); ++i) {
-                if (dst_check[i] != 0) dst_non_zero++;
-              }
-              
-              std::cout << "[Debug] K[0][0]: KVManager has " << src_non_zero 
-                        << "/1000 non-zero, kv_alloc has " << dst_non_zero << "/1000 non-zero\n";
-              
-              // Check position 0 for each dimension (should have data)
-              std::cout << "  First 3 dimensions at position 0: ";
-              for (int d = 0; d < 3; ++d) {
-                uint8_t val = src_check[d * kv_cache_len];
-                std::cout << (int)val << " ";
-              }
-              std::cout << "\n";
-            }
-          } else {
-            std::memset(buf, 0, t.nbytes);
-          }
-        } else {
-          std::memset(buf, 0, t.nbytes);
+      // ✅ KV cache inputs are now automatically handled by kv_kv_input_override
+      // get_kv_buffer() returns KVManager's shared memory directly (zero-copy)
+      // No need to manually copy KV cache data!
+      
+      // Debug: verify KV cache data integrity (first decode step only)
+      else if (gen_idx == 0 && log_level >= 2 && n.find("_args_") != std::string::npos && t.dims.size() == 3) {
+        // This buffer is already pointing to KVManager's shared memory
+        uint8_t* buf_check = reinterpret_cast<uint8_t*>(buf);
+        int non_zero = 0;
+        for (size_t i = 0; i < std::min((size_t)1000, t.nbytes); ++i) {
+          if (buf_check[i] != 0) non_zero++;
         }
+        
+        std::cout << "[Debug] KV cache input " << t.name 
+                  << ": " << non_zero << "/1000 non-zero (shared memory)\n";
       }
     }
     

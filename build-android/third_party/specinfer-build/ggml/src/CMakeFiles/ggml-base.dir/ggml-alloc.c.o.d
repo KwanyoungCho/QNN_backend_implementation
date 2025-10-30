@@ -2,57 +2,57 @@ third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/ggml-alloc.c.o: \
   /home/chokwans99/dev/llm/specinfer.cpp/ggml/src/ggml-alloc.c \
   /home/chokwans99/dev/llm/specinfer.cpp/ggml/src/../include/ggml-alloc.h \
   /home/chokwans99/dev/llm/specinfer.cpp/ggml/src/../include/ggml.h \
-  /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/include/stdbool.h \
-  /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/include/stddef.h \
-  /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/include/__stddef_max_align_t.h \
-  /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/include/stdint.h \
-  /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/stdint.h \
-  /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/bits/wchar_limits.h \
-  /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/sys/cdefs.h \
-  /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/android/versioning.h \
-  /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/android/api-level.h \
-  /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/android/ndk-version.h \
-  /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/stdio.h \
-  /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/sys/types.h \
-  /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/linux/types.h \
-  /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android/asm/types.h \
-  /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/asm-generic/types.h \
-  /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/asm-generic/int-ll64.h \
-  /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android/asm/bitsperlong.h \
-  /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/asm-generic/bitsperlong.h \
-  /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/linux/posix_types.h \
-  /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/linux/stddef.h \
-  /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/linux/compiler_types.h \
-  /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/linux/compiler.h \
-  /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android/asm/posix_types.h \
-  /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/asm-generic/posix_types.h \
-  /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/bits/pthread_types.h \
-  /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/include/stdarg.h \
-  /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/bits/seek_constants.h \
-  /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/bits/fortify/stdio.h \
+  /home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/include/stdbool.h \
+  /home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/include/stddef.h \
+  /home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/include/__stddef_max_align_t.h \
+  /home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/include/stdint.h \
+  /home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/stdint.h \
+  /home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/bits/wchar_limits.h \
+  /home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/sys/cdefs.h \
+  /home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/android/versioning.h \
+  /home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/android/api-level.h \
+  /home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/android/ndk-version.h \
+  /home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/stdio.h \
+  /home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/sys/types.h \
+  /home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/linux/types.h \
+  /home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android/asm/types.h \
+  /home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/asm-generic/types.h \
+  /home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/asm-generic/int-ll64.h \
+  /home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android/asm/bitsperlong.h \
+  /home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/asm-generic/bitsperlong.h \
+  /home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/linux/posix_types.h \
+  /home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/linux/stddef.h \
+  /home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/linux/compiler_types.h \
+  /home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/linux/compiler.h \
+  /home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android/asm/posix_types.h \
+  /home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/asm-generic/posix_types.h \
+  /home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/bits/pthread_types.h \
+  /home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/include/stdarg.h \
+  /home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/bits/seek_constants.h \
+  /home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/bits/fortify/stdio.h \
   /home/chokwans99/dev/llm/specinfer.cpp/ggml/src/./ggml-backend-impl.h \
   /home/chokwans99/dev/llm/specinfer.cpp/ggml/src/../include/ggml-backend.h \
   /home/chokwans99/dev/llm/specinfer.cpp/ggml/src/./ggml-impl.h \
   /home/chokwans99/dev/llm/specinfer.cpp/ggml/src/../include/gguf.h \
-  /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/assert.h \
-  /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/math.h \
-  /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/include/limits.h \
-  /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/limits.h \
-  /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/include/float.h \
-  /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/linux/limits.h \
-  /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/bits/posix_limits.h \
-  /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/stdlib.h \
-  /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/alloca.h \
-  /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/bits/wait.h \
-  /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/linux/wait.h \
-  /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/malloc.h \
-  /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/xlocale.h \
-  /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/bits/fortify/stdlib.h \
-  /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/android/legacy_stdlib_inlines.h \
-  /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/string.h \
-  /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/bits/strcasecmp.h \
-  /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/strings.h \
-  /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/bits/fortify/strings.h \
-  /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/bits/fortify/string.h \
-  /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/include/arm_neon.h \
-  /home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/include/arm_bf16.h
+  /home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/assert.h \
+  /home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/math.h \
+  /home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/include/limits.h \
+  /home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/limits.h \
+  /home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/include/float.h \
+  /home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/linux/limits.h \
+  /home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/bits/posix_limits.h \
+  /home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/stdlib.h \
+  /home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/alloca.h \
+  /home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/bits/wait.h \
+  /home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/linux/wait.h \
+  /home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/malloc.h \
+  /home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/xlocale.h \
+  /home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/bits/fortify/stdlib.h \
+  /home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/android/legacy_stdlib_inlines.h \
+  /home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/string.h \
+  /home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/bits/strcasecmp.h \
+  /home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/strings.h \
+  /home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/bits/fortify/strings.h \
+  /home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/bits/fortify/string.h \
+  /home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/include/arm_neon.h \
+  /home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/17/include/arm_bf16.h

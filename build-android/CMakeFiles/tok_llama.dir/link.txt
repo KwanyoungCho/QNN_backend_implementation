@@ -1,2 +1,2 @@
-/home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-ar qc libtok_llama.a CMakeFiles/tok_llama.dir/src/tokenizer_llama.cpp.o
-/home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-ranlib libtok_llama.a
+/home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-ar qc libtok_llama.a CMakeFiles/tok_llama.dir/src/tokenizer_llama.cpp.o
+/home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-ranlib libtok_llama.a

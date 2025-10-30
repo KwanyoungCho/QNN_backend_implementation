@@ -73,15 +73,15 @@ CMakeFiles/tok_llama.dir/src/tokenizer_llama.cpp.o: CMakeFiles/tok_llama.dir/fla
 CMakeFiles/tok_llama.dir/src/tokenizer_llama.cpp.o: ../src/tokenizer_llama.cpp
 CMakeFiles/tok_llama.dir/src/tokenizer_llama.cpp.o: CMakeFiles/tok_llama.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/chokwans99/llm_test/build-android/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/tok_llama.dir/src/tokenizer_llama.cpp.o"
-	/home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tok_llama.dir/src/tokenizer_llama.cpp.o -MF CMakeFiles/tok_llama.dir/src/tokenizer_llama.cpp.o.d -o CMakeFiles/tok_llama.dir/src/tokenizer_llama.cpp.o -c /home/chokwans99/llm_test/src/tokenizer_llama.cpp
+	/home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tok_llama.dir/src/tokenizer_llama.cpp.o -MF CMakeFiles/tok_llama.dir/src/tokenizer_llama.cpp.o.d -o CMakeFiles/tok_llama.dir/src/tokenizer_llama.cpp.o -c /home/chokwans99/llm_test/src/tokenizer_llama.cpp
 
 CMakeFiles/tok_llama.dir/src/tokenizer_llama.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tok_llama.dir/src/tokenizer_llama.cpp.i"
-	/home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/chokwans99/llm_test/src/tokenizer_llama.cpp > CMakeFiles/tok_llama.dir/src/tokenizer_llama.cpp.i
+	/home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/chokwans99/llm_test/src/tokenizer_llama.cpp > CMakeFiles/tok_llama.dir/src/tokenizer_llama.cpp.i
 
 CMakeFiles/tok_llama.dir/src/tokenizer_llama.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tok_llama.dir/src/tokenizer_llama.cpp.s"
-	/home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/chokwans99/QNN_SDK/Qualcomm/HEXAGON_SDK/5.4.0.3/tools/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/chokwans99/llm_test/src/tokenizer_llama.cpp -o CMakeFiles/tok_llama.dir/src/tokenizer_llama.cpp.s
+	/home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/sysroot $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/chokwans99/llm_test/src/tokenizer_llama.cpp -o CMakeFiles/tok_llama.dir/src/tokenizer_llama.cpp.s
 
 # Object files for target tok_llama
 tok_llama_OBJECTS = \
