@@ -240,6 +240,19 @@ qnn_decode/fast:
 .PHONY : qnn_decode/fast
 
 #=============================================================================
+# Target rules for targets named qnn_llm_generate
+
+# Build rule for target.
+qnn_llm_generate: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 qnn_llm_generate
+.PHONY : qnn_llm_generate
+
+# fast build rule for target.
+qnn_llm_generate/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_llm_generate.dir/build.make CMakeFiles/qnn_llm_generate.dir/build
+.PHONY : qnn_llm_generate/fast
+
+#=============================================================================
 # Target rules for targets named tok_llama
 
 # Build rule for target.
@@ -413,6 +426,30 @@ apps/qnn_io_plan_main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_io_plan.dir/build.make CMakeFiles/qnn_io_plan.dir/apps/qnn_io_plan_main.cpp.s
 .PHONY : apps/qnn_io_plan_main.cpp.s
 
+apps/qnn_llm_generate.o: apps/qnn_llm_generate.cpp.o
+.PHONY : apps/qnn_llm_generate.o
+
+# target to build an object file
+apps/qnn_llm_generate.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_llm_generate.dir/build.make CMakeFiles/qnn_llm_generate.dir/apps/qnn_llm_generate.cpp.o
+.PHONY : apps/qnn_llm_generate.cpp.o
+
+apps/qnn_llm_generate.i: apps/qnn_llm_generate.cpp.i
+.PHONY : apps/qnn_llm_generate.i
+
+# target to preprocess a source file
+apps/qnn_llm_generate.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_llm_generate.dir/build.make CMakeFiles/qnn_llm_generate.dir/apps/qnn_llm_generate.cpp.i
+.PHONY : apps/qnn_llm_generate.cpp.i
+
+apps/qnn_llm_generate.s: apps/qnn_llm_generate.cpp.s
+.PHONY : apps/qnn_llm_generate.s
+
+# target to generate assembly for a file
+apps/qnn_llm_generate.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_llm_generate.dir/build.make CMakeFiles/qnn_llm_generate.dir/apps/qnn_llm_generate.cpp.s
+.PHONY : apps/qnn_llm_generate.cpp.s
+
 apps/qnn_prefill_main.o: apps/qnn_prefill_main.cpp.o
 .PHONY : apps/qnn_prefill_main.o
 
@@ -509,6 +546,30 @@ src/io_alloc.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_ctx_core.dir/build.make CMakeFiles/qnn_ctx_core.dir/src/io_alloc.cpp.s
 .PHONY : src/io_alloc.cpp.s
 
+src/llm_decode_runner.o: src/llm_decode_runner.cpp.o
+.PHONY : src/llm_decode_runner.o
+
+# target to build an object file
+src/llm_decode_runner.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_ctx_core.dir/build.make CMakeFiles/qnn_ctx_core.dir/src/llm_decode_runner.cpp.o
+.PHONY : src/llm_decode_runner.cpp.o
+
+src/llm_decode_runner.i: src/llm_decode_runner.cpp.i
+.PHONY : src/llm_decode_runner.i
+
+# target to preprocess a source file
+src/llm_decode_runner.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_ctx_core.dir/build.make CMakeFiles/qnn_ctx_core.dir/src/llm_decode_runner.cpp.i
+.PHONY : src/llm_decode_runner.cpp.i
+
+src/llm_decode_runner.s: src/llm_decode_runner.cpp.s
+.PHONY : src/llm_decode_runner.s
+
+# target to generate assembly for a file
+src/llm_decode_runner.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_ctx_core.dir/build.make CMakeFiles/qnn_ctx_core.dir/src/llm_decode_runner.cpp.s
+.PHONY : src/llm_decode_runner.cpp.s
+
 src/llm_input_preparer.o: src/llm_input_preparer.cpp.o
 .PHONY : src/llm_input_preparer.o
 
@@ -556,6 +617,30 @@ src/llm_kv_cache_manager.s: src/llm_kv_cache_manager.cpp.s
 src/llm_kv_cache_manager.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_ctx_core.dir/build.make CMakeFiles/qnn_ctx_core.dir/src/llm_kv_cache_manager.cpp.s
 .PHONY : src/llm_kv_cache_manager.cpp.s
+
+src/llm_kv_cache_mapper.o: src/llm_kv_cache_mapper.cpp.o
+.PHONY : src/llm_kv_cache_mapper.o
+
+# target to build an object file
+src/llm_kv_cache_mapper.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_ctx_core.dir/build.make CMakeFiles/qnn_ctx_core.dir/src/llm_kv_cache_mapper.cpp.o
+.PHONY : src/llm_kv_cache_mapper.cpp.o
+
+src/llm_kv_cache_mapper.i: src/llm_kv_cache_mapper.cpp.i
+.PHONY : src/llm_kv_cache_mapper.i
+
+# target to preprocess a source file
+src/llm_kv_cache_mapper.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_ctx_core.dir/build.make CMakeFiles/qnn_ctx_core.dir/src/llm_kv_cache_mapper.cpp.i
+.PHONY : src/llm_kv_cache_mapper.cpp.i
+
+src/llm_kv_cache_mapper.s: src/llm_kv_cache_mapper.cpp.s
+.PHONY : src/llm_kv_cache_mapper.s
+
+# target to generate assembly for a file
+src/llm_kv_cache_mapper.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_ctx_core.dir/build.make CMakeFiles/qnn_ctx_core.dir/src/llm_kv_cache_mapper.cpp.s
+.PHONY : src/llm_kv_cache_mapper.cpp.s
 
 src/llm_output_processor.o: src/llm_output_processor.cpp.o
 .PHONY : src/llm_output_processor.o
@@ -698,6 +783,7 @@ help:
 	@echo "... qnn_decode"
 	@echo "... qnn_graph_probe"
 	@echo "... qnn_io_plan"
+	@echo "... qnn_llm_generate"
 	@echo "... qnn_prefill"
 	@echo "... tok_encode"
 	@echo "... tok_llama"
@@ -713,6 +799,9 @@ help:
 	@echo "... apps/qnn_io_plan_main.o"
 	@echo "... apps/qnn_io_plan_main.i"
 	@echo "... apps/qnn_io_plan_main.s"
+	@echo "... apps/qnn_llm_generate.o"
+	@echo "... apps/qnn_llm_generate.i"
+	@echo "... apps/qnn_llm_generate.s"
 	@echo "... apps/qnn_prefill_main.o"
 	@echo "... apps/qnn_prefill_main.i"
 	@echo "... apps/qnn_prefill_main.s"
@@ -725,12 +814,18 @@ help:
 	@echo "... src/io_alloc.o"
 	@echo "... src/io_alloc.i"
 	@echo "... src/io_alloc.s"
+	@echo "... src/llm_decode_runner.o"
+	@echo "... src/llm_decode_runner.i"
+	@echo "... src/llm_decode_runner.s"
 	@echo "... src/llm_input_preparer.o"
 	@echo "... src/llm_input_preparer.i"
 	@echo "... src/llm_input_preparer.s"
 	@echo "... src/llm_kv_cache_manager.o"
 	@echo "... src/llm_kv_cache_manager.i"
 	@echo "... src/llm_kv_cache_manager.s"
+	@echo "... src/llm_kv_cache_mapper.o"
+	@echo "... src/llm_kv_cache_mapper.i"
+	@echo "... src/llm_kv_cache_mapper.s"
 	@echo "... src/llm_output_processor.o"
 	@echo "... src/llm_output_processor.i"
 	@echo "... src/llm_output_processor.s"

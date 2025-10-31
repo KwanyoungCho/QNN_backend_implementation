@@ -1,0 +1,662 @@
+#include "llm_decode_runner.h"
+#include "llm_input_preparer.h"
+#include "qnn_tensor_util.h"
+
+#include <iostream>
+#include <fstream>
+#include <cstring>
+#include <algorithm>
+#include <set>
+
+namespace llm_test {
+
+LLMDecodeRunner::LLMDecodeRunner(const LLMDecodeConfig& config)
+    : config_(config),
+      prefill_graph_(nullptr),
+      kv_graph_(nullptr),
+      context_len_(0),
+      num_layers_(0),
+      num_heads_(0),
+      head_dim_(0),
+      prefill_ar_len_(0),
+      kv_ar_len_(0),
+      prefill_cache_len_(0),
+      kv_cache_len_(0) {
+}
+
+LLMDecodeRunner::~LLMDecodeRunner() = default;
+
+bool LLMDecodeRunner::initialize() {
+  // 1. Load QNN backend
+  loader_.reset(new QnnLoader());
+  
+  // Set QNN log level (1=ERROR, 2=WARN, 3=INFO, 4=VERBOSE, 5=DEBUG)
+  loader_->set_log_level(config_.log_level);
+  
+  if (!loader_->load(config_.backend_so, config_.system_so)) {
+    error_msg_ = "Failed to load QNN backend";
+    return false;
+  }
+  
+  if (!loader_->get_interface_provider()) {
+    error_msg_ = "Failed to get QNN interface provider";
+    return false;
+  }
+  
+  if (!loader_->create_backend_and_device()) {
+    error_msg_ = "Failed to create QNN backend and device";
+    return false;
+  }
+  
+  if (config_.log_level >= 1) {
+    std::cout << "[Init] QNN backend loaded\n";
+  }
+  
+  // 2. Load graphs
+  if (!load_graphs()) return false;
+  
+  // 3. Extract metadata
+  if (!extract_metadata()) return false;
+  
+  // 4. Setup KV cache
+  if (!setup_kv_cache()) return false;
+  
+  // 5. Setup I/O allocators
+  if (!setup_io_allocators()) return false;
+  
+  // 6. Load tokenizer
+  tokenizer_.reset(new LlamaTokenizer());
+  if (!tokenizer_->init(config_.tokenizer_path.c_str())) {
+    error_msg_ = "Failed to load tokenizer";
+    return false;
+  }
+  
+  if (config_.log_level >= 1) {
+    std::cout << "[Init] All components initialized successfully\n";
+  }
+  
+  return true;
+}
+
+bool LLMDecodeRunner::load_graphs() {
+  std::string json_path = config_.ctx_dir + "/forward_0_json.json";
+  
+  if (!parse_qnn_json(json_path, graphs_)) {
+    error_msg_ = "Failed to parse QNN JSON: " + json_path;
+    return false;
+  }
+  
+  if (graphs_.find("prefill_forward") == graphs_.end() ||
+      graphs_.find("kv_forward") == graphs_.end()) {
+    error_msg_ = "Required graphs not found (prefill_forward, kv_forward)";
+    return false;
+  }
+  
+  prefill_graph_ = &graphs_["prefill_forward"];
+  kv_graph_ = &graphs_["kv_forward"];
+  
+  if (config_.log_level >= 1) {
+    std::cout << "[Graphs] Loaded prefill_forward and kv_forward\n";
+  }
+  
+  // Load context binary
+  std::string ctx_bin = config_.ctx_dir + "/forward_0.bin";
+  
+  // Read binary file
+  std::ifstream ifs(ctx_bin, std::ios::binary | std::ios::ate);
+  if (!ifs) {
+    error_msg_ = "Failed to open context binary: " + ctx_bin;
+    return false;
+  }
+  
+  size_t size = ifs.tellg();
+  ifs.seekg(0, std::ios::beg);
+  std::vector<char> buffer(size);
+  if (!ifs.read(buffer.data(), size)) {
+    error_msg_ = "Failed to read context binary: " + ctx_bin;
+    return false;
+  }
+  ifs.close();
+  
+  if (!loader_->create_context_from_binary(buffer.data(), size)) {
+    error_msg_ = "Failed to create context from binary: " + ctx_bin;
+    return false;
+  }
+  
+  // Retrieve graphs
+  if (!loader_->retrieve_graph(0, "prefill_forward") ||
+      !loader_->retrieve_graph(0, "kv_forward")) {
+    error_msg_ = "Failed to retrieve graphs";
+    return false;
+  }
+  
+  return true;
+}
+
+bool LLMDecodeRunner::extract_metadata() {
+  // Extract from prefill graph
+  context_len_ = 0;
+  prefill_ar_len_ = 0;
+  head_dim_ = 0;
+  
+  // Find attention mask to get context_len and ar_len
+  for (const auto& t : prefill_graph_->inputs) {
+    std::string name_lower = t.name;
+    for (auto& c : name_lower) c = (char)tolower(c);
+    
+    if (name_lower.find("atten_mask") != std::string::npos && t.dims.size() >= 2) {
+      // Attention mask dims: [batch, ar_len, context_len] or [ar_len, context_len]
+      // Use last two dimensions
+      prefill_ar_len_ = t.dims[t.dims.size() - 2];
+      context_len_ = t.dims[t.dims.size() - 1];
+      break;
+    }
+  }
+  
+  // Extract from kv graph
+  kv_ar_len_ = 0;
+  for (const auto& t : kv_graph_->inputs) {
+    std::string name_lower = t.name;
+    for (auto& c : name_lower) c = (char)tolower(c);
+    
+    if (name_lower.find("atten_mask") != std::string::npos && t.dims.size() >= 2) {
+      kv_ar_len_ = t.dims[t.dims.size() - 2];
+      if (context_len_ == 0) {
+        context_len_ = t.dims[t.dims.size() - 1];
+      }
+      break;
+    }
+  }
+  
+  // Extract head_dim from KV cache input tensor
+  for (const auto& t : prefill_graph_->inputs) {
+    if (t.name.find("_args_") != std::string::npos && t.dims.size() == 3) {
+      // KV cache dims format: [batch=1, max_cache_len, head_dim]
+      head_dim_ = t.dims[2];
+      if (head_dim_ > 0) break;
+    }
+  }
+  
+  // Count unique KV cache tensors
+  std::set<std::string> kv_cache_names;
+  for (const auto& t : prefill_graph_->inputs) {
+    if (t.name.find("_args_") != std::string::npos && t.dims.size() == 3) {
+      kv_cache_names.insert(t.name);
+    }
+  }
+  
+  int total_kv_tensors = kv_cache_names.size();
+  
+  // Deduce num_layers and num_heads
+  // Total KV cache tensors = 2 (K+V) * num_layers * num_heads
+  num_layers_ = 16;  // Assuming llama 1B: 16 layers
+  num_heads_ = total_kv_tensors / (2 * num_layers_);
+  
+  // Cache lengths (ExecutorchReader style)
+  prefill_cache_len_ = context_len_ - prefill_ar_len_;  // 512 - 32 = 480
+  kv_cache_len_ = context_len_ - kv_ar_len_;            // 512 - 1 = 511
+  
+  if (config_.log_level >= 1) {
+    std::cout << "[Metadata] context_len=" << context_len_
+              << ", prefill_ar=" << prefill_ar_len_
+              << ", kv_ar=" << kv_ar_len_ << "\n";
+    std::cout << "[Metadata] num_layers=" << num_layers_
+              << ", num_heads=" << num_heads_
+              << ", head_dim=" << head_dim_ << "\n";
+    std::cout << "[Metadata] prefill_cache_len=" << prefill_cache_len_
+              << ", kv_cache_len=" << kv_cache_len_ << "\n";
+  }
+  
+  if (context_len_ == 0 || num_heads_ == 0 || head_dim_ == 0) {
+    error_msg_ = "Failed to extract valid metadata";
+    return false;
+  }
+  
+  return true;
+}
+
+bool LLMDecodeRunner::setup_kv_cache() {
+  LLMKVCacheManager::Metadata kv_meta{
+      context_len_,
+      head_dim_,
+      prefill_ar_len_,
+      kv_cache_len_,
+      num_heads_,
+      num_layers_
+  };
+  
+  kv_manager_.reset(new LLMKVCacheManager(kv_meta));
+  if (!kv_manager_->allocate()) {
+    error_msg_ = "Failed to allocate KV cache memory";
+    return false;
+  }
+  
+  if (config_.log_level >= 1) {
+    std::cout << "[KV Cache] Allocated "
+              << (kv_manager_->total_cache_size() / 1024.0 / 1024.0)
+              << " MiB\n";
+  }
+  
+  // Build KV cache mappings
+  prefill_kv_mapping_ = LLMKVCacheMapper::build_mapping(
+      *prefill_graph_, num_heads_, head_dim_);
+  kv_kv_mapping_ = LLMKVCacheMapper::build_mapping(
+      *kv_graph_, num_heads_, head_dim_);
+  
+  prefill_kv_override_ = LLMKVCacheMapper::create_buffer_override(
+      prefill_kv_mapping_, *kv_manager_);
+  kv_kv_override_ = LLMKVCacheMapper::create_buffer_override(
+      kv_kv_mapping_, *kv_manager_);
+  
+  if (config_.log_level >= 1) {
+    std::cout << "[KV Binding] Prefill: " << prefill_kv_mapping_.size()
+              << " tensors, Decode: " << kv_kv_mapping_.size() << " tensors\n";
+  }
+  
+  return true;
+}
+
+bool LLMDecodeRunner::setup_io_allocators() {
+  prefill_alloc_.reset(new QNNIOAllocator());
+  prefill_alloc_->build_from_qnnjson(*prefill_graph_);
+  auto prefill_bytes = prefill_alloc_->allocate(64);
+  
+  kv_alloc_.reset(new QNNIOAllocator());
+  kv_alloc_->build_from_qnnjson(*kv_graph_);
+  auto kv_bytes = kv_alloc_->allocate(64);
+  
+  if (config_.log_level >= 1) {
+    std::cout << "[I/O] Prefill: " << (prefill_bytes / 1024.0)
+              << " KiB, Decode: " << (kv_bytes / 1024.0) << " KiB\n";
+  }
+  
+  return true;
+}
+
+bool LLMDecodeRunner::generate(const std::string& prompt, std::string& output_text) {
+  // 1. Tokenize prompt
+  auto tokens = tokenizer_->encode(prompt, true, false);
+  if (tokens.empty()) {
+    error_msg_ = "Failed to tokenize prompt";
+    return false;
+  }
+  
+  if (config_.log_level >= 1) {
+    std::cout << "\n[Generate] Prompt: \"" << prompt << "\"\n";
+    std::cout << "[Generate] Tokens: " << tokens.size() << "\n";
+  }
+  
+  // 2. Run prefill
+  int32_t next_token = 0;
+  int32_t n_update = 0;
+  if (!run_prefill(tokens, next_token, n_update)) {
+    return false;
+  }
+  
+  // 3. Decode first token
+  std::string decoded = tokenizer_->decode({next_token});
+  output_text = decoded;
+  
+  if (config_.log_level >= 1) {
+    std::cout << "[Prefill] Next token: " << next_token
+              << " → \"" << decoded << "\"\n";
+  }
+  
+  tokens.push_back(next_token);
+  
+  // 4. Rearrange cache for decode
+  if (config_.log_level >= 1) {
+    std::cout << "\n[Rearrange] Expanding KV cache: "
+              << prefill_cache_len_ << " → " << kv_cache_len_ << "\n";
+  }
+  kv_manager_->rearrange_cache(prefill_ar_len_, kv_ar_len_);
+  
+  // 5. Decode loop
+  if (config_.log_level >= 1) {
+    std::cout << "\n[Decode] Generating up to " << config_.max_gen_tokens
+              << " tokens...\n";
+    std::cout << "[Output] " << decoded;
+    std::cout.flush();
+  }
+  
+  int32_t initial_tokens = n_update;
+  
+  for (int gen_idx = 0; gen_idx < config_.max_gen_tokens - 1; ++gen_idx) {
+    int32_t n_past = initial_tokens + gen_idx;
+    int32_t token_out = 0;
+    
+    if (!run_decode_step(next_token, n_past, token_out)) {
+      return false;
+    }
+    
+    // Check EOS
+    if (token_out == 128001 || token_out == 128009) {
+      if (config_.log_level >= 1) {
+        std::cout << "\n[Decode] EOS token detected\n";
+      }
+      break;
+    }
+    
+    // Decode and append
+    decoded = tokenizer_->decode({token_out});
+    output_text += decoded;
+    
+    if (config_.log_level >= 1) {
+      std::cout << decoded;
+      std::cout.flush();
+    }
+    
+    next_token = token_out;
+    tokens.push_back(token_out);
+  }
+  
+  if (config_.log_level >= 1) {
+    std::cout << "\n\n[Generate] Complete. Total tokens: " << tokens.size() << "\n";
+  }
+  
+  return true;
+}
+
+bool LLMDecodeRunner::run_prefill(const std::vector<int32_t>& tokens,
+                                   int32_t& next_token,
+                                   int32_t& n_update) {
+  // Prepare inputs
+  auto get_prefill_buffer = [&](const std::string& name) -> void* {
+    auto it = prefill_kv_override_.find(name);
+    if (it != prefill_kv_override_.end()) return it->second;
+    
+    auto& bindings = prefill_alloc_->bindings();
+    auto bit = bindings.find(name);
+    return (bit != bindings.end()) ? bit->second : nullptr;
+  };
+  
+  if (!InputPreparer::auto_fill_inputs(*prefill_graph_, get_prefill_buffer, tokens, true)) {
+    error_msg_ = "Failed to prepare prefill inputs";
+    return false;
+  }
+  
+  // Build QNN tensors
+  std::vector<Qnn_Tensor_t> inputs, outputs;
+  std::vector<std::unique_ptr<QnnTensorHolder>> holders;
+  
+  for (const auto& t : prefill_graph_->inputs) {
+    void* buf = get_prefill_buffer(t.name);
+    if (!buf) continue;
+    
+    auto h = std::make_unique<QnnTensorHolder>();
+    if (h->init_from_json(t, buf, t.nbytes, true)) {
+      inputs.push_back(h->tensor());
+      holders.push_back(std::move(h));
+    }
+  }
+  
+  for (const auto& t : prefill_graph_->outputs) {
+    auto& bindings = prefill_alloc_->bindings();
+    auto it = bindings.find(t.name);
+    if (it == bindings.end()) continue;
+    
+    auto h = std::make_unique<QnnTensorHolder>();
+    if (h->init_from_json(t, it->second, t.nbytes, false)) {
+      outputs.push_back(h->tensor());
+      holders.push_back(std::move(h));
+    }
+  }
+  
+  if (config_.log_level >= 2) {
+    std::cout << "[Prefill] Prepared " << inputs.size() << " inputs, "
+              << outputs.size() << " outputs\n";
+  }
+  
+  // Execute
+  if (!loader_->execute_graph(0, "prefill_forward", inputs, outputs)) {
+    error_msg_ = "Prefill execution failed";
+    return false;
+  }
+  
+  // Extract logits and decode token
+  const QnnJsonTensorDesc* logits_desc = nullptr;
+  for (const auto& t : prefill_graph_->outputs) {
+    if (t.name.find("squeeze") != std::string::npos ||
+        t.name.find("logit") != std::string::npos) {
+      logits_desc = &t;
+      break;
+    }
+  }
+  
+  if (!logits_desc) {
+    error_msg_ = "Logits output not found";
+    return false;
+  }
+  
+  auto& bindings = prefill_alloc_->bindings();
+  auto it = bindings.find(logits_desc->name);
+  if (it == bindings.end()) {
+    error_msg_ = "Logits buffer not found";
+    return false;
+  }
+  
+  const uint16_t* logits = reinterpret_cast<const uint16_t*>(it->second);
+  int32_t vocab_size = 128256;
+  int32_t last_token_offset = (tokens.size() - 1) * vocab_size;
+  
+  uint16_t max_val = logits[last_token_offset];
+  next_token = 0;
+  for (int32_t i = 1; i < vocab_size; ++i) {
+    if (logits[last_token_offset + i] > max_val) {
+      max_val = logits[last_token_offset + i];
+      next_token = i;
+    }
+  }
+  
+  // Update KV cache from prefill outputs
+  n_update = 1 + ((tokens.size() - 1) % prefill_ar_len_);
+  int32_t n_past = 0;
+  
+  int v_idx = 0, k_idx = 0;
+  for (const auto& t : prefill_graph_->outputs) {
+    std::string n = t.name;
+    
+    bool is_v = (n.find("view_copy") != std::string::npos &&
+                 t.dims.size() == 3 && t.dims[1] == prefill_ar_len_ && t.dims[2] == head_dim_);
+    bool is_k = (n.find("permute_copy") != std::string::npos &&
+                 t.dims.size() == 3 && t.dims[1] == head_dim_ && t.dims[2] == prefill_ar_len_);
+    
+    if (!is_v && !is_k) continue;
+    
+    auto bit = bindings.find(t.name);
+    if (bit == bindings.end()) continue;
+    
+    if (is_v) {
+      int layer = v_idx / num_heads_;
+      int head = v_idx % num_heads_;
+      v_idx++;
+      
+      if (layer >= num_layers_ || head >= num_heads_) continue;
+      
+      const auto& v_buf = kv_manager_->get_v_cache(layer, head);
+      uint8_t* src = reinterpret_cast<uint8_t*>(bit->second);
+      uint8_t* dst = reinterpret_cast<uint8_t*>(v_buf.input_buffer) + n_past * head_dim_;
+      std::memcpy(dst, src, n_update * head_dim_);
+      
+    } else if (is_k) {
+      int layer = k_idx / num_heads_;
+      int head = k_idx % num_heads_;
+      k_idx++;
+      
+      if (layer >= num_layers_ || head >= num_heads_) continue;
+      
+      const auto& k_buf = kv_manager_->get_k_cache(layer, head);
+      uint8_t* src = reinterpret_cast<uint8_t*>(bit->second);
+      uint8_t* dst = reinterpret_cast<uint8_t*>(k_buf.input_buffer) + n_past;
+      
+      for (int32_t dim = 0; dim < head_dim_; ++dim) {
+        std::memcpy(dst, src, n_update);
+        src += prefill_ar_len_;
+        dst += prefill_cache_len_;
+      }
+    }
+  }
+  
+  return true;
+}
+
+bool LLMDecodeRunner::run_decode_step(int32_t token_in,
+                                       int32_t n_past,
+                                       int32_t& token_out) {
+  // Prepare inputs
+  auto get_kv_buffer = [&](const std::string& name) -> void* {
+    auto it = kv_kv_override_.find(name);
+    if (it != kv_kv_override_.end()) return it->second;
+    
+    auto& bindings = kv_alloc_->bindings();
+    auto bit = bindings.find(name);
+    return (bit != bindings.end()) ? bit->second : nullptr;
+  };
+  
+  // Fill inputs
+  for (const auto& t : kv_graph_->inputs) {
+    std::string n = t.name;
+    for (auto& c : n) c = (char)tolower(c);
+    
+    void* buf = get_kv_buffer(t.name);
+    if (!buf) continue;
+    
+    // Token
+    if (n.find("token") != std::string::npos && n.find("input") != std::string::npos) {
+      std::memcpy(buf, &token_in, sizeof(int32_t));
+    }
+    // Position
+    else if (n.find("pos") != std::string::npos && t.data_type.find("INT_32") != std::string::npos) {
+      std::memcpy(buf, &n_past, sizeof(int32_t));
+    }
+    // Attention mask
+    else if (n.find("atten_mask") != std::string::npos) {
+      uint16_t* mask = reinterpret_cast<uint16_t*>(buf);
+      std::memset(mask, 0, t.nbytes);
+      
+      // Attend to past tokens [0..n_past-1]
+      for (int32_t i = 0; i < n_past; ++i) {
+        mask[i] = 65535;
+      }
+      // Attend to current token (last position)
+      mask[context_len_ - 1] = 65535;
+    }
+  }
+  
+  // Build QNN tensors
+  std::vector<Qnn_Tensor_t> inputs, outputs;
+  std::vector<std::unique_ptr<QnnTensorHolder>> holders;
+  
+  for (const auto& t : kv_graph_->inputs) {
+    void* buf = get_kv_buffer(t.name);
+    if (!buf) continue;
+    
+    auto h = std::make_unique<QnnTensorHolder>();
+    if (h->init_from_json(t, buf, t.nbytes, true)) {
+      inputs.push_back(h->tensor());
+      holders.push_back(std::move(h));
+    }
+  }
+  
+  for (const auto& t : kv_graph_->outputs) {
+    auto& bindings = kv_alloc_->bindings();
+    auto it = bindings.find(t.name);
+    if (it == bindings.end()) continue;
+    
+    auto h = std::make_unique<QnnTensorHolder>();
+    if (h->init_from_json(t, it->second, t.nbytes, false)) {
+      outputs.push_back(h->tensor());
+      holders.push_back(std::move(h));
+    }
+  }
+  
+  // Execute
+  if (!loader_->execute_graph(0, "kv_forward", inputs, outputs)) {
+    error_msg_ = "Decode execution failed";
+    return false;
+  }
+  
+  // Extract logits
+  const QnnJsonTensorDesc* logits_desc = nullptr;
+  for (const auto& t : kv_graph_->outputs) {
+    if (t.name.find("squeeze") != std::string::npos ||
+        t.name.find("logit") != std::string::npos) {
+      logits_desc = &t;
+      break;
+    }
+  }
+  
+  if (!logits_desc) {
+    error_msg_ = "Logits output not found";
+    return false;
+  }
+  
+  auto& bindings = kv_alloc_->bindings();
+  auto it = bindings.find(logits_desc->name);
+  if (it == bindings.end()) {
+    error_msg_ = "Logits buffer not found";
+    return false;
+  }
+  
+  const uint16_t* logits = reinterpret_cast<const uint16_t*>(it->second);
+  int32_t vocab_size = 128256;
+  
+  uint16_t max_val = logits[0];
+  token_out = 0;
+  for (int32_t i = 1; i < vocab_size; ++i) {
+    if (logits[i] > max_val) {
+      max_val = logits[i];
+      token_out = i;
+    }
+  }
+  
+  // Update KV cache from decode outputs
+  int v_idx = 0, k_idx = 0;
+  for (const auto& t : kv_graph_->outputs) {
+    std::string n = t.name;
+    
+    bool is_v = (n.find("view_copy") != std::string::npos &&
+                 t.dims.size() == 3 && t.dims[1] == kv_ar_len_ && t.dims[2] == head_dim_);
+    bool is_k = (n.find("permute_copy") != std::string::npos &&
+                 t.dims.size() == 3 && t.dims[1] == head_dim_ && t.dims[2] == kv_ar_len_);
+    
+    if (!is_v && !is_k) continue;
+    
+    auto bit = bindings.find(t.name);
+    if (bit == bindings.end()) continue;
+    
+    if (is_v) {
+      int layer = v_idx / num_heads_;
+      int head = v_idx % num_heads_;
+      v_idx++;
+      
+      if (layer >= num_layers_ || head >= num_heads_) continue;
+      
+      const auto& v_buf = kv_manager_->get_v_cache(layer, head);
+      uint8_t* src = reinterpret_cast<uint8_t*>(bit->second);
+      uint8_t* dst = reinterpret_cast<uint8_t*>(v_buf.input_buffer) + n_past * head_dim_;
+      std::memcpy(dst, src, kv_ar_len_ * head_dim_);
+      
+    } else if (is_k) {
+      int layer = k_idx / num_heads_;
+      int head = k_idx % num_heads_;
+      k_idx++;
+      
+      if (layer >= num_layers_ || head >= num_heads_) continue;
+      
+      const auto& k_buf = kv_manager_->get_k_cache(layer, head);
+      uint8_t* src = reinterpret_cast<uint8_t*>(bit->second);
+      uint8_t* dst = reinterpret_cast<uint8_t*>(k_buf.input_buffer) + n_past;
+      
+      for (int32_t dim = 0; dim < head_dim_; ++dim) {
+        std::memcpy(dst, src, kv_ar_len_);
+        src += kv_ar_len_;
+        dst += kv_cache_len_;
+      }
+    }
+  }
+  
+  return true;
+}
+
+} // namespace llm_test

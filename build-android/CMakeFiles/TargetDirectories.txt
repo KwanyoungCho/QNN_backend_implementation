@@ -4,6 +4,7 @@
 /home/chokwans99/llm_test/build-android/CMakeFiles/qnn_io_plan.dir
 /home/chokwans99/llm_test/build-android/CMakeFiles/qnn_prefill.dir
 /home/chokwans99/llm_test/build-android/CMakeFiles/qnn_decode.dir
+/home/chokwans99/llm_test/build-android/CMakeFiles/qnn_llm_generate.dir
 /home/chokwans99/llm_test/build-android/CMakeFiles/tok_llama.dir
 /home/chokwans99/llm_test/build-android/CMakeFiles/tok_encode.dir
 /home/chokwans99/llm_test/build-android/CMakeFiles/edit_cache.dir

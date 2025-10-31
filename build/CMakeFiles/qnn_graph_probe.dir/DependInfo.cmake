@@ -11,12 +11,9 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/chokwans99/llm_test/apps/qnn_graph_probe_main.cpp" "CMakeFiles/qnn_graph_probe.dir/apps/qnn_graph_probe_main.cpp.o" "gcc" "CMakeFiles/qnn_graph_probe.dir/apps/qnn_graph_probe_main.cpp.o.d"
   )
 
-# Targets to which this target links which contain Fortran sources.
-set(CMAKE_Fortran_TARGET_LINKED_INFO_FILES
-  )
-
-# Targets to which this target links which contain Fortran sources.
-set(CMAKE_Fortran_TARGET_FORWARD_LINKED_INFO_FILES
+# Targets to which this target links.
+set(CMAKE_TARGET_LINKED_INFO_FILES
+  "/home/chokwans99/llm_test/build/CMakeFiles/qnn_ctx_core.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

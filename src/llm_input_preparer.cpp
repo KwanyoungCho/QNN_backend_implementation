@@ -134,9 +134,9 @@ bool InputPreparer::auto_fill_inputs(
     // KV cache: clear to 0
     if (is_kv_cache_tensor(t)) {
       clear_kv_cache(buffer, t);
-      if (verbose) {
-        std::cout << "[InputPreparer] Cleared KV cache: " << t.name << "\n";
-      }
+      // if (verbose) {
+      //   std::cout << "[InputPreparer] Cleared KV cache: " << t.name << "\n";
+      // }
       continue;
     }
     

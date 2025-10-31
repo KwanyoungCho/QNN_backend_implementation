@@ -224,21 +224,21 @@ void LLMKVCacheManager::rearrange_key(
     return;  // No rearrangement needed
   }
   
-  std::cout << "[LLMKVCacheManager] Rearranging K cache: " 
-            << src_cache_len << " → " << dst_cache_len << "\n";
+  // std::cout << "[LLMKVCacheManager] Rearranging K cache: " 
+  //           << src_cache_len << " → " << dst_cache_len << "\n";
   
   uint8_t* buffer = reinterpret_cast<uint8_t*>(cache.input_buffer);
   
-  // DEBUG: Log BEFORE rearrange (first cache only, Layer 0 Head 0)
-  static bool first_rearrange = true;
-  if (first_rearrange && cache.input_buffer == k_cache_[0][0].input_buffer) {
-    std::cout << "[DEBUG Rearrange] BEFORE K cache (L0H0):\n";
-    std::cout << "  buffer[0]=" << (int)buffer[0] 
-              << ", buffer[" << src_cache_len << "]=" << (int)buffer[src_cache_len]
-              << ", buffer[" << (src_cache_len*2) << "]=" << (int)buffer[src_cache_len*2] << "\n";
-    std::cout << "  Total buffer size allocated: " << cache.input_bytes << " bytes\n";
-    std::cout << "  src_cache_len=" << src_cache_len << ", dst_cache_len=" << dst_cache_len << "\n";
-  }
+  // // DEBUG: Log BEFORE rearrange (first cache only, Layer 0 Head 0)
+  // static bool first_rearrange = true;
+  // if (first_rearrange && cache.input_buffer == k_cache_[0][0].input_buffer) {
+  //   std::cout << "[DEBUG Rearrange] BEFORE K cache (L0H0):\n";
+  //   std::cout << "  buffer[0]=" << (int)buffer[0] 
+  //             << ", buffer[" << src_cache_len << "]=" << (int)buffer[src_cache_len]
+  //             << ", buffer[" << (src_cache_len*2) << "]=" << (int)buffer[src_cache_len*2] << "\n";
+  //   std::cout << "  Total buffer size allocated: " << cache.input_bytes << " bytes\n";
+  //   std::cout << "  src_cache_len=" << src_cache_len << ", dst_cache_len=" << dst_cache_len << "\n";
+  // }
   
   // BACKWARD iteration to avoid overwrite (src_cache_len < dst_cache_len)
   for (int32_t dim = metadata_.head_dim - 1; dim >= 0; --dim) {
@@ -247,21 +247,21 @@ void LLMKVCacheManager::rearrange_key(
     std::memmove(dst, src, src_cache_len);
   }
   
-  // DEBUG: Log AFTER rearrange
-  if (first_rearrange && cache.input_buffer == k_cache_[0][0].input_buffer) {
-    std::cout << "[DEBUG Rearrange] AFTER K cache (L0H0):\n";
-    std::cout << "  buffer[0]=" << (int)buffer[0] 
-              << ", buffer[" << dst_cache_len << "]=" << (int)buffer[dst_cache_len]
-              << ", buffer[" << (dst_cache_len*2) << "]=" << (int)buffer[dst_cache_len*2] << "\n";
+  // // DEBUG: Log AFTER rearrange
+  // if (first_rearrange && cache.input_buffer == k_cache_[0][0].input_buffer) {
+  //   std::cout << "[DEBUG Rearrange] AFTER K cache (L0H0):\n";
+  //   std::cout << "  buffer[0]=" << (int)buffer[0] 
+  //             << ", buffer[" << dst_cache_len << "]=" << (int)buffer[dst_cache_len]
+  //             << ", buffer[" << (dst_cache_len*2) << "]=" << (int)buffer[dst_cache_len*2] << "\n";
     
-    // 전체 non-zero count
-    int non_zero = 0;
-    for (int i = 0; i < std::min((int)cache.input_bytes, 10000); ++i) {
-      if (buffer[i] != 0) non_zero++;
-    }
-    std::cout << "  Non-zero in first 10000 bytes: " << non_zero << "/10000\n";
-    first_rearrange = false;
-  }
+  //   // 전체 non-zero count
+  //   int non_zero = 0;
+  //   for (int i = 0; i < std::min((int)cache.input_bytes, 10000); ++i) {
+  //     if (buffer[i] != 0) non_zero++;
+  //   }
+  //   std::cout << "  Non-zero in first 10000 bytes: " << non_zero << "/10000\n";
+  //   first_rearrange = false;
+  // }
 }
 
 void LLMKVCacheManager::rearrange_value(
@@ -283,8 +283,8 @@ void LLMKVCacheManager::rearrange_value(
     return;  // No rearrangement needed
   }
   
-  std::cout << "[LLMKVCacheManager] Rearranging V cache: " 
-            << src_cache_len << " → " << dst_cache_len << " (no-op)\n";
+  // std::cout << "[LLMKVCacheManager] Rearranging V cache: " 
+  //           << src_cache_len << " → " << dst_cache_len << " (no-op)\n";
   
   // V cache is sequential, so no rearrangement needed
   // The first src_cache_len * head_dim bytes are already in correct position

@@ -14,7 +14,8 @@ adb push build-android/qnn_io_plan /data/local/tmp/chokwans99/executorch/QNN_tes
 adb push build-android/tok_encode /data/local/tmp/chokwans99/executorch/QNN_test
 adb push build-android/qnn_prefill /data/local/tmp/chokwans99/executorch/QNN_test
 adb push build-android/qnn_decode /data/local/tmp/chokwans99/executorch/QNN_test
-adb push /home/chokwans99/llm_test/models/llama_qnn_1b/tokenizer.gguf /data/local/tmp/chokwans99/executorch/QNN_test
+adb push build-android/qnn_llm_generate /data/local/tmp/chokwans99/executorch/QNN_test
+
 adb push build-android/bin/libllama.so /data/local/tmp/chokwans99/executorch/QNN_test
 adb push build-android/bin/libggml.so /data/local/tmp/chokwans99/executorch/QNN_test
 adb push build-android/bin/libggml-cpu.so /data/local/tmp/chokwans99/executorch/QNN_test
@@ -26,3 +27,4 @@ adb shell 'chmod +x /data/local/tmp/chokwans99/executorch/QNN_test/qnn_io_plan'
 adb shell 'chmod +x /data/local/tmp/chokwans99/executorch/QNN_test/tok_encode'
 adb shell 'chmod +x /data/local/tmp/chokwans99/executorch/QNN_test/qnn_prefill'
 adb shell 'chmod +x /data/local/tmp/chokwans99/executorch/QNN_test/qnn_decode'
+adb shell 'chmod +x /data/local/tmp/chokwans99/executorch/QNN_test/qnn_llm_generate'

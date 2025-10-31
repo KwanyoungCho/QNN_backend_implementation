@@ -1,1 +1,1 @@
-/usr/bin/c++ CMakeFiles/qnn_graph_probe.dir/apps/qnn_graph_probe_main.cpp.o -o qnn_graph_probe  libqnn_ctx_core.a -ldl -lpthread
+/usr/bin/c++ -O3 -DNDEBUG CMakeFiles/qnn_graph_probe.dir/apps/qnn_graph_probe_main.cpp.o -o qnn_graph_probe  libqnn_ctx_core.a -ldl -lpthread 

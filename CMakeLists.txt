@@ -25,6 +25,8 @@ add_library(qnn_ctx_core STATIC
   src/llm_input_preparer.cpp
   src/llm_output_processor.cpp
   src/llm_kv_cache_manager.cpp
+  src/llm_kv_cache_mapper.cpp
+  src/llm_decode_runner.cpp
 )
 
 add_executable(qnn_ctx_init
@@ -65,6 +67,12 @@ add_executable(qnn_decode
   apps/qnn_decode_main.cpp
 )
 target_link_libraries(qnn_decode PRIVATE qnn_ctx_core tok_llama)
+
+# New modularized LLM generation application
+add_executable(qnn_llm_generate
+  apps/qnn_llm_generate.cpp
+)
+target_link_libraries(qnn_llm_generate PRIVATE qnn_ctx_core tok_llama)
 
 
 # llama.cpp tokenizer wrapper and example

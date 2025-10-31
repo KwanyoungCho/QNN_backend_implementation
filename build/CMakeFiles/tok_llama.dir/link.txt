@@ -1,0 +1,2 @@
+/usr/bin/ar qc libtok_llama.a CMakeFiles/tok_llama.dir/src/tokenizer_llama.cpp.o
+/usr/bin/ranlib libtok_llama.a

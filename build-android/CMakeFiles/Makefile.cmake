@@ -184,6 +184,7 @@ set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/qnn_io_plan.dir/DependInfo.cmake"
   "CMakeFiles/qnn_prefill.dir/DependInfo.cmake"
   "CMakeFiles/qnn_decode.dir/DependInfo.cmake"
+  "CMakeFiles/qnn_llm_generate.dir/DependInfo.cmake"
   "CMakeFiles/tok_llama.dir/DependInfo.cmake"
   "CMakeFiles/tok_encode.dir/DependInfo.cmake"
   "third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/DependInfo.cmake"
