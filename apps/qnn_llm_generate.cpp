@@ -17,7 +17,7 @@ static void usage(const char* prog) {
             << "  [--backend_so PATH]    QNN backend library (default: libQnnHtp.so)\n"
             << "  [--system_so PATH]     QNN system library (optional)\n"
             << "  [--max_gen N]          Maximum tokens to generate (default: 100)\n"
-            << "  [--log_level N]        Log verbosity 0=quiet, 1=info, 2=debug (default: 1)\n"
+            << "  [--log_level N]        QNN log verbosity 1=ERROR, 2=WARN, 3=INFO, 4=VERBOSE, 5=DEBUG (default: 1)\n"
             << "\n"
             << "Example:\n"
             << "  " << prog << " \\\n"

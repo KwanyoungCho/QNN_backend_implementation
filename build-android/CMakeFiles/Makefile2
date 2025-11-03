@@ -284,12 +284,12 @@ CMakeFiles/qnn_io_plan.dir/clean:
 # Target rules for target CMakeFiles/qnn_prefill.dir
 
 # All Build rule for target.
+CMakeFiles/qnn_prefill.dir/all: CMakeFiles/qnn_ctx_core.dir/all
+CMakeFiles/qnn_prefill.dir/all: CMakeFiles/tok_llama.dir/all
+CMakeFiles/qnn_prefill.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/all
 CMakeFiles/qnn_prefill.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/all
 CMakeFiles/qnn_prefill.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/all
-CMakeFiles/qnn_prefill.dir/all: CMakeFiles/qnn_ctx_core.dir/all
 CMakeFiles/qnn_prefill.dir/all: third_party/specinfer-build/src/CMakeFiles/llama.dir/all
-CMakeFiles/qnn_prefill.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/all
-CMakeFiles/qnn_prefill.dir/all: CMakeFiles/tok_llama.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_prefill.dir/build.make CMakeFiles/qnn_prefill.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_prefill.dir/build.make CMakeFiles/qnn_prefill.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/chokwans99/llm_test/build-android/CMakeFiles --progress-num=75,76 "Built target qnn_prefill"
@@ -315,12 +315,12 @@ CMakeFiles/qnn_prefill.dir/clean:
 # Target rules for target CMakeFiles/qnn_decode.dir
 
 # All Build rule for target.
+CMakeFiles/qnn_decode.dir/all: CMakeFiles/qnn_ctx_core.dir/all
+CMakeFiles/qnn_decode.dir/all: CMakeFiles/tok_llama.dir/all
+CMakeFiles/qnn_decode.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/all
 CMakeFiles/qnn_decode.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/all
 CMakeFiles/qnn_decode.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/all
-CMakeFiles/qnn_decode.dir/all: CMakeFiles/qnn_ctx_core.dir/all
 CMakeFiles/qnn_decode.dir/all: third_party/specinfer-build/src/CMakeFiles/llama.dir/all
-CMakeFiles/qnn_decode.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/all
-CMakeFiles/qnn_decode.dir/all: CMakeFiles/tok_llama.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_decode.dir/build.make CMakeFiles/qnn_decode.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_decode.dir/build.make CMakeFiles/qnn_decode.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/chokwans99/llm_test/build-android/CMakeFiles --progress-num=67,68 "Built target qnn_decode"
@@ -346,12 +346,12 @@ CMakeFiles/qnn_decode.dir/clean:
 # Target rules for target CMakeFiles/qnn_llm_generate.dir
 
 # All Build rule for target.
+CMakeFiles/qnn_llm_generate.dir/all: CMakeFiles/qnn_ctx_core.dir/all
+CMakeFiles/qnn_llm_generate.dir/all: CMakeFiles/tok_llama.dir/all
+CMakeFiles/qnn_llm_generate.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/all
 CMakeFiles/qnn_llm_generate.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/all
 CMakeFiles/qnn_llm_generate.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/all
-CMakeFiles/qnn_llm_generate.dir/all: CMakeFiles/qnn_ctx_core.dir/all
 CMakeFiles/qnn_llm_generate.dir/all: third_party/specinfer-build/src/CMakeFiles/llama.dir/all
-CMakeFiles/qnn_llm_generate.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/all
-CMakeFiles/qnn_llm_generate.dir/all: CMakeFiles/tok_llama.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_llm_generate.dir/build.make CMakeFiles/qnn_llm_generate.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_llm_generate.dir/build.make CMakeFiles/qnn_llm_generate.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/chokwans99/llm_test/build-android/CMakeFiles --progress-num=73,74 "Built target qnn_llm_generate"
@@ -377,10 +377,10 @@ CMakeFiles/qnn_llm_generate.dir/clean:
 # Target rules for target CMakeFiles/tok_llama.dir
 
 # All Build rule for target.
+CMakeFiles/tok_llama.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/all
 CMakeFiles/tok_llama.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/all
 CMakeFiles/tok_llama.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/all
 CMakeFiles/tok_llama.dir/all: third_party/specinfer-build/src/CMakeFiles/llama.dir/all
-CMakeFiles/tok_llama.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tok_llama.dir/build.make CMakeFiles/tok_llama.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tok_llama.dir/build.make CMakeFiles/tok_llama.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/chokwans99/llm_test/build-android/CMakeFiles --progress-num=79,80 "Built target tok_llama"
@@ -406,11 +406,11 @@ CMakeFiles/tok_llama.dir/clean:
 # Target rules for target CMakeFiles/tok_encode.dir
 
 # All Build rule for target.
+CMakeFiles/tok_encode.dir/all: CMakeFiles/tok_llama.dir/all
+CMakeFiles/tok_encode.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/all
 CMakeFiles/tok_encode.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/all
 CMakeFiles/tok_encode.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/all
 CMakeFiles/tok_encode.dir/all: third_party/specinfer-build/src/CMakeFiles/llama.dir/all
-CMakeFiles/tok_encode.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/all
-CMakeFiles/tok_encode.dir/all: CMakeFiles/tok_llama.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tok_encode.dir/build.make CMakeFiles/tok_encode.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tok_encode.dir/build.make CMakeFiles/tok_encode.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/chokwans99/llm_test/build-android/CMakeFiles --progress-num=77,78 "Built target tok_encode"
@@ -462,8 +462,8 @@ third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/clean:
 # Target rules for target third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir
 
 # All Build rule for target.
-third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/all
 third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/all
+third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/all
 	$(MAKE) $(MAKESILENT) -f third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/build.make third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/depend
 	$(MAKE) $(MAKESILENT) -f third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/build.make third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/chokwans99/llm_test/build-android/CMakeFiles --progress-num=1,2 "Built target ggml"
@@ -515,9 +515,9 @@ third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/clean:
 # Target rules for target third_party/specinfer-build/src/CMakeFiles/llama.dir
 
 # All Build rule for target.
+third_party/specinfer-build/src/CMakeFiles/llama.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/all
 third_party/specinfer-build/src/CMakeFiles/llama.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/all
 third_party/specinfer-build/src/CMakeFiles/llama.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/all
-third_party/specinfer-build/src/CMakeFiles/llama.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/all
 	$(MAKE) $(MAKESILENT) -f third_party/specinfer-build/src/CMakeFiles/llama.dir/build.make third_party/specinfer-build/src/CMakeFiles/llama.dir/depend
 	$(MAKE) $(MAKESILENT) -f third_party/specinfer-build/src/CMakeFiles/llama.dir/build.make third_party/specinfer-build/src/CMakeFiles/llama.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/chokwans99/llm_test/build-android/CMakeFiles --progress-num=28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53 "Built target llama"

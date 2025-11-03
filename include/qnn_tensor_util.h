@@ -24,6 +24,9 @@ public:
   // 반환값: 성공 여부
   bool init_from_json(const QnnJsonTensorDesc& json_desc, void* data_ptr, uint64_t nbytes, bool is_input);
 
+  // Update buffer pointer without reconstructing the whole tensor
+  void update_buffer(void* data_ptr, uint64_t nbytes);
+
   const Qnn_Tensor_t& tensor() const { return tensor_; }
 
 private:

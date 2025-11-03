@@ -2,9 +2,11 @@
 
 #include "qnn_loader.h"
 #include "qnn_qnnjson.h"
+#include "qnn_tensor_util.h"
 #include "io_alloc.h"
 #include "llm_kv_cache_manager.h"
 #include "llm_kv_cache_mapper.h"
+#include "llm_stats.h"
 #include "llm_output_processor.h"
 #include "tokenizer_llama.h"
 
@@ -59,6 +61,11 @@ class LLMDecodeRunner {
    */
   const std::string& get_error() const { return error_msg_; }
   
+  /**
+   * @brief Get performance statistics
+   */
+  const LLMStats& get_stats() const { return stats_; }
+  
  private:
   // Configuration
   LLMDecodeConfig config_;
@@ -91,8 +98,17 @@ class LLMDecodeRunner {
   std::unique_ptr<QNNIOAllocator> prefill_alloc_;
   std::unique_ptr<QNNIOAllocator> kv_alloc_;
   
+  // Pre-built QNN tensors (reused across executions)
+  std::vector<std::unique_ptr<QnnTensorHolder>> prefill_input_holders_;
+  std::vector<std::unique_ptr<QnnTensorHolder>> prefill_output_holders_;
+  std::vector<std::unique_ptr<QnnTensorHolder>> kv_input_holders_;
+  std::vector<std::unique_ptr<QnnTensorHolder>> kv_output_holders_;
+  
   // Tokenizer
   std::unique_ptr<LlamaTokenizer> tokenizer_;
+  
+  // Performance statistics
+  LLMStats stats_;
   
   // Helper methods
   bool load_graphs();

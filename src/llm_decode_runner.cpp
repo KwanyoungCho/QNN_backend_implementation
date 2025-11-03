@@ -27,6 +27,9 @@ LLMDecodeRunner::LLMDecodeRunner(const LLMDecodeConfig& config)
 LLMDecodeRunner::~LLMDecodeRunner() = default;
 
 bool LLMDecodeRunner::initialize() {
+  // Track model load time
+  stats_.model_load_start_ms = time_in_ms();
+  
   // 1. Load QNN backend
   loader_.reset(new QnnLoader());
   
@@ -71,8 +74,13 @@ bool LLMDecodeRunner::initialize() {
     return false;
   }
   
+  // Track model load end time
+  stats_.model_load_end_ms = time_in_ms();
+  
   if (config_.log_level >= 1) {
     std::cout << "[Init] All components initialized successfully\n";
+    double load_time_s = (stats_.model_load_end_ms - stats_.model_load_start_ms) / 1000.0;
+    std::cout << "[Init] Model load time: " << load_time_s << " seconds\n";
   }
   
   return true;
@@ -257,6 +265,7 @@ bool LLMDecodeRunner::setup_kv_cache() {
 }
 
 bool LLMDecodeRunner::setup_io_allocators() {
+  // 1. Allocate I/O buffers
   prefill_alloc_.reset(new QNNIOAllocator());
   prefill_alloc_->build_from_qnnjson(*prefill_graph_);
   auto prefill_bytes = prefill_alloc_->allocate(64);
@@ -265,44 +274,96 @@ bool LLMDecodeRunner::setup_io_allocators() {
   kv_alloc_->build_from_qnnjson(*kv_graph_);
   auto kv_bytes = kv_alloc_->allocate(64);
   
+  // 2. Pre-build QNN tensor holders (one-time setup)
+  prefill_input_holders_.clear();
+  prefill_output_holders_.clear();
+  kv_input_holders_.clear();
+  kv_output_holders_.clear();
+  
+  // Prefill input holders
+  for (const auto& t : prefill_graph_->inputs) {
+    auto h = std::make_unique<QnnTensorHolder>();
+    // Initialize with nullptr, will update pointer before execution
+    h->init_from_json(t, nullptr, t.nbytes, true);
+    prefill_input_holders_.push_back(std::move(h));
+  }
+  
+  // Prefill output holders
+  for (const auto& t : prefill_graph_->outputs) {
+    auto h = std::make_unique<QnnTensorHolder>();
+    h->init_from_json(t, nullptr, t.nbytes, false);
+    prefill_output_holders_.push_back(std::move(h));
+  }
+  
+  // KV input holders
+  for (const auto& t : kv_graph_->inputs) {
+    auto h = std::make_unique<QnnTensorHolder>();
+    h->init_from_json(t, nullptr, t.nbytes, true);
+    kv_input_holders_.push_back(std::move(h));
+  }
+  
+  // KV output holders
+  for (const auto& t : kv_graph_->outputs) {
+    auto h = std::make_unique<QnnTensorHolder>();
+    h->init_from_json(t, nullptr, t.nbytes, false);
+    kv_output_holders_.push_back(std::move(h));
+  }
+  
   if (config_.log_level >= 1) {
     std::cout << "[I/O] Prefill: " << (prefill_bytes / 1024.0)
               << " KiB, Decode: " << (kv_bytes / 1024.0) << " KiB\n";
+    std::cout << "[I/O] Pre-built tensors - Prefill: " 
+              << prefill_input_holders_.size() << " in, "
+              << prefill_output_holders_.size() << " out / Decode: "
+              << kv_input_holders_.size() << " in, "
+              << kv_output_holders_.size() << " out\n";
   }
   
   return true;
 }
 
 bool LLMDecodeRunner::generate(const std::string& prompt, std::string& output_text) {
-  // 1. Tokenize prompt
-  auto tokens = tokenizer_->encode(prompt, true, false);
+  // Start inference timing
+  stats_.inference_start_ms = time_in_ms();
+  
+  // 1. Tokenize prompt (no special tokens, no chat template - same as qnn_decode_main)
+  auto tokens = tokenizer_->encode(prompt, false, false);
   if (tokens.empty()) {
     error_msg_ = "Failed to tokenize prompt";
     return false;
   }
+  
+  stats_.num_prompt_tokens = tokens.size();
   
   if (config_.log_level >= 1) {
     std::cout << "\n[Generate] Prompt: \"" << prompt << "\"\n";
     std::cout << "[Generate] Tokens: " << tokens.size() << "\n";
   }
   
-  // 2. Run prefill
+  // 3. Run prefill
   int32_t next_token = 0;
   int32_t n_update = 0;
   if (!run_prefill(tokens, next_token, n_update)) {
     return false;
   }
   
-  // 3. Decode first token
+  // Mark prefill end (TTFT)
+  stats_.prompt_eval_end_ms = time_in_ms();
+  stats_.first_token_ms = stats_.prompt_eval_end_ms;
+  
+  // 4. Decode first token
   std::string decoded = tokenizer_->decode({next_token});
   output_text = decoded;
   
   if (config_.log_level >= 1) {
     std::cout << "[Prefill] Next token: " << next_token
               << " → \"" << decoded << "\"\n";
+    double ttft_s = (stats_.first_token_ms - stats_.inference_start_ms) / 1000.0;
+    std::cout << "[Prefill] TTFT: " << ttft_s << " seconds\n";
   }
   
   tokens.push_back(next_token);
+  stats_.num_generated_tokens = 1;
   
   // 4. Rearrange cache for decode
   if (config_.log_level >= 1) {
@@ -348,10 +409,19 @@ bool LLMDecodeRunner::generate(const std::string& prompt, std::string& output_te
     
     next_token = token_out;
     tokens.push_back(token_out);
+    stats_.num_generated_tokens++;
   }
+  
+  // Mark inference end
+  stats_.inference_end_ms = time_in_ms();
   
   if (config_.log_level >= 1) {
     std::cout << "\n\n[Generate] Complete. Total tokens: " << tokens.size() << "\n";
+  }
+  
+  // Print performance report
+  if (config_.log_level >= 1) {
+    stats_.print_report();
   }
   
   return true;
@@ -375,31 +445,38 @@ bool LLMDecodeRunner::run_prefill(const std::vector<int32_t>& tokens,
     return false;
   }
   
-  // Build QNN tensors
+  // Update pre-built tensors with current buffer pointers (zero allocation)
   std::vector<Qnn_Tensor_t> inputs, outputs;
-  std::vector<std::unique_ptr<QnnTensorHolder>> holders;
   
-  for (const auto& t : prefill_graph_->inputs) {
+  for (size_t i = 0; i < prefill_graph_->inputs.size() && i < prefill_input_holders_.size(); ++i) {
+    const auto& t = prefill_graph_->inputs[i];
     void* buf = get_prefill_buffer(t.name);
-    if (!buf) continue;
-    
-    auto h = std::make_unique<QnnTensorHolder>();
-    if (h->init_from_json(t, buf, t.nbytes, true)) {
-      inputs.push_back(h->tensor());
-      holders.push_back(std::move(h));
+    if (!buf) {
+      if (config_.log_level >= 2) {
+        std::cerr << "[Prefill] Warning: No buffer for input " << t.name << "\n";
+      }
+      continue;
     }
+    
+    // Update buffer pointer only (no allocation)
+    prefill_input_holders_[i]->update_buffer(buf, t.nbytes);
+    inputs.push_back(prefill_input_holders_[i]->tensor());
   }
   
-  for (const auto& t : prefill_graph_->outputs) {
+  for (size_t i = 0; i < prefill_graph_->outputs.size() && i < prefill_output_holders_.size(); ++i) {
+    const auto& t = prefill_graph_->outputs[i];
     auto& bindings = prefill_alloc_->bindings();
     auto it = bindings.find(t.name);
-    if (it == bindings.end()) continue;
-    
-    auto h = std::make_unique<QnnTensorHolder>();
-    if (h->init_from_json(t, it->second, t.nbytes, false)) {
-      outputs.push_back(h->tensor());
-      holders.push_back(std::move(h));
+    if (it == bindings.end()) {
+      if (config_.log_level >= 2) {
+        std::cerr << "[Prefill] Warning: No buffer for output " << t.name << "\n";
+      }
+      continue;
     }
+    
+    // Update buffer pointer only (no allocation)
+    prefill_output_holders_[i]->update_buffer(it->second, t.nbytes);
+    outputs.push_back(prefill_output_holders_[i]->tensor());
   }
   
   if (config_.log_level >= 2) {
@@ -543,31 +620,38 @@ bool LLMDecodeRunner::run_decode_step(int32_t token_in,
     }
   }
   
-  // Build QNN tensors
+  // Update pre-built tensors with current buffer pointers (zero allocation)
   std::vector<Qnn_Tensor_t> inputs, outputs;
-  std::vector<std::unique_ptr<QnnTensorHolder>> holders;
   
-  for (const auto& t : kv_graph_->inputs) {
+  for (size_t i = 0; i < kv_graph_->inputs.size() && i < kv_input_holders_.size(); ++i) {
+    const auto& t = kv_graph_->inputs[i];
     void* buf = get_kv_buffer(t.name);
-    if (!buf) continue;
-    
-    auto h = std::make_unique<QnnTensorHolder>();
-    if (h->init_from_json(t, buf, t.nbytes, true)) {
-      inputs.push_back(h->tensor());
-      holders.push_back(std::move(h));
+    if (!buf) {
+      if (config_.log_level >= 2) {
+        std::cerr << "[Decode] Warning: No buffer for input " << t.name << "\n";
+      }
+      continue;
     }
+    
+    // Update buffer pointer only (no allocation)
+    kv_input_holders_[i]->update_buffer(buf, t.nbytes);
+    inputs.push_back(kv_input_holders_[i]->tensor());
   }
   
-  for (const auto& t : kv_graph_->outputs) {
+  for (size_t i = 0; i < kv_graph_->outputs.size() && i < kv_output_holders_.size(); ++i) {
+    const auto& t = kv_graph_->outputs[i];
     auto& bindings = kv_alloc_->bindings();
     auto it = bindings.find(t.name);
-    if (it == bindings.end()) continue;
-    
-    auto h = std::make_unique<QnnTensorHolder>();
-    if (h->init_from_json(t, it->second, t.nbytes, false)) {
-      outputs.push_back(h->tensor());
-      holders.push_back(std::move(h));
+    if (it == bindings.end()) {
+      if (config_.log_level >= 2) {
+        std::cerr << "[Decode] Warning: No buffer for output " << t.name << "\n";
+      }
+      continue;
     }
+    
+    // Update buffer pointer only (no allocation)
+    kv_output_holders_[i]->update_buffer(it->second, t.nbytes);
+    outputs.push_back(kv_output_holders_[i]->tensor());
   }
   
   // Execute

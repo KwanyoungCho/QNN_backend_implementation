@@ -47,6 +47,9 @@ CMAKE_COLOR_MAKEFILE:BOOL=ON
 //LLVM archiver
 CMAKE_CXX_COMPILER_AR:FILEPATH=/home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-ar
 
+//`clang-scan-deps` dependency scanner
+CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS:FILEPATH=CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS-NOTFOUND
+
 //Generate index for LLVM archive
 CMAKE_CXX_COMPILER_RANLIB:FILEPATH=/home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-ranlib
 
@@ -70,6 +73,9 @@ CMAKE_CXX_STANDARD_LIBRARIES:STRING=-latomic -lm
 
 //LLVM archiver
 CMAKE_C_COMPILER_AR:FILEPATH=/home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-ar
+
+//`clang-scan-deps` dependency scanner
+CMAKE_C_COMPILER_CLANG_SCAN_DEPS:FILEPATH=CMAKE_C_COMPILER_CLANG_SCAN_DEPS-NOTFOUND
 
 //Generate index for LLVM archive
 CMAKE_C_COMPILER_RANLIB:FILEPATH=/home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-ranlib
@@ -112,6 +118,9 @@ CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 
 //Enable/Disable output of compile commands during generation.
 CMAKE_EXPORT_COMPILE_COMMANDS:BOOL=
+
+//Value Computed by CMake.
+CMAKE_FIND_PACKAGE_REDIRECTS_DIR:STATIC=/home/chokwans99/llm_test/build-android/CMakeFiles/pkgRedirects
 
 //User executables (bin)
 CMAKE_INSTALL_BINDIR:PATH=bin
@@ -262,8 +271,11 @@ CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 //Strip
 CMAKE_STRIP:FILEPATH=/home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-strip
 
-//The CMake toolchain file
-CMAKE_TOOLCHAIN_FILE:FILEPATH=/home/chokwans99/QNN_SDK/android-ndk-r26c/build/cmake/android.toolchain.cmake
+//Path to a program.
+CMAKE_TAPI:FILEPATH=CMAKE_TAPI-NOTFOUND
+
+//No help, variable specified on the command line.
+CMAKE_TOOLCHAIN_FILE:UNINITIALIZED=/home/chokwans99/QNN_SDK/android-ndk-r26c/build/cmake/android.toolchain.cmake
 
 //If this value is on, makefiles will be generated without the
 // .SILENT directive, and all commands will be echoed to the console
@@ -690,6 +702,8 @@ CMAKE_CPACK_COMMAND:INTERNAL=/usr/bin/cpack
 CMAKE_CTEST_COMMAND:INTERNAL=/usr/bin/ctest
 //ADVANCED property for variable: CMAKE_CXX_COMPILER_AR
 CMAKE_CXX_COMPILER_AR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS
+CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_CXX_COMPILER_RANLIB
 CMAKE_CXX_COMPILER_RANLIB-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_CXX_FLAGS
@@ -706,6 +720,8 @@ CMAKE_CXX_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 CMAKE_CXX_STANDARD_LIBRARIES-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_C_COMPILER_AR
 CMAKE_C_COMPILER_AR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_C_COMPILER_CLANG_SCAN_DEPS
+CMAKE_C_COMPILER_CLANG_SCAN_DEPS-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_C_COMPILER_RANLIB
 CMAKE_C_COMPILER_RANLIB-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_C_FLAGS
@@ -843,6 +859,8 @@ CMAKE_STATIC_LINKER_FLAGS_RELEASE-ADVANCED:INTERNAL=1
 CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_STRIP
 CMAKE_STRIP-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_TAPI
+CMAKE_TAPI-ADVANCED:INTERNAL=1
 //uname command
 CMAKE_UNAME:INTERNAL=/usr/bin/uname
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
@@ -889,6 +907,12 @@ OpenMP_SPECTEST_C_:INTERNAL=TRUE
 OpenMP_omp_LIBRARY-ADVANCED:INTERNAL=1
 //Result of TRY_COMPILE
 THREADS_HAVE_PTHREAD_ARG:INTERNAL=TRUE
+//linker supports push/pop state
+_CMAKE_CXX_LINKER_PUSHPOP_STATE_SUPPORTED:INTERNAL=TRUE
+//linker supports push/pop state
+_CMAKE_C_LINKER_PUSHPOP_STATE_SUPPORTED:INTERNAL=TRUE
+//linker supports push/pop state
+_CMAKE_LINKER_PUSHPOP_STATE_SUPPORTED:INTERNAL=TRUE
 //CMAKE_INSTALL_PREFIX during last run
 _GNUInstallDirs_LAST_CMAKE_INSTALL_PREFIX:INTERNAL=/usr/local
 
