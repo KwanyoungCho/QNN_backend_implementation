@@ -39,6 +39,9 @@ public:
 
   // Executorch와 동일 경로: 단일 바이너리 버퍼로 컨텍스트 1개 복원
   bool create_context_from_binary(const void* binary, size_t binary_size);
+  
+  // Multi-context: 여러 바이너리로 컨텍스트를 순차적으로 생성
+  bool create_contexts_from_binaries(const std::vector<std::pair<const void*, size_t>>& binaries);
   size_t num_contexts() const { return contexts_.size(); }
 
   // 컨텍스트 인덱스와 그래프 이름으로 그래프 핸들을 조회하여 내부에 보관

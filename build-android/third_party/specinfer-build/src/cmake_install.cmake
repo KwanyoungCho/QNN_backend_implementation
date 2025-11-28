@@ -1,4 +1,4 @@
-# Install script for directory: /home/chokwans99/dev/llm/specinfer.cpp/src
+# Install script for directory: /home/jongjip/dev/llm/llama.cpp/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -37,8 +37,8 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
   set(CMAKE_CROSSCOMPILING "TRUE")
 endif()
 
-# Set default install directory permissions.
+# Set path to fallback-tool for dependency-resolution.
 if(NOT DEFINED CMAKE_OBJDUMP)
-  set(CMAKE_OBJDUMP "/home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-objdump")
+  set(CMAKE_OBJDUMP "/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-objdump")
 endif()
 

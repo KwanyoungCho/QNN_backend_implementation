@@ -21,7 +21,8 @@ LLMDecodeRunner::LLMDecodeRunner(const LLMDecodeConfig& config)
       prefill_ar_len_(0),
       kv_ar_len_(0),
       prefill_cache_len_(0),
-      kv_cache_len_(0) {
+      kv_cache_len_(0),
+      layers_per_shard_(0) {
 }
 
 LLMDecodeRunner::~LLMDecodeRunner() = default;
@@ -53,19 +54,59 @@ bool LLMDecodeRunner::initialize() {
   
   if (config_.log_level >= 1) {
     std::cout << "[Init] QNN backend loaded\n";
+    if (config_.use_multi_context) {
+      std::cout << "[Init] Multi-context mode enabled (" << config_.num_shards << " shards)\n";
+    }
   }
   
-  // 2. Load graphs
-  if (!load_graphs()) return false;
+  // 1.5. Load model parameters if provided
+  if (!config_.params_path.empty()) {
+    if (!parse_model_params(config_.params_path, model_params_)) {
+      error_msg_ = "Failed to parse params.json: " + config_.params_path;
+      return false;
+    }
+    
+    if (config_.log_level >= 1) {
+      std::cout << "[ModelParams] Loaded from: " << config_.params_path << "\n";
+      std::cout << "  dim=" << model_params_.dim 
+                << ", n_layers=" << model_params_.n_layers
+                << ", n_heads=" << model_params_.n_heads
+                << ", n_kv_heads=" << model_params_.n_kv_heads << "\n";
+      std::cout << "  head_dim=" << model_params_.head_dim
+                << ", vocab_size=" << model_params_.vocab_size << "\n";
+    }
+    
+    // Compute layers per shard for multi-context
+    if (config_.use_multi_context && config_.num_shards > 0) {
+      layers_per_shard_ = model_params_.n_layers / config_.num_shards;
+      if (config_.log_level >= 1) {
+        std::cout << "  layers_per_shard=" << layers_per_shard_ 
+                  << " (" << model_params_.n_layers << " / " << config_.num_shards << ")\n";
+      }
+      if (model_params_.n_layers % config_.num_shards != 0) {
+        std::cerr << "[Warning] n_layers (" << model_params_.n_layers 
+                  << ") is not evenly divisible by num_shards (" << config_.num_shards << ")\n";
+      }
+    }
+  } else if (config_.log_level >= 1) {
+    std::cout << "[ModelParams] No params.json provided, will extract from graphs\n";
+  }
   
-  // 3. Extract metadata
-  if (!extract_metadata()) return false;
-  
-  // 4. Setup KV cache
-  if (!setup_kv_cache()) return false;
-  
-  // 5. Setup I/O allocators
-  if (!setup_io_allocators()) return false;
+  // 2-5. Choose single vs multi-context initialization path
+  if (config_.use_multi_context) {
+    // Multi-context mode (sharding)
+    if (!load_multi_context_graphs()) return false;
+    if (!extract_multi_context_metadata()) return false;
+    if (!setup_multi_context_kv_cache()) return false;
+    if (!setup_multi_context_io_allocators()) return false;
+    if (!allocate_shared_buffers()) return false;
+  } else {
+    // Single-context mode
+    if (!load_graphs()) return false;
+    if (!extract_metadata()) return false;
+    if (!setup_kv_cache()) return false;
+    if (!setup_io_allocators()) return false;
+  }
   
   // 6. Load tokenizer
   tokenizer_.reset(new LlamaTokenizer());
@@ -142,27 +183,24 @@ bool LLMDecodeRunner::load_graphs() {
 }
 
 bool LLMDecodeRunner::extract_metadata() {
-  // Extract from prefill graph
+  // 1. Extract dimensions from graph (always needed from attention mask)
   context_len_ = 0;
   prefill_ar_len_ = 0;
-  head_dim_ = 0;
+  kv_ar_len_ = 0;
   
-  // Find attention mask to get context_len and ar_len
+  // Find attention mask to get context_len and ar_len from prefill graph
   for (const auto& t : prefill_graph_->inputs) {
     std::string name_lower = t.name;
     for (auto& c : name_lower) c = (char)tolower(c);
     
     if (name_lower.find("atten_mask") != std::string::npos && t.dims.size() >= 2) {
-      // Attention mask dims: [batch, ar_len, context_len] or [ar_len, context_len]
-      // Use last two dimensions
       prefill_ar_len_ = t.dims[t.dims.size() - 2];
       context_len_ = t.dims[t.dims.size() - 1];
       break;
     }
   }
   
-  // Extract from kv graph
-  kv_ar_len_ = 0;
+  // Extract kv_ar_len from kv graph
   for (const auto& t : kv_graph_->inputs) {
     std::string name_lower = t.name;
     for (auto& c : name_lower) c = (char)tolower(c);
@@ -176,29 +214,36 @@ bool LLMDecodeRunner::extract_metadata() {
     }
   }
   
-  // Extract head_dim from KV cache input tensor
-  for (const auto& t : prefill_graph_->inputs) {
-    if (t.name.find("_args_") != std::string::npos && t.dims.size() == 3) {
-      // KV cache dims format: [batch=1, max_cache_len, head_dim]
-      head_dim_ = t.dims[2];
-      if (head_dim_ > 0) break;
+  // 2. Use params.json if available, otherwise infer from graph
+  if (model_params_.is_valid()) {
+    // Use values from params.json
+    num_layers_ = model_params_.n_layers;
+    num_heads_ = model_params_.n_kv_heads;
+    head_dim_ = model_params_.head_dim;
+  } else {
+    // Fallback: extract from graph tensors
+    head_dim_ = 0;
+    
+    // Extract head_dim from KV cache tensor
+    for (const auto& t : prefill_graph_->inputs) {
+      if (t.name.find("_args_") != std::string::npos && t.dims.size() == 3) {
+        head_dim_ = t.dims[2];
+        if (head_dim_ > 0) break;
+      }
     }
-  }
-  
-  // Count unique KV cache tensors
-  std::set<std::string> kv_cache_names;
-  for (const auto& t : prefill_graph_->inputs) {
-    if (t.name.find("_args_") != std::string::npos && t.dims.size() == 3) {
-      kv_cache_names.insert(t.name);
+    
+    // Count KV cache tensors to infer num_layers and num_heads
+    std::set<std::string> kv_cache_names;
+    for (const auto& t : prefill_graph_->inputs) {
+      if (t.name.find("_args_") != std::string::npos && t.dims.size() == 3) {
+        kv_cache_names.insert(t.name);
+      }
     }
+    
+    int total_kv_tensors = kv_cache_names.size();
+    num_layers_ = 16;  // Default: llama 1B
+    num_heads_ = total_kv_tensors / (2 * num_layers_);
   }
-  
-  int total_kv_tensors = kv_cache_names.size();
-  
-  // Deduce num_layers and num_heads
-  // Total KV cache tensors = 2 (K+V) * num_layers * num_heads
-  num_layers_ = 16;  // Assuming llama 1B: 16 layers
-  num_heads_ = total_kv_tensors / (2 * num_layers_);
   
   // Cache lengths (ExecutorchReader style)
   prefill_cache_len_ = context_len_ - prefill_ar_len_;  // 512 - 32 = 480
@@ -213,6 +258,11 @@ bool LLMDecodeRunner::extract_metadata() {
               << ", head_dim=" << head_dim_ << "\n";
     std::cout << "[Metadata] prefill_cache_len=" << prefill_cache_len_
               << ", kv_cache_len=" << kv_cache_len_ << "\n";
+    if (model_params_.is_valid()) {
+      std::cout << "[Metadata] Source: params.json ✓\n";
+    } else {
+      std::cout << "[Metadata] Source: inferred from graph tensors\n";
+    }
   }
   
   if (context_len_ == 0 || num_heads_ == 0 || head_dim_ == 0) {
@@ -340,11 +390,17 @@ bool LLMDecodeRunner::generate(const std::string& prompt, std::string& output_te
     std::cout << "[Generate] Tokens: " << tokens.size() << "\n";
   }
   
-  // 3. Run prefill
+  // 3. Run prefill (choose single vs multi-context)
   int32_t next_token = 0;
   int32_t n_update = 0;
-  if (!run_prefill(tokens, next_token, n_update)) {
-    return false;
+  if (config_.use_multi_context) {
+    if (!run_multi_context_prefill(tokens, next_token, n_update)) {
+      return false;
+    }
+  } else {
+    if (!run_prefill(tokens, next_token, n_update)) {
+      return false;
+    }
   }
   
   // Mark prefill end (TTFT)
@@ -365,12 +421,14 @@ bool LLMDecodeRunner::generate(const std::string& prompt, std::string& output_te
   tokens.push_back(next_token);
   stats_.num_generated_tokens = 1;
   
-  // 4. Rearrange cache for decode
-  if (config_.log_level >= 1) {
-    std::cout << "\n[Rearrange] Expanding KV cache: "
-              << prefill_cache_len_ << " → " << kv_cache_len_ << "\n";
+  // 4. Rearrange cache for decode (single-context only, multi-context does it internally)
+  if (!config_.use_multi_context) {
+    if (config_.log_level >= 1) {
+      std::cout << "\n[Rearrange] Expanding KV cache: "
+                << prefill_cache_len_ << " → " << kv_cache_len_ << "\n";
+    }
+    kv_manager_->rearrange_cache(prefill_ar_len_, kv_ar_len_);
   }
-  kv_manager_->rearrange_cache(prefill_ar_len_, kv_ar_len_);
   
   // 5. Decode loop
   if (config_.log_level >= 1) {
@@ -386,8 +444,15 @@ bool LLMDecodeRunner::generate(const std::string& prompt, std::string& output_te
     int32_t n_past = initial_tokens + gen_idx;
     int32_t token_out = 0;
     
-    if (!run_decode_step(next_token, n_past, token_out)) {
-      return false;
+    // Run decode step (choose single vs multi-context)
+    if (config_.use_multi_context) {
+      if (!run_multi_context_decode_step(next_token, n_past, token_out)) {
+        return false;
+      }
+    } else {
+      if (!run_decode_step(next_token, n_past, token_out)) {
+        return false;
+      }
     }
     
     // Check EOS

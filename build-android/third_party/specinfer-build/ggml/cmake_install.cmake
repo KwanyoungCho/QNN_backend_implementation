@@ -1,4 +1,4 @@
-# Install script for directory: /home/chokwans99/dev/llm/specinfer.cpp/ggml
+# Install script for directory: /home/jongjip/dev/llm/llama.cpp/ggml
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -37,78 +37,78 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
   set(CMAKE_CROSSCOMPILING "TRUE")
 endif()
 
-# Set default install directory permissions.
+# Set path to fallback-tool for dependency-resolution.
 if(NOT DEFINED CMAKE_OBJDUMP)
-  set(CMAKE_OBJDUMP "/home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-objdump")
+  set(CMAKE_OBJDUMP "/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-objdump")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/chokwans99/llm_test/build-android/third_party/specinfer-build/ggml/src/cmake_install.cmake")
+  include("/home/jongjip/QNN_backend_implementation/build-android/third_party/specinfer-build/ggml/src/cmake_install.cmake")
 endif()
 
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libggml.so" AND
      NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libggml.so")
     file(RPATH_CHECK
          FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libggml.so"
          RPATH "")
   endif()
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE SHARED_LIBRARY FILES "/home/chokwans99/llm_test/build-android/bin/libggml.so")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE SHARED_LIBRARY FILES "/home/jongjip/QNN_backend_implementation/build-android/bin/libggml.so")
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libggml.so" AND
      NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libggml.so")
     if(CMAKE_INSTALL_DO_STRIP)
-      execute_process(COMMAND "/home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-strip" "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libggml.so")
+      execute_process(COMMAND "/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-strip" "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libggml.so")
     endif()
   endif()
 endif()
 
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
 endif()
 
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE FILE FILES
-    "/home/chokwans99/dev/llm/specinfer.cpp/ggml/include/ggml.h"
-    "/home/chokwans99/dev/llm/specinfer.cpp/ggml/include/ggml-cpu.h"
-    "/home/chokwans99/dev/llm/specinfer.cpp/ggml/include/ggml-alloc.h"
-    "/home/chokwans99/dev/llm/specinfer.cpp/ggml/include/ggml-backend.h"
-    "/home/chokwans99/dev/llm/specinfer.cpp/ggml/include/ggml-blas.h"
-    "/home/chokwans99/dev/llm/specinfer.cpp/ggml/include/ggml-cann.h"
-    "/home/chokwans99/dev/llm/specinfer.cpp/ggml/include/ggml-cpp.h"
-    "/home/chokwans99/dev/llm/specinfer.cpp/ggml/include/ggml-cuda.h"
-    "/home/chokwans99/dev/llm/specinfer.cpp/ggml/include/ggml-kompute.h"
-    "/home/chokwans99/dev/llm/specinfer.cpp/ggml/include/ggml-opt.h"
-    "/home/chokwans99/dev/llm/specinfer.cpp/ggml/include/ggml-metal.h"
-    "/home/chokwans99/dev/llm/specinfer.cpp/ggml/include/ggml-rpc.h"
-    "/home/chokwans99/dev/llm/specinfer.cpp/ggml/include/ggml-sycl.h"
-    "/home/chokwans99/dev/llm/specinfer.cpp/ggml/include/ggml-vulkan.h"
-    "/home/chokwans99/dev/llm/specinfer.cpp/ggml/include/gguf.h"
+    "/home/jongjip/dev/llm/llama.cpp/ggml/include/ggml.h"
+    "/home/jongjip/dev/llm/llama.cpp/ggml/include/ggml-cpu.h"
+    "/home/jongjip/dev/llm/llama.cpp/ggml/include/ggml-alloc.h"
+    "/home/jongjip/dev/llm/llama.cpp/ggml/include/ggml-backend.h"
+    "/home/jongjip/dev/llm/llama.cpp/ggml/include/ggml-blas.h"
+    "/home/jongjip/dev/llm/llama.cpp/ggml/include/ggml-cann.h"
+    "/home/jongjip/dev/llm/llama.cpp/ggml/include/ggml-cpp.h"
+    "/home/jongjip/dev/llm/llama.cpp/ggml/include/ggml-cuda.h"
+    "/home/jongjip/dev/llm/llama.cpp/ggml/include/ggml-opt.h"
+    "/home/jongjip/dev/llm/llama.cpp/ggml/include/ggml-metal.h"
+    "/home/jongjip/dev/llm/llama.cpp/ggml/include/ggml-rpc.h"
+    "/home/jongjip/dev/llm/llama.cpp/ggml/include/ggml-sycl.h"
+    "/home/jongjip/dev/llm/llama.cpp/ggml/include/ggml-vulkan.h"
+    "/home/jongjip/dev/llm/llama.cpp/ggml/include/ggml-webgpu.h"
+    "/home/jongjip/dev/llm/llama.cpp/ggml/include/gguf.h"
     )
 endif()
 
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libggml-base.so" AND
      NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libggml-base.so")
     file(RPATH_CHECK
          FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libggml-base.so"
          RPATH "")
   endif()
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE SHARED_LIBRARY FILES "/home/chokwans99/llm_test/build-android/bin/libggml-base.so")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE SHARED_LIBRARY FILES "/home/jongjip/QNN_backend_implementation/build-android/bin/libggml-base.so")
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libggml-base.so" AND
      NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libggml-base.so")
     if(CMAKE_INSTALL_DO_STRIP)
-      execute_process(COMMAND "/home/chokwans99/QNN_SDK/android-ndk-r26c/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-strip" "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libggml-base.so")
+      execute_process(COMMAND "/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-strip" "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libggml-base.so")
     endif()
   endif()
 endif()
 
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
 endif()
 
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/ggml" TYPE FILE FILES
-    "/home/chokwans99/llm_test/build-android/third_party/specinfer-build/ggml/ggml-config.cmake"
-    "/home/chokwans99/llm_test/build-android/third_party/specinfer-build/ggml/ggml-version.cmake"
+    "/home/jongjip/QNN_backend_implementation/build-android/third_party/specinfer-build/ggml/ggml-config.cmake"
+    "/home/jongjip/QNN_backend_implementation/build-android/third_party/specinfer-build/ggml/ggml-version.cmake"
     )
 endif()
 

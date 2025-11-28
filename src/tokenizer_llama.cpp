@@ -14,6 +14,12 @@ LlamaTokenizer::~LlamaTokenizer() { shutdown(); }
 bool LlamaTokenizer::init(const char* gguf_path) {
   std::lock_guard<std::mutex> lk(g_tok_mu);
   if (model_) return true;
+  
+  // Disable llama.cpp logging
+  llama_log_set([](enum ggml_log_level level, const char* text, void* user_data) {
+    // Silent: do nothing
+  }, nullptr);
+  
   llama_backend_init();
   llama_model_params mp = llama_model_default_params();
   mp.use_mmap = false;

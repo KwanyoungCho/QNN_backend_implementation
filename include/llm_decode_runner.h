@@ -9,6 +9,7 @@
 #include "llm_stats.h"
 #include "llm_output_processor.h"
 #include "tokenizer_llama.h"
+#include "model_params.h"
 
 #include <string>
 #include <vector>
@@ -24,8 +25,11 @@ struct LLMDecodeConfig {
   std::string backend_so;       // QNN backend library path
   std::string system_so;        // QNN system library path (optional)
   std::string tokenizer_path;   // Tokenizer model path
+  std::string params_path;      // params.json path (optional, for dynamic config)
   int max_gen_tokens = 100;     // Maximum tokens to generate
   int log_level = 0;            // 0=quiet, 1=info, 2=debug
+  bool use_multi_context = false; // Enable multi-context (sharding) mode
+  int num_shards = 0;           // Number of context shards (0=auto-detect, default)
 };
 
 /**
@@ -73,11 +77,35 @@ class LLMDecodeRunner {
   
   // QNN components
   std::unique_ptr<QnnLoader> loader_;
+  
+  // Single-context mode
   std::map<std::string, QnnJsonGraphDesc> graphs_;
   QnnJsonGraphDesc* prefill_graph_;
   QnnJsonGraphDesc* kv_graph_;
   
+  // Multi-context mode (sharding)
+  struct ShardInfo {
+    std::map<std::string, QnnJsonGraphDesc> graphs;
+    QnnJsonGraphDesc* prefill_graph;
+    QnnJsonGraphDesc* kv_graph;
+    
+    // I/O allocators for this shard
+    std::unique_ptr<QNNIOAllocator> prefill_alloc;
+    std::unique_ptr<QNNIOAllocator> kv_alloc;
+    
+    // Tensor holders for zero-copy binding
+    std::vector<std::unique_ptr<QnnTensorHolder>> prefill_input_holders;
+    std::vector<std::unique_ptr<QnnTensorHolder>> prefill_output_holders;
+    std::vector<std::unique_ptr<QnnTensorHolder>> kv_input_holders;
+    std::vector<std::unique_ptr<QnnTensorHolder>> kv_output_holders;
+  };
+  std::vector<ShardInfo> shards_;
+  
+  // Shared buffers across shards
+  std::map<std::string, void*> shared_buffer_views_; // hidden_state, rope_cos, rope_sin, attention_mask
+  
   // Model metadata
+  ModelParams model_params_;    // Parsed from params.json
   int context_len_;
   int num_layers_;
   int num_heads_;
@@ -86,6 +114,7 @@ class LLMDecodeRunner {
   int kv_ar_len_;
   int prefill_cache_len_;
   int kv_cache_len_;
+  int layers_per_shard_;        // For multi-context: n_layers / num_shards
   
   // KV cache
   std::unique_ptr<LLMKVCacheManager> kv_manager_;
@@ -94,11 +123,11 @@ class LLMDecodeRunner {
   std::map<std::string, void*> prefill_kv_override_;
   std::map<std::string, void*> kv_kv_override_;
   
-  // I/O allocators
+  // I/O allocators (single-context only)
   std::unique_ptr<QNNIOAllocator> prefill_alloc_;
   std::unique_ptr<QNNIOAllocator> kv_alloc_;
   
-  // Pre-built QNN tensors (reused across executions)
+  // Pre-built QNN tensors (single-context only, reused across executions)
   std::vector<std::unique_ptr<QnnTensorHolder>> prefill_input_holders_;
   std::vector<std::unique_ptr<QnnTensorHolder>> prefill_output_holders_;
   std::vector<std::unique_ptr<QnnTensorHolder>> kv_input_holders_;
@@ -110,12 +139,20 @@ class LLMDecodeRunner {
   // Performance statistics
   LLMStats stats_;
   
-  // Helper methods
+  // Helper methods (single-context)
   bool load_graphs();
   bool extract_metadata();
   bool setup_kv_cache();
   bool setup_io_allocators();
   
+  // Helper methods (multi-context)
+  bool load_multi_context_graphs();
+  bool extract_multi_context_metadata();
+  bool setup_multi_context_kv_cache();
+  bool setup_multi_context_io_allocators();
+  bool allocate_shared_buffers();
+  
+  // Single-context execution
   bool run_prefill(const std::vector<int32_t>& tokens, 
                    int32_t& next_token,
                    int32_t& n_update);
@@ -123,6 +160,24 @@ class LLMDecodeRunner {
   bool run_decode_step(int32_t token_in,
                        int32_t n_past,
                        int32_t& token_out);
+  
+  // Multi-context execution
+  bool run_multi_context_prefill(const std::vector<int32_t>& tokens,
+                                  int32_t& next_token,
+                                  int32_t& n_update);
+  
+  bool run_multi_context_decode_step(int32_t token_in,
+                                      int32_t n_past,
+                                      int32_t& token_out);
+  
+  // Shard execution helpers
+  bool run_shard_prefill(int shard_idx,
+                         const std::vector<int32_t>& tokens,
+                         int32_t n_past,
+                         int32_t n_update);
+  
+  bool run_shard_decode(int shard_idx,
+                        int32_t n_past);
 };
 
 } // namespace llm_test

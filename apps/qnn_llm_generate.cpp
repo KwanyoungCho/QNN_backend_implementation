@@ -14,16 +14,29 @@ static void usage(const char* prog) {
             << "  --ctx_dir DIR          QNN context directory\n"
             << "  --tokenizer PATH       Tokenizer model path (tokenizer.model)\n"
             << "  --prompt STR           Input prompt\n"
+            << "  [--params PATH]        params.json path (optional, for dynamic config)\n"
             << "  [--backend_so PATH]    QNN backend library (default: libQnnHtp.so)\n"
             << "  [--system_so PATH]     QNN system library (optional)\n"
             << "  [--max_gen N]          Maximum tokens to generate (default: 100)\n"
             << "  [--log_level N]        QNN log verbosity 1=ERROR, 2=WARN, 3=INFO, 4=VERBOSE, 5=DEBUG (default: 1)\n"
+            << "  [--multi_context]      Enable multi-context (sharding) mode\n"
+            << "  [--num_shards N]       Number of shards (0=auto-detect, default)\n"
             << "\n"
-            << "Example:\n"
+            << "Example (single-context):\n"
             << "  " << prog << " \\\n"
             << "    --ctx_dir models/llama_qnn_1b \\\n"
             << "    --tokenizer models/llama_qnn_1b/tokenizer.model \\\n"
+            << "    --params models/llama_qnn_1b/params.json \\\n"
             << "    --prompt \"The capital of France is\" \\\n"
+            << "    --max_gen 50\n"
+            << "\n"
+            << "Example (multi-context, auto-detect shards):\n"
+            << "  " << prog << " \\\n"
+            << "    --ctx_dir models/llama_qnn_1b \\\n"
+            << "    --tokenizer models/llama_qnn_1b/tokenizer.model \\\n"
+            << "    --params models/llama_qnn_1b/params.json \\\n"
+            << "    --prompt \"Hello\" \\\n"
+            << "    --multi_context \\\n"
             << "    --max_gen 50\n";
 }
 
@@ -52,6 +65,12 @@ int main(int argc, char** argv) {
       config.max_gen_tokens = std::stoi(argv[++i]);
     } else if (arg == "--log_level" && i + 1 < argc) {
       config.log_level = std::stoi(argv[++i]);
+    } else if (arg == "--params" && i + 1 < argc) {
+      config.params_path = argv[++i];
+    } else if (arg == "--multi_context") {
+      config.use_multi_context = true;
+    } else if (arg == "--num_shards" && i + 1 < argc) {
+      config.num_shards = std::stoi(argv[++i]);
     } else if (arg == "--help" || arg == "-h") {
       usage(argv[0]);
       return 0;

@@ -22,15 +22,13 @@ add_library(qnn_ctx_core STATIC
   src/io_alloc.cpp
   src/qnn_qnnjson.cpp
   src/qnn_tensor_util.cpp
+  src/model_params.cpp
   src/llm_input_preparer.cpp
   src/llm_output_processor.cpp
   src/llm_kv_cache_manager.cpp
   src/llm_kv_cache_mapper.cpp
   src/llm_decode_runner.cpp
-)
-
-add_executable(qnn_ctx_init
-  apps/qnn_ctx_init_main.cpp
+  src/llm_decode_runner_multi_context.cpp
 )
 
 target_include_directories(qnn_ctx_core PUBLIC
@@ -46,27 +44,6 @@ else()
   target_link_libraries(qnn_ctx_core PUBLIC pthread)
 endif()
 
-target_link_libraries(qnn_ctx_init PRIVATE qnn_ctx_core)
-
-add_executable(qnn_graph_probe
-  apps/qnn_graph_probe_main.cpp
-)
-target_link_libraries(qnn_graph_probe PRIVATE qnn_ctx_core)
-
-add_executable(qnn_io_plan
-  apps/qnn_io_plan_main.cpp
-)
-target_link_libraries(qnn_io_plan PRIVATE qnn_ctx_core)
-
-add_executable(qnn_prefill
-  apps/qnn_prefill_main.cpp
-)
-target_link_libraries(qnn_prefill PRIVATE qnn_ctx_core tok_llama)
-
-add_executable(qnn_decode
-  apps/qnn_decode_main.cpp
-)
-target_link_libraries(qnn_decode PRIVATE qnn_ctx_core tok_llama)
 
 # New modularized LLM generation application
 add_executable(qnn_llm_generate
@@ -81,7 +58,7 @@ set(LLAMA_STATIC ON CACHE BOOL "" FORCE)
 set(LLAMA_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(LLAMA_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 set(LLAMA_BUILD_TOOLS OFF CACHE BOOL "" FORCE)
-add_subdirectory(/home/chokwans99/dev/llm/specinfer.cpp ${CMAKE_BINARY_DIR}/third_party/specinfer-build)
+add_subdirectory(/home/jongjip/dev/llm/llama.cpp ${CMAKE_BINARY_DIR}/third_party/specinfer-build)
 
 add_library(tok_llama STATIC src/tokenizer_llama.cpp)
 
@@ -91,9 +68,3 @@ target_link_libraries(tok_llama PUBLIC llama)
 if(ANDROID)
   target_link_libraries(tok_llama PUBLIC log)
 endif()
-
-add_executable(tok_encode
-  apps/tok_encode_main.cpp
-)
-target_link_libraries(tok_encode PRIVATE tok_llama)
-
