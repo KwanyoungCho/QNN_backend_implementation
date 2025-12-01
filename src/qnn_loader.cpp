@@ -153,6 +153,9 @@ bool QnnLoader::create_backend_and_device() {
                         reinterpret_cast<Qnn_DeviceHandle_t*>(&device_)) != QNN_SUCCESS || !device_) {
     return false;
   }
+
+  // op packages resgister 해야함???
+
   return true;
 }
 
