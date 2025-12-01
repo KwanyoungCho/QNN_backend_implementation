@@ -71,6 +71,15 @@ bool QnnTensorHolder::init_from_json(const QnnJsonTensorDesc& json_desc, void* d
   return true;
 }
 
+void QnnTensorHolder::update_buffer(void* data_ptr, uint64_t nbytes) {
+  // Update client buffer pointer and size
+  client_.data = data_ptr;
+  client_.dataSize = static_cast<uint32_t>(nbytes);
+  
+  // Update tensor reference to client buffer
+  tensor_.v2.clientBuf = client_;
+}
+
 } // namespace llm_test
 
 

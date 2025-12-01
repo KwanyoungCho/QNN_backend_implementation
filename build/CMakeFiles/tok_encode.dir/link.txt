@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG CMakeFiles/tok_encode.dir/apps/tok_encode_main.cpp.o -o tok_encode  -Wl,-rpath,/home/chokwans99/llm_test/build/bin libtok_llama.a bin/libllama.so bin/libggml.so bin/libggml-cpu.so bin/libggml-base.so 

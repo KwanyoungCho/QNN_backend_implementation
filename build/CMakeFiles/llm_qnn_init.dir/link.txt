@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/llm_qnn_init.dir/src/main.cpp.o CMakeFiles/llm_qnn_init.dir/src/qnn_loader.cpp.o CMakeFiles/llm_qnn_init.dir/src/binary_provider.cpp.o -o llm_qnn_init  -ldl -lpthread

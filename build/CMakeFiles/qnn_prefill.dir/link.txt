@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG CMakeFiles/qnn_prefill.dir/apps/qnn_prefill_main.cpp.o -o qnn_prefill  -Wl,-rpath,/home/chokwans99/llm_test/build/bin libqnn_ctx_core.a libtok_llama.a -ldl -lpthread bin/libllama.so bin/libggml.so bin/libggml-cpu.so bin/libggml-base.so 

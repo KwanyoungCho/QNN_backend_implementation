@@ -1,1 +1,1 @@
-/usr/bin/c++ CMakeFiles/qnn_io_plan.dir/apps/qnn_io_plan_main.cpp.o -o qnn_io_plan  libqnn_ctx_core.a -ldl -lpthread
+/usr/bin/c++ -O3 -DNDEBUG CMakeFiles/qnn_io_plan.dir/apps/qnn_io_plan_main.cpp.o -o qnn_io_plan  libqnn_ctx_core.a -ldl -lpthread 

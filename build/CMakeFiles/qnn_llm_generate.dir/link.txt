@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG CMakeFiles/qnn_llm_generate.dir/apps/qnn_llm_generate.cpp.o -o qnn_llm_generate  -Wl,-rpath,/home/chokwans99/llm_test/build/bin libqnn_ctx_core.a libtok_llama.a -ldl -lpthread bin/libllama.so bin/libggml.so bin/libggml-cpu.so bin/libggml-base.so 

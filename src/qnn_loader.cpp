@@ -203,6 +203,32 @@ bool QnnLoader::create_context_from_binary(const void* binary, size_t binary_siz
   return true;
 }
 
+bool QnnLoader::create_contexts_from_binaries(const std::vector<std::pair<const void*, size_t>>& binaries) {
+  if (!interface_provider_ || !backend_ || !device_) return false;
+  auto qnn = reinterpret_cast<const QnnInterface_t*>(interface_provider_);
+  const auto& api = qnn->QNN_INTERFACE_VER_NAME;
+  if (!api.contextCreateFromBinary) return false;
+  
+  // Create contexts sequentially
+  for (const auto& [binary, binary_size] : binaries) {
+    void* ctx = nullptr;
+    auto err = api.contextCreateFromBinary(
+        reinterpret_cast<Qnn_BackendHandle_t>(backend_),
+        reinterpret_cast<Qnn_DeviceHandle_t>(device_),
+        /*config*/nullptr,
+        binary,
+        static_cast<Qnn_ContextBinarySize_t>(binary_size),
+        reinterpret_cast<Qnn_ContextHandle_t*>(&ctx),
+        /*profile*/nullptr);
+    if (err != QNN_SUCCESS) {
+      std::cerr << "Failed to create context from binary (index " << contexts_.size() << ")\n";
+      return false;
+    }
+    contexts_.push_back(ctx);
+  }
+  return true;
+}
+
 bool QnnLoader::retrieve_graph(size_t ctx_index, const std::string& graph_name) {
   if (!interface_provider_) return false;
   if (ctx_index >= contexts_.size()) return false;
