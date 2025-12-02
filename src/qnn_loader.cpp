@@ -154,7 +154,7 @@ bool QnnLoader::create_backend_and_device() {
     return false;
   }
 
-  // op packages resgister 해야함???
+  // [spagetti] op packages resgister 해야함???
 
   return true;
 }
@@ -196,7 +196,7 @@ bool QnnLoader::create_context_from_binary(const void* binary, size_t binary_siz
   auto err = api.contextCreateFromBinary(
       reinterpret_cast<Qnn_BackendHandle_t>(backend_),
       reinterpret_cast<Qnn_DeviceHandle_t>(device_),
-      /*config*/nullptr,
+      /*config*/nullptr, // [spagetti] config 넣어야 하는지 확인해봐
       binary,
       static_cast<Qnn_ContextBinarySize_t>(binary_size),
       reinterpret_cast<Qnn_ContextHandle_t*>(&ctx),
@@ -232,7 +232,7 @@ bool QnnLoader::create_contexts_from_binaries(const std::vector<std::pair<const 
   return true;
 }
 
-bool QnnLoader::retrieve_graph(size_t ctx_index, const std::string& graph_name) {
+bool QnnLoader::retrieve_graph(size_t ctx_index, const std::string& graph_name) { // [spagetti] blob & cache
   if (!interface_provider_) return false;
   if (ctx_index >= contexts_.size()) return false;
   auto qnn = reinterpret_cast<const QnnInterface_t*>(interface_provider_);

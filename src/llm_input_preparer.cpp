@@ -37,7 +37,7 @@ bool InputPreparer::fill_tokens(
   return true;
 }
 
-bool InputPreparer::fill_positions(
+bool InputPreparer::fill_positions( // [spagetti] fill token이랑 fill position, (mask까지)이랑 왜 데이터 집어 넣는 방식이 달라?
     void* buffer,
     const QnnJsonTensorDesc& tensor_desc,
     size_t num_tokens,
@@ -132,7 +132,7 @@ bool InputPreparer::auto_fill_inputs(
     if (!buffer) continue;
     
     // KV cache: clear to 0
-    if (is_kv_cache_tensor(t)) {
+    if (is_kv_cache_tensor(t)) { // [spagetti] KV cache initialize 이미 한거 아님???
       clear_kv_cache(buffer, t);
       // if (verbose) {
       //   std::cout << "[InputPreparer] Cleared KV cache: " << t.name << "\n";
@@ -141,7 +141,7 @@ bool InputPreparer::auto_fill_inputs(
     }
     
     // Token input
-    bool is_token_input = 
+    bool is_token_input =  // [spagetti] 지금 사실 경우가 이렇게 다양하지 않음 좀 간단하게 바꿔도 될듯
       (name_lower.find("token") != std::string::npos && name_lower.find("_id") == std::string::npos) ||
       name_lower.find("input_ids") != std::string::npos;
     bool is_int32 = t.data_type.find("INT_32") != std::string::npos || 
@@ -159,7 +159,7 @@ bool InputPreparer::auto_fill_inputs(
     }
     
     // Position input
-    bool is_position = name_lower.find("position") != std::string::npos || 
+    bool is_position = name_lower.find("position") != std::string::npos || // [spagetti] 단순화
                        name_lower.find("pos_id") != std::string::npos ||
                        (name_lower.find("pos") != std::string::npos && 
                         name_lower.find("input_pos") != std::string::npos);
@@ -174,7 +174,7 @@ bool InputPreparer::auto_fill_inputs(
       continue;
     }
     
-    // Length scalars
+    // Length scalars // [spagetti] 이거 없어도 돌아가는거 아님?
     bool is_length = name_lower.find("seq_len") != std::string::npos ||
                      name_lower.find("input_length") != std::string::npos ||
                      name_lower.find("token_count") != std::string::npos;
@@ -191,7 +191,7 @@ bool InputPreparer::auto_fill_inputs(
       continue;
     }
     
-    // Attention mask
+    // Attention mask // [spagetti] 단순화
     bool is_mask = name_lower.find("atten_mask") != std::string::npos ||
                    name_lower.find("attn_mask") != std::string::npos ||
                    (name_lower.find("mask") != std::string::npos && 

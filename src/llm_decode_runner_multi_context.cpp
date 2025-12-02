@@ -30,7 +30,7 @@
 
 namespace llm_test {
 
-bool LLMDecodeRunner::load_multi_context_graphs() {
+bool LLMDecodeRunner::load_multi_context_graphs() { // [spagetti] blob 고려 / et에서 cache가 뭔지 왜 필요한지 확인해봐야함
   // Auto-detect or use specified num_shards
   std::vector<std::string> context_files;
   std::vector<std::string> json_files;
@@ -293,23 +293,23 @@ bool LLMDecodeRunner::setup_multi_context_kv_cache() {
   return true;
 }
 
-bool LLMDecodeRunner::setup_multi_context_io_allocators() {
+bool LLMDecodeRunner::setup_multi_context_io_allocators() { // [spagetti] 이거 문제가 많다 전체 재설계 해야할 수도 있음
   for (int i = 0; i < config_.num_shards; ++i) {
     auto& shard = shards_[i];
     
     // Prefill allocator
     shard.prefill_alloc.reset(new QNNIOAllocator());
     shard.prefill_alloc->build_from_qnnjson(*shard.prefill_graph);
-    auto prefill_bytes = shard.prefill_alloc->allocate(64);
+    auto prefill_bytes = shard.prefill_alloc->allocate(64); // [spagetti] 이거 지금 말안됨 근거 없는 코드임 내가 돌아가게만 만든 코드
     
     // KV allocator
     shard.kv_alloc.reset(new QNNIOAllocator());
     shard.kv_alloc->build_from_qnnjson(*shard.kv_graph);
-    auto kv_bytes = shard.kv_alloc->allocate(64);
+    auto kv_bytes = shard.kv_alloc->allocate(64); // [spagetti] 이거 왜 두번 할당함? 그럼 실제로는 뭘씀? 이거 열심히 rpc한다음에 이거 쓰고 있었던거 아니야?
     
     // Create tensor holders for prefill graph
     shard.prefill_input_holders.clear();
-    for (const auto& t : shard.prefill_graph->inputs) {
+    for (const auto& t : shard.prefill_graph->inputs) { // [spagetti] 모든 인풋에 대해서 이렇게 만드는게 맞나? 확인
       auto h = std::make_unique<QnnTensorHolder>();
       h->init_from_json(t, nullptr, t.nbytes, true);
       shard.prefill_input_holders.push_back(std::move(h));
@@ -415,7 +415,7 @@ bool LLMDecodeRunner::run_multi_context_prefill(const std::vector<int32_t>& toke
   
   // Fill causal attention mask
   // SMART_MASK: attention mask is causal for prefill
-  std::memset(attn_mask, 0, prefill_ar_len_ * context_len_ * sizeof(uint16_t));
+  std::memset(attn_mask, 0, prefill_ar_len_ * context_len_ * sizeof(uint16_t)); // [spagetti] 왜 length 곱함?
   for (int i = 0; i < n_update; ++i) {
     int row = prefill_ar_len_ - n_update + i;
     int end_pos = context_len_ - (n_update - i);
@@ -457,7 +457,7 @@ bool LLMDecodeRunner::run_multi_context_prefill(const std::vector<int32_t>& toke
     }
     
     // Process V caches
-    for (size_t i = 0; i < v_outputs.size(); ++i) {
+    for (size_t i = 0; i < v_outputs.size(); ++i) { // [spagetti] 이거 initialize 단계에서 어디에다가 만들어 놓지 않았나? 확인 필요
       int local_layer = i / num_heads_;
       int head = i % num_heads_;
       int global_layer = shard_layer_base + local_layer;
@@ -513,7 +513,7 @@ bool LLMDecodeRunner::run_multi_context_prefill(const std::vector<int32_t>& toke
     std::string name_lower = t.name;
     for (auto& c : name_lower) c = (char)tolower(c);
     
-    if (name_lower.find("squeeze") != std::string::npos ||
+    if (name_lower.find("squeeze") != std::string::npos || // [spagetti] 이름 단순화!
         name_lower.find("logit") != std::string::npos ||
         name_lower.find("lm_head") != std::string::npos) {
       logits_desc = &t;
@@ -522,7 +522,7 @@ bool LLMDecodeRunner::run_multi_context_prefill(const std::vector<int32_t>& toke
   }
   
   // Fallback: use the largest output tensor
-  if (!logits_desc) {
+  if (!logits_desc) { // [spagetti] 이 부분 뭐하는거임? 필요한거임?
     size_t max_size = 0;
     for (const auto& t : shards_[final_shard].prefill_graph->outputs) {
       if (t.dims.size() == 3 && t.name.find("_args_") != std::string::npos) {
@@ -884,7 +884,7 @@ bool LLMDecodeRunner::run_shard_prefill(int shard_idx,
       std::cout << "[Shard 0] First token: " << tokens[0] << "\n";
     }
     
-    InputPreparer::auto_fill_inputs(*shard.prefill_graph,
+    InputPreparer::auto_fill_inputs(*shard.prefill_graph, // [spagetti] 꼭 이런식으로 해야하나? get_v_cache에서 받은 버퍼 그대로 쓰는게 일단 맞긴해?
       [&](const std::string& name) -> void* {
         // Check KV override first
         auto ko = kv_override.find(name);
@@ -927,7 +927,7 @@ bool LLMDecodeRunner::run_shard_prefill(int shard_idx,
     }
     
     // Copy inputs from shared buffers
-    for (const auto& t : shard.prefill_graph->inputs) {
+    for (const auto& t : shard.prefill_graph->inputs) { // [spagetti] 정확하게 어떻게 동작하는건지 확인할 필요 있음
       auto ko = kv_override.find(t.name);
       if (ko != kv_override.end()) continue;  // Skip KV cache (already bound)
       
@@ -971,7 +971,7 @@ bool LLMDecodeRunner::run_shard_prefill(int shard_idx,
   // 2. Build tensor lists and execute
   std::vector<Qnn_Tensor_t> inputs, outputs;
   
-  for (size_t i = 0; i < shard.prefill_graph->inputs.size() && i < shard.prefill_input_holders.size(); ++i) {
+  for (size_t i = 0; i < shard.prefill_graph->inputs.size() && i < shard.prefill_input_holders.size(); ++i) { // [spagetti] tensor_t 만드는 방식이 이런식으로 하는게 맞나?
     const auto& t = shard.prefill_graph->inputs[i];
     
     // Check KV override first
