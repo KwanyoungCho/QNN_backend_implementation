@@ -3,15 +3,15 @@
 
 # compile C with /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang
 # compile CXX with /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++
-C_DEFINES = -DGGML_BUILD -DGGML_COMMIT=\"d7395115b\" -DGGML_SCHED_MAX_COPIES=4 -DGGML_SHARED -DGGML_VERSION=\"0.9.4\" -D_GNU_SOURCE -D_XOPEN_SOURCE=600 -Dggml_base_EXPORTS
+C_DEFINES = -DGGML_BUILD -DGGML_COMMIT=\"060a6d39-dirty\" -DGGML_SCHED_MAX_COPIES=4 -DGGML_SHARED -DGGML_VERSION=\"0.9.4\" -D_GNU_SOURCE -D_XOPEN_SOURCE=600 -Dggml_base_EXPORTS
 
-C_INCLUDES = -I/home/jongjip/dev/llm/llama.cpp/ggml/src/. -I/home/jongjip/dev/llm/llama.cpp/ggml/src/../include
+C_INCLUDES = -I/home/jongjip/dev/llm/specinfer.cpp/ggml/src/. -I/home/jongjip/dev/llm/specinfer.cpp/ggml/src/../include
 
 C_FLAGS = -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -O3 -DNDEBUG  -std=gnu11 -fPIC -Wshadow -Wstrict-prototypes -Wpointer-arith -Wmissing-prototypes -Werror=implicit-int -Werror=implicit-function-declaration -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wdouble-promotion -pthread
 
-CXX_DEFINES = -DGGML_BUILD -DGGML_COMMIT=\"d7395115b\" -DGGML_SCHED_MAX_COPIES=4 -DGGML_SHARED -DGGML_VERSION=\"0.9.4\" -D_GNU_SOURCE -D_XOPEN_SOURCE=600 -Dggml_base_EXPORTS
+CXX_DEFINES = -DGGML_BUILD -DGGML_COMMIT=\"060a6d39-dirty\" -DGGML_SCHED_MAX_COPIES=4 -DGGML_SHARED -DGGML_VERSION=\"0.9.4\" -D_GNU_SOURCE -D_XOPEN_SOURCE=600 -Dggml_base_EXPORTS
 
-CXX_INCLUDES = -I/home/jongjip/dev/llm/llama.cpp/ggml/src/. -I/home/jongjip/dev/llm/llama.cpp/ggml/src/../include
+CXX_INCLUDES = -I/home/jongjip/dev/llm/specinfer.cpp/ggml/src/. -I/home/jongjip/dev/llm/specinfer.cpp/ggml/src/../include
 
 CXX_FLAGS = -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -O3 -DNDEBUG  -std=gnu++17 -fPIC -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -pthread
 

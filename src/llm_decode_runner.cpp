@@ -52,6 +52,13 @@ bool LLMDecodeRunner::initialize() {
     return false;
   }
   
+  // Enable HTP Performance Mode (Burst)
+  if (!loader_->enable_htp_performance_mode()) {
+    if (config_.log_level >= 2) {
+      std::cerr << "[Init] Warning: Failed to enable HTP performance mode\n";
+    }
+  }
+
   if (config_.log_level >= 1) {
     std::cout << "[Init] QNN backend loaded\n";
     if (config_.use_multi_context) {

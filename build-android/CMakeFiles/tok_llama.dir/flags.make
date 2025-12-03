@@ -4,7 +4,7 @@
 # compile CXX with /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++
 CXX_DEFINES = -DGGML_BACKEND_SHARED -DGGML_SHARED -DGGML_USE_CPU -DLLAMA_SHARED
 
-CXX_INCLUDES = -I/home/jongjip/QNN_backend_implementation/include -I/home/jongjip/dev/llm/llama.cpp/src/../include -I/home/jongjip/dev/llm/llama.cpp/ggml/src/../include
+CXX_INCLUDES = -I/home/jongjip/QNN_backend_implementation/include -I/home/jongjip/dev/llm/specinfer.cpp/src/../include -I/home/jongjip/dev/llm/specinfer.cpp/ggml/src/../include
 
 CXX_FLAGS = -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -O3 -DNDEBUG  -std=gnu++17 -fPIC
 

@@ -1,6 +1,6 @@
 third_party/specinfer-build/src/CMakeFiles/llama.dir/unicode-data.cpp.o: \
-  /home/jongjip/dev/llm/llama.cpp/src/unicode-data.cpp \
-  /home/jongjip/dev/llm/llama.cpp/src/unicode-data.h \
+  /home/jongjip/dev/llm/specinfer.cpp/src/unicode-data.cpp \
+  /home/jongjip/dev/llm/specinfer.cpp/src/unicode-data.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/cstdint \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__assert \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__config \

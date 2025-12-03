@@ -1,8 +1,8 @@
 third_party/specinfer-build/src/CMakeFiles/llama.dir/llama-model-saver.cpp.o: \
-  /home/jongjip/dev/llm/llama.cpp/src/llama-model-saver.cpp \
-  /home/jongjip/dev/llm/llama.cpp/src/llama-model-saver.h \
-  /home/jongjip/dev/llm/llama.cpp/src/../include/llama.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/../include/ggml.h \
+  /home/jongjip/dev/llm/specinfer.cpp/src/llama-model-saver.cpp \
+  /home/jongjip/dev/llm/specinfer.cpp/src/llama-model-saver.h \
+  /home/jongjip/dev/llm/specinfer.cpp/src/../include/llama.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/../include/ggml.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/stdbool.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__config \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__config_site \
@@ -49,11 +49,11 @@ third_party/specinfer-build/src/CMakeFiles/llama.dir/llama-model-saver.cpp.o: \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include/__stdarg_va_copy.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/bits/seek_constants.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/bits/fortify/stdio.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/../include/ggml-cpu.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/../include/ggml-backend.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/../include/ggml-alloc.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/../include/ggml-opt.h \
-  /home/jongjip/dev/llm/llama.cpp/src/llama-arch.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/../include/ggml-cpu.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/../include/ggml-backend.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/../include/ggml-alloc.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/../include/ggml-opt.h \
+  /home/jongjip/dev/llm/specinfer.cpp/src/llama-arch.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/string \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__algorithm/max.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__algorithm/comp.h \
@@ -818,12 +818,12 @@ third_party/specinfer-build/src/CMakeFiles/llama.dir/llama-model-saver.cpp.o: \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/cstdarg \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__memory/temp_value.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__split_buffer \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/../include/gguf.h \
-  /home/jongjip/dev/llm/llama.cpp/src/llama-hparams.h \
-  /home/jongjip/dev/llm/llama.cpp/src/llama-model.h \
-  /home/jongjip/dev/llm/llama.cpp/src/llama-graph.h \
-  /home/jongjip/dev/llm/llama.cpp/src/llama-batch.h \
-  /home/jongjip/dev/llm/llama.cpp/src/llama-cparams.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/../include/gguf.h \
+  /home/jongjip/dev/llm/specinfer.cpp/src/llama-hparams.h \
+  /home/jongjip/dev/llm/specinfer.cpp/src/llama-model.h \
+  /home/jongjip/dev/llm/specinfer.cpp/src/llama-graph.h \
+  /home/jongjip/dev/llm/specinfer.cpp/src/llama-batch.h \
+  /home/jongjip/dev/llm/specinfer.cpp/src/llama-cparams.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/set \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__functional/is_transparent.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__iterator/ranges_iterator_traits.h \
@@ -852,8 +852,8 @@ third_party/specinfer-build/src/CMakeFiles/llama.dir/llama-model-saver.cpp.o: \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__functional/pointer_to_unary_function.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__functional/unary_negate.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/bitset \
-  /home/jongjip/dev/llm/llama.cpp/src/llama-adapter.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/../include/ggml-cpp.h \
-  /home/jongjip/dev/llm/llama.cpp/src/llama-memory.h \
+  /home/jongjip/dev/llm/specinfer.cpp/src/llama-adapter.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/../include/ggml-cpp.h \
+  /home/jongjip/dev/llm/specinfer.cpp/src/llama-memory.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/map \
-  /home/jongjip/dev/llm/llama.cpp/src/llama-vocab.h
+  /home/jongjip/dev/llm/specinfer.cpp/src/llama-vocab.h

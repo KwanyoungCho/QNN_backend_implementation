@@ -1,7 +1,7 @@
 third_party/specinfer-build/src/CMakeFiles/llama.dir/llama-arch.cpp.o: \
-  /home/jongjip/dev/llm/llama.cpp/src/llama-arch.cpp \
-  /home/jongjip/dev/llm/llama.cpp/src/llama-arch.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/../include/ggml.h \
+  /home/jongjip/dev/llm/specinfer.cpp/src/llama-arch.cpp \
+  /home/jongjip/dev/llm/specinfer.cpp/src/llama-arch.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/../include/ggml.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/stdbool.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__config \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__config_site \
@@ -758,7 +758,7 @@ third_party/specinfer-build/src/CMakeFiles/llama.dir/llama-arch.cpp.o: \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__bit/byteswap.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__bit/endian.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__bit/has_single_bit.h \
-  /home/jongjip/dev/llm/llama.cpp/src/llama-impl.h \
+  /home/jongjip/dev/llm/specinfer.cpp/src/llama-impl.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/vector \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__bit_reference \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__format/formatter.h \

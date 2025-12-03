@@ -1,7 +1,7 @@
 third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/ggml-backend.cpp.o: \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/ggml-backend.cpp \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/../include/ggml-backend.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/../include/ggml.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/ggml-backend.cpp \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/../include/ggml-backend.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/../include/ggml.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/stdbool.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__config \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__config_site \
@@ -48,10 +48,10 @@ third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/ggml-backend.cpp.o
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include/__stdarg_va_copy.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/bits/seek_constants.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/bits/fortify/stdio.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/../include/ggml-alloc.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/ggml-backend-impl.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/ggml-impl.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/../include/gguf.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/../include/ggml-alloc.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/ggml-backend-impl.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/ggml-impl.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/../include/gguf.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/assert.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/math.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/math.h \

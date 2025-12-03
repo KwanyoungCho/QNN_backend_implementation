@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/jongjip/dev/llm/llama.cpp/ggml/src/ggml-backend-reg.cpp" "third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/ggml-backend-reg.cpp.o" "gcc" "third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/ggml-backend-reg.cpp.o.d"
+  "/home/jongjip/dev/llm/specinfer.cpp/ggml/src/ggml-backend-reg.cpp" "third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/ggml-backend-reg.cpp.o" "gcc" "third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/ggml-backend-reg.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

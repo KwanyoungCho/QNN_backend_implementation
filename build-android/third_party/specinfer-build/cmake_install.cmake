@@ -1,4 +1,4 @@
-# Install script for directory: /home/jongjip/dev/llm/llama.cpp
+# Install script for directory: /home/jongjip/dev/llm/specinfer.cpp
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -73,8 +73,8 @@ endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE FILE FILES
-    "/home/jongjip/dev/llm/llama.cpp/include/llama.h"
-    "/home/jongjip/dev/llm/llama.cpp/include/llama-cpp.h"
+    "/home/jongjip/dev/llm/specinfer.cpp/include/llama.h"
+    "/home/jongjip/dev/llm/specinfer.cpp/include/llama-cpp.h"
     )
 endif()
 
@@ -86,7 +86,7 @@ if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE FILE PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE FILES "/home/jongjip/dev/llm/llama.cpp/convert_hf_to_gguf.py")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE FILE PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE FILES "/home/jongjip/dev/llm/specinfer.cpp/convert_hf_to_gguf.py")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)

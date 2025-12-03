@@ -1,6 +1,6 @@
 third_party/specinfer-build/src/CMakeFiles/llama.dir/llama-mmap.cpp.o: \
-  /home/jongjip/dev/llm/llama.cpp/src/llama-mmap.cpp \
-  /home/jongjip/dev/llm/llama.cpp/src/llama-mmap.h \
+  /home/jongjip/dev/llm/specinfer.cpp/src/llama-mmap.cpp \
+  /home/jongjip/dev/llm/specinfer.cpp/src/llama-mmap.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/cstdint \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__assert \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__config \
@@ -809,8 +809,8 @@ third_party/specinfer-build/src/CMakeFiles/llama.dir/llama-mmap.cpp.o: \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/cstdarg \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__memory/temp_value.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__split_buffer \
-  /home/jongjip/dev/llm/llama.cpp/src/llama-impl.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/../include/ggml.h \
+  /home/jongjip/dev/llm/specinfer.cpp/src/llama-impl.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/../include/ggml.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/stdbool.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include/stdbool.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/unistd.h \

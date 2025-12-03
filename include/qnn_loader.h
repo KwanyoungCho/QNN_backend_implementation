@@ -68,6 +68,9 @@ public:
   // 생성/복원한 리소스를 역순으로 정리 (context → device → backend → logger → dlclose)
   void cleanup();
 
+  // HTP 성능 모드 활성화 (Burst/HighPerformance)
+  bool enable_htp_performance_mode();
+
 private:
   void* get_providers_fn_ {nullptr};
   const void* interface_provider_ {nullptr};
@@ -77,6 +80,8 @@ private:
   void* device_ {nullptr};
   std::vector<void*> contexts_;
   std::vector<void*> graphs_;
+
+  uint32_t power_config_client_id_ {0}; // HTP Power Config Client ID
 
   int log_level_ {5};
 
