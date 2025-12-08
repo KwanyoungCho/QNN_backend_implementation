@@ -70,18 +70,18 @@ include third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/progress.make
 include third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/flags.make
 
 third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/ggml-backend-reg.cpp.o: third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/flags.make
-third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/ggml-backend-reg.cpp.o: /home/jongjip/dev/llm/llama.cpp/ggml/src/ggml-backend-reg.cpp
+third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/ggml-backend-reg.cpp.o: /home/jongjip/dev/llm/specinfer.cpp/ggml/src/ggml-backend-reg.cpp
 third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/ggml-backend-reg.cpp.o: third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/ggml-backend-reg.cpp.o"
-	cd /home/jongjip/QNN_backend_implementation/build-android/third_party/specinfer-build/ggml/src && /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/ggml-backend-reg.cpp.o -MF CMakeFiles/ggml.dir/ggml-backend-reg.cpp.o.d -o CMakeFiles/ggml.dir/ggml-backend-reg.cpp.o -c /home/jongjip/dev/llm/llama.cpp/ggml/src/ggml-backend-reg.cpp
+	cd /home/jongjip/QNN_backend_implementation/build-android/third_party/specinfer-build/ggml/src && /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/ggml-backend-reg.cpp.o -MF CMakeFiles/ggml.dir/ggml-backend-reg.cpp.o.d -o CMakeFiles/ggml.dir/ggml-backend-reg.cpp.o -c /home/jongjip/dev/llm/specinfer.cpp/ggml/src/ggml-backend-reg.cpp
 
 third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/ggml-backend-reg.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ggml.dir/ggml-backend-reg.cpp.i"
-	cd /home/jongjip/QNN_backend_implementation/build-android/third_party/specinfer-build/ggml/src && /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/jongjip/dev/llm/llama.cpp/ggml/src/ggml-backend-reg.cpp > CMakeFiles/ggml.dir/ggml-backend-reg.cpp.i
+	cd /home/jongjip/QNN_backend_implementation/build-android/third_party/specinfer-build/ggml/src && /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/jongjip/dev/llm/specinfer.cpp/ggml/src/ggml-backend-reg.cpp > CMakeFiles/ggml.dir/ggml-backend-reg.cpp.i
 
 third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/ggml-backend-reg.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ggml.dir/ggml-backend-reg.cpp.s"
-	cd /home/jongjip/QNN_backend_implementation/build-android/third_party/specinfer-build/ggml/src && /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/jongjip/dev/llm/llama.cpp/ggml/src/ggml-backend-reg.cpp -o CMakeFiles/ggml.dir/ggml-backend-reg.cpp.s
+	cd /home/jongjip/QNN_backend_implementation/build-android/third_party/specinfer-build/ggml/src && /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/jongjip/dev/llm/specinfer.cpp/ggml/src/ggml-backend-reg.cpp -o CMakeFiles/ggml.dir/ggml-backend-reg.cpp.s
 
 # Object files for target ggml
 ggml_OBJECTS = \
@@ -107,6 +107,6 @@ third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/clean:
 .PHONY : third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/clean
 
 third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/depend:
-	cd /home/jongjip/QNN_backend_implementation/build-android && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/jongjip/QNN_backend_implementation /home/jongjip/dev/llm/llama.cpp/ggml/src /home/jongjip/QNN_backend_implementation/build-android /home/jongjip/QNN_backend_implementation/build-android/third_party/specinfer-build/ggml/src /home/jongjip/QNN_backend_implementation/build-android/third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/jongjip/QNN_backend_implementation/build-android && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/jongjip/QNN_backend_implementation /home/jongjip/dev/llm/specinfer.cpp/ggml/src /home/jongjip/QNN_backend_implementation/build-android /home/jongjip/QNN_backend_implementation/build-android/third_party/specinfer-build/ggml/src /home/jongjip/QNN_backend_implementation/build-android/third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/depend
 

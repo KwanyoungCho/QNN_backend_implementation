@@ -1,6 +1,6 @@
 third_party/specinfer-build/src/CMakeFiles/llama.dir/llama-io.cpp.o: \
-  /home/jongjip/dev/llm/llama.cpp/src/llama-io.cpp \
-  /home/jongjip/dev/llm/llama.cpp/src/llama-io.h \
+  /home/jongjip/dev/llm/specinfer.cpp/src/llama-io.cpp \
+  /home/jongjip/dev/llm/specinfer.cpp/src/llama-io.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/cstddef \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__assert \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__config \

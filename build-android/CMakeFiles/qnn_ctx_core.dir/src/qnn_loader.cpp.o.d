@@ -826,6 +826,8 @@ CMakeFiles/qnn_ctx_core.dir/src/qnn_loader.cpp.o: \
   /home/jongjip/qairt/2.37.0.250724/include/QNN/QnnSignal.h \
   /home/jongjip/qairt/2.37.0.250724/include/QNN/QnnOpDef.h \
   /home/jongjip/qairt/2.37.0.250724/include/QNN/QnnOpPackage.h \
+  /home/jongjip/qairt/2.37.0.250724/include/QNN/HTP/QnnHtpDevice.h \
+  /home/jongjip/qairt/2.37.0.250724/include/QNN/HTP/QnnHtpPerfInfrastructure.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/dlfcn.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/iostream \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/istream \

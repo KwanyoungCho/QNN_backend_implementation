@@ -1,6 +1,6 @@
 third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/ggml-quants.c.o: \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/ggml-quants.c \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/ggml-common.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/ggml-quants.c \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/ggml-common.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include/stdint.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/stdint.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/bits/wchar_limits.h \
@@ -15,8 +15,8 @@ third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/ggml-quants.c.o: \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include/__stddef_null.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include/__stddef_max_align_t.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include/__stddef_offsetof.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/ggml-quants.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/../include/ggml.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/ggml-quants.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/../include/ggml.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include/stdbool.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/stdio.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/sys/types.h \
@@ -41,8 +41,8 @@ third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/ggml-quants.c.o: \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include/__stdarg_va_copy.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/bits/seek_constants.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/bits/fortify/stdio.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/ggml-impl.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/../include/gguf.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/ggml-impl.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/../include/gguf.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/assert.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/math.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include/limits.h \
@@ -66,8 +66,8 @@ third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/ggml-quants.c.o: \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include/arm_neon.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include/arm_bf16.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include/arm_vector_types.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/ggml-cpu/ggml-cpu-impl.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/./ggml-impl.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/../include/ggml-cpu.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/../include/ggml-backend.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/../include/ggml-alloc.h
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/ggml-cpu/ggml-cpu-impl.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/./ggml-impl.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/../include/ggml-cpu.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/../include/ggml-backend.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/../include/ggml-alloc.h

@@ -171,12 +171,12 @@ third_party/specinfer-build/src/clean: third_party/specinfer-build/src/CMakeFile
 CMakeFiles/qnn_ctx_core.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_ctx_core.dir/build.make CMakeFiles/qnn_ctx_core.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_ctx_core.dir/build.make CMakeFiles/qnn_ctx_core.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles --progress-num=55,56,57,58,59,60,61,62,63,64,65,66,67 "Built target qnn_ctx_core"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles --progress-num=90,91,92,93,94,95,96,97 "Built target qnn_ctx_core"
 .PHONY : CMakeFiles/qnn_ctx_core.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/qnn_ctx_core.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles 13
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles 8
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/qnn_ctx_core.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles 0
 .PHONY : CMakeFiles/qnn_ctx_core.dir/rule
@@ -194,20 +194,20 @@ CMakeFiles/qnn_ctx_core.dir/clean:
 # Target rules for target CMakeFiles/qnn_llm_generate.dir
 
 # All Build rule for target.
+CMakeFiles/qnn_llm_generate.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/all
 CMakeFiles/qnn_llm_generate.dir/all: CMakeFiles/qnn_ctx_core.dir/all
+CMakeFiles/qnn_llm_generate.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/all
+CMakeFiles/qnn_llm_generate.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/all
 CMakeFiles/qnn_llm_generate.dir/all: third_party/specinfer-build/src/CMakeFiles/llama.dir/all
 CMakeFiles/qnn_llm_generate.dir/all: CMakeFiles/tok_llama.dir/all
-CMakeFiles/qnn_llm_generate.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/all
-CMakeFiles/qnn_llm_generate.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/all
-CMakeFiles/qnn_llm_generate.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_llm_generate.dir/build.make CMakeFiles/qnn_llm_generate.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_llm_generate.dir/build.make CMakeFiles/qnn_llm_generate.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles --progress-num=68,69 "Built target qnn_llm_generate"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles --progress-num=98 "Built target qnn_llm_generate"
 .PHONY : CMakeFiles/qnn_llm_generate.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/qnn_llm_generate.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles 71
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles 100
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/qnn_llm_generate.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles 0
 .PHONY : CMakeFiles/qnn_llm_generate.dir/rule
@@ -225,18 +225,18 @@ CMakeFiles/qnn_llm_generate.dir/clean:
 # Target rules for target CMakeFiles/tok_llama.dir
 
 # All Build rule for target.
-CMakeFiles/tok_llama.dir/all: third_party/specinfer-build/src/CMakeFiles/llama.dir/all
-CMakeFiles/tok_llama.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/all
 CMakeFiles/tok_llama.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/all
 CMakeFiles/tok_llama.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/all
+CMakeFiles/tok_llama.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/all
+CMakeFiles/tok_llama.dir/all: third_party/specinfer-build/src/CMakeFiles/llama.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tok_llama.dir/build.make CMakeFiles/tok_llama.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tok_llama.dir/build.make CMakeFiles/tok_llama.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles --progress-num=70,71 "Built target tok_llama"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles --progress-num=99,100 "Built target tok_llama"
 .PHONY : CMakeFiles/tok_llama.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/tok_llama.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles 56
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles 91
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/tok_llama.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles 0
 .PHONY : CMakeFiles/tok_llama.dir/rule
@@ -257,12 +257,12 @@ CMakeFiles/tok_llama.dir/clean:
 third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/all:
 	$(MAKE) $(MAKESILENT) -f third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/build.make third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/depend
 	$(MAKE) $(MAKESILENT) -f third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/build.make third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles --progress-num=3,4,5,6,7,8,9,10,11 "Built target ggml-base"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles --progress-num=2,3,4,5,6 "Built target ggml-base"
 .PHONY : third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/all
 
 # Build rule for subdir invocation for target.
 third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles 9
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles 5
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles 0
 .PHONY : third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/rule
@@ -280,16 +280,16 @@ third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/clean:
 # Target rules for target third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir
 
 # All Build rule for target.
-third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/all
 third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/all
+third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/all
 	$(MAKE) $(MAKESILENT) -f third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/build.make third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/depend
 	$(MAKE) $(MAKESILENT) -f third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/build.make third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles --progress-num=1,2 "Built target ggml"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles --progress-num=1 "Built target ggml"
 .PHONY : third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/all
 
 # Build rule for subdir invocation for target.
 third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles 27
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles 15
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles 0
 .PHONY : third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/rule
@@ -310,12 +310,12 @@ third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/clean:
 third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/all
 	$(MAKE) $(MAKESILENT) -f third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/build.make third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/depend
 	$(MAKE) $(MAKESILENT) -f third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/build.make third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles --progress-num=12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27 "Built target ggml-cpu"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles --progress-num=7,8,9,10,11,12,13,14,15 "Built target ggml-cpu"
 .PHONY : third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/all
 
 # Build rule for subdir invocation for target.
 third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles 25
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles 14
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles 0
 .PHONY : third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/rule
@@ -333,17 +333,17 @@ third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/clean:
 # Target rules for target third_party/specinfer-build/src/CMakeFiles/llama.dir
 
 # All Build rule for target.
-third_party/specinfer-build/src/CMakeFiles/llama.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/all
 third_party/specinfer-build/src/CMakeFiles/llama.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/all
 third_party/specinfer-build/src/CMakeFiles/llama.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/all
+third_party/specinfer-build/src/CMakeFiles/llama.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/all
 	$(MAKE) $(MAKESILENT) -f third_party/specinfer-build/src/CMakeFiles/llama.dir/build.make third_party/specinfer-build/src/CMakeFiles/llama.dir/depend
 	$(MAKE) $(MAKESILENT) -f third_party/specinfer-build/src/CMakeFiles/llama.dir/build.make third_party/specinfer-build/src/CMakeFiles/llama.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles --progress-num=28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54 "Built target llama"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles --progress-num=16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89 "Built target llama"
 .PHONY : third_party/specinfer-build/src/CMakeFiles/llama.dir/all
 
 # Build rule for subdir invocation for target.
 third_party/specinfer-build/src/CMakeFiles/llama.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles 54
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles 89
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 third_party/specinfer-build/src/CMakeFiles/llama.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles 0
 .PHONY : third_party/specinfer-build/src/CMakeFiles/llama.dir/rule

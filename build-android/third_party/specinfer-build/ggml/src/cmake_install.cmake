@@ -1,4 +1,4 @@
-# Install script for directory: /home/jongjip/dev/llm/llama.cpp/ggml/src
+# Install script for directory: /home/jongjip/dev/llm/specinfer.cpp/ggml/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

@@ -1,7 +1,7 @@
 third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/ggml-threading.cpp.o: \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/ggml-threading.cpp \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/ggml-threading.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/../include/ggml.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/ggml-threading.cpp \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/ggml-threading.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/../include/ggml.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/stdbool.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__config \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__config_site \

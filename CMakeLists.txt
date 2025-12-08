@@ -58,7 +58,7 @@ set(LLAMA_STATIC ON CACHE BOOL "" FORCE)
 set(LLAMA_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(LLAMA_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 set(LLAMA_BUILD_TOOLS OFF CACHE BOOL "" FORCE)
-add_subdirectory(/home/jongjip/dev/llm/llama.cpp ${CMAKE_BINARY_DIR}/third_party/specinfer-build)
+add_subdirectory(/home/jongjip/dev/llm/specinfer.cpp ${CMAKE_BINARY_DIR}/third_party/specinfer-build)
 
 add_library(tok_llama STATIC src/tokenizer_llama.cpp)
 

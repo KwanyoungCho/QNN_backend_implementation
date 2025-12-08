@@ -1,4 +1,4 @@
-# Install script for directory: /home/jongjip/dev/llm/llama.cpp/ggml
+# Install script for directory: /home/jongjip/dev/llm/specinfer.cpp/ggml
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -68,21 +68,21 @@ endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE FILE FILES
-    "/home/jongjip/dev/llm/llama.cpp/ggml/include/ggml.h"
-    "/home/jongjip/dev/llm/llama.cpp/ggml/include/ggml-cpu.h"
-    "/home/jongjip/dev/llm/llama.cpp/ggml/include/ggml-alloc.h"
-    "/home/jongjip/dev/llm/llama.cpp/ggml/include/ggml-backend.h"
-    "/home/jongjip/dev/llm/llama.cpp/ggml/include/ggml-blas.h"
-    "/home/jongjip/dev/llm/llama.cpp/ggml/include/ggml-cann.h"
-    "/home/jongjip/dev/llm/llama.cpp/ggml/include/ggml-cpp.h"
-    "/home/jongjip/dev/llm/llama.cpp/ggml/include/ggml-cuda.h"
-    "/home/jongjip/dev/llm/llama.cpp/ggml/include/ggml-opt.h"
-    "/home/jongjip/dev/llm/llama.cpp/ggml/include/ggml-metal.h"
-    "/home/jongjip/dev/llm/llama.cpp/ggml/include/ggml-rpc.h"
-    "/home/jongjip/dev/llm/llama.cpp/ggml/include/ggml-sycl.h"
-    "/home/jongjip/dev/llm/llama.cpp/ggml/include/ggml-vulkan.h"
-    "/home/jongjip/dev/llm/llama.cpp/ggml/include/ggml-webgpu.h"
-    "/home/jongjip/dev/llm/llama.cpp/ggml/include/gguf.h"
+    "/home/jongjip/dev/llm/specinfer.cpp/ggml/include/ggml.h"
+    "/home/jongjip/dev/llm/specinfer.cpp/ggml/include/ggml-cpu.h"
+    "/home/jongjip/dev/llm/specinfer.cpp/ggml/include/ggml-alloc.h"
+    "/home/jongjip/dev/llm/specinfer.cpp/ggml/include/ggml-backend.h"
+    "/home/jongjip/dev/llm/specinfer.cpp/ggml/include/ggml-blas.h"
+    "/home/jongjip/dev/llm/specinfer.cpp/ggml/include/ggml-cann.h"
+    "/home/jongjip/dev/llm/specinfer.cpp/ggml/include/ggml-cpp.h"
+    "/home/jongjip/dev/llm/specinfer.cpp/ggml/include/ggml-cuda.h"
+    "/home/jongjip/dev/llm/specinfer.cpp/ggml/include/ggml-opt.h"
+    "/home/jongjip/dev/llm/specinfer.cpp/ggml/include/ggml-metal.h"
+    "/home/jongjip/dev/llm/specinfer.cpp/ggml/include/ggml-rpc.h"
+    "/home/jongjip/dev/llm/specinfer.cpp/ggml/include/ggml-sycl.h"
+    "/home/jongjip/dev/llm/specinfer.cpp/ggml/include/ggml-vulkan.h"
+    "/home/jongjip/dev/llm/specinfer.cpp/ggml/include/ggml-webgpu.h"
+    "/home/jongjip/dev/llm/specinfer.cpp/ggml/include/gguf.h"
     )
 endif()
 

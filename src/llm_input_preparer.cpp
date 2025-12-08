@@ -1,6 +1,7 @@
 #include "llm_input_preparer.h"
 #include <cstring>
 #include <algorithm>
+#include <numeric>
 #include <cctype>
 #include <iostream>
 
@@ -37,7 +38,7 @@ bool InputPreparer::fill_tokens(
   return true;
 }
 
-bool InputPreparer::fill_positions( // [spagetti] fill token이랑 fill position, (mask까지)이랑 왜 데이터 집어 넣는 방식이 달라?
+bool InputPreparer::fill_positions( // [spagetti] fill token이랑 fill position, (mask까지)이랑 왜 데이터 집어 넣는 방식이 달라?이유가 있긴한데 일단 좀 깔끔하게 고치긴 했습니다. 
     void* buffer,
     const QnnJsonTensorDesc& tensor_desc,
     size_t num_tokens,
@@ -50,9 +51,7 @@ bool InputPreparer::fill_positions( // [spagetti] fill token이랑 fill position
   }
   
   int32_t* pos_buf = reinterpret_cast<int32_t*>(buffer);
-  for (size_t i = 0; i < num_tokens; ++i) {
-    pos_buf[i] = start_pos + static_cast<int32_t>(i);
-  }
+  std::iota(pos_buf, pos_buf + num_tokens, start_pos);
   
   return true;
 }
@@ -99,9 +98,7 @@ bool InputPreparer::fill_attention_mask(
     uint64_t attend_start = max_len - seq_dim; // New tokens의 시작 위치
     
     // Causal mask: token i는 자기 자신(i)과 이전 토큰들(0..i-1)에만 attend
-    for (uint64_t j = 0; j <= i; ++j) {
-      mask_buf[row_offset + attend_start + j] = 65535; // attend (65535 = 1.0 in ufixed16)
-    }
+    std::fill_n(mask_buf + row_offset + attend_start, i + 1, 65535);
   }
   
   // Note: fill_seq < seq_dim인 경우, 나머지 행들은 0으로 유지
@@ -131,19 +128,8 @@ bool InputPreparer::auto_fill_inputs(
     void* buffer = get_buffer_fn(t.name);
     if (!buffer) continue;
     
-    // KV cache: clear to 0
-    if (is_kv_cache_tensor(t)) { // [spagetti] KV cache initialize 이미 한거 아님???
-      clear_kv_cache(buffer, t);
-      // if (verbose) {
-      //   std::cout << "[InputPreparer] Cleared KV cache: " << t.name << "\n";
-      // }
-      continue;
-    }
-    
     // Token input
-    bool is_token_input =  // [spagetti] 지금 사실 경우가 이렇게 다양하지 않음 좀 간단하게 바꿔도 될듯
-      (name_lower.find("token") != std::string::npos && name_lower.find("_id") == std::string::npos) ||
-      name_lower.find("input_ids") != std::string::npos;
+    bool is_token_input = name_lower.find("token") != std::string::npos;
     bool is_int32 = t.data_type.find("INT_32") != std::string::npos || 
                     t.data_type.find("UINT_32") != std::string::npos;
     bool is_1d_or_2d = t.dims.size() == 1 || t.dims.size() == 2;
@@ -159,10 +145,7 @@ bool InputPreparer::auto_fill_inputs(
     }
     
     // Position input
-    bool is_position = name_lower.find("position") != std::string::npos || // [spagetti] 단순화
-                       name_lower.find("pos_id") != std::string::npos ||
-                       (name_lower.find("pos") != std::string::npos && 
-                        name_lower.find("input_pos") != std::string::npos);
+    bool is_position = name_lower.find("_pos_") != std::string::npos;
     
     if (is_position && is_int32 && t.nbytes >= tokens.size() * 4) {
       if (fill_positions(buffer, t, tokens.size(), 0)) {
@@ -174,28 +157,8 @@ bool InputPreparer::auto_fill_inputs(
       continue;
     }
     
-    // Length scalars // [spagetti] 이거 없어도 돌아가는거 아님?
-    bool is_length = name_lower.find("seq_len") != std::string::npos ||
-                     name_lower.find("input_length") != std::string::npos ||
-                     name_lower.find("token_count") != std::string::npos;
-    bool is_start_pos = name_lower.find("past_len") != std::string::npos ||
-                        name_lower.find("start_pos") != std::string::npos;
-    
-    if ((is_length || is_start_pos) && is_int32 && t.nbytes >= 4) {
-      int32_t value = is_start_pos ? 0 : static_cast<int32_t>(tokens.size());
-      std::memcpy(buffer, &value, sizeof(value));
-      if (verbose) {
-        std::cout << "[InputPreparer] Filled length: " << t.name 
-                  << " = " << value << "\n";
-      }
-      continue;
-    }
-    
-    // Attention mask // [spagetti] 단순화
-    bool is_mask = name_lower.find("atten_mask") != std::string::npos ||
-                   name_lower.find("attn_mask") != std::string::npos ||
-                   (name_lower.find("mask") != std::string::npos && 
-                    name_lower.find("attention") != std::string::npos);
+    // Attention mask
+    bool is_mask = name_lower.find("atten_mask") != std::string::npos;
     
     if (is_mask && t.dims.size() >= 2) {
       if (fill_attention_mask(buffer, t, tokens.size())) {

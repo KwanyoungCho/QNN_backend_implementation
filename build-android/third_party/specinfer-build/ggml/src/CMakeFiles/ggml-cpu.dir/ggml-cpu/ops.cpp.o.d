@@ -1,7 +1,7 @@
 third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/ops.cpp.o: \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/ggml-cpu/ops.cpp \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/ggml-cpu/ops.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/../include/ggml.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/ggml-cpu/ops.cpp \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/ggml-cpu/ops.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/../include/ggml.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/stdbool.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__config \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__config_site \
@@ -48,11 +48,11 @@ third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/ops.cpp.o:
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include/__stdarg_va_copy.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/bits/seek_constants.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/bits/fortify/stdio.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/../include/ggml-cpu.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/../include/ggml-backend.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/../include/ggml-alloc.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/./ggml-impl.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/../include/gguf.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/../include/ggml-cpu.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/../include/ggml-backend.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/../include/ggml-alloc.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/./ggml-impl.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/../include/gguf.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/assert.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/math.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/math.h \
@@ -821,11 +821,37 @@ third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/ops.cpp.o:
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/cstdarg \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__memory/temp_value.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__split_buffer \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/ggml-cpu/binary-ops.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/ggml-cpu/common.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/ggml-cpu/traits.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/./ggml-backend-impl.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/ggml-cpu/ggml-cpu-impl.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/ggml-cpu/simd-mappings.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/ggml-cpu/unary-ops.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/ggml-cpu/vec.h
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/ggml-cpu/binary-ops.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/ggml-cpu/common.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/ggml-cpu/traits.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/./ggml-backend-impl.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/ggml-cpu/ggml-cpu-impl.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/ggml-cpu/simd-mappings.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/ggml-cpu/unary-ops.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/ggml-cpu/vec.h \
+  /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/cfloat \
+  /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/functional \
+  /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__functional/binary_negate.h \
+  /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__functional/bind.h \
+  /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__functional/bind_back.h \
+  /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__functional/perfect_forward.h \
+  /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__functional/bind_front.h \
+  /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__functional/binder1st.h \
+  /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__functional/binder2nd.h \
+  /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__functional/boyer_moore_searcher.h \
+  /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/unordered_map \
+  /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__functional/is_transparent.h \
+  /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__hash_table \
+  /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__iterator/ranges_iterator_traits.h \
+  /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__node_handle \
+  /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__functional/compose.h \
+  /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__functional/default_searcher.h \
+  /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__functional/function.h \
+  /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__memory/builtin_new_allocator.h \
+  /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__type_traits/strip_signature.h \
+  /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__functional/mem_fn.h \
+  /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__functional/mem_fun_ref.h \
+  /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__functional/not_fn.h \
+  /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__functional/pointer_to_binary_function.h \
+  /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__functional/pointer_to_unary_function.h \
+  /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__functional/unary_negate.h

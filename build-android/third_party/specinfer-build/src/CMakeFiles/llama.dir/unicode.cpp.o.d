@@ -1,6 +1,6 @@
 third_party/specinfer-build/src/CMakeFiles/llama.dir/unicode.cpp.o: \
-  /home/jongjip/dev/llm/llama.cpp/src/unicode.cpp \
-  /home/jongjip/dev/llm/llama.cpp/src/unicode.h \
+  /home/jongjip/dev/llm/specinfer.cpp/src/unicode.cpp \
+  /home/jongjip/dev/llm/specinfer.cpp/src/unicode.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/cstdint \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__assert \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__config \
@@ -809,7 +809,7 @@ third_party/specinfer-build/src/CMakeFiles/llama.dir/unicode.cpp.o: \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/cstdarg \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__memory/temp_value.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__split_buffer \
-  /home/jongjip/dev/llm/llama.cpp/src/unicode-data.h \
+  /home/jongjip/dev/llm/specinfer.cpp/src/unicode-data.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/unordered_map \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__functional/is_transparent.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__hash_table \

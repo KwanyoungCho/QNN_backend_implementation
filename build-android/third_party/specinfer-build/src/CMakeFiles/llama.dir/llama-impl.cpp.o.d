@@ -1,7 +1,7 @@
 third_party/specinfer-build/src/CMakeFiles/llama.dir/llama-impl.cpp.o: \
-  /home/jongjip/dev/llm/llama.cpp/src/llama-impl.cpp \
-  /home/jongjip/dev/llm/llama.cpp/src/llama-impl.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/../include/ggml.h \
+  /home/jongjip/dev/llm/specinfer.cpp/src/llama-impl.cpp \
+  /home/jongjip/dev/llm/specinfer.cpp/src/llama-impl.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/../include/ggml.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/stdbool.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__config \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__config_site \
@@ -812,12 +812,12 @@ third_party/specinfer-build/src/CMakeFiles/llama.dir/llama-impl.cpp.o: \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/cstdarg \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__memory/temp_value.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/__split_buffer \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/../include/gguf.h \
-  /home/jongjip/dev/llm/llama.cpp/src/../include/llama.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/../include/ggml-cpu.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/../include/ggml-backend.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/../include/ggml-alloc.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/../include/ggml-opt.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/../include/gguf.h \
+  /home/jongjip/dev/llm/specinfer.cpp/src/../include/llama.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/../include/ggml-cpu.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/../include/ggml-backend.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/../include/ggml-alloc.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/../include/ggml-opt.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/cinttypes \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/inttypes.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include/inttypes.h \

@@ -2,8 +2,11 @@
 
 #include <QnnInterface.h>
 #include <QnnLog.h>
+#include "HTP/QnnHtpDevice.h"
+#include "HTP/QnnHtpPerfInfrastructure.h"
 #include <cstdarg>
 #include <cstdio>
+#include <cstring>
 #include <dlfcn.h>
 #include <iostream>
 
@@ -166,6 +169,19 @@ void QnnLoader::cleanup() {
   if (interface_provider_) {
     auto qnn = reinterpret_cast<const QnnInterface_t*>(interface_provider_);
     const auto& api = qnn->QNN_INTERFACE_VER_NAME;
+
+    // HTP Power Config 해제
+    if (power_config_client_id_ != 0 && device_ && api.deviceGetInfrastructure) {
+        QnnDevice_Infrastructure_t device_infra = nullptr;
+        if (api.deviceGetInfrastructure(&device_infra) == QNN_SUCCESS) {
+            auto* htp_infra = static_cast<QnnHtpDevice_Infrastructure_t*>(device_infra);
+            if (htp_infra->infraType == QNN_HTP_DEVICE_INFRASTRUCTURE_TYPE_PERF) {
+                 htp_infra->perfInfra.destroyPowerConfigId(power_config_client_id_);
+            }
+        }
+    }
+    power_config_client_id_ = 0;
+
     for (void* c : contexts_) {
       if (c && api.contextFree) api.contextFree(reinterpret_cast<Qnn_ContextHandle_t>(c), nullptr);
     }
@@ -196,7 +212,7 @@ bool QnnLoader::create_context_from_binary(const void* binary, size_t binary_siz
   auto err = api.contextCreateFromBinary(
       reinterpret_cast<Qnn_BackendHandle_t>(backend_),
       reinterpret_cast<Qnn_DeviceHandle_t>(device_),
-      /*config*/nullptr, // [spagetti] config 넣어야 하는지 확인해봐
+      /*config*/nullptr,
       binary,
       static_cast<Qnn_ContextBinarySize_t>(binary_size),
       reinterpret_cast<Qnn_ContextHandle_t*>(&ctx),
@@ -270,6 +286,89 @@ bool QnnLoader::execute_graph(size_t ctx_index,
       /*profile*/nullptr,
       /*signal*/nullptr);
   return err == QNN_SUCCESS;
+}
+
+bool QnnLoader::enable_htp_performance_mode() {
+  if (!interface_provider_ || !device_) return false;
+  auto qnn = reinterpret_cast<const QnnInterface_t*>(interface_provider_);
+  const auto& api = qnn->QNN_INTERFACE_VER_NAME;
+
+  if (!api.deviceGetInfrastructure) {
+      std::cerr << "deviceGetInfrastructure not available\n";
+      return false;
+  }
+
+  QnnDevice_Infrastructure_t device_infra = nullptr;
+  if (api.deviceGetInfrastructure(&device_infra) != QNN_SUCCESS) {
+      std::cerr << "Failed to get device infrastructure\n";
+      return false;
+  }
+
+  auto* htp_infra = static_cast<QnnHtpDevice_Infrastructure_t*>(device_infra);
+  if (htp_infra->infraType != QNN_HTP_DEVICE_INFRASTRUCTURE_TYPE_PERF) {
+      std::cerr << "HTP infra type is not PERF\n";
+      return false;
+  }
+
+  auto& perf_infra = htp_infra->perfInfra;
+  
+  if (power_config_client_id_ == 0) {
+      if (perf_infra.createPowerConfigId(0, 0, &power_config_client_id_) != QNN_SUCCESS) {
+          std::cerr << "Failed to create power config ID\n";
+          return false;
+      }
+  }
+
+  // 1. DCVS & Power Mode Config (kHtpBurst)
+  QnnHtpPerfInfrastructure_PowerConfig_t power_config;
+  memset(&power_config, 0, sizeof(power_config));
+  power_config.option = QNN_HTP_PERF_INFRASTRUCTURE_POWER_CONFIGOPTION_DCVS_V3;
+  
+  auto& dcvs = power_config.dcvsV3Config;
+  dcvs.contextId = power_config_client_id_;
+  
+  // Upvote common settings
+  dcvs.setSleepDisable = 0; // Executorch sets this to 0 for UpVote
+  dcvs.sleepDisable = 0;    // Irrelevant if setSleepDisable is 0
+  dcvs.setDcvsEnable = 1;
+  dcvs.dcvsEnable = 0;      // kDcvsDisable
+  dcvs.powerMode = QNN_HTP_PERF_INFRASTRUCTURE_POWERMODE_PERFORMANCE_MODE;
+
+  // kHtpBurst specific settings
+  dcvs.setSleepLatency = 1;
+  dcvs.sleepLatency = 40; // kSleepMinLatency
+
+  dcvs.setBusParams = 1;
+  dcvs.busVoltageCornerMin = DCVS_VOLTAGE_VCORNER_MAX_VOLTAGE_CORNER;
+  dcvs.busVoltageCornerTarget = DCVS_VOLTAGE_VCORNER_MAX_VOLTAGE_CORNER;
+  dcvs.busVoltageCornerMax = DCVS_VOLTAGE_VCORNER_MAX_VOLTAGE_CORNER;
+
+  dcvs.setCoreParams = 1;
+  dcvs.coreVoltageCornerMin = DCVS_VOLTAGE_VCORNER_MAX_VOLTAGE_CORNER;
+  dcvs.coreVoltageCornerTarget = DCVS_VOLTAGE_VCORNER_MAX_VOLTAGE_CORNER;
+  dcvs.coreVoltageCornerMax = DCVS_VOLTAGE_VCORNER_MAX_VOLTAGE_CORNER;
+
+  // 2. RPC Control Latency Config
+  QnnHtpPerfInfrastructure_PowerConfig_t rpc_latency_config;
+  memset(&rpc_latency_config, 0, sizeof(rpc_latency_config));
+  rpc_latency_config.option = QNN_HTP_PERF_INFRASTRUCTURE_POWER_CONFIGOPTION_RPC_CONTROL_LATENCY;
+  rpc_latency_config.rpcControlLatencyConfig = 100; // kRpcControlLatency
+
+  // 3. RPC Polling Time Config
+  QnnHtpPerfInfrastructure_PowerConfig_t rpc_polling_config;
+  memset(&rpc_polling_config, 0, sizeof(rpc_polling_config));
+  rpc_polling_config.option = QNN_HTP_PERF_INFRASTRUCTURE_POWER_CONFIGOPTION_RPC_POLLING_TIME;
+  rpc_polling_config.rpcPollingTimeConfig = 9999; // kRpcPollingTimeHighPower
+
+  const QnnHtpPerfInfrastructure_PowerConfig_t* configs[] = {&power_config, &rpc_latency_config, &rpc_polling_config, nullptr};
+  
+  if (perf_infra.setPowerConfig(power_config_client_id_, configs) != QNN_SUCCESS) {
+      std::cerr << "Failed to set HTP power config (Burst Mode)\n";
+      return false;
+  }
+  
+  std::cout << "HTP Performance Mode Enabled (Burst + RPC Polling)\n";
+  return true;
 }
 
 } // namespace llm_test

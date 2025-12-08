@@ -1,8 +1,8 @@
 third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/ggml-cpu.c.o: \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/ggml-cpu/ggml-cpu.c \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/./ggml-backend-impl.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/../include/ggml-backend.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/../include/ggml.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/ggml-cpu/ggml-cpu.c \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/./ggml-backend-impl.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/../include/ggml-backend.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/../include/ggml.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include/stdbool.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include/stddef.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include/__stddef_ptrdiff_t.h \
@@ -41,11 +41,11 @@ third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/ggml-cpu.c
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include/__stdarg_va_copy.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/bits/seek_constants.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/bits/fortify/stdio.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/../include/ggml-alloc.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/ggml-cpu/traits.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/ggml-cpu/ggml-cpu-impl.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/./ggml-impl.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/../include/gguf.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/../include/ggml-alloc.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/ggml-cpu/traits.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/ggml-cpu/ggml-cpu-impl.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/./ggml-impl.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/../include/gguf.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/assert.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/math.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include/limits.h \
@@ -69,16 +69,16 @@ third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/ggml-cpu.c
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include/arm_neon.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include/arm_bf16.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include/arm_vector_types.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/../include/ggml-cpu.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/ggml-cpu/quants.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/./ggml-common.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/./ggml-threading.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/ggml-cpu/unary-ops.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/ggml-cpu/common.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/ggml-cpu/simd-mappings.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/ggml-cpu/binary-ops.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/ggml-cpu/vec.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/ggml-cpu/ops.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/../include/ggml-cpu.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/ggml-cpu/quants.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/./ggml-common.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/./ggml-threading.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/ggml-cpu/unary-ops.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/ggml-cpu/common.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/ggml-cpu/simd-mappings.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/ggml-cpu/binary-ops.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/ggml-cpu/vec.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/ggml-cpu/ops.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/errno.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/linux/errno.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android/asm/errno.h \
@@ -106,7 +106,7 @@ third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/ggml-cpu.c
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include/inttypes.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/inttypes.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include/omp.h \
-  /home/jongjip/dev/llm/llama.cpp/ggml/src/ggml-cpu/llamafile/sgemm.h \
+  /home/jongjip/dev/llm/specinfer.cpp/ggml/src/ggml-cpu/llamafile/sgemm.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/pthread.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/sched.h \
   /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/linux/sched.h \

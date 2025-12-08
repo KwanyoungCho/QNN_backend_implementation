@@ -593,7 +593,7 @@ GGML_VULKAN_SHADER_DEBUG_INFO:BOOL=OFF
 GGML_VULKAN_VALIDATE:BOOL=OFF
 
 //ggml: enable vxe
-GGML_VXE:BOOL=ON
+GGML_VXE:BOOL=OFF
 
 //ggml: use WebGPU
 GGML_WEBGPU:BOOL=OFF
@@ -648,6 +648,10 @@ LLAMA_CURL:BOOL=ON
 
 //llama: enable -Werror flag
 LLAMA_FATAL_WARNINGS:BOOL=OFF
+
+//llama: if libcurl is disabled, use httplib to download model
+// from an URL
+LLAMA_HTTPLIB:BOOL=ON
 
 //Location of header  files
 LLAMA_INCLUDE_INSTALL_DIR:PATH=include
@@ -707,7 +711,7 @@ ggml_BINARY_DIR:STATIC=/home/jongjip/QNN_backend_implementation/build-android/th
 ggml_IS_TOP_LEVEL:STATIC=OFF
 
 //Value Computed by CMake
-ggml_SOURCE_DIR:STATIC=/home/jongjip/dev/llm/llama.cpp/ggml
+ggml_SOURCE_DIR:STATIC=/home/jongjip/dev/llm/specinfer.cpp/ggml
 
 //Value Computed by CMake
 llama.cpp_BINARY_DIR:STATIC=/home/jongjip/QNN_backend_implementation/build-android/third_party/specinfer-build
@@ -716,7 +720,7 @@ llama.cpp_BINARY_DIR:STATIC=/home/jongjip/QNN_backend_implementation/build-andro
 llama.cpp_IS_TOP_LEVEL:STATIC=OFF
 
 //Value Computed by CMake
-llama.cpp_SOURCE_DIR:STATIC=/home/jongjip/dev/llm/llama.cpp
+llama.cpp_SOURCE_DIR:STATIC=/home/jongjip/dev/llm/specinfer.cpp
 
 //Value Computed by CMake
 llm_qnn_init_BINARY_DIR:STATIC=/home/jongjip/QNN_backend_implementation/build-android
@@ -955,6 +959,18 @@ GGML_CUDA_COMPRESSION_MODE-STRINGS:INTERNAL=none;speed;balance;size
 GGML_OPENMP_ENABLED:INTERNAL=ON
 //ADVANCED property for variable: GIT_EXECUTABLE
 GIT_EXECUTABLE-ADVANCED:INTERNAL=1
+//Test HAVE_DOTPROD
+HAVE_DOTPROD:INTERNAL=
+//Test HAVE_FMA
+HAVE_FMA:INTERNAL=1
+//Test HAVE_FP16_VECTOR_ARITHMETIC
+HAVE_FP16_VECTOR_ARITHMETIC:INTERNAL=
+//Test HAVE_MATMUL_INT8
+HAVE_MATMUL_INT8:INTERNAL=
+//Test HAVE_SME
+HAVE_SME:INTERNAL=
+//Test HAVE_SVE
+HAVE_SVE:INTERNAL=
 //Result of TRY_COMPILE
 OpenMP_COMPILE_RESULT_CXX_fopenmplibomp:INTERNAL=TRUE
 //Result of TRY_COMPILE

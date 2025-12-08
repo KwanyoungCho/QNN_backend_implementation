@@ -300,13 +300,13 @@ bool LLMDecodeRunner::setup_multi_context_io_allocators() { // [spagetti] 이거
     // Prefill allocator
     shard.prefill_alloc.reset(new QNNIOAllocator());
     shard.prefill_alloc->build_from_qnnjson(*shard.prefill_graph);
-    auto prefill_bytes = shard.prefill_alloc->allocate(64); // [spagetti] 이거 지금 말안됨 근거 없는 코드임 내가 돌아가게만 만든 코드
+    auto prefill_bytes = shard.prefill_alloc->allocate(0); // [spagetti] 이거 지금 말안됨 근거 없는 코드임 내가 돌아가게만 만든 코드
     
-    // KV allocator
+    // // KV allocator
     shard.kv_alloc.reset(new QNNIOAllocator());
     shard.kv_alloc->build_from_qnnjson(*shard.kv_graph);
-    auto kv_bytes = shard.kv_alloc->allocate(64); // [spagetti] 이거 왜 두번 할당함? 그럼 실제로는 뭘씀? 이거 열심히 rpc한다음에 이거 쓰고 있었던거 아니야?
-    
+    auto kv_bytes = shard.kv_alloc->allocate(64); // [spagetti] 이거 왜 두번 할당함? 그럼 실제로는 뭘씀? 
+
     // Create tensor holders for prefill graph
     shard.prefill_input_holders.clear();
     for (const auto& t : shard.prefill_graph->inputs) { // [spagetti] 모든 인풋에 대해서 이렇게 만드는게 맞나? 확인
@@ -513,9 +513,7 @@ bool LLMDecodeRunner::run_multi_context_prefill(const std::vector<int32_t>& toke
     std::string name_lower = t.name;
     for (auto& c : name_lower) c = (char)tolower(c);
     
-    if (name_lower.find("squeeze") != std::string::npos || // [spagetti] 이름 단순화!
-        name_lower.find("logit") != std::string::npos ||
-        name_lower.find("lm_head") != std::string::npos) {
+    if (name_lower.find("squeeze") != std::string::npos) {
       logits_desc = &t;
       break;
     }
