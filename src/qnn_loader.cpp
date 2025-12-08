@@ -212,7 +212,7 @@ bool QnnLoader::create_context_from_binary(const void* binary, size_t binary_siz
   auto err = api.contextCreateFromBinary(
       reinterpret_cast<Qnn_BackendHandle_t>(backend_),
       reinterpret_cast<Qnn_DeviceHandle_t>(device_),
-      /*config*/nullptr, // [spagetti] config 넣어야 하는지 확인해봐
+      /*config*/nullptr,
       binary,
       static_cast<Qnn_ContextBinarySize_t>(binary_size),
       reinterpret_cast<Qnn_ContextHandle_t*>(&ctx),

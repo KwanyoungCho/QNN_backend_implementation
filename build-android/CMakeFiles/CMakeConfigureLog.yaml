@@ -40,8 +40,8 @@ events:
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-KkPGsG"
-      binary: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-KkPGsG"
+      source: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-t9IkwJ"
+      binary: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-t9IkwJ"
     cmakeVariables:
       ANDROID_ABI: "arm64-v8a"
       ANDROID_ARM_MODE: "thumb"
@@ -62,20 +62,20 @@ events:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-KkPGsG'
+        Change Dir: '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-t9IkwJ'
         
-        Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_806f4/fast
-        /usr/bin/make  -f CMakeFiles/cmTC_806f4.dir/build.make CMakeFiles/cmTC_806f4.dir/build
-        make[1]: Entering directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-KkPGsG'
-        Building CXX object CMakeFiles/cmTC_806f4.dir/CMakeCXXCompilerABI.cpp.o
-        /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat    -fPIE   -v -MD -MT CMakeFiles/cmTC_806f4.dir/CMakeCXXCompilerABI.cpp.o -MF CMakeFiles/cmTC_806f4.dir/CMakeCXXCompilerABI.cpp.o.d -o CMakeFiles/cmTC_806f4.dir/CMakeCXXCompilerABI.cpp.o -c /usr/local/share/cmake-3.30/Modules/CMakeCXXCompilerABI.cpp
+        Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_49919/fast
+        /usr/bin/make  -f CMakeFiles/cmTC_49919.dir/build.make CMakeFiles/cmTC_49919.dir/build
+        make[1]: Entering directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-t9IkwJ'
+        Building CXX object CMakeFiles/cmTC_49919.dir/CMakeCXXCompilerABI.cpp.o
+        /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat    -fPIE   -v -MD -MT CMakeFiles/cmTC_49919.dir/CMakeCXXCompilerABI.cpp.o -MF CMakeFiles/cmTC_49919.dir/CMakeCXXCompilerABI.cpp.o.d -o CMakeFiles/cmTC_49919.dir/CMakeCXXCompilerABI.cpp.o -c /usr/local/share/cmake-3.30/Modules/CMakeCXXCompilerABI.cpp
         Android (12470979, +pgo, +bolt, +lto, +mlgo, based on r522817c) clang version 18.0.3 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
         Target: aarch64-none-linux-android30
         Thread model: posix
         InstalledDir: /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin
         Found CUDA installation: /usr/local/cuda-12.2, version 12.2
          (in-process)
-         "/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++" -cc1 -triple aarch64-none-linux-android30 -emit-obj -mrelax-all -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=non-leaf -ffp-contract=on -fno-rounding-math -mconstructor-aliases -funwind-tables=2 -target-cpu generic -target-feature +neon -target-feature +v8a -target-feature +fix-cortex-a53-835769 -target-abi aapcs -debug-info-kind=constructor -dwarf-version=4 -debugger-tuning=gdb -fdebug-compilation-dir=/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-KkPGsG -v -ffunction-sections -fdata-sections -fcoverage-compilation-dir=/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-KkPGsG -resource-dir /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18 -dependency-file CMakeFiles/cmTC_806f4.dir/CMakeCXXCompilerABI.cpp.o.d -MT CMakeFiles/cmTC_806f4.dir/CMakeCXXCompilerABI.cpp.o -sys-header-deps -D ANDROID -D _FORTIFY_SOURCE=2 -isysroot /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -internal-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1 -internal-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include -internal-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include -internal-externc-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android -internal-externc-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/include -internal-externc-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include -Wformat -fdeprecated-macro -ferror-limit 19 -stack-protector 2 -fno-signed-char -fgnuc-version=4.2.1 -fcxx-exceptions -fexceptions -target-feature +outline-atomics -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_806f4.dir/CMakeCXXCompilerABI.cpp.o -x c++ /usr/local/share/cmake-3.30/Modules/CMakeCXXCompilerABI.cpp
+         "/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++" -cc1 -triple aarch64-none-linux-android30 -emit-obj -mrelax-all -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=non-leaf -ffp-contract=on -fno-rounding-math -mconstructor-aliases -funwind-tables=2 -target-cpu generic -target-feature +neon -target-feature +v8a -target-feature +fix-cortex-a53-835769 -target-abi aapcs -debug-info-kind=constructor -dwarf-version=4 -debugger-tuning=gdb -fdebug-compilation-dir=/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-t9IkwJ -v -ffunction-sections -fdata-sections -fcoverage-compilation-dir=/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-t9IkwJ -resource-dir /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18 -dependency-file CMakeFiles/cmTC_49919.dir/CMakeCXXCompilerABI.cpp.o.d -MT CMakeFiles/cmTC_49919.dir/CMakeCXXCompilerABI.cpp.o -sys-header-deps -D ANDROID -D _FORTIFY_SOURCE=2 -isysroot /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -internal-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1 -internal-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include -internal-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include -internal-externc-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android -internal-externc-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/include -internal-externc-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include -Wformat -fdeprecated-macro -ferror-limit 19 -stack-protector 2 -fno-signed-char -fgnuc-version=4.2.1 -fcxx-exceptions -fexceptions -target-feature +outline-atomics -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_49919.dir/CMakeCXXCompilerABI.cpp.o -x c++ /usr/local/share/cmake-3.30/Modules/CMakeCXXCompilerABI.cpp
         clang -cc1 version 18.0.3 based upon LLVM 18.0.3 default target x86_64-unknown-linux-gnu
         ignoring nonexistent directory "/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include"
         ignoring nonexistent directory "/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/include"
@@ -86,16 +86,16 @@ events:
          /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android
          /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include
         End of search list.
-        Linking CXX executable cmTC_806f4
-        /usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_806f4.dir/link.txt --verbose=1
-        /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat    -static-libstdc++ -Wl,--build-id=sha1 -Wl,--no-undefined-version -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments   -v CMakeFiles/cmTC_806f4.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_806f4
+        Linking CXX executable cmTC_49919
+        /usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_49919.dir/link.txt --verbose=1
+        /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat    -static-libstdc++ -Wl,--build-id=sha1 -Wl,--no-undefined-version -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments   -v CMakeFiles/cmTC_49919.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_49919
         Android (12470979, +pgo, +bolt, +lto, +mlgo, based on r522817c) clang version 18.0.3 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
         Target: aarch64-none-linux-android30
         Thread model: posix
         InstalledDir: /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin
         Found CUDA installation: /usr/local/cuda-12.2, version 12.2
-         "/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/ld.lld" --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -EL --fix-cortex-a53-843419 -z now -z relro -z max-page-size=4096 --hash-style=gnu --eh-frame-hdr -m aarch64linux -pie -dynamic-linker /system/bin/linker64 -o cmTC_806f4 /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtbegin_dynamic.o -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/aarch64 -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30 -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib --build-id=sha1 --no-undefined-version --fatal-warnings --no-undefined CMakeFiles/cmTC_806f4.dir/CMakeCXXCompilerABI.cpp.o -Bstatic -lc++ -Bdynamic -lm /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl -lc /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtend_android.o
-        make[1]: Leaving directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-KkPGsG'
+         "/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/ld.lld" --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -EL --fix-cortex-a53-843419 -z now -z relro -z max-page-size=4096 --hash-style=gnu --eh-frame-hdr -m aarch64linux -pie -dynamic-linker /system/bin/linker64 -o cmTC_49919 /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtbegin_dynamic.o -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/aarch64 -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30 -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib --build-id=sha1 --no-undefined-version --fatal-warnings --no-undefined CMakeFiles/cmTC_49919.dir/CMakeCXXCompilerABI.cpp.o -Bstatic -lc++ -Bdynamic -lm /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl -lc /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtend_android.o
+        make[1]: Leaving directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-t9IkwJ'
         
       exitCode: 0
   -
@@ -130,20 +130,20 @@ events:
       Parsed CXX implicit link information:
         link line regex: [^( *|.*[/\\])(ld[0-9]*(\\.[a-z]+)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
         linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(\\.[a-z]+)?))("|,| |$)]
-        ignore line: [Change Dir: '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-KkPGsG']
+        ignore line: [Change Dir: '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-t9IkwJ']
         ignore line: []
-        ignore line: [Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_806f4/fast]
-        ignore line: [/usr/bin/make  -f CMakeFiles/cmTC_806f4.dir/build.make CMakeFiles/cmTC_806f4.dir/build]
-        ignore line: [make[1]: Entering directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-KkPGsG']
-        ignore line: [Building CXX object CMakeFiles/cmTC_806f4.dir/CMakeCXXCompilerABI.cpp.o]
-        ignore line: [/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat    -fPIE   -v -MD -MT CMakeFiles/cmTC_806f4.dir/CMakeCXXCompilerABI.cpp.o -MF CMakeFiles/cmTC_806f4.dir/CMakeCXXCompilerABI.cpp.o.d -o CMakeFiles/cmTC_806f4.dir/CMakeCXXCompilerABI.cpp.o -c /usr/local/share/cmake-3.30/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_49919/fast]
+        ignore line: [/usr/bin/make  -f CMakeFiles/cmTC_49919.dir/build.make CMakeFiles/cmTC_49919.dir/build]
+        ignore line: [make[1]: Entering directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-t9IkwJ']
+        ignore line: [Building CXX object CMakeFiles/cmTC_49919.dir/CMakeCXXCompilerABI.cpp.o]
+        ignore line: [/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat    -fPIE   -v -MD -MT CMakeFiles/cmTC_49919.dir/CMakeCXXCompilerABI.cpp.o -MF CMakeFiles/cmTC_49919.dir/CMakeCXXCompilerABI.cpp.o.d -o CMakeFiles/cmTC_49919.dir/CMakeCXXCompilerABI.cpp.o -c /usr/local/share/cmake-3.30/Modules/CMakeCXXCompilerABI.cpp]
         ignore line: [Android (12470979  +pgo  +bolt  +lto  +mlgo  based on r522817c) clang version 18.0.3 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)]
         ignore line: [Target: aarch64-none-linux-android30]
         ignore line: [Thread model: posix]
         ignore line: [InstalledDir: /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin]
         ignore line: [Found CUDA installation: /usr/local/cuda-12.2  version 12.2]
         ignore line: [ (in-process)]
-        ignore line: [ "/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++" -cc1 -triple aarch64-none-linux-android30 -emit-obj -mrelax-all -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=non-leaf -ffp-contract=on -fno-rounding-math -mconstructor-aliases -funwind-tables=2 -target-cpu generic -target-feature +neon -target-feature +v8a -target-feature +fix-cortex-a53-835769 -target-abi aapcs -debug-info-kind=constructor -dwarf-version=4 -debugger-tuning=gdb -fdebug-compilation-dir=/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-KkPGsG -v -ffunction-sections -fdata-sections -fcoverage-compilation-dir=/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-KkPGsG -resource-dir /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18 -dependency-file CMakeFiles/cmTC_806f4.dir/CMakeCXXCompilerABI.cpp.o.d -MT CMakeFiles/cmTC_806f4.dir/CMakeCXXCompilerABI.cpp.o -sys-header-deps -D ANDROID -D _FORTIFY_SOURCE=2 -isysroot /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -internal-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1 -internal-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include -internal-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include -internal-externc-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android -internal-externc-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/include -internal-externc-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include -Wformat -fdeprecated-macro -ferror-limit 19 -stack-protector 2 -fno-signed-char -fgnuc-version=4.2.1 -fcxx-exceptions -fexceptions -target-feature +outline-atomics -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_806f4.dir/CMakeCXXCompilerABI.cpp.o -x c++ /usr/local/share/cmake-3.30/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [ "/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++" -cc1 -triple aarch64-none-linux-android30 -emit-obj -mrelax-all -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=non-leaf -ffp-contract=on -fno-rounding-math -mconstructor-aliases -funwind-tables=2 -target-cpu generic -target-feature +neon -target-feature +v8a -target-feature +fix-cortex-a53-835769 -target-abi aapcs -debug-info-kind=constructor -dwarf-version=4 -debugger-tuning=gdb -fdebug-compilation-dir=/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-t9IkwJ -v -ffunction-sections -fdata-sections -fcoverage-compilation-dir=/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-t9IkwJ -resource-dir /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18 -dependency-file CMakeFiles/cmTC_49919.dir/CMakeCXXCompilerABI.cpp.o.d -MT CMakeFiles/cmTC_49919.dir/CMakeCXXCompilerABI.cpp.o -sys-header-deps -D ANDROID -D _FORTIFY_SOURCE=2 -isysroot /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -internal-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1 -internal-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include -internal-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include -internal-externc-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android -internal-externc-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/include -internal-externc-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include -Wformat -fdeprecated-macro -ferror-limit 19 -stack-protector 2 -fno-signed-char -fgnuc-version=4.2.1 -fcxx-exceptions -fexceptions -target-feature +outline-atomics -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_49919.dir/CMakeCXXCompilerABI.cpp.o -x c++ /usr/local/share/cmake-3.30/Modules/CMakeCXXCompilerABI.cpp]
         ignore line: [clang -cc1 version 18.0.3 based upon LLVM 18.0.3 default target x86_64-unknown-linux-gnu]
         ignore line: [ignoring nonexistent directory "/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include"]
         ignore line: [ignoring nonexistent directory "/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/include"]
@@ -154,15 +154,15 @@ events:
         ignore line: [ /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android]
         ignore line: [ /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include]
         ignore line: [End of search list.]
-        ignore line: [Linking CXX executable cmTC_806f4]
-        ignore line: [/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_806f4.dir/link.txt --verbose=1]
-        ignore line: [/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat    -static-libstdc++ -Wl --build-id=sha1 -Wl --no-undefined-version -Wl --fatal-warnings -Wl --no-undefined -Qunused-arguments   -v CMakeFiles/cmTC_806f4.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_806f4]
+        ignore line: [Linking CXX executable cmTC_49919]
+        ignore line: [/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_49919.dir/link.txt --verbose=1]
+        ignore line: [/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat    -static-libstdc++ -Wl --build-id=sha1 -Wl --no-undefined-version -Wl --fatal-warnings -Wl --no-undefined -Qunused-arguments   -v CMakeFiles/cmTC_49919.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_49919]
         ignore line: [Android (12470979  +pgo  +bolt  +lto  +mlgo  based on r522817c) clang version 18.0.3 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)]
         ignore line: [Target: aarch64-none-linux-android30]
         ignore line: [Thread model: posix]
         ignore line: [InstalledDir: /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin]
         ignore line: [Found CUDA installation: /usr/local/cuda-12.2  version 12.2]
-        link line: [ "/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/ld.lld" --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -EL --fix-cortex-a53-843419 -z now -z relro -z max-page-size=4096 --hash-style=gnu --eh-frame-hdr -m aarch64linux -pie -dynamic-linker /system/bin/linker64 -o cmTC_806f4 /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtbegin_dynamic.o -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/aarch64 -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30 -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib --build-id=sha1 --no-undefined-version --fatal-warnings --no-undefined CMakeFiles/cmTC_806f4.dir/CMakeCXXCompilerABI.cpp.o -Bstatic -lc++ -Bdynamic -lm /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl -lc /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtend_android.o]
+        link line: [ "/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/ld.lld" --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -EL --fix-cortex-a53-843419 -z now -z relro -z max-page-size=4096 --hash-style=gnu --eh-frame-hdr -m aarch64linux -pie -dynamic-linker /system/bin/linker64 -o cmTC_49919 /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtbegin_dynamic.o -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/aarch64 -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30 -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib --build-id=sha1 --no-undefined-version --fatal-warnings --no-undefined CMakeFiles/cmTC_49919.dir/CMakeCXXCompilerABI.cpp.o -Bstatic -lc++ -Bdynamic -lm /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl -lc /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtend_android.o]
           arg [/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/ld.lld] ==> ignore
           arg [--sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot] ==> ignore
           arg [-EL] ==> ignore
@@ -178,7 +178,7 @@ events:
           arg [-dynamic-linker] ==> ignore
           arg [/system/bin/linker64] ==> ignore
           arg [-o] ==> ignore
-          arg [cmTC_806f4] ==> ignore
+          arg [cmTC_49919] ==> ignore
           arg [/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtbegin_dynamic.o] ==> obj [/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtbegin_dynamic.o]
           arg [-L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/aarch64] ==> dir [/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/aarch64]
           arg [-L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30] ==> dir [/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30]
@@ -188,7 +188,7 @@ events:
           arg [--no-undefined-version] ==> ignore
           arg [--fatal-warnings] ==> ignore
           arg [--no-undefined] ==> ignore
-          arg [CMakeFiles/cmTC_806f4.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+          arg [CMakeFiles/cmTC_49919.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
           arg [-Bstatic] ==> search static
           arg [-lc++] ==> lib [c++]
           arg [-Bdynamic] ==> search dynamic
@@ -255,8 +255,8 @@ events:
     checks:
       - "Detecting C compiler ABI info"
     directories:
-      source: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-5pXeYF"
-      binary: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-5pXeYF"
+      source: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-KK0WSL"
+      binary: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-KK0WSL"
     cmakeVariables:
       ANDROID_ABI: "arm64-v8a"
       ANDROID_ARM_MODE: "thumb"
@@ -276,20 +276,20 @@ events:
       variable: "CMAKE_C_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-5pXeYF'
+        Change Dir: '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-KK0WSL'
         
-        Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_62abe/fast
-        /usr/bin/make  -f CMakeFiles/cmTC_62abe.dir/build.make CMakeFiles/cmTC_62abe.dir/build
-        make[1]: Entering directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-5pXeYF'
-        Building C object CMakeFiles/cmTC_62abe.dir/CMakeCCompilerABI.c.o
-        /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat   -fPIE   -v -MD -MT CMakeFiles/cmTC_62abe.dir/CMakeCCompilerABI.c.o -MF CMakeFiles/cmTC_62abe.dir/CMakeCCompilerABI.c.o.d -o CMakeFiles/cmTC_62abe.dir/CMakeCCompilerABI.c.o -c /usr/local/share/cmake-3.30/Modules/CMakeCCompilerABI.c
+        Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_6e436/fast
+        /usr/bin/make  -f CMakeFiles/cmTC_6e436.dir/build.make CMakeFiles/cmTC_6e436.dir/build
+        make[1]: Entering directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-KK0WSL'
+        Building C object CMakeFiles/cmTC_6e436.dir/CMakeCCompilerABI.c.o
+        /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat   -fPIE   -v -MD -MT CMakeFiles/cmTC_6e436.dir/CMakeCCompilerABI.c.o -MF CMakeFiles/cmTC_6e436.dir/CMakeCCompilerABI.c.o.d -o CMakeFiles/cmTC_6e436.dir/CMakeCCompilerABI.c.o -c /usr/local/share/cmake-3.30/Modules/CMakeCCompilerABI.c
         Android (12470979, +pgo, +bolt, +lto, +mlgo, based on r522817c) clang version 18.0.3 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
         Target: aarch64-none-linux-android30
         Thread model: posix
         InstalledDir: /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin
         Found CUDA installation: /usr/local/cuda-12.2, version 12.2
          (in-process)
-         "/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang" -cc1 -triple aarch64-none-linux-android30 -emit-obj -mrelax-all -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=non-leaf -ffp-contract=on -fno-rounding-math -mconstructor-aliases -funwind-tables=2 -target-cpu generic -target-feature +neon -target-feature +v8a -target-feature +fix-cortex-a53-835769 -target-abi aapcs -debug-info-kind=constructor -dwarf-version=4 -debugger-tuning=gdb -fdebug-compilation-dir=/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-5pXeYF -v -ffunction-sections -fdata-sections -fcoverage-compilation-dir=/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-5pXeYF -resource-dir /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18 -dependency-file CMakeFiles/cmTC_62abe.dir/CMakeCCompilerABI.c.o.d -MT CMakeFiles/cmTC_62abe.dir/CMakeCCompilerABI.c.o -sys-header-deps -D ANDROID -D _FORTIFY_SOURCE=2 -isysroot /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -internal-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include -internal-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include -internal-externc-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android -internal-externc-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/include -internal-externc-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include -Wformat -ferror-limit 19 -stack-protector 2 -fno-signed-char -fgnuc-version=4.2.1 -target-feature +outline-atomics -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_62abe.dir/CMakeCCompilerABI.c.o -x c /usr/local/share/cmake-3.30/Modules/CMakeCCompilerABI.c
+         "/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang" -cc1 -triple aarch64-none-linux-android30 -emit-obj -mrelax-all -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=non-leaf -ffp-contract=on -fno-rounding-math -mconstructor-aliases -funwind-tables=2 -target-cpu generic -target-feature +neon -target-feature +v8a -target-feature +fix-cortex-a53-835769 -target-abi aapcs -debug-info-kind=constructor -dwarf-version=4 -debugger-tuning=gdb -fdebug-compilation-dir=/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-KK0WSL -v -ffunction-sections -fdata-sections -fcoverage-compilation-dir=/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-KK0WSL -resource-dir /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18 -dependency-file CMakeFiles/cmTC_6e436.dir/CMakeCCompilerABI.c.o.d -MT CMakeFiles/cmTC_6e436.dir/CMakeCCompilerABI.c.o -sys-header-deps -D ANDROID -D _FORTIFY_SOURCE=2 -isysroot /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -internal-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include -internal-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include -internal-externc-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android -internal-externc-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/include -internal-externc-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include -Wformat -ferror-limit 19 -stack-protector 2 -fno-signed-char -fgnuc-version=4.2.1 -target-feature +outline-atomics -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_6e436.dir/CMakeCCompilerABI.c.o -x c /usr/local/share/cmake-3.30/Modules/CMakeCCompilerABI.c
         clang -cc1 version 18.0.3 based upon LLVM 18.0.3 default target x86_64-unknown-linux-gnu
         ignoring nonexistent directory "/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include"
         ignoring nonexistent directory "/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/include"
@@ -299,16 +299,16 @@ events:
          /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android
          /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include
         End of search list.
-        Linking C executable cmTC_62abe
-        /usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_62abe.dir/link.txt --verbose=1
-        /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat   -static-libstdc++ -Wl,--build-id=sha1 -Wl,--no-undefined-version -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments   -v CMakeFiles/cmTC_62abe.dir/CMakeCCompilerABI.c.o -o cmTC_62abe
+        Linking C executable cmTC_6e436
+        /usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_6e436.dir/link.txt --verbose=1
+        /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat   -static-libstdc++ -Wl,--build-id=sha1 -Wl,--no-undefined-version -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments   -v CMakeFiles/cmTC_6e436.dir/CMakeCCompilerABI.c.o -o cmTC_6e436
         Android (12470979, +pgo, +bolt, +lto, +mlgo, based on r522817c) clang version 18.0.3 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
         Target: aarch64-none-linux-android30
         Thread model: posix
         InstalledDir: /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin
         Found CUDA installation: /usr/local/cuda-12.2, version 12.2
-         "/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/ld.lld" --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -EL --fix-cortex-a53-843419 -z now -z relro -z max-page-size=4096 --hash-style=gnu --eh-frame-hdr -m aarch64linux -pie -dynamic-linker /system/bin/linker64 -o cmTC_62abe /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtbegin_dynamic.o -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/aarch64 -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30 -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib --build-id=sha1 --no-undefined-version --fatal-warnings --no-undefined CMakeFiles/cmTC_62abe.dir/CMakeCCompilerABI.c.o /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl -lc /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtend_android.o
-        make[1]: Leaving directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-5pXeYF'
+         "/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/ld.lld" --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -EL --fix-cortex-a53-843419 -z now -z relro -z max-page-size=4096 --hash-style=gnu --eh-frame-hdr -m aarch64linux -pie -dynamic-linker /system/bin/linker64 -o cmTC_6e436 /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtbegin_dynamic.o -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/aarch64 -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30 -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib --build-id=sha1 --no-undefined-version --fatal-warnings --no-undefined CMakeFiles/cmTC_6e436.dir/CMakeCCompilerABI.c.o /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl -lc /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtend_android.o
+        make[1]: Leaving directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-KK0WSL'
         
       exitCode: 0
   -
@@ -341,20 +341,20 @@ events:
       Parsed C implicit link information:
         link line regex: [^( *|.*[/\\])(ld[0-9]*(\\.[a-z]+)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
         linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(\\.[a-z]+)?))("|,| |$)]
-        ignore line: [Change Dir: '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-5pXeYF']
+        ignore line: [Change Dir: '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-KK0WSL']
         ignore line: []
-        ignore line: [Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_62abe/fast]
-        ignore line: [/usr/bin/make  -f CMakeFiles/cmTC_62abe.dir/build.make CMakeFiles/cmTC_62abe.dir/build]
-        ignore line: [make[1]: Entering directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-5pXeYF']
-        ignore line: [Building C object CMakeFiles/cmTC_62abe.dir/CMakeCCompilerABI.c.o]
-        ignore line: [/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat   -fPIE   -v -MD -MT CMakeFiles/cmTC_62abe.dir/CMakeCCompilerABI.c.o -MF CMakeFiles/cmTC_62abe.dir/CMakeCCompilerABI.c.o.d -o CMakeFiles/cmTC_62abe.dir/CMakeCCompilerABI.c.o -c /usr/local/share/cmake-3.30/Modules/CMakeCCompilerABI.c]
+        ignore line: [Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_6e436/fast]
+        ignore line: [/usr/bin/make  -f CMakeFiles/cmTC_6e436.dir/build.make CMakeFiles/cmTC_6e436.dir/build]
+        ignore line: [make[1]: Entering directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-KK0WSL']
+        ignore line: [Building C object CMakeFiles/cmTC_6e436.dir/CMakeCCompilerABI.c.o]
+        ignore line: [/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat   -fPIE   -v -MD -MT CMakeFiles/cmTC_6e436.dir/CMakeCCompilerABI.c.o -MF CMakeFiles/cmTC_6e436.dir/CMakeCCompilerABI.c.o.d -o CMakeFiles/cmTC_6e436.dir/CMakeCCompilerABI.c.o -c /usr/local/share/cmake-3.30/Modules/CMakeCCompilerABI.c]
         ignore line: [Android (12470979  +pgo  +bolt  +lto  +mlgo  based on r522817c) clang version 18.0.3 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)]
         ignore line: [Target: aarch64-none-linux-android30]
         ignore line: [Thread model: posix]
         ignore line: [InstalledDir: /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin]
         ignore line: [Found CUDA installation: /usr/local/cuda-12.2  version 12.2]
         ignore line: [ (in-process)]
-        ignore line: [ "/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang" -cc1 -triple aarch64-none-linux-android30 -emit-obj -mrelax-all -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=non-leaf -ffp-contract=on -fno-rounding-math -mconstructor-aliases -funwind-tables=2 -target-cpu generic -target-feature +neon -target-feature +v8a -target-feature +fix-cortex-a53-835769 -target-abi aapcs -debug-info-kind=constructor -dwarf-version=4 -debugger-tuning=gdb -fdebug-compilation-dir=/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-5pXeYF -v -ffunction-sections -fdata-sections -fcoverage-compilation-dir=/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-5pXeYF -resource-dir /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18 -dependency-file CMakeFiles/cmTC_62abe.dir/CMakeCCompilerABI.c.o.d -MT CMakeFiles/cmTC_62abe.dir/CMakeCCompilerABI.c.o -sys-header-deps -D ANDROID -D _FORTIFY_SOURCE=2 -isysroot /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -internal-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include -internal-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include -internal-externc-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android -internal-externc-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/include -internal-externc-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include -Wformat -ferror-limit 19 -stack-protector 2 -fno-signed-char -fgnuc-version=4.2.1 -target-feature +outline-atomics -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_62abe.dir/CMakeCCompilerABI.c.o -x c /usr/local/share/cmake-3.30/Modules/CMakeCCompilerABI.c]
+        ignore line: [ "/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang" -cc1 -triple aarch64-none-linux-android30 -emit-obj -mrelax-all -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=non-leaf -ffp-contract=on -fno-rounding-math -mconstructor-aliases -funwind-tables=2 -target-cpu generic -target-feature +neon -target-feature +v8a -target-feature +fix-cortex-a53-835769 -target-abi aapcs -debug-info-kind=constructor -dwarf-version=4 -debugger-tuning=gdb -fdebug-compilation-dir=/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-KK0WSL -v -ffunction-sections -fdata-sections -fcoverage-compilation-dir=/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-KK0WSL -resource-dir /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18 -dependency-file CMakeFiles/cmTC_6e436.dir/CMakeCCompilerABI.c.o.d -MT CMakeFiles/cmTC_6e436.dir/CMakeCCompilerABI.c.o -sys-header-deps -D ANDROID -D _FORTIFY_SOURCE=2 -isysroot /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -internal-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include -internal-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include -internal-externc-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android -internal-externc-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/include -internal-externc-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include -Wformat -ferror-limit 19 -stack-protector 2 -fno-signed-char -fgnuc-version=4.2.1 -target-feature +outline-atomics -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_6e436.dir/CMakeCCompilerABI.c.o -x c /usr/local/share/cmake-3.30/Modules/CMakeCCompilerABI.c]
         ignore line: [clang -cc1 version 18.0.3 based upon LLVM 18.0.3 default target x86_64-unknown-linux-gnu]
         ignore line: [ignoring nonexistent directory "/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include"]
         ignore line: [ignoring nonexistent directory "/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/include"]
@@ -364,15 +364,15 @@ events:
         ignore line: [ /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android]
         ignore line: [ /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include]
         ignore line: [End of search list.]
-        ignore line: [Linking C executable cmTC_62abe]
-        ignore line: [/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_62abe.dir/link.txt --verbose=1]
-        ignore line: [/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat   -static-libstdc++ -Wl --build-id=sha1 -Wl --no-undefined-version -Wl --fatal-warnings -Wl --no-undefined -Qunused-arguments   -v CMakeFiles/cmTC_62abe.dir/CMakeCCompilerABI.c.o -o cmTC_62abe]
+        ignore line: [Linking C executable cmTC_6e436]
+        ignore line: [/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_6e436.dir/link.txt --verbose=1]
+        ignore line: [/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat   -static-libstdc++ -Wl --build-id=sha1 -Wl --no-undefined-version -Wl --fatal-warnings -Wl --no-undefined -Qunused-arguments   -v CMakeFiles/cmTC_6e436.dir/CMakeCCompilerABI.c.o -o cmTC_6e436]
         ignore line: [Android (12470979  +pgo  +bolt  +lto  +mlgo  based on r522817c) clang version 18.0.3 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)]
         ignore line: [Target: aarch64-none-linux-android30]
         ignore line: [Thread model: posix]
         ignore line: [InstalledDir: /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin]
         ignore line: [Found CUDA installation: /usr/local/cuda-12.2  version 12.2]
-        link line: [ "/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/ld.lld" --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -EL --fix-cortex-a53-843419 -z now -z relro -z max-page-size=4096 --hash-style=gnu --eh-frame-hdr -m aarch64linux -pie -dynamic-linker /system/bin/linker64 -o cmTC_62abe /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtbegin_dynamic.o -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/aarch64 -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30 -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib --build-id=sha1 --no-undefined-version --fatal-warnings --no-undefined CMakeFiles/cmTC_62abe.dir/CMakeCCompilerABI.c.o /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl -lc /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtend_android.o]
+        link line: [ "/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/ld.lld" --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -EL --fix-cortex-a53-843419 -z now -z relro -z max-page-size=4096 --hash-style=gnu --eh-frame-hdr -m aarch64linux -pie -dynamic-linker /system/bin/linker64 -o cmTC_6e436 /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtbegin_dynamic.o -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/aarch64 -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30 -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib --build-id=sha1 --no-undefined-version --fatal-warnings --no-undefined CMakeFiles/cmTC_6e436.dir/CMakeCCompilerABI.c.o /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl -lc /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtend_android.o]
           arg [/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/ld.lld] ==> ignore
           arg [--sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot] ==> ignore
           arg [-EL] ==> ignore
@@ -388,7 +388,7 @@ events:
           arg [-dynamic-linker] ==> ignore
           arg [/system/bin/linker64] ==> ignore
           arg [-o] ==> ignore
-          arg [cmTC_62abe] ==> ignore
+          arg [cmTC_6e436] ==> ignore
           arg [/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtbegin_dynamic.o] ==> obj [/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtbegin_dynamic.o]
           arg [-L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/aarch64] ==> dir [/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/aarch64]
           arg [-L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30] ==> dir [/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30]
@@ -398,7 +398,7 @@ events:
           arg [--no-undefined-version] ==> ignore
           arg [--fatal-warnings] ==> ignore
           arg [--no-undefined] ==> ignore
-          arg [CMakeFiles/cmTC_62abe.dir/CMakeCCompilerABI.c.o] ==> ignore
+          arg [CMakeFiles/cmTC_6e436.dir/CMakeCCompilerABI.c.o] ==> ignore
           arg [/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a] ==> lib [/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a]
           arg [-l:libunwind.a] ==> lib [-l:libunwind.a]
           arg [-ldl] ==> lib [dl]
@@ -477,8 +477,8 @@ events:
     checks:
       - "Performing Test CMAKE_HAVE_LIBC_PTHREAD"
     directories:
-      source: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-0nkX8H"
-      binary: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-0nkX8H"
+      source: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-vnmUEI"
+      binary: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-vnmUEI"
     cmakeVariables:
       ANDROID_ABI: "arm64-v8a"
       ANDROID_ARM_MODE: "thumb"
@@ -499,24 +499,24 @@ events:
       variable: "CMAKE_HAVE_LIBC_PTHREAD"
       cached: true
       stdout: |
-        Change Dir: '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-0nkX8H'
+        Change Dir: '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-vnmUEI'
         
-        Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_3aede/fast
-        /usr/bin/make  -f CMakeFiles/cmTC_3aede.dir/build.make CMakeFiles/cmTC_3aede.dir/build
-        make[1]: Entering directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-0nkX8H'
-        Building C object CMakeFiles/cmTC_3aede.dir/src.c.o
-        /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DCMAKE_HAVE_LIBC_PTHREAD  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -std=gnu11 -fPIE -MD -MT CMakeFiles/cmTC_3aede.dir/src.c.o -MF CMakeFiles/cmTC_3aede.dir/src.c.o.d -o CMakeFiles/cmTC_3aede.dir/src.c.o -c /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-0nkX8H/src.c
-        /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-0nkX8H/src.c:13:3: error: call to undeclared function 'pthread_cancel'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+        Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_c19d2/fast
+        /usr/bin/make  -f CMakeFiles/cmTC_c19d2.dir/build.make CMakeFiles/cmTC_c19d2.dir/build
+        make[1]: Entering directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-vnmUEI'
+        Building C object CMakeFiles/cmTC_c19d2.dir/src.c.o
+        /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DCMAKE_HAVE_LIBC_PTHREAD  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -std=gnu11 -fPIE -MD -MT CMakeFiles/cmTC_c19d2.dir/src.c.o -MF CMakeFiles/cmTC_c19d2.dir/src.c.o.d -o CMakeFiles/cmTC_c19d2.dir/src.c.o -c /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-vnmUEI/src.c
+        /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-vnmUEI/src.c:13:3: error: call to undeclared function 'pthread_cancel'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
            13 |   pthread_cancel(thread);
               |   ^
-        /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-0nkX8H/src.c:13:3: note: did you mean 'pthread_once'?
+        /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-vnmUEI/src.c:13:3: note: did you mean 'pthread_once'?
         /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/pthread.h:264:5: note: 'pthread_once' declared here
           264 | int pthread_once(pthread_once_t* _Nonnull __once, void (* _Nonnull __init_routine)(void));
               |     ^
         1 error generated.
-        make[1]: *** [CMakeFiles/cmTC_3aede.dir/build.make:79: CMakeFiles/cmTC_3aede.dir/src.c.o] Error 1
-        make[1]: Leaving directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-0nkX8H'
-        make: *** [Makefile:127: cmTC_3aede/fast] Error 2
+        make[1]: *** [CMakeFiles/cmTC_c19d2.dir/build.make:79: CMakeFiles/cmTC_c19d2.dir/src.c.o] Error 1
+        make[1]: Leaving directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-vnmUEI'
+        make: *** [Makefile:127: cmTC_c19d2/fast] Error 2
         
       exitCode: 2
   -
@@ -528,8 +528,8 @@ events:
     checks:
       - "Check if compiler accepts -pthread"
     directories:
-      source: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-BAIFEJ"
-      binary: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-BAIFEJ"
+      source: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-SClVrL"
+      binary: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-SClVrL"
     cmakeVariables:
       ANDROID_ABI: "arm64-v8a"
       ANDROID_ARM_MODE: "thumb"
@@ -550,17 +550,17 @@ events:
       variable: "THREADS_HAVE_PTHREAD_ARG"
       cached: true
       stdout: |
-        Change Dir: '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-BAIFEJ'
+        Change Dir: '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-SClVrL'
         
-        Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_a9d12/fast
-        /usr/bin/make  -f CMakeFiles/cmTC_a9d12.dir/build.make CMakeFiles/cmTC_a9d12.dir/build
-        make[1]: Entering directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-BAIFEJ'
-        Building C object CMakeFiles/cmTC_a9d12.dir/CheckForPthreads.c.o
-        /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -std=gnu11 -fPIE -MD -MT CMakeFiles/cmTC_a9d12.dir/CheckForPthreads.c.o -MF CMakeFiles/cmTC_a9d12.dir/CheckForPthreads.c.o.d -o CMakeFiles/cmTC_a9d12.dir/CheckForPthreads.c.o -c /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-BAIFEJ/CheckForPthreads.c
-        Linking C executable cmTC_a9d12
-        /usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a9d12.dir/link.txt --verbose=1
-        /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -static-libstdc++ -Wl,--build-id=sha1 -Wl,--no-undefined-version -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments    CMakeFiles/cmTC_a9d12.dir/CheckForPthreads.c.o -o cmTC_a9d12  -pthread -latomic -lm
-        make[1]: Leaving directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-BAIFEJ'
+        Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_b1273/fast
+        /usr/bin/make  -f CMakeFiles/cmTC_b1273.dir/build.make CMakeFiles/cmTC_b1273.dir/build
+        make[1]: Entering directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-SClVrL'
+        Building C object CMakeFiles/cmTC_b1273.dir/CheckForPthreads.c.o
+        /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -std=gnu11 -fPIE -MD -MT CMakeFiles/cmTC_b1273.dir/CheckForPthreads.c.o -MF CMakeFiles/cmTC_b1273.dir/CheckForPthreads.c.o.d -o CMakeFiles/cmTC_b1273.dir/CheckForPthreads.c.o -c /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-SClVrL/CheckForPthreads.c
+        Linking C executable cmTC_b1273
+        /usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b1273.dir/link.txt --verbose=1
+        /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -static-libstdc++ -Wl,--build-id=sha1 -Wl,--no-undefined-version -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments    CMakeFiles/cmTC_b1273.dir/CheckForPthreads.c.o -o cmTC_b1273  -pthread -latomic -lm
+        make[1]: Leaving directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-SClVrL'
         
       exitCode: 0
   -
@@ -572,8 +572,8 @@ events:
       - "/home/jongjip/dev/llm/specinfer.cpp/ggml/src/CMakeLists.txt:424 (ggml_add_cpu_backend_variant_impl)"
     description: "Detecting C OpenMP compiler info"
     directories:
-      source: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-FTSwtJ"
-      binary: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-FTSwtJ"
+      source: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-IiX2UH"
+      binary: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-IiX2UH"
     cmakeVariables:
       ANDROID_ABI: "arm64-v8a"
       ANDROID_ARM_MODE: "thumb"
@@ -594,20 +594,20 @@ events:
       variable: "OpenMP_COMPILE_RESULT_C_fopenmplibomp"
       cached: true
       stdout: |
-        Change Dir: '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-FTSwtJ'
+        Change Dir: '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-IiX2UH'
         
-        Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_c6d07/fast
-        /usr/bin/make  -f CMakeFiles/cmTC_c6d07.dir/build.make CMakeFiles/cmTC_c6d07.dir/build
-        make[1]: Entering directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-FTSwtJ'
-        Building C object CMakeFiles/cmTC_c6d07.dir/OpenMPTryFlag.c.o
-        /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fopenmp=libomp -v -std=gnu11 -fPIE -MD -MT CMakeFiles/cmTC_c6d07.dir/OpenMPTryFlag.c.o -MF CMakeFiles/cmTC_c6d07.dir/OpenMPTryFlag.c.o.d -o CMakeFiles/cmTC_c6d07.dir/OpenMPTryFlag.c.o -c /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-FTSwtJ/OpenMPTryFlag.c
+        Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_13a05/fast
+        /usr/bin/make  -f CMakeFiles/cmTC_13a05.dir/build.make CMakeFiles/cmTC_13a05.dir/build
+        make[1]: Entering directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-IiX2UH'
+        Building C object CMakeFiles/cmTC_13a05.dir/OpenMPTryFlag.c.o
+        /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fopenmp=libomp -v -std=gnu11 -fPIE -MD -MT CMakeFiles/cmTC_13a05.dir/OpenMPTryFlag.c.o -MF CMakeFiles/cmTC_13a05.dir/OpenMPTryFlag.c.o.d -o CMakeFiles/cmTC_13a05.dir/OpenMPTryFlag.c.o -c /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-IiX2UH/OpenMPTryFlag.c
         Android (12470979, +pgo, +bolt, +lto, +mlgo, based on r522817c) clang version 18.0.3 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
         Target: aarch64-none-linux-android30
         Thread model: posix
         InstalledDir: /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin
         Found CUDA installation: /usr/local/cuda-12.2, version 12.2
          (in-process)
-         "/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang" -cc1 -triple aarch64-none-linux-android30 -emit-obj -mrelax-all -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name OpenMPTryFlag.c -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=non-leaf -ffp-contract=on -fno-rounding-math -mconstructor-aliases -funwind-tables=2 -target-cpu generic -target-feature +neon -target-feature +v8a -target-feature +fix-cortex-a53-835769 -target-abi aapcs -debug-info-kind=constructor -dwarf-version=4 -debugger-tuning=gdb -fdebug-compilation-dir=/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-FTSwtJ -v -ffunction-sections -fdata-sections -fcoverage-compilation-dir=/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-FTSwtJ -resource-dir /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18 -dependency-file CMakeFiles/cmTC_c6d07.dir/OpenMPTryFlag.c.o.d -MT CMakeFiles/cmTC_c6d07.dir/OpenMPTryFlag.c.o -sys-header-deps -D ANDROID -D _FORTIFY_SOURCE=2 -isysroot /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -internal-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include -internal-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include -internal-externc-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android -internal-externc-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/include -internal-externc-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include -Wformat -Werror=format-security -std=gnu11 -ferror-limit 19 -fopenmp -stack-protector 2 -fno-signed-char -fgnuc-version=4.2.1 -target-feature +outline-atomics -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_c6d07.dir/OpenMPTryFlag.c.o -x c /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-FTSwtJ/OpenMPTryFlag.c
+         "/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang" -cc1 -triple aarch64-none-linux-android30 -emit-obj -mrelax-all -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name OpenMPTryFlag.c -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=non-leaf -ffp-contract=on -fno-rounding-math -mconstructor-aliases -funwind-tables=2 -target-cpu generic -target-feature +neon -target-feature +v8a -target-feature +fix-cortex-a53-835769 -target-abi aapcs -debug-info-kind=constructor -dwarf-version=4 -debugger-tuning=gdb -fdebug-compilation-dir=/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-IiX2UH -v -ffunction-sections -fdata-sections -fcoverage-compilation-dir=/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-IiX2UH -resource-dir /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18 -dependency-file CMakeFiles/cmTC_13a05.dir/OpenMPTryFlag.c.o.d -MT CMakeFiles/cmTC_13a05.dir/OpenMPTryFlag.c.o -sys-header-deps -D ANDROID -D _FORTIFY_SOURCE=2 -isysroot /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -internal-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include -internal-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include -internal-externc-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android -internal-externc-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/include -internal-externc-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include -Wformat -Werror=format-security -std=gnu11 -ferror-limit 19 -fopenmp -stack-protector 2 -fno-signed-char -fgnuc-version=4.2.1 -target-feature +outline-atomics -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_13a05.dir/OpenMPTryFlag.c.o -x c /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-IiX2UH/OpenMPTryFlag.c
         clang -cc1 version 18.0.3 based upon LLVM 18.0.3 default target x86_64-unknown-linux-gnu
         ignoring nonexistent directory "/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include"
         ignoring nonexistent directory "/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/include"
@@ -617,16 +617,16 @@ events:
          /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android
          /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include
         End of search list.
-        Linking C executable cmTC_c6d07
-        /usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c6d07.dir/link.txt --verbose=1
-        /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fopenmp=libomp -v -static-libstdc++ -Wl,--build-id=sha1 -Wl,--no-undefined-version -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments    CMakeFiles/cmTC_c6d07.dir/OpenMPTryFlag.c.o -o cmTC_c6d07  -v -latomic -lm
+        Linking C executable cmTC_13a05
+        /usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_13a05.dir/link.txt --verbose=1
+        /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fopenmp=libomp -v -static-libstdc++ -Wl,--build-id=sha1 -Wl,--no-undefined-version -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments    CMakeFiles/cmTC_13a05.dir/OpenMPTryFlag.c.o -o cmTC_13a05  -v -latomic -lm
         Android (12470979, +pgo, +bolt, +lto, +mlgo, based on r522817c) clang version 18.0.3 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
         Target: aarch64-none-linux-android30
         Thread model: posix
         InstalledDir: /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin
         Found CUDA installation: /usr/local/cuda-12.2, version 12.2
-         "/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/ld.lld" --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -EL --fix-cortex-a53-843419 -z now -z relro -z max-page-size=4096 --hash-style=gnu --eh-frame-hdr -m aarch64linux -pie -dynamic-linker /system/bin/linker64 -o cmTC_c6d07 /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtbegin_dynamic.o -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/aarch64 -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30 -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib --build-id=sha1 --no-undefined-version --fatal-warnings --no-undefined CMakeFiles/cmTC_c6d07.dir/OpenMPTryFlag.c.o -latomic -lm -lomp -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl -lc /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtend_android.o
-        make[1]: Leaving directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-FTSwtJ'
+         "/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/ld.lld" --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -EL --fix-cortex-a53-843419 -z now -z relro -z max-page-size=4096 --hash-style=gnu --eh-frame-hdr -m aarch64linux -pie -dynamic-linker /system/bin/linker64 -o cmTC_13a05 /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtbegin_dynamic.o -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/aarch64 -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30 -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib --build-id=sha1 --no-undefined-version --fatal-warnings --no-undefined CMakeFiles/cmTC_13a05.dir/OpenMPTryFlag.c.o -latomic -lm -lomp -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl -lc /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtend_android.o
+        make[1]: Leaving directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-IiX2UH'
         
       exitCode: 0
   -
@@ -639,20 +639,20 @@ events:
     message: |
       Parsed C OpenMP implicit link information from above output:
         link line regex: [^( *|.*[/\\])(ld[0-9]*(\\.[a-z]+)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
-        ignore line: [Change Dir: '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-FTSwtJ']
+        ignore line: [Change Dir: '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-IiX2UH']
         ignore line: []
-        ignore line: [Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_c6d07/fast]
-        ignore line: [/usr/bin/make  -f CMakeFiles/cmTC_c6d07.dir/build.make CMakeFiles/cmTC_c6d07.dir/build]
-        ignore line: [make[1]: Entering directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-FTSwtJ']
-        ignore line: [Building C object CMakeFiles/cmTC_c6d07.dir/OpenMPTryFlag.c.o]
-        ignore line: [/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fopenmp=libomp -v -std=gnu11 -fPIE -MD -MT CMakeFiles/cmTC_c6d07.dir/OpenMPTryFlag.c.o -MF CMakeFiles/cmTC_c6d07.dir/OpenMPTryFlag.c.o.d -o CMakeFiles/cmTC_c6d07.dir/OpenMPTryFlag.c.o -c /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-FTSwtJ/OpenMPTryFlag.c]
+        ignore line: [Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_13a05/fast]
+        ignore line: [/usr/bin/make  -f CMakeFiles/cmTC_13a05.dir/build.make CMakeFiles/cmTC_13a05.dir/build]
+        ignore line: [make[1]: Entering directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-IiX2UH']
+        ignore line: [Building C object CMakeFiles/cmTC_13a05.dir/OpenMPTryFlag.c.o]
+        ignore line: [/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fopenmp=libomp -v -std=gnu11 -fPIE -MD -MT CMakeFiles/cmTC_13a05.dir/OpenMPTryFlag.c.o -MF CMakeFiles/cmTC_13a05.dir/OpenMPTryFlag.c.o.d -o CMakeFiles/cmTC_13a05.dir/OpenMPTryFlag.c.o -c /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-IiX2UH/OpenMPTryFlag.c]
         ignore line: [Android (12470979  +pgo  +bolt  +lto  +mlgo  based on r522817c) clang version 18.0.3 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)]
         ignore line: [Target: aarch64-none-linux-android30]
         ignore line: [Thread model: posix]
         ignore line: [InstalledDir: /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin]
         ignore line: [Found CUDA installation: /usr/local/cuda-12.2  version 12.2]
         ignore line: [ (in-process)]
-        ignore line: [ "/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang" -cc1 -triple aarch64-none-linux-android30 -emit-obj -mrelax-all -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name OpenMPTryFlag.c -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=non-leaf -ffp-contract=on -fno-rounding-math -mconstructor-aliases -funwind-tables=2 -target-cpu generic -target-feature +neon -target-feature +v8a -target-feature +fix-cortex-a53-835769 -target-abi aapcs -debug-info-kind=constructor -dwarf-version=4 -debugger-tuning=gdb -fdebug-compilation-dir=/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-FTSwtJ -v -ffunction-sections -fdata-sections -fcoverage-compilation-dir=/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-FTSwtJ -resource-dir /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18 -dependency-file CMakeFiles/cmTC_c6d07.dir/OpenMPTryFlag.c.o.d -MT CMakeFiles/cmTC_c6d07.dir/OpenMPTryFlag.c.o -sys-header-deps -D ANDROID -D _FORTIFY_SOURCE=2 -isysroot /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -internal-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include -internal-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include -internal-externc-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android -internal-externc-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/include -internal-externc-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include -Wformat -Werror=format-security -std=gnu11 -ferror-limit 19 -fopenmp -stack-protector 2 -fno-signed-char -fgnuc-version=4.2.1 -target-feature +outline-atomics -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_c6d07.dir/OpenMPTryFlag.c.o -x c /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-FTSwtJ/OpenMPTryFlag.c]
+        ignore line: [ "/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang" -cc1 -triple aarch64-none-linux-android30 -emit-obj -mrelax-all -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name OpenMPTryFlag.c -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=non-leaf -ffp-contract=on -fno-rounding-math -mconstructor-aliases -funwind-tables=2 -target-cpu generic -target-feature +neon -target-feature +v8a -target-feature +fix-cortex-a53-835769 -target-abi aapcs -debug-info-kind=constructor -dwarf-version=4 -debugger-tuning=gdb -fdebug-compilation-dir=/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-IiX2UH -v -ffunction-sections -fdata-sections -fcoverage-compilation-dir=/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-IiX2UH -resource-dir /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18 -dependency-file CMakeFiles/cmTC_13a05.dir/OpenMPTryFlag.c.o.d -MT CMakeFiles/cmTC_13a05.dir/OpenMPTryFlag.c.o -sys-header-deps -D ANDROID -D _FORTIFY_SOURCE=2 -isysroot /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -internal-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include -internal-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include -internal-externc-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android -internal-externc-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/include -internal-externc-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include -Wformat -Werror=format-security -std=gnu11 -ferror-limit 19 -fopenmp -stack-protector 2 -fno-signed-char -fgnuc-version=4.2.1 -target-feature +outline-atomics -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_13a05.dir/OpenMPTryFlag.c.o -x c /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-IiX2UH/OpenMPTryFlag.c]
         ignore line: [clang -cc1 version 18.0.3 based upon LLVM 18.0.3 default target x86_64-unknown-linux-gnu]
         ignore line: [ignoring nonexistent directory "/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include"]
         ignore line: [ignoring nonexistent directory "/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/include"]
@@ -662,15 +662,15 @@ events:
         ignore line: [ /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android]
         ignore line: [ /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include]
         ignore line: [End of search list.]
-        ignore line: [Linking C executable cmTC_c6d07]
-        ignore line: [/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c6d07.dir/link.txt --verbose=1]
-        ignore line: [/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fopenmp=libomp -v -static-libstdc++ -Wl --build-id=sha1 -Wl --no-undefined-version -Wl --fatal-warnings -Wl --no-undefined -Qunused-arguments    CMakeFiles/cmTC_c6d07.dir/OpenMPTryFlag.c.o -o cmTC_c6d07  -v -latomic -lm]
+        ignore line: [Linking C executable cmTC_13a05]
+        ignore line: [/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_13a05.dir/link.txt --verbose=1]
+        ignore line: [/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fopenmp=libomp -v -static-libstdc++ -Wl --build-id=sha1 -Wl --no-undefined-version -Wl --fatal-warnings -Wl --no-undefined -Qunused-arguments    CMakeFiles/cmTC_13a05.dir/OpenMPTryFlag.c.o -o cmTC_13a05  -v -latomic -lm]
         ignore line: [Android (12470979  +pgo  +bolt  +lto  +mlgo  based on r522817c) clang version 18.0.3 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)]
         ignore line: [Target: aarch64-none-linux-android30]
         ignore line: [Thread model: posix]
         ignore line: [InstalledDir: /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin]
         ignore line: [Found CUDA installation: /usr/local/cuda-12.2  version 12.2]
-        link line: [ "/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/ld.lld" --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -EL --fix-cortex-a53-843419 -z now -z relro -z max-page-size=4096 --hash-style=gnu --eh-frame-hdr -m aarch64linux -pie -dynamic-linker /system/bin/linker64 -o cmTC_c6d07 /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtbegin_dynamic.o -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/aarch64 -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30 -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib --build-id=sha1 --no-undefined-version --fatal-warnings --no-undefined CMakeFiles/cmTC_c6d07.dir/OpenMPTryFlag.c.o -latomic -lm -lomp -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl -lc /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtend_android.o]
+        link line: [ "/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/ld.lld" --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -EL --fix-cortex-a53-843419 -z now -z relro -z max-page-size=4096 --hash-style=gnu --eh-frame-hdr -m aarch64linux -pie -dynamic-linker /system/bin/linker64 -o cmTC_13a05 /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtbegin_dynamic.o -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/aarch64 -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30 -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib --build-id=sha1 --no-undefined-version --fatal-warnings --no-undefined CMakeFiles/cmTC_13a05.dir/OpenMPTryFlag.c.o -latomic -lm -lomp -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl -lc /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtend_android.o]
           arg [/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/ld.lld] ==> ignore
           arg [--sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot] ==> ignore
           arg [-EL] ==> ignore
@@ -686,7 +686,7 @@ events:
           arg [-dynamic-linker] ==> ignore
           arg [/system/bin/linker64] ==> ignore
           arg [-o] ==> ignore
-          arg [cmTC_c6d07] ==> ignore
+          arg [cmTC_13a05] ==> ignore
           arg [-L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/aarch64] ==> dir [/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/aarch64]
           arg [-L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30] ==> dir [/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30]
           arg [-L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android] ==> dir [/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android]
@@ -695,7 +695,7 @@ events:
           arg [--no-undefined-version] ==> ignore
           arg [--fatal-warnings] ==> ignore
           arg [--no-undefined] ==> ignore
-          arg [CMakeFiles/cmTC_c6d07.dir/OpenMPTryFlag.c.o] ==> ignore
+          arg [CMakeFiles/cmTC_13a05.dir/OpenMPTryFlag.c.o] ==> ignore
           arg [-latomic] ==> lib [atomic]
           arg [-lm] ==> lib [m]
           arg [-lomp] ==> lib [omp]
@@ -729,8 +729,8 @@ events:
       - "/home/jongjip/dev/llm/specinfer.cpp/ggml/src/CMakeLists.txt:424 (ggml_add_cpu_backend_variant_impl)"
     description: "Detecting CXX OpenMP compiler info"
     directories:
-      source: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-Y04E6F"
-      binary: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-Y04E6F"
+      source: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-ZrfXMH"
+      binary: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-ZrfXMH"
     cmakeVariables:
       ANDROID_ABI: "arm64-v8a"
       ANDROID_ARM_MODE: "thumb"
@@ -751,20 +751,20 @@ events:
       variable: "OpenMP_COMPILE_RESULT_CXX_fopenmplibomp"
       cached: true
       stdout: |
-        Change Dir: '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-Y04E6F'
+        Change Dir: '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-ZrfXMH'
         
-        Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_1eaa0/fast
-        /usr/bin/make  -f CMakeFiles/cmTC_1eaa0.dir/build.make CMakeFiles/cmTC_1eaa0.dir/build
-        make[1]: Entering directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-Y04E6F'
-        Building CXX object CMakeFiles/cmTC_1eaa0.dir/OpenMPTryFlag.cpp.o
-        /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -fopenmp=libomp -v -std=gnu++17 -fPIE -MD -MT CMakeFiles/cmTC_1eaa0.dir/OpenMPTryFlag.cpp.o -MF CMakeFiles/cmTC_1eaa0.dir/OpenMPTryFlag.cpp.o.d -o CMakeFiles/cmTC_1eaa0.dir/OpenMPTryFlag.cpp.o -c /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-Y04E6F/OpenMPTryFlag.cpp
+        Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_36c73/fast
+        /usr/bin/make  -f CMakeFiles/cmTC_36c73.dir/build.make CMakeFiles/cmTC_36c73.dir/build
+        make[1]: Entering directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-ZrfXMH'
+        Building CXX object CMakeFiles/cmTC_36c73.dir/OpenMPTryFlag.cpp.o
+        /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -fopenmp=libomp -v -std=gnu++17 -fPIE -MD -MT CMakeFiles/cmTC_36c73.dir/OpenMPTryFlag.cpp.o -MF CMakeFiles/cmTC_36c73.dir/OpenMPTryFlag.cpp.o.d -o CMakeFiles/cmTC_36c73.dir/OpenMPTryFlag.cpp.o -c /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-ZrfXMH/OpenMPTryFlag.cpp
         Android (12470979, +pgo, +bolt, +lto, +mlgo, based on r522817c) clang version 18.0.3 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
         Target: aarch64-none-linux-android30
         Thread model: posix
         InstalledDir: /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin
         Found CUDA installation: /usr/local/cuda-12.2, version 12.2
          (in-process)
-         "/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++" -cc1 -triple aarch64-none-linux-android30 -emit-obj -mrelax-all -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name OpenMPTryFlag.cpp -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=non-leaf -ffp-contract=on -fno-rounding-math -mconstructor-aliases -funwind-tables=2 -target-cpu generic -target-feature +neon -target-feature +v8a -target-feature +fix-cortex-a53-835769 -target-abi aapcs -debug-info-kind=constructor -dwarf-version=4 -debugger-tuning=gdb -fdebug-compilation-dir=/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-Y04E6F -v -ffunction-sections -fdata-sections -fcoverage-compilation-dir=/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-Y04E6F -resource-dir /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18 -dependency-file CMakeFiles/cmTC_1eaa0.dir/OpenMPTryFlag.cpp.o.d -MT CMakeFiles/cmTC_1eaa0.dir/OpenMPTryFlag.cpp.o -sys-header-deps -D ANDROID -D _FORTIFY_SOURCE=2 -isysroot /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -internal-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1 -internal-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include -internal-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include -internal-externc-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android -internal-externc-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/include -internal-externc-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include -Wformat -Werror=format-security -std=gnu++17 -fdeprecated-macro -ferror-limit 19 -fopenmp -stack-protector 2 -fno-signed-char -fgnuc-version=4.2.1 -fcxx-exceptions -fexceptions -target-feature +outline-atomics -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_1eaa0.dir/OpenMPTryFlag.cpp.o -x c++ /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-Y04E6F/OpenMPTryFlag.cpp
+         "/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++" -cc1 -triple aarch64-none-linux-android30 -emit-obj -mrelax-all -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name OpenMPTryFlag.cpp -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=non-leaf -ffp-contract=on -fno-rounding-math -mconstructor-aliases -funwind-tables=2 -target-cpu generic -target-feature +neon -target-feature +v8a -target-feature +fix-cortex-a53-835769 -target-abi aapcs -debug-info-kind=constructor -dwarf-version=4 -debugger-tuning=gdb -fdebug-compilation-dir=/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-ZrfXMH -v -ffunction-sections -fdata-sections -fcoverage-compilation-dir=/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-ZrfXMH -resource-dir /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18 -dependency-file CMakeFiles/cmTC_36c73.dir/OpenMPTryFlag.cpp.o.d -MT CMakeFiles/cmTC_36c73.dir/OpenMPTryFlag.cpp.o -sys-header-deps -D ANDROID -D _FORTIFY_SOURCE=2 -isysroot /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -internal-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1 -internal-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include -internal-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include -internal-externc-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android -internal-externc-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/include -internal-externc-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include -Wformat -Werror=format-security -std=gnu++17 -fdeprecated-macro -ferror-limit 19 -fopenmp -stack-protector 2 -fno-signed-char -fgnuc-version=4.2.1 -fcxx-exceptions -fexceptions -target-feature +outline-atomics -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_36c73.dir/OpenMPTryFlag.cpp.o -x c++ /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-ZrfXMH/OpenMPTryFlag.cpp
         clang -cc1 version 18.0.3 based upon LLVM 18.0.3 default target x86_64-unknown-linux-gnu
         ignoring nonexistent directory "/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include"
         ignoring nonexistent directory "/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/include"
@@ -775,16 +775,16 @@ events:
          /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android
          /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include
         End of search list.
-        Linking CXX executable cmTC_1eaa0
-        /usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1eaa0.dir/link.txt --verbose=1
-        /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -fopenmp=libomp -v -static-libstdc++ -Wl,--build-id=sha1 -Wl,--no-undefined-version -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments    CMakeFiles/cmTC_1eaa0.dir/OpenMPTryFlag.cpp.o -o cmTC_1eaa0  -v -latomic -lm
+        Linking CXX executable cmTC_36c73
+        /usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_36c73.dir/link.txt --verbose=1
+        /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -fopenmp=libomp -v -static-libstdc++ -Wl,--build-id=sha1 -Wl,--no-undefined-version -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments    CMakeFiles/cmTC_36c73.dir/OpenMPTryFlag.cpp.o -o cmTC_36c73  -v -latomic -lm
         Android (12470979, +pgo, +bolt, +lto, +mlgo, based on r522817c) clang version 18.0.3 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
         Target: aarch64-none-linux-android30
         Thread model: posix
         InstalledDir: /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin
         Found CUDA installation: /usr/local/cuda-12.2, version 12.2
-         "/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/ld.lld" --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -EL --fix-cortex-a53-843419 -z now -z relro -z max-page-size=4096 --hash-style=gnu --eh-frame-hdr -m aarch64linux -pie -dynamic-linker /system/bin/linker64 -o cmTC_1eaa0 /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtbegin_dynamic.o -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/aarch64 -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30 -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib --build-id=sha1 --no-undefined-version --fatal-warnings --no-undefined CMakeFiles/cmTC_1eaa0.dir/OpenMPTryFlag.cpp.o -latomic -lm -Bstatic -lc++ -Bdynamic -lm -lomp -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl -lc /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtend_android.o
-        make[1]: Leaving directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-Y04E6F'
+         "/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/ld.lld" --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -EL --fix-cortex-a53-843419 -z now -z relro -z max-page-size=4096 --hash-style=gnu --eh-frame-hdr -m aarch64linux -pie -dynamic-linker /system/bin/linker64 -o cmTC_36c73 /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtbegin_dynamic.o -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/aarch64 -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30 -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib --build-id=sha1 --no-undefined-version --fatal-warnings --no-undefined CMakeFiles/cmTC_36c73.dir/OpenMPTryFlag.cpp.o -latomic -lm -Bstatic -lc++ -Bdynamic -lm -lomp -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl -lc /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtend_android.o
+        make[1]: Leaving directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-ZrfXMH'
         
       exitCode: 0
   -
@@ -797,20 +797,20 @@ events:
     message: |
       Parsed CXX OpenMP implicit link information from above output:
         link line regex: [^( *|.*[/\\])(ld[0-9]*(\\.[a-z]+)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
-        ignore line: [Change Dir: '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-Y04E6F']
+        ignore line: [Change Dir: '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-ZrfXMH']
         ignore line: []
-        ignore line: [Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_1eaa0/fast]
-        ignore line: [/usr/bin/make  -f CMakeFiles/cmTC_1eaa0.dir/build.make CMakeFiles/cmTC_1eaa0.dir/build]
-        ignore line: [make[1]: Entering directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-Y04E6F']
-        ignore line: [Building CXX object CMakeFiles/cmTC_1eaa0.dir/OpenMPTryFlag.cpp.o]
-        ignore line: [/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -fopenmp=libomp -v -std=gnu++17 -fPIE -MD -MT CMakeFiles/cmTC_1eaa0.dir/OpenMPTryFlag.cpp.o -MF CMakeFiles/cmTC_1eaa0.dir/OpenMPTryFlag.cpp.o.d -o CMakeFiles/cmTC_1eaa0.dir/OpenMPTryFlag.cpp.o -c /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-Y04E6F/OpenMPTryFlag.cpp]
+        ignore line: [Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_36c73/fast]
+        ignore line: [/usr/bin/make  -f CMakeFiles/cmTC_36c73.dir/build.make CMakeFiles/cmTC_36c73.dir/build]
+        ignore line: [make[1]: Entering directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-ZrfXMH']
+        ignore line: [Building CXX object CMakeFiles/cmTC_36c73.dir/OpenMPTryFlag.cpp.o]
+        ignore line: [/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -fopenmp=libomp -v -std=gnu++17 -fPIE -MD -MT CMakeFiles/cmTC_36c73.dir/OpenMPTryFlag.cpp.o -MF CMakeFiles/cmTC_36c73.dir/OpenMPTryFlag.cpp.o.d -o CMakeFiles/cmTC_36c73.dir/OpenMPTryFlag.cpp.o -c /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-ZrfXMH/OpenMPTryFlag.cpp]
         ignore line: [Android (12470979  +pgo  +bolt  +lto  +mlgo  based on r522817c) clang version 18.0.3 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)]
         ignore line: [Target: aarch64-none-linux-android30]
         ignore line: [Thread model: posix]
         ignore line: [InstalledDir: /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin]
         ignore line: [Found CUDA installation: /usr/local/cuda-12.2  version 12.2]
         ignore line: [ (in-process)]
-        ignore line: [ "/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++" -cc1 -triple aarch64-none-linux-android30 -emit-obj -mrelax-all -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name OpenMPTryFlag.cpp -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=non-leaf -ffp-contract=on -fno-rounding-math -mconstructor-aliases -funwind-tables=2 -target-cpu generic -target-feature +neon -target-feature +v8a -target-feature +fix-cortex-a53-835769 -target-abi aapcs -debug-info-kind=constructor -dwarf-version=4 -debugger-tuning=gdb -fdebug-compilation-dir=/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-Y04E6F -v -ffunction-sections -fdata-sections -fcoverage-compilation-dir=/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-Y04E6F -resource-dir /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18 -dependency-file CMakeFiles/cmTC_1eaa0.dir/OpenMPTryFlag.cpp.o.d -MT CMakeFiles/cmTC_1eaa0.dir/OpenMPTryFlag.cpp.o -sys-header-deps -D ANDROID -D _FORTIFY_SOURCE=2 -isysroot /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -internal-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1 -internal-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include -internal-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include -internal-externc-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android -internal-externc-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/include -internal-externc-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include -Wformat -Werror=format-security -std=gnu++17 -fdeprecated-macro -ferror-limit 19 -fopenmp -stack-protector 2 -fno-signed-char -fgnuc-version=4.2.1 -fcxx-exceptions -fexceptions -target-feature +outline-atomics -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_1eaa0.dir/OpenMPTryFlag.cpp.o -x c++ /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-Y04E6F/OpenMPTryFlag.cpp]
+        ignore line: [ "/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++" -cc1 -triple aarch64-none-linux-android30 -emit-obj -mrelax-all -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name OpenMPTryFlag.cpp -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=non-leaf -ffp-contract=on -fno-rounding-math -mconstructor-aliases -funwind-tables=2 -target-cpu generic -target-feature +neon -target-feature +v8a -target-feature +fix-cortex-a53-835769 -target-abi aapcs -debug-info-kind=constructor -dwarf-version=4 -debugger-tuning=gdb -fdebug-compilation-dir=/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-ZrfXMH -v -ffunction-sections -fdata-sections -fcoverage-compilation-dir=/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-ZrfXMH -resource-dir /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18 -dependency-file CMakeFiles/cmTC_36c73.dir/OpenMPTryFlag.cpp.o.d -MT CMakeFiles/cmTC_36c73.dir/OpenMPTryFlag.cpp.o -sys-header-deps -D ANDROID -D _FORTIFY_SOURCE=2 -isysroot /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -internal-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1 -internal-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/include -internal-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include -internal-externc-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android -internal-externc-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/include -internal-externc-isystem /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include -Wformat -Werror=format-security -std=gnu++17 -fdeprecated-macro -ferror-limit 19 -fopenmp -stack-protector 2 -fno-signed-char -fgnuc-version=4.2.1 -fcxx-exceptions -fexceptions -target-feature +outline-atomics -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_36c73.dir/OpenMPTryFlag.cpp.o -x c++ /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-ZrfXMH/OpenMPTryFlag.cpp]
         ignore line: [clang -cc1 version 18.0.3 based upon LLVM 18.0.3 default target x86_64-unknown-linux-gnu]
         ignore line: [ignoring nonexistent directory "/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/local/include"]
         ignore line: [ignoring nonexistent directory "/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/include"]
@@ -821,15 +821,15 @@ events:
         ignore line: [ /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/aarch64-linux-android]
         ignore line: [ /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include]
         ignore line: [End of search list.]
-        ignore line: [Linking CXX executable cmTC_1eaa0]
-        ignore line: [/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1eaa0.dir/link.txt --verbose=1]
-        ignore line: [/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -fopenmp=libomp -v -static-libstdc++ -Wl --build-id=sha1 -Wl --no-undefined-version -Wl --fatal-warnings -Wl --no-undefined -Qunused-arguments    CMakeFiles/cmTC_1eaa0.dir/OpenMPTryFlag.cpp.o -o cmTC_1eaa0  -v -latomic -lm]
+        ignore line: [Linking CXX executable cmTC_36c73]
+        ignore line: [/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_36c73.dir/link.txt --verbose=1]
+        ignore line: [/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -fopenmp=libomp -v -static-libstdc++ -Wl --build-id=sha1 -Wl --no-undefined-version -Wl --fatal-warnings -Wl --no-undefined -Qunused-arguments    CMakeFiles/cmTC_36c73.dir/OpenMPTryFlag.cpp.o -o cmTC_36c73  -v -latomic -lm]
         ignore line: [Android (12470979  +pgo  +bolt  +lto  +mlgo  based on r522817c) clang version 18.0.3 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)]
         ignore line: [Target: aarch64-none-linux-android30]
         ignore line: [Thread model: posix]
         ignore line: [InstalledDir: /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin]
         ignore line: [Found CUDA installation: /usr/local/cuda-12.2  version 12.2]
-        link line: [ "/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/ld.lld" --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -EL --fix-cortex-a53-843419 -z now -z relro -z max-page-size=4096 --hash-style=gnu --eh-frame-hdr -m aarch64linux -pie -dynamic-linker /system/bin/linker64 -o cmTC_1eaa0 /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtbegin_dynamic.o -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/aarch64 -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30 -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib --build-id=sha1 --no-undefined-version --fatal-warnings --no-undefined CMakeFiles/cmTC_1eaa0.dir/OpenMPTryFlag.cpp.o -latomic -lm -Bstatic -lc++ -Bdynamic -lm -lomp -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl -lc /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtend_android.o]
+        link line: [ "/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/ld.lld" --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -EL --fix-cortex-a53-843419 -z now -z relro -z max-page-size=4096 --hash-style=gnu --eh-frame-hdr -m aarch64linux -pie -dynamic-linker /system/bin/linker64 -o cmTC_36c73 /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtbegin_dynamic.o -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/aarch64 -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30 -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib --build-id=sha1 --no-undefined-version --fatal-warnings --no-undefined CMakeFiles/cmTC_36c73.dir/OpenMPTryFlag.cpp.o -latomic -lm -Bstatic -lc++ -Bdynamic -lm -lomp -L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl -lc /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30/crtend_android.o]
           arg [/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/ld.lld] ==> ignore
           arg [--sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot] ==> ignore
           arg [-EL] ==> ignore
@@ -845,7 +845,7 @@ events:
           arg [-dynamic-linker] ==> ignore
           arg [/system/bin/linker64] ==> ignore
           arg [-o] ==> ignore
-          arg [cmTC_1eaa0] ==> ignore
+          arg [cmTC_36c73] ==> ignore
           arg [-L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/aarch64] ==> dir [/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/lib/clang/18/lib/linux/aarch64]
           arg [-L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30] ==> dir [/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/30]
           arg [-L/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android] ==> dir [/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android]
@@ -854,7 +854,7 @@ events:
           arg [--no-undefined-version] ==> ignore
           arg [--fatal-warnings] ==> ignore
           arg [--no-undefined] ==> ignore
-          arg [CMakeFiles/cmTC_1eaa0.dir/OpenMPTryFlag.cpp.o] ==> ignore
+          arg [CMakeFiles/cmTC_36c73.dir/OpenMPTryFlag.cpp.o] ==> ignore
           arg [-latomic] ==> lib [atomic]
           arg [-lm] ==> lib [m]
           arg [-Bstatic] ==> search static
@@ -892,8 +892,8 @@ events:
       - "/home/jongjip/dev/llm/specinfer.cpp/ggml/src/CMakeLists.txt:424 (ggml_add_cpu_backend_variant_impl)"
     description: "Detecting C OpenMP version"
     directories:
-      source: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-LBNSzI"
-      binary: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-LBNSzI"
+      source: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-pCNhaJ"
+      binary: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-pCNhaJ"
     cmakeVariables:
       ANDROID_ABI: "arm64-v8a"
       ANDROID_ARM_MODE: "thumb"
@@ -914,17 +914,17 @@ events:
       variable: "OpenMP_SPECTEST_C_"
       cached: true
       stdout: |
-        Change Dir: '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-LBNSzI'
+        Change Dir: '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-pCNhaJ'
         
-        Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_4935c/fast
-        /usr/bin/make  -f CMakeFiles/cmTC_4935c.dir/build.make CMakeFiles/cmTC_4935c.dir/build
-        make[1]: Entering directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-LBNSzI'
-        Building C object CMakeFiles/cmTC_4935c.dir/OpenMPCheckVersion.c.o
-        /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fopenmp=libomp -std=gnu11 -fPIE -MD -MT CMakeFiles/cmTC_4935c.dir/OpenMPCheckVersion.c.o -MF CMakeFiles/cmTC_4935c.dir/OpenMPCheckVersion.c.o.d -o CMakeFiles/cmTC_4935c.dir/OpenMPCheckVersion.c.o -c /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-LBNSzI/OpenMPCheckVersion.c
-        Linking C executable cmTC_4935c
-        /usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4935c.dir/link.txt --verbose=1
-        /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fopenmp=libomp -static-libstdc++ -Wl,--build-id=sha1 -Wl,--no-undefined-version -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments    CMakeFiles/cmTC_4935c.dir/OpenMPCheckVersion.c.o -o cmTC_4935c  -latomic -lm
-        make[1]: Leaving directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-LBNSzI'
+        Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_e5bf7/fast
+        /usr/bin/make  -f CMakeFiles/cmTC_e5bf7.dir/build.make CMakeFiles/cmTC_e5bf7.dir/build
+        make[1]: Entering directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-pCNhaJ'
+        Building C object CMakeFiles/cmTC_e5bf7.dir/OpenMPCheckVersion.c.o
+        /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fopenmp=libomp -std=gnu11 -fPIE -MD -MT CMakeFiles/cmTC_e5bf7.dir/OpenMPCheckVersion.c.o -MF CMakeFiles/cmTC_e5bf7.dir/OpenMPCheckVersion.c.o.d -o CMakeFiles/cmTC_e5bf7.dir/OpenMPCheckVersion.c.o -c /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-pCNhaJ/OpenMPCheckVersion.c
+        Linking C executable cmTC_e5bf7
+        /usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e5bf7.dir/link.txt --verbose=1
+        /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fopenmp=libomp -static-libstdc++ -Wl,--build-id=sha1 -Wl,--no-undefined-version -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments    CMakeFiles/cmTC_e5bf7.dir/OpenMPCheckVersion.c.o -o cmTC_e5bf7  -latomic -lm
+        make[1]: Leaving directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-pCNhaJ'
         
       exitCode: 0
   -
@@ -936,8 +936,8 @@ events:
       - "/home/jongjip/dev/llm/specinfer.cpp/ggml/src/CMakeLists.txt:424 (ggml_add_cpu_backend_variant_impl)"
     description: "Detecting CXX OpenMP version"
     directories:
-      source: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-ReEgoH"
-      binary: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-ReEgoH"
+      source: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-3iO5kI"
+      binary: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-3iO5kI"
     cmakeVariables:
       ANDROID_ABI: "arm64-v8a"
       ANDROID_ARM_MODE: "thumb"
@@ -958,17 +958,17 @@ events:
       variable: "OpenMP_SPECTEST_CXX_"
       cached: true
       stdout: |
-        Change Dir: '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-ReEgoH'
+        Change Dir: '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-3iO5kI'
         
-        Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_fa5df/fast
-        /usr/bin/make  -f CMakeFiles/cmTC_fa5df.dir/build.make CMakeFiles/cmTC_fa5df.dir/build
-        make[1]: Entering directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-ReEgoH'
-        Building CXX object CMakeFiles/cmTC_fa5df.dir/OpenMPCheckVersion.cpp.o
-        /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -fopenmp=libomp -std=gnu++17 -fPIE -MD -MT CMakeFiles/cmTC_fa5df.dir/OpenMPCheckVersion.cpp.o -MF CMakeFiles/cmTC_fa5df.dir/OpenMPCheckVersion.cpp.o.d -o CMakeFiles/cmTC_fa5df.dir/OpenMPCheckVersion.cpp.o -c /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-ReEgoH/OpenMPCheckVersion.cpp
-        Linking CXX executable cmTC_fa5df
-        /usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_fa5df.dir/link.txt --verbose=1
-        /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -fopenmp=libomp -static-libstdc++ -Wl,--build-id=sha1 -Wl,--no-undefined-version -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments    CMakeFiles/cmTC_fa5df.dir/OpenMPCheckVersion.cpp.o -o cmTC_fa5df  -latomic -lm
-        make[1]: Leaving directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-ReEgoH'
+        Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_0ea2d/fast
+        /usr/bin/make  -f CMakeFiles/cmTC_0ea2d.dir/build.make CMakeFiles/cmTC_0ea2d.dir/build
+        make[1]: Entering directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-3iO5kI'
+        Building CXX object CMakeFiles/cmTC_0ea2d.dir/OpenMPCheckVersion.cpp.o
+        /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -fopenmp=libomp -std=gnu++17 -fPIE -MD -MT CMakeFiles/cmTC_0ea2d.dir/OpenMPCheckVersion.cpp.o -MF CMakeFiles/cmTC_0ea2d.dir/OpenMPCheckVersion.cpp.o.d -o CMakeFiles/cmTC_0ea2d.dir/OpenMPCheckVersion.cpp.o -c /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-3iO5kI/OpenMPCheckVersion.cpp
+        Linking CXX executable cmTC_0ea2d
+        /usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0ea2d.dir/link.txt --verbose=1
+        /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -fopenmp=libomp -static-libstdc++ -Wl,--build-id=sha1 -Wl,--no-undefined-version -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments    CMakeFiles/cmTC_0ea2d.dir/OpenMPCheckVersion.cpp.o -o cmTC_0ea2d  -latomic -lm
+        make[1]: Leaving directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-3iO5kI'
         
       exitCode: 0
   -
@@ -982,8 +982,8 @@ events:
     checks:
       - "Performing Test GGML_COMPILER_SUPPORTS_FP16_FORMAT_I3E"
     directories:
-      source: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-KEmEdH"
-      binary: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-KEmEdH"
+      source: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-xwa9xJ"
+      binary: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-xwa9xJ"
     cmakeVariables:
       ANDROID_ABI: "arm64-v8a"
       ANDROID_ARM_MODE: "thumb"
@@ -1004,17 +1004,17 @@ events:
       variable: "GGML_COMPILER_SUPPORTS_FP16_FORMAT_I3E"
       cached: true
       stdout: |
-        Change Dir: '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-KEmEdH'
+        Change Dir: '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-xwa9xJ'
         
-        Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_6437f/fast
-        /usr/bin/make  -f CMakeFiles/cmTC_6437f.dir/build.make CMakeFiles/cmTC_6437f.dir/build
-        make[1]: Entering directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-KEmEdH'
-        Building CXX object CMakeFiles/cmTC_6437f.dir/src.cxx.o
-        /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DGGML_COMPILER_SUPPORTS_FP16_FORMAT_I3E  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security    -std=gnu++17 -fPIE   -mfp16-format=ieee -MD -MT CMakeFiles/cmTC_6437f.dir/src.cxx.o -MF CMakeFiles/cmTC_6437f.dir/src.cxx.o.d -o CMakeFiles/cmTC_6437f.dir/src.cxx.o -c /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-KEmEdH/src.cxx
+        Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_0b841/fast
+        /usr/bin/make  -f CMakeFiles/cmTC_0b841.dir/build.make CMakeFiles/cmTC_0b841.dir/build
+        make[1]: Entering directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-xwa9xJ'
+        Building CXX object CMakeFiles/cmTC_0b841.dir/src.cxx.o
+        /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DGGML_COMPILER_SUPPORTS_FP16_FORMAT_I3E  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security    -std=gnu++17 -fPIE   -mfp16-format=ieee -MD -MT CMakeFiles/cmTC_0b841.dir/src.cxx.o -MF CMakeFiles/cmTC_0b841.dir/src.cxx.o.d -o CMakeFiles/cmTC_0b841.dir/src.cxx.o -c /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-xwa9xJ/src.cxx
         clang++: error: unknown argument: '-mfp16-format=ieee'
-        make[1]: *** [CMakeFiles/cmTC_6437f.dir/build.make:79: CMakeFiles/cmTC_6437f.dir/src.cxx.o] Error 1
-        make[1]: Leaving directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-KEmEdH'
-        make: *** [Makefile:127: cmTC_6437f/fast] Error 2
+        make[1]: *** [CMakeFiles/cmTC_0b841.dir/build.make:79: CMakeFiles/cmTC_0b841.dir/src.cxx.o] Error 1
+        make[1]: Leaving directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-xwa9xJ'
+        make: *** [Makefile:127: cmTC_0b841/fast] Error 2
         
       exitCode: 2
   -
@@ -1027,8 +1027,8 @@ events:
     checks:
       - "Performing Test HAVE_DOTPROD"
     directories:
-      source: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-zB4FRH"
-      binary: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-zB4FRH"
+      source: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-HjATCJ"
+      binary: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-HjATCJ"
     cmakeVariables:
       ANDROID_ABI: "arm64-v8a"
       ANDROID_ARM_MODE: "thumb"
@@ -1049,20 +1049,20 @@ events:
       variable: "HAVE_DOTPROD"
       cached: true
       stdout: |
-        Change Dir: '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-zB4FRH'
+        Change Dir: '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-HjATCJ'
         
-        Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_b68be/fast
-        /usr/bin/make  -f CMakeFiles/cmTC_b68be.dir/build.make CMakeFiles/cmTC_b68be.dir/build
-        make[1]: Entering directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-zB4FRH'
-        Building CXX object CMakeFiles/cmTC_b68be.dir/src.cxx.o
-        /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DHAVE_DOTPROD  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security    -std=gnu++17 -fPIE -MD -MT CMakeFiles/cmTC_b68be.dir/src.cxx.o -MF CMakeFiles/cmTC_b68be.dir/src.cxx.o.d -o CMakeFiles/cmTC_b68be.dir/src.cxx.o -c /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-zB4FRH/src.cxx
-        /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-zB4FRH/src.cxx:3:24: error: "Feature DOTPROD is not defined"
+        Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_8880d/fast
+        /usr/bin/make  -f CMakeFiles/cmTC_8880d.dir/build.make CMakeFiles/cmTC_8880d.dir/build
+        make[1]: Entering directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-HjATCJ'
+        Building CXX object CMakeFiles/cmTC_8880d.dir/src.cxx.o
+        /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DHAVE_DOTPROD  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security    -std=gnu++17 -fPIE -MD -MT CMakeFiles/cmTC_8880d.dir/src.cxx.o -MF CMakeFiles/cmTC_8880d.dir/src.cxx.o.d -o CMakeFiles/cmTC_8880d.dir/src.cxx.o -c /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-HjATCJ/src.cxx
+        /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-HjATCJ/src.cxx:3:24: error: "Feature DOTPROD is not defined"
             3 |                     #  error "Feature DOTPROD is not defined"
               |                        ^
         1 error generated.
-        make[1]: *** [CMakeFiles/cmTC_b68be.dir/build.make:79: CMakeFiles/cmTC_b68be.dir/src.cxx.o] Error 1
-        make[1]: Leaving directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-zB4FRH'
-        make: *** [Makefile:127: cmTC_b68be/fast] Error 2
+        make[1]: *** [CMakeFiles/cmTC_8880d.dir/build.make:79: CMakeFiles/cmTC_8880d.dir/src.cxx.o] Error 1
+        make[1]: Leaving directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-HjATCJ'
+        make: *** [Makefile:127: cmTC_8880d/fast] Error 2
         
       exitCode: 2
   -
@@ -1075,8 +1075,8 @@ events:
     checks:
       - "Performing Test HAVE_SVE"
     directories:
-      source: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-d35bwF"
-      binary: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-d35bwF"
+      source: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-XUlJIJ"
+      binary: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-XUlJIJ"
     cmakeVariables:
       ANDROID_ABI: "arm64-v8a"
       ANDROID_ARM_MODE: "thumb"
@@ -1097,20 +1097,20 @@ events:
       variable: "HAVE_SVE"
       cached: true
       stdout: |
-        Change Dir: '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-d35bwF'
+        Change Dir: '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-XUlJIJ'
         
-        Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_fba70/fast
-        /usr/bin/make  -f CMakeFiles/cmTC_fba70.dir/build.make CMakeFiles/cmTC_fba70.dir/build
-        make[1]: Entering directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-d35bwF'
-        Building CXX object CMakeFiles/cmTC_fba70.dir/src.cxx.o
-        /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DHAVE_SVE  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security    -std=gnu++17 -fPIE -MD -MT CMakeFiles/cmTC_fba70.dir/src.cxx.o -MF CMakeFiles/cmTC_fba70.dir/src.cxx.o.d -o CMakeFiles/cmTC_fba70.dir/src.cxx.o -c /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-d35bwF/src.cxx
-        /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-d35bwF/src.cxx:3:24: error: "Feature SVE is not defined"
+        Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_b7172/fast
+        /usr/bin/make  -f CMakeFiles/cmTC_b7172.dir/build.make CMakeFiles/cmTC_b7172.dir/build
+        make[1]: Entering directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-XUlJIJ'
+        Building CXX object CMakeFiles/cmTC_b7172.dir/src.cxx.o
+        /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DHAVE_SVE  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security    -std=gnu++17 -fPIE -MD -MT CMakeFiles/cmTC_b7172.dir/src.cxx.o -MF CMakeFiles/cmTC_b7172.dir/src.cxx.o.d -o CMakeFiles/cmTC_b7172.dir/src.cxx.o -c /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-XUlJIJ/src.cxx
+        /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-XUlJIJ/src.cxx:3:24: error: "Feature SVE is not defined"
             3 |                     #  error "Feature SVE is not defined"
               |                        ^
         1 error generated.
-        make[1]: *** [CMakeFiles/cmTC_fba70.dir/build.make:79: CMakeFiles/cmTC_fba70.dir/src.cxx.o] Error 1
-        make[1]: Leaving directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-d35bwF'
-        make: *** [Makefile:127: cmTC_fba70/fast] Error 2
+        make[1]: *** [CMakeFiles/cmTC_b7172.dir/build.make:79: CMakeFiles/cmTC_b7172.dir/src.cxx.o] Error 1
+        make[1]: Leaving directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-XUlJIJ'
+        make: *** [Makefile:127: cmTC_b7172/fast] Error 2
         
       exitCode: 2
   -
@@ -1123,8 +1123,8 @@ events:
     checks:
       - "Performing Test HAVE_MATMUL_INT8"
     directories:
-      source: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-z18SjF"
-      binary: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-z18SjF"
+      source: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-a05VVI"
+      binary: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-a05VVI"
     cmakeVariables:
       ANDROID_ABI: "arm64-v8a"
       ANDROID_ARM_MODE: "thumb"
@@ -1145,20 +1145,20 @@ events:
       variable: "HAVE_MATMUL_INT8"
       cached: true
       stdout: |
-        Change Dir: '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-z18SjF'
+        Change Dir: '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-a05VVI'
         
-        Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_451c7/fast
-        /usr/bin/make  -f CMakeFiles/cmTC_451c7.dir/build.make CMakeFiles/cmTC_451c7.dir/build
-        make[1]: Entering directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-z18SjF'
-        Building CXX object CMakeFiles/cmTC_451c7.dir/src.cxx.o
-        /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DHAVE_MATMUL_INT8  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security    -std=gnu++17 -fPIE -MD -MT CMakeFiles/cmTC_451c7.dir/src.cxx.o -MF CMakeFiles/cmTC_451c7.dir/src.cxx.o.d -o CMakeFiles/cmTC_451c7.dir/src.cxx.o -c /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-z18SjF/src.cxx
-        /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-z18SjF/src.cxx:3:24: error: "Feature MATMUL_INT8 is not defined"
+        Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_da2ce/fast
+        /usr/bin/make  -f CMakeFiles/cmTC_da2ce.dir/build.make CMakeFiles/cmTC_da2ce.dir/build
+        make[1]: Entering directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-a05VVI'
+        Building CXX object CMakeFiles/cmTC_da2ce.dir/src.cxx.o
+        /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DHAVE_MATMUL_INT8  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security    -std=gnu++17 -fPIE -MD -MT CMakeFiles/cmTC_da2ce.dir/src.cxx.o -MF CMakeFiles/cmTC_da2ce.dir/src.cxx.o.d -o CMakeFiles/cmTC_da2ce.dir/src.cxx.o -c /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-a05VVI/src.cxx
+        /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-a05VVI/src.cxx:3:24: error: "Feature MATMUL_INT8 is not defined"
             3 |                     #  error "Feature MATMUL_INT8 is not defined"
               |                        ^
         1 error generated.
-        make[1]: *** [CMakeFiles/cmTC_451c7.dir/build.make:79: CMakeFiles/cmTC_451c7.dir/src.cxx.o] Error 1
-        make[1]: Leaving directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-z18SjF'
-        make: *** [Makefile:127: cmTC_451c7/fast] Error 2
+        make[1]: *** [CMakeFiles/cmTC_da2ce.dir/build.make:79: CMakeFiles/cmTC_da2ce.dir/src.cxx.o] Error 1
+        make[1]: Leaving directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-a05VVI'
+        make: *** [Makefile:127: cmTC_da2ce/fast] Error 2
         
       exitCode: 2
   -
@@ -1171,8 +1171,8 @@ events:
     checks:
       - "Performing Test HAVE_FMA"
     directories:
-      source: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-3txM2H"
-      binary: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-3txM2H"
+      source: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-FWRTnJ"
+      binary: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-FWRTnJ"
     cmakeVariables:
       ANDROID_ABI: "arm64-v8a"
       ANDROID_ARM_MODE: "thumb"
@@ -1193,17 +1193,17 @@ events:
       variable: "HAVE_FMA"
       cached: true
       stdout: |
-        Change Dir: '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-3txM2H'
+        Change Dir: '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-FWRTnJ'
         
-        Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_1345b/fast
-        /usr/bin/make  -f CMakeFiles/cmTC_1345b.dir/build.make CMakeFiles/cmTC_1345b.dir/build
-        make[1]: Entering directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-3txM2H'
-        Building CXX object CMakeFiles/cmTC_1345b.dir/src.cxx.o
-        /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DHAVE_FMA  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security    -std=gnu++17 -fPIE -MD -MT CMakeFiles/cmTC_1345b.dir/src.cxx.o -MF CMakeFiles/cmTC_1345b.dir/src.cxx.o.d -o CMakeFiles/cmTC_1345b.dir/src.cxx.o -c /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-3txM2H/src.cxx
-        Linking CXX executable cmTC_1345b
-        /usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1345b.dir/link.txt --verbose=1
-        /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security    -static-libstdc++ -Wl,--build-id=sha1 -Wl,--no-undefined-version -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments    CMakeFiles/cmTC_1345b.dir/src.cxx.o -o cmTC_1345b  -latomic -lm
-        make[1]: Leaving directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-3txM2H'
+        Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_2a482/fast
+        /usr/bin/make  -f CMakeFiles/cmTC_2a482.dir/build.make CMakeFiles/cmTC_2a482.dir/build
+        make[1]: Entering directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-FWRTnJ'
+        Building CXX object CMakeFiles/cmTC_2a482.dir/src.cxx.o
+        /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DHAVE_FMA  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security    -std=gnu++17 -fPIE -MD -MT CMakeFiles/cmTC_2a482.dir/src.cxx.o -MF CMakeFiles/cmTC_2a482.dir/src.cxx.o.d -o CMakeFiles/cmTC_2a482.dir/src.cxx.o -c /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-FWRTnJ/src.cxx
+        Linking CXX executable cmTC_2a482
+        /usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_2a482.dir/link.txt --verbose=1
+        /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security    -static-libstdc++ -Wl,--build-id=sha1 -Wl,--no-undefined-version -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments    CMakeFiles/cmTC_2a482.dir/src.cxx.o -o cmTC_2a482  -latomic -lm
+        make[1]: Leaving directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-FWRTnJ'
         
       exitCode: 0
   -
@@ -1216,8 +1216,8 @@ events:
     checks:
       - "Performing Test HAVE_FP16_VECTOR_ARITHMETIC"
     directories:
-      source: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-EPQ5tJ"
-      binary: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-EPQ5tJ"
+      source: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-v1BijI"
+      binary: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-v1BijI"
     cmakeVariables:
       ANDROID_ABI: "arm64-v8a"
       ANDROID_ARM_MODE: "thumb"
@@ -1238,20 +1238,20 @@ events:
       variable: "HAVE_FP16_VECTOR_ARITHMETIC"
       cached: true
       stdout: |
-        Change Dir: '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-EPQ5tJ'
+        Change Dir: '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-v1BijI'
         
-        Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_04ed8/fast
-        /usr/bin/make  -f CMakeFiles/cmTC_04ed8.dir/build.make CMakeFiles/cmTC_04ed8.dir/build
-        make[1]: Entering directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-EPQ5tJ'
-        Building CXX object CMakeFiles/cmTC_04ed8.dir/src.cxx.o
-        /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DHAVE_FP16_VECTOR_ARITHMETIC  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security    -std=gnu++17 -fPIE -MD -MT CMakeFiles/cmTC_04ed8.dir/src.cxx.o -MF CMakeFiles/cmTC_04ed8.dir/src.cxx.o.d -o CMakeFiles/cmTC_04ed8.dir/src.cxx.o -c /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-EPQ5tJ/src.cxx
-        /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-EPQ5tJ/src.cxx:3:24: error: "Feature FP16_VECTOR_ARITHMETIC is not defined"
+        Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_17c11/fast
+        /usr/bin/make  -f CMakeFiles/cmTC_17c11.dir/build.make CMakeFiles/cmTC_17c11.dir/build
+        make[1]: Entering directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-v1BijI'
+        Building CXX object CMakeFiles/cmTC_17c11.dir/src.cxx.o
+        /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DHAVE_FP16_VECTOR_ARITHMETIC  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security    -std=gnu++17 -fPIE -MD -MT CMakeFiles/cmTC_17c11.dir/src.cxx.o -MF CMakeFiles/cmTC_17c11.dir/src.cxx.o.d -o CMakeFiles/cmTC_17c11.dir/src.cxx.o -c /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-v1BijI/src.cxx
+        /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-v1BijI/src.cxx:3:24: error: "Feature FP16_VECTOR_ARITHMETIC is not defined"
             3 |                     #  error "Feature FP16_VECTOR_ARITHMETIC is not defined"
               |                        ^
         1 error generated.
-        make[1]: *** [CMakeFiles/cmTC_04ed8.dir/build.make:79: CMakeFiles/cmTC_04ed8.dir/src.cxx.o] Error 1
-        make[1]: Leaving directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-EPQ5tJ'
-        make: *** [Makefile:127: cmTC_04ed8/fast] Error 2
+        make[1]: *** [CMakeFiles/cmTC_17c11.dir/build.make:79: CMakeFiles/cmTC_17c11.dir/src.cxx.o] Error 1
+        make[1]: Leaving directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-v1BijI'
+        make: *** [Makefile:127: cmTC_17c11/fast] Error 2
         
       exitCode: 2
   -
@@ -1264,8 +1264,8 @@ events:
     checks:
       - "Performing Test HAVE_SME"
     directories:
-      source: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-cPsgZI"
-      binary: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-cPsgZI"
+      source: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-f5BEaM"
+      binary: "/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-f5BEaM"
     cmakeVariables:
       ANDROID_ABI: "arm64-v8a"
       ANDROID_ARM_MODE: "thumb"
@@ -1286,20 +1286,20 @@ events:
       variable: "HAVE_SME"
       cached: true
       stdout: |
-        Change Dir: '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-cPsgZI'
+        Change Dir: '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-f5BEaM'
         
-        Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_14c59/fast
-        /usr/bin/make  -f CMakeFiles/cmTC_14c59.dir/build.make CMakeFiles/cmTC_14c59.dir/build
-        make[1]: Entering directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-cPsgZI'
-        Building CXX object CMakeFiles/cmTC_14c59.dir/src.cxx.o
-        /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DHAVE_SME  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security    -std=gnu++17 -fPIE -MD -MT CMakeFiles/cmTC_14c59.dir/src.cxx.o -MF CMakeFiles/cmTC_14c59.dir/src.cxx.o.d -o CMakeFiles/cmTC_14c59.dir/src.cxx.o -c /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-cPsgZI/src.cxx
-        /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-cPsgZI/src.cxx:3:24: error: "Feature SME is not defined"
+        Run Build Command(s): /usr/local/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_91b6b/fast
+        /usr/bin/make  -f CMakeFiles/cmTC_91b6b.dir/build.make CMakeFiles/cmTC_91b6b.dir/build
+        make[1]: Entering directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-f5BEaM'
+        Building CXX object CMakeFiles/cmTC_91b6b.dir/src.cxx.o
+        /home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android30 --sysroot=/home/jongjip/android-ndk-r27c/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DHAVE_SME  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security    -std=gnu++17 -fPIE -MD -MT CMakeFiles/cmTC_91b6b.dir/src.cxx.o -MF CMakeFiles/cmTC_91b6b.dir/src.cxx.o.d -o CMakeFiles/cmTC_91b6b.dir/src.cxx.o -c /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-f5BEaM/src.cxx
+        /home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-f5BEaM/src.cxx:3:24: error: "Feature SME is not defined"
             3 |                     #  error "Feature SME is not defined"
               |                        ^
         1 error generated.
-        make[1]: *** [CMakeFiles/cmTC_14c59.dir/build.make:79: CMakeFiles/cmTC_14c59.dir/src.cxx.o] Error 1
-        make[1]: Leaving directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-cPsgZI'
-        make: *** [Makefile:127: cmTC_14c59/fast] Error 2
+        make[1]: *** [CMakeFiles/cmTC_91b6b.dir/build.make:79: CMakeFiles/cmTC_91b6b.dir/src.cxx.o] Error 1
+        make[1]: Leaving directory '/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles/CMakeScratch/TryCompile-f5BEaM'
+        make: *** [Makefile:127: cmTC_91b6b/fast] Error 2
         
       exitCode: 2
 ...
