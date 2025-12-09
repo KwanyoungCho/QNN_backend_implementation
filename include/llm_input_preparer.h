@@ -73,6 +73,8 @@ public:
    * @param graph_desc Graph descriptor
    * @param get_buffer_fn Function to get buffer by tensor name
    * @param tokens Token IDs
+   * @param start_pos Starting position for position tensor (default 0)
+   * @param skip_attention_mask Skip auto-filling attention mask (default false)
    * @param verbose Print debug info
    * @return true if successful
    */
@@ -80,6 +82,8 @@ public:
     const QnnJsonGraphDesc& graph_desc,
     std::function<void*(const std::string&)> get_buffer_fn,
     const std::vector<int32_t>& tokens,
+    int32_t start_pos = 0,
+    bool skip_attention_mask = false,
     bool verbose = true);
 };
 

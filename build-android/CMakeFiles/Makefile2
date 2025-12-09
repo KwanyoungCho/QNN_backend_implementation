@@ -194,12 +194,12 @@ CMakeFiles/qnn_ctx_core.dir/clean:
 # Target rules for target CMakeFiles/qnn_llm_generate.dir
 
 # All Build rule for target.
-CMakeFiles/qnn_llm_generate.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/all
+CMakeFiles/qnn_llm_generate.dir/all: CMakeFiles/tok_llama.dir/all
 CMakeFiles/qnn_llm_generate.dir/all: CMakeFiles/qnn_ctx_core.dir/all
+CMakeFiles/qnn_llm_generate.dir/all: third_party/specinfer-build/src/CMakeFiles/llama.dir/all
+CMakeFiles/qnn_llm_generate.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/all
 CMakeFiles/qnn_llm_generate.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/all
 CMakeFiles/qnn_llm_generate.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/all
-CMakeFiles/qnn_llm_generate.dir/all: third_party/specinfer-build/src/CMakeFiles/llama.dir/all
-CMakeFiles/qnn_llm_generate.dir/all: CMakeFiles/tok_llama.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_llm_generate.dir/build.make CMakeFiles/qnn_llm_generate.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/qnn_llm_generate.dir/build.make CMakeFiles/qnn_llm_generate.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles --progress-num=98 "Built target qnn_llm_generate"
@@ -225,10 +225,10 @@ CMakeFiles/qnn_llm_generate.dir/clean:
 # Target rules for target CMakeFiles/tok_llama.dir
 
 # All Build rule for target.
+CMakeFiles/tok_llama.dir/all: third_party/specinfer-build/src/CMakeFiles/llama.dir/all
 CMakeFiles/tok_llama.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/all
 CMakeFiles/tok_llama.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/all
 CMakeFiles/tok_llama.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/all
-CMakeFiles/tok_llama.dir/all: third_party/specinfer-build/src/CMakeFiles/llama.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tok_llama.dir/build.make CMakeFiles/tok_llama.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tok_llama.dir/build.make CMakeFiles/tok_llama.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/jongjip/QNN_backend_implementation/build-android/CMakeFiles --progress-num=99,100 "Built target tok_llama"

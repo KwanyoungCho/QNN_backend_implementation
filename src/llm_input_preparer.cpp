@@ -119,6 +119,8 @@ bool InputPreparer::auto_fill_inputs(
     const QnnJsonGraphDesc& graph_desc,
     std::function<void*(const std::string&)> get_buffer_fn,
     const std::vector<int32_t>& tokens,
+    int32_t start_pos,
+    bool skip_attention_mask,
     bool verbose) {
   
   for (const auto& t : graph_desc.inputs) {
@@ -148,19 +150,19 @@ bool InputPreparer::auto_fill_inputs(
     bool is_position = name_lower.find("_pos_") != std::string::npos;
     
     if (is_position && is_int32 && t.nbytes >= tokens.size() * 4) {
-      if (fill_positions(buffer, t, tokens.size(), 0)) {
+      if (fill_positions(buffer, t, tokens.size(), start_pos)) {
         if (verbose) {
           std::cout << "[InputPreparer] Filled positions: " << t.name 
-                    << " 0.." << (tokens.size() - 1) << "\n";
+                    << " " << start_pos << ".." << (start_pos + tokens.size() - 1) << "\n";
         }
       }
       continue;
     }
     
-    // Attention mask
+    // Attention mask (skip if requested - for multi-iteration prefill)
     bool is_mask = name_lower.find("atten_mask") != std::string::npos;
     
-    if (is_mask && t.dims.size() >= 2) {
+    if (is_mask && t.dims.size() >= 2 && !skip_attention_mask) {
       if (fill_attention_mask(buffer, t, tokens.size())) {
         if (verbose) {
           std::cout << "[InputPreparer] Filled attention mask: " << t.name 
