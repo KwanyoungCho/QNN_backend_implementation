@@ -194,9 +194,9 @@ CMakeFiles/qnn_ctx_core.dir/clean:
 # Target rules for target CMakeFiles/qnn_llm_generate.dir
 
 # All Build rule for target.
-CMakeFiles/qnn_llm_generate.dir/all: CMakeFiles/tok_llama.dir/all
-CMakeFiles/qnn_llm_generate.dir/all: CMakeFiles/qnn_ctx_core.dir/all
 CMakeFiles/qnn_llm_generate.dir/all: third_party/specinfer-build/src/CMakeFiles/llama.dir/all
+CMakeFiles/qnn_llm_generate.dir/all: CMakeFiles/qnn_ctx_core.dir/all
+CMakeFiles/qnn_llm_generate.dir/all: CMakeFiles/tok_llama.dir/all
 CMakeFiles/qnn_llm_generate.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-base.dir/all
 CMakeFiles/qnn_llm_generate.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml.dir/all
 CMakeFiles/qnn_llm_generate.dir/all: third_party/specinfer-build/ggml/src/CMakeFiles/ggml-cpu.dir/all

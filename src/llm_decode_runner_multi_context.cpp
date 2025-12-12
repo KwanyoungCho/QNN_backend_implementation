@@ -410,8 +410,16 @@ bool LLMDecodeRunner::run_multi_context_prefill(const std::vector<int32_t>& toke
   int32_t n_past = 0;
   int32_t num_tokens = tokens.size();
   uint16_t* attn_mask = reinterpret_cast<uint16_t*>(shared_buffer_views_["attention_mask"]);
+
+
+  if (config_.log_level >= 1) {
+    std::cout << "[Multi-Context Prefill] Input tokens:\n";
+    for (size_t i = 0; i < tokens.size(); ++i) {
+      std::cout << "  token[" << i << "] = " << tokens[i] << "\n";
+    }
+  }
   
-  // Multiple iteration prefill: 토큰을 prefill_ar_len 크기로 나누어 처리
+  // Multiple iteration prefill
   while (n_past < num_tokens) {
     int32_t chunk_size = std::min(prefill_ar_len_, num_tokens - n_past);
     
@@ -425,7 +433,7 @@ bool LLMDecodeRunner::run_multi_context_prefill(const std::vector<int32_t>& toke
       tokens.begin() + n_past,
       tokens.begin() + n_past + chunk_size
     );
-    
+
     // Pad chunk to prefill_ar_len if needed
     if (chunk_size < prefill_ar_len_) {
       chunk_tokens.resize(prefill_ar_len_, 0);  // Pad with 0

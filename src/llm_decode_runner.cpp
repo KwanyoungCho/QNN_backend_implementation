@@ -384,7 +384,7 @@ bool LLMDecodeRunner::generate(const std::string& prompt, std::string& output_te
   stats_.inference_start_ms = time_in_ms();
   
   // 1. Tokenize prompt (no special tokens, no chat template - same as qnn_decode_main)
-  auto tokens = tokenizer_->encode(prompt, false, false); // [spagetti] 토크나이저가 느릴 가능성은? - 별로 안중요
+  auto tokens = tokenizer_->encode(prompt, true, false); // [spagetti] 토크나이저가 느릴 가능성은? - 별로 안중요
   if (tokens.empty()) {
     error_msg_ = "Failed to tokenize prompt";
     return false;
