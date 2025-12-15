@@ -384,7 +384,7 @@ bool LLMDecodeRunner::generate(const std::string& prompt, std::string& output_te
   stats_.inference_start_ms = time_in_ms();
   
   // 1. Tokenize prompt (no special tokens, no chat template - same as qnn_decode_main)
-  auto tokens = tokenizer_->encode(prompt, false, false); // [spagetti] 토크나이저가 느릴 가능성은? - 별로 안중요
+  auto tokens = tokenizer_->encode(prompt, true, false); // [spagetti] 토크나이저가 느릴 가능성은? - 별로 안중요
   if (tokens.empty()) {
     error_msg_ = "Failed to tokenize prompt";
     return false;
@@ -441,6 +441,8 @@ bool LLMDecodeRunner::generate(const std::string& prompt, std::string& output_te
   if (config_.log_level >= 1) {
     std::cout << "\n[Decode] Generating up to " << config_.max_gen_tokens
               << " tokens...\n";
+    std::cout << "[Decode] Starting from position: " << n_update
+              << " (total prefill tokens: " << tokens.size() << ")\n";
     std::cout << "[Output] " << decoded;
     std::cout.flush();
   }
@@ -463,7 +465,7 @@ bool LLMDecodeRunner::generate(const std::string& prompt, std::string& output_te
     }
     
     // Check EOS
-    if (token_out == 128001 || token_out == 128009) {
+    if (token_out == 128001) {
       if (config_.log_level >= 1) {
         std::cout << "\n[Decode] EOS token detected\n";
       }
@@ -502,7 +504,13 @@ bool LLMDecodeRunner::generate(const std::string& prompt, std::string& output_te
 bool LLMDecodeRunner::run_prefill(const std::vector<int32_t>& tokens,
                                    int32_t& next_token,
                                    int32_t& n_update) {
-  // Prepare inputs
+  if (config_.log_level >= 1) {
+    std::cout << "[Single-Context Prefill] Starting with " << tokens.size() << " tokens\n";
+  }
+  
+  int32_t n_past = 0;
+  int32_t num_tokens = tokens.size();
+  
   auto get_prefill_buffer = [&](const std::string& name) -> void* {
     auto it = prefill_kv_override_.find(name);
     if (it != prefill_kv_override_.end()) return it->second;
@@ -512,57 +520,136 @@ bool LLMDecodeRunner::run_prefill(const std::vector<int32_t>& tokens,
     return (bit != bindings.end()) ? bit->second : nullptr;
   };
   
-  if (!InputPreparer::auto_fill_inputs(*prefill_graph_, get_prefill_buffer, tokens, true)) {
-    error_msg_ = "Failed to prepare prefill inputs";
-    return false;
-  }
-  
-  // Update pre-built tensors with current buffer pointers (zero allocation)
-  std::vector<Qnn_Tensor_t> inputs, outputs;
-  
-  for (size_t i = 0; i < prefill_graph_->inputs.size() && i < prefill_input_holders_.size(); ++i) {
-    const auto& t = prefill_graph_->inputs[i];
-    void* buf = get_prefill_buffer(t.name);
-    if (!buf) {
-      if (config_.log_level >= 2) {
-        std::cerr << "[Prefill] Warning: No buffer for input " << t.name << "\n";
-      }
-      continue;
+  // Multiple iteration prefill: 토큰을 prefill_ar_len 크기로 나누어 처리
+  while (n_past < num_tokens) {
+    int32_t chunk_size = std::min(prefill_ar_len_, num_tokens - n_past);
+    
+    if (config_.log_level >= 1) {
+      std::cout << "[Single-Context Prefill] Iteration: n_past=" << n_past 
+                << ", chunk_size=" << chunk_size << "\n";
     }
     
-    // Update buffer pointer only (no allocation)
-    prefill_input_holders_[i]->update_buffer(buf, t.nbytes);
-    inputs.push_back(prefill_input_holders_[i]->tensor());
-  }
+    // Extract current chunk of tokens
+    std::vector<int32_t> chunk_tokens(
+      tokens.begin() + n_past,
+      tokens.begin() + n_past + chunk_size
+    );
+    
+    // Pad chunk to prefill_ar_len if needed
+    if (chunk_size < prefill_ar_len_) {
+      chunk_tokens.resize(prefill_ar_len_, 0);  // Pad with 0
+    }
+    
+    // Prepare inputs for this chunk
+    // Note: For single-context, attention mask is auto-filled (no manual management)
+    if (!InputPreparer::auto_fill_inputs(*prefill_graph_, get_prefill_buffer, chunk_tokens, 
+                                          n_past, false, config_.log_level >= 2)) {
+      error_msg_ = "Failed to prepare prefill inputs";
+      return false;
+    }
   
-  for (size_t i = 0; i < prefill_graph_->outputs.size() && i < prefill_output_holders_.size(); ++i) {
-    const auto& t = prefill_graph_->outputs[i];
+    // Update pre-built tensors with current buffer pointers (zero allocation)
+    std::vector<Qnn_Tensor_t> inputs, outputs;
+    
+    for (size_t i = 0; i < prefill_graph_->inputs.size() && i < prefill_input_holders_.size(); ++i) {
+      const auto& t = prefill_graph_->inputs[i];
+      void* buf = get_prefill_buffer(t.name);
+      if (!buf) {
+        if (config_.log_level >= 2) {
+          std::cerr << "[Prefill] Warning: No buffer for input " << t.name << "\n";
+        }
+        continue;
+      }
+      
+      // Update buffer pointer only (no allocation)
+      prefill_input_holders_[i]->update_buffer(buf, t.nbytes);
+      inputs.push_back(prefill_input_holders_[i]->tensor());
+    }
+    
+    for (size_t i = 0; i < prefill_graph_->outputs.size() && i < prefill_output_holders_.size(); ++i) {
+      const auto& t = prefill_graph_->outputs[i];
+      auto& bindings = prefill_alloc_->bindings();
+      auto it = bindings.find(t.name);
+      if (it == bindings.end()) {
+        if (config_.log_level >= 2) {
+          std::cerr << "[Prefill] Warning: No buffer for output " << t.name << "\n";
+        }
+        continue;
+      }
+      
+      // Update buffer pointer only (no allocation)
+      prefill_output_holders_[i]->update_buffer(it->second, t.nbytes);
+      outputs.push_back(prefill_output_holders_[i]->tensor());
+    }
+    
+    if (config_.log_level >= 2) {
+      std::cout << "[Prefill] Prepared " << inputs.size() << " inputs, "
+                << outputs.size() << " outputs\n";
+    }
+    
+    // Execute
+    if (!loader_->execute_graph(0, "prefill_forward", inputs, outputs)) {
+      error_msg_ = "Prefill execution failed";
+      return false;
+    }
+    
+    // Update KV cache from prefill outputs for this iteration
     auto& bindings = prefill_alloc_->bindings();
-    auto it = bindings.find(t.name);
-    if (it == bindings.end()) {
-      if (config_.log_level >= 2) {
-        std::cerr << "[Prefill] Warning: No buffer for output " << t.name << "\n";
+    
+    int v_idx = 0, k_idx = 0;
+    for (const auto& t : prefill_graph_->outputs) {
+      std::string n = t.name;
+      
+      bool is_v = (n.find("view_copy") != std::string::npos &&
+                   t.dims.size() == 3 && t.dims[1] == prefill_ar_len_ && t.dims[2] == head_dim_);
+      bool is_k = (n.find("permute_copy") != std::string::npos &&
+                   t.dims.size() == 3 && t.dims[1] == head_dim_ && t.dims[2] == prefill_ar_len_);
+      
+      if (!is_v && !is_k) continue;
+      
+      auto bit = bindings.find(t.name);
+      if (bit == bindings.end()) continue;
+      
+      if (is_v) {
+        int layer = v_idx / num_heads_;
+        int head = v_idx % num_heads_;
+        v_idx++;
+        
+        if (layer >= num_layers_ || head >= num_heads_) continue;
+        
+        const auto& v_buf = kv_manager_->get_v_cache(layer, head);
+        uint8_t* src = reinterpret_cast<uint8_t*>(bit->second);
+        uint8_t* dst = reinterpret_cast<uint8_t*>(v_buf.input_buffer) + n_past * head_dim_;
+        std::memcpy(dst, src, chunk_size * head_dim_);
+        
+      } else if (is_k) {
+        int layer = k_idx / num_heads_;
+        int head = k_idx % num_heads_;
+        k_idx++;
+        
+        if (layer >= num_layers_ || head >= num_heads_) continue;
+        
+        const auto& k_buf = kv_manager_->get_k_cache(layer, head);
+        uint8_t* src = reinterpret_cast<uint8_t*>(bit->second);
+        uint8_t* dst = reinterpret_cast<uint8_t*>(k_buf.input_buffer) + n_past;
+        
+        for (int32_t dim = 0; dim < head_dim_; ++dim) {
+          std::memcpy(dst, src, chunk_size);
+          src += prefill_ar_len_;
+          dst += prefill_cache_len_;
+        }
       }
-      continue;
     }
     
-    // Update buffer pointer only (no allocation)
-    prefill_output_holders_[i]->update_buffer(it->second, t.nbytes);
-    outputs.push_back(prefill_output_holders_[i]->tensor());
+    // Advance n_past for next iteration
+    n_past += chunk_size;
+  }  // End of while loop
+  
+  if (config_.log_level >= 1) {
+    std::cout << "[Single-Context Prefill] All iterations completed. Total tokens: " << n_past << "\n";
   }
   
-  if (config_.log_level >= 2) {
-    std::cout << "[Prefill] Prepared " << inputs.size() << " inputs, "
-              << outputs.size() << " outputs\n";
-  }
-  
-  // Execute
-  if (!loader_->execute_graph(0, "prefill_forward", inputs, outputs)) {
-    error_msg_ = "Prefill execution failed";
-    return false;
-  }
-  
-  // Extract logits and decode token
+  // Extract logits from last iteration
   const QnnJsonTensorDesc* logits_desc = nullptr;
   for (const auto& t : prefill_graph_->outputs) {
     if (t.name.find("squeeze") != std::string::npos ||
@@ -586,7 +673,19 @@ bool LLMDecodeRunner::run_prefill(const std::vector<int32_t>& tokens,
   
   const uint16_t* logits = reinterpret_cast<const uint16_t*>(it->second);
   int32_t vocab_size = 128256;
-  int32_t last_token_offset = (tokens.size() - 1) * vocab_size;
+  
+  // Calculate offset for last token in last iteration
+  int32_t last_chunk_size = ((num_tokens - 1) % prefill_ar_len_) + 1;
+  int32_t last_token_offset = (last_chunk_size - 1) * vocab_size;
+  
+  // Calculate n_update: total tokens processed (not just last chunk)
+  n_update = num_tokens;
+  
+  if (config_.log_level >= 1) {
+    std::cout << "[Single-Context Prefill] Argmax: total_tokens=" << num_tokens
+              << ", last_chunk_size=" << last_chunk_size
+              << ", offset=" << last_token_offset << "\n";
+  }
   
   uint16_t max_val = logits[last_token_offset];
   next_token = 0;
@@ -594,55 +693,6 @@ bool LLMDecodeRunner::run_prefill(const std::vector<int32_t>& tokens,
     if (logits[last_token_offset + i] > max_val) {
       max_val = logits[last_token_offset + i];
       next_token = i;
-    }
-  }
-  
-  // Update KV cache from prefill outputs
-  n_update = 1 + ((tokens.size() - 1) % prefill_ar_len_);
-  int32_t n_past = 0;
-  
-  int v_idx = 0, k_idx = 0;
-  for (const auto& t : prefill_graph_->outputs) {
-    std::string n = t.name;
-    
-    bool is_v = (n.find("view_copy") != std::string::npos &&
-                 t.dims.size() == 3 && t.dims[1] == prefill_ar_len_ && t.dims[2] == head_dim_);
-    bool is_k = (n.find("permute_copy") != std::string::npos &&
-                 t.dims.size() == 3 && t.dims[1] == head_dim_ && t.dims[2] == prefill_ar_len_);
-    
-    if (!is_v && !is_k) continue;
-    
-    auto bit = bindings.find(t.name);
-    if (bit == bindings.end()) continue;
-    
-    if (is_v) {
-      int layer = v_idx / num_heads_;
-      int head = v_idx % num_heads_;
-      v_idx++;
-      
-      if (layer >= num_layers_ || head >= num_heads_) continue;
-      
-      const auto& v_buf = kv_manager_->get_v_cache(layer, head);
-      uint8_t* src = reinterpret_cast<uint8_t*>(bit->second);
-      uint8_t* dst = reinterpret_cast<uint8_t*>(v_buf.input_buffer) + n_past * head_dim_;
-      std::memcpy(dst, src, n_update * head_dim_);
-      
-    } else if (is_k) {
-      int layer = k_idx / num_heads_;
-      int head = k_idx % num_heads_;
-      k_idx++;
-      
-      if (layer >= num_layers_ || head >= num_heads_) continue;
-      
-      const auto& k_buf = kv_manager_->get_k_cache(layer, head);
-      uint8_t* src = reinterpret_cast<uint8_t*>(bit->second);
-      uint8_t* dst = reinterpret_cast<uint8_t*>(k_buf.input_buffer) + n_past;
-      
-      for (int32_t dim = 0; dim < head_dim_; ++dim) {
-        std::memcpy(dst, src, n_update);
-        src += prefill_ar_len_;
-        dst += prefill_cache_len_;
-      }
     }
   }
   

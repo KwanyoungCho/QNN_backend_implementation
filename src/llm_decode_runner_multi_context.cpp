@@ -408,100 +408,142 @@ bool LLMDecodeRunner::run_multi_context_prefill(const std::vector<int32_t>& toke
   }
   
   int32_t n_past = 0;
-  n_update = 1 + ((tokens.size() - 1) % prefill_ar_len_);
-  
-  // Initialize attention mask for prefill (causal pattern)
+  int32_t num_tokens = tokens.size();
   uint16_t* attn_mask = reinterpret_cast<uint16_t*>(shared_buffer_views_["attention_mask"]);
-  
-  // Fill causal attention mask
-  // SMART_MASK: attention mask is causal for prefill
-  std::memset(attn_mask, 0, prefill_ar_len_ * context_len_ * sizeof(uint16_t)); // [spagetti] 왜 length 곱함?
-  for (int i = 0; i < n_update; ++i) {
-    int row = prefill_ar_len_ - n_update + i;
-    int end_pos = context_len_ - (n_update - i);
-    for (int j = 0; j < end_pos; ++j) {
-      attn_mask[row * context_len_ + j] = 65535;  // UFIXED_POINT_16 max = attend
+
+
+  if (config_.log_level >= 1) {
+    std::cout << "[Multi-Context Prefill] Input tokens:\n";
+    for (size_t i = 0; i < tokens.size(); ++i) {
+      std::cout << "  token[" << i << "] = " << tokens[i] << "\n";
     }
   }
   
-  // Run prefill through all shards sequentially
-  for (int shard_idx = 0; shard_idx < config_.num_shards; ++shard_idx) {
-    if (!run_shard_prefill(shard_idx, tokens, n_past, n_update)) {
-      return false;
+  // Multiple iteration prefill
+  while (n_past < num_tokens) {
+    int32_t chunk_size = std::min(prefill_ar_len_, num_tokens - n_past);
+    
+    if (config_.log_level >= 1) {
+      std::cout << "[Multi-Context Prefill] Iteration: n_past=" << n_past 
+                << ", chunk_size=" << chunk_size << "\n";
     }
-  }
+    
+    // Extract current chunk of tokens
+    std::vector<int32_t> chunk_tokens(
+      tokens.begin() + n_past,
+      tokens.begin() + n_past + chunk_size
+    );
+
+    // Pad chunk to prefill_ar_len if needed
+    if (chunk_size < prefill_ar_len_) {
+      chunk_tokens.resize(prefill_ar_len_, 0);  // Pad with 0
+    }
+    
+    // Update attention mask for this iteration
+    // SMART_MASK: causal pattern within the current chunk, plus attending to all past tokens
+    std::memset(attn_mask, 0, prefill_ar_len_ * context_len_ * sizeof(uint16_t));
+    
+    for (int i = 0; i < chunk_size; ++i) {
+      int row = i;
+      // Attend to all past tokens [0..n_past-1]
+      for (int j = 0; j < n_past; ++j) {
+        attn_mask[row * context_len_ + j] = 65535;
+      }
+      // Attend to current and previous tokens in this chunk (causal)
+      int chunk_start = context_len_ - prefill_ar_len_;
+      for (int j = 0; j <= i; ++j) {
+        attn_mask[row * context_len_ + chunk_start + j] = 65535;
+      }
+    }
+    
+    // Run prefill through all shards sequentially
+    for (int shard_idx = 0; shard_idx < config_.num_shards; ++shard_idx) {
+      if (!run_shard_prefill(shard_idx, chunk_tokens, n_past, chunk_size)) {
+        return false;
+      }
+    }
+    
+    // Update KV cache: copy prefill outputs to KV inputs for this iteration
+    if (config_.log_level >= 2) {
+      std::cout << "[Multi-Context Prefill] Updating KV cache for iteration at n_past=" 
+                << n_past << ", chunk_size=" << chunk_size << "\n";
+    }
+    
+    int total_v_updated = 0, total_k_updated = 0;
+    
+    for (int shard_idx = 0; shard_idx < config_.num_shards; ++shard_idx) {
+      auto& shard = shards_[shard_idx];
+      auto& bindings = shard.prefill_alloc->bindings();
+      int shard_layer_base = shard_idx * layers_per_shard_;
+      
+      // Collect V and K cache outputs (in original order, no sorting!)
+      std::vector<void*> v_outputs, k_outputs;
+      for (const auto& t : shard.prefill_graph->outputs) {
+        auto bit = bindings.find(t.name);
+        if (bit == bindings.end()) continue;
+        
+        if (t.name.find("output_aten_view_copy_default_") != std::string::npos) {
+          v_outputs.push_back(bit->second);
+        } else if (t.name.find("output_aten_permute_copy_default_") != std::string::npos) {
+          k_outputs.push_back(bit->second);
+        }
+      }
+      
+      // Process V caches
+      for (size_t i = 0; i < v_outputs.size(); ++i) {
+        int local_layer = i / num_heads_;
+        int head = i % num_heads_;
+        int global_layer = shard_layer_base + local_layer;
+        
+        if (global_layer >= num_layers_) continue;
+        
+        const auto& v_buf = kv_manager_->get_v_cache(global_layer, head);
+        uint8_t* src = reinterpret_cast<uint8_t*>(v_outputs[i]);
+        uint8_t* dst = reinterpret_cast<uint8_t*>(v_buf.input_buffer) + n_past * head_dim_;
+        std::memcpy(dst, src, chunk_size * head_dim_);
+        
+        if (config_.log_level >= 2 && shard_idx == 0 && i < 2) {
+          std::cout << "[Prefill KV] Iter: n_past=" << n_past << " Shard " << shard_idx 
+                    << " V-cache " << i << " → Layer " << global_layer << " Head " << head << "\n";
+        }
+        total_v_updated++;
+      }
+      
+      // Process K caches
+      for (size_t i = 0; i < k_outputs.size(); ++i) {
+        int local_layer = i / num_heads_;
+        int head = i % num_heads_;
+        int global_layer = shard_layer_base + local_layer;
+        
+        if (global_layer >= num_layers_) continue;
+        
+        const auto& k_buf = kv_manager_->get_k_cache(global_layer, head);
+        uint8_t* src = reinterpret_cast<uint8_t*>(k_outputs[i]);
+        uint8_t* dst = reinterpret_cast<uint8_t*>(k_buf.input_buffer) + n_past;
+        
+        // K cache: copy with stride (transposed layout)
+        for (int32_t dim = 0; dim < head_dim_; ++dim) {
+          std::memcpy(dst, src, chunk_size);
+          src += prefill_ar_len_;
+          dst += prefill_cache_len_;
+        }
+        total_k_updated++;
+      }
+    }
+    
+    if (config_.log_level >= 2) {
+      std::cout << "[Multi-Context Prefill] KV cache updated: "
+                << total_v_updated << " V-caches, "
+                << total_k_updated << " K-caches\n";
+    }
+    
+    // Advance n_past for next iteration
+    n_past += chunk_size;
+  }  // End of while loop
   
   if (config_.log_level >= 1) {
-    std::cout << "[Multi-Context Prefill] Extracting logits...\n";
-  }
-  
-  // Update KV cache: copy prefill outputs to KV inputs (like single-context)
-  int total_v_updated = 0, total_k_updated = 0;
-  
-  for (int shard_idx = 0; shard_idx < config_.num_shards; ++shard_idx) {
-    auto& shard = shards_[shard_idx];
-    auto& bindings = shard.prefill_alloc->bindings();
-    int shard_layer_base = shard_idx * layers_per_shard_;
-    
-    // Collect V and K cache outputs (in original order, no sorting!)
-    std::vector<void*> v_outputs, k_outputs;
-    for (const auto& t : shard.prefill_graph->outputs) {
-      auto bit = bindings.find(t.name);
-      if (bit == bindings.end()) continue;
-      
-      if (t.name.find("output_aten_view_copy_default_") != std::string::npos) {
-        v_outputs.push_back(bit->second);
-      } else if (t.name.find("output_aten_permute_copy_default_") != std::string::npos) {
-        k_outputs.push_back(bit->second);
-      }
-    }
-    
-    // Process V caches
-    for (size_t i = 0; i < v_outputs.size(); ++i) { // [spagetti] 이거 initialize 단계에서 어디에다가 만들어 놓지 않았나? 확인 필요
-      int local_layer = i / num_heads_;
-      int head = i % num_heads_;
-      int global_layer = shard_layer_base + local_layer;
-      
-      if (global_layer >= num_layers_) continue;
-      
-      const auto& v_buf = kv_manager_->get_v_cache(global_layer, head);
-      uint8_t* src = reinterpret_cast<uint8_t*>(v_outputs[i]);
-      uint8_t* dst = reinterpret_cast<uint8_t*>(v_buf.input_buffer) + n_past * head_dim_;
-      std::memcpy(dst, src, n_update * head_dim_);
-      
-      if (config_.log_level >= 2 && shard_idx == 0 && i < 2) {
-        std::cout << "[Prefill KV] Shard " << shard_idx << " V-cache " << i 
-                  << " → Layer " << global_layer << " Head " << head << "\n";
-      }
-      total_v_updated++;
-    }
-    
-    // Process K caches
-    for (size_t i = 0; i < k_outputs.size(); ++i) {
-      int local_layer = i / num_heads_;
-      int head = i % num_heads_;
-      int global_layer = shard_layer_base + local_layer;
-      
-      if (global_layer >= num_layers_) continue;
-      
-      const auto& k_buf = kv_manager_->get_k_cache(global_layer, head);
-      uint8_t* src = reinterpret_cast<uint8_t*>(k_outputs[i]);
-      uint8_t* dst = reinterpret_cast<uint8_t*>(k_buf.input_buffer) + n_past;
-      
-      // K cache: copy with stride (transposed layout)
-      for (int32_t dim = 0; dim < head_dim_; ++dim) {
-        std::memcpy(dst, src, n_update);
-        src += prefill_ar_len_;
-        dst += prefill_cache_len_;
-      }
-      total_k_updated++;
-    }
-  }
-  
-  if (config_.log_level >= 1) {
-    std::cout << "[Multi-Context Prefill] KV cache updated: "
-              << total_v_updated << " V-caches, "
-              << total_k_updated << " K-caches\n";
+    std::cout << "[Multi-Context Prefill] All iterations completed. Total tokens processed: " 
+              << n_past << "\n";
   }
   
   // Extract logits from final shard
@@ -560,14 +602,24 @@ bool LLMDecodeRunner::run_multi_context_prefill(const std::vector<int32_t>& toke
   const uint16_t* logits = reinterpret_cast<const uint16_t*>(it->second);
   int32_t vocab_size = model_params_.is_valid() ? model_params_.vocab_size : 128256;
   
-  // For prefill, logits are [batch=1, seq_len, vocab_size]
-  // We want the last token's logits
-  int32_t seq_len = tokens.size();
-  int32_t last_token_offset = (seq_len - 1) * vocab_size;
+  // For prefill, logits are [batch=1, prefill_ar_len, vocab_size]
+  // We want the last token's logits from the last iteration
+  // If we processed 50 tokens with prefill_ar_len=32:
+  //   - Iteration 1: tokens[0:32] (32 tokens)
+  //   - Iteration 2: tokens[32:50] (18 tokens)
+  // The last iteration's output contains 18 tokens worth of logits,
+  // and we want the last one (index 17 in that chunk)
+  int32_t last_chunk_size = ((num_tokens - 1) % prefill_ar_len_) + 1;
+  int32_t last_token_offset = (last_chunk_size - 1) * vocab_size;
+  
+  // Calculate n_update: total tokens processed (not just last chunk)
+  n_update = num_tokens;
   
   if (config_.log_level >= 1) {
-    std::cout << "[Multi-Context Prefill] Argmax: seq_len=" << seq_len 
-              << ", vocab_size=" << vocab_size << ", offset=" << last_token_offset << "\n";
+    std::cout << "[Multi-Context Prefill] Argmax: total_tokens=" << num_tokens
+              << ", last_chunk_size=" << last_chunk_size
+              << ", vocab_size=" << vocab_size 
+              << ", offset=" << last_token_offset << "\n";
   }
   
   if (config_.log_level >= 2) {
@@ -882,7 +934,8 @@ bool LLMDecodeRunner::run_shard_prefill(int shard_idx,
       std::cout << "[Shard 0] First token: " << tokens[0] << "\n";
     }
     
-    InputPreparer::auto_fill_inputs(*shard.prefill_graph, // [spagetti] 꼭 이런식으로 해야하나? get_v_cache에서 받은 버퍼 그대로 쓰는게 일단 맞긴해?
+    // Fill tokens and positions (skip attention mask - we manage it manually)
+    InputPreparer::auto_fill_inputs(*shard.prefill_graph,
       [&](const std::string& name) -> void* {
         // Check KV override first
         auto ko = kv_override.find(name);
@@ -892,18 +945,21 @@ bool LLMDecodeRunner::run_shard_prefill(int shard_idx,
         auto it = bindings.find(name);
         return (it != bindings.end()) ? it->second : nullptr;
       },
-      tokens);
+      tokens,
+      n_past,  // start_pos: use current n_past for position tensor
+      true,    // skip_attention_mask: we manually set it before this call
+      config_.log_level >= 2);
     
-    // Save attention mask to shared buffer for shard 1-7
+    // Copy manually-set attention mask to shard 0's input buffer
     for (const auto& t : shard.prefill_graph->inputs) {
       std::string name_lower = t.name;
       for (auto& c : name_lower) c = (char)tolower(c);
       if (name_lower.find("atten_mask") != std::string::npos) {
         auto it = bindings.find(t.name);
         if (it != bindings.end()) {
-          std::memcpy(shared_buffer_views_["attention_mask"], it->second, t.nbytes);
+          std::memcpy(it->second, shared_buffer_views_["attention_mask"], t.nbytes);
           if (config_.log_level >= 2) {
-            std::cout << "[Shard 0] Attention mask saved to shared buffer\n";
+            std::cout << "[Shard 0] Attention mask copied from shared buffer\n";
           }
         }
         break;
